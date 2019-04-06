@@ -1,0 +1,32 @@
+.component {
+    position: relative;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    min-height: 72px;
+    background-color: #eee;
+
+    .control {
+        display: none;
+        position: absolute;
+        top: 6px;
+        right: 6px;
+    }
+
+    &:hover>.control {
+        display: block;
+    }
+}
+
+.central-box {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    border: 1px dashed #167ce9;
+    padding: 10px;
+
+    p {
+        margin: 16px;
+    }
+}

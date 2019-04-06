@@ -1,0 +1,21 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='utf-8')
+        title #{htmlWebpackPlugin.options.title}
+        meta(name='viewport', content='width=device-width, initial-scale=1, user-scalable=0, maximum-scale=1, minimum-scale=1')
+        meta(content=htmlWebpackPlugin.options.keywords.toString())
+        meta(content=htmlWebpackPlugin.options.description name='description')
+        link(rel='stylesheet' type='text/css' href='/css/font-awesome.min.css')
+    body
+        #app
+        script(type='text/javascript' src='/js/jquery.min.js')
+        script(type='text/javascript' src='/js/popper.min.js')
+        script(type='text/javascript' src='/js/bootstrap.min.js')
+        script(type='text/javascript' src='/js/plugins/bootstrap-datetimepicker.min.js')
+        link(rel='stylesheet' type='text/css' href='/css/bootstrap-datetimepicker.min.css')
+        script(type='text/javascript' src='/js/plugins/bootstrap-notify.min.js')
+        script(type='text/javascript' src='/js/plugins/select2.min.js')
+        script(type='text/javascript' src='/js/plugins/chart.js')
+        script(type='text/javascript' src='https://cdn.ckeditor.com/4.10.1/full/ckeditor.js')
+        script(type='text/javascript' src=htmlWebpackPlugin.files.chunks.main.entry)
