@@ -10,9 +10,9 @@ module.exports = app =>{
         SoCVan: Number,
         NgayCVan: Date
     });
-    const model = app.db.model('CN_NNGOAI',schema);
+    const model = app.db.model('cb_nngoai',schema);
 
-    app.model.CB_NNGOAI = {
+    app.model.cb_nngoai = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

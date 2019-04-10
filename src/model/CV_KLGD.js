@@ -4,9 +4,9 @@ module.exports = app =>{
         TEN_CV: String,
         GHI_CHU: String
     });
-    const model = app.db.model('CV_KLGD',schema);
+    const model = app.db.model('cv_klgd',schema);
 
-    app.model.CV_KLGD = {
+    app.model.cv_klgd = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

@@ -7,14 +7,14 @@ module.exports = app => {
         NOI_SINH: String,
         NGAY_VAO: Date,
         NGAY_NGHI: Date,
-        TRINH_DO: [{ type: app.db.Schema.ObjectId, ref: 'TRINH_DO' }],
+        TRINH_DO: [{ type: app.db.Schema.ObjectId, ref: 'trinhdo' }],
         DON_VI: String,
         DIA_CHI: String,
         GHI_CHU: String
     });
-    const model = app.db.model('CBCNV_HD_DV_tu_tra',schema);
+    const model = app.db.model('cbcnv_hd_dv_tu_tra',schema);
 
-    app.model.CBCNV_HD_DV_tu_tra = {
+    app.model.cbcnv_hd_dv_tu_tra = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

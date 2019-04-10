@@ -4,8 +4,8 @@ module.exports = app =>{
         STT: Number,
         HO: String,
         TEN: String,
-        MS_BM: [{ type: app.db.Schema.ObjectId, ref: 'ALL_BO_MON' }],
-        MS_CV: [{ type: app.db.Schema.ObjectId, ref: 'CV_KLGD_(99_00)' }],
+        MS_BM: [{ type: app.db.Schema.ObjectId, ref: 'bomon' }],
+        MS_CV: [{ type: app.db.Schema.ObjectId, ref: 'cv_klgd' }],
         TU_DK: String,
         NHOMLOP: String,
         SO_SV: Number,
@@ -15,9 +15,9 @@ module.exports = app =>{
         DEN_NGAY: Date,
         GHI_CHU: String
     });
-    const model = app.db.model('DK_KLGD',schema);
+    const model = app.db.model('dk_klgd',schema);
 
-    app.model.DK_KLGD = {
+    app.model.dk_klgd = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

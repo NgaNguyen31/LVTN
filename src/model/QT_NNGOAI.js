@@ -1,7 +1,7 @@
 module.exports = app => {
     const schema = app.db.Schema ({
         STT: Number,
-        MSNV : [{ type: app.db.Schema.ObjectId, ref: 'ALL_CBCNV' }],
+        MSNV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
         HO: String,
         TEN: String,
         SO_QUYET_DINH: String,
@@ -12,11 +12,11 @@ module.exports = app => {
         NGAY_VE_THUC: Date,
         SO_QD_TIEP_NHAN: String,
         NGAY_QD_TIEP_NHAN: Date,
-        MUC_DICH: [{ type: app.db.Schema.ObjectId, ref: 'MUC_DICH' }],
+        MUC_DICH: [{ type: app.db.Schema.ObjectId, ref: 'mucdich' }],
         NOI_DUNG: String,
         NGANH_HOC: String,
         GIA_HAN: Boolean,
-        NUOC_DEN: [{ type: app.db.Schema.ObjectId, ref: 'NUOC' }],
+        NUOC_DEN: [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
         NOI_DEN: String,
         CHI_PHI:String,
         GHI_CHU: String,
@@ -25,9 +25,9 @@ module.exports = app => {
         BHXH: String,
         FIELD2: String
     });
-    const model = app.db.model('QT_NNGOAI', schema);
+    const model = app.db.model('qt_nngoai', schema);
 
-    app.model.QT_NNGOAI = {
+    app.model.qt_nngoai = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

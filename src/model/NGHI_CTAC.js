@@ -3,9 +3,9 @@ module.exports = app => {
         NGHI : String,
         DIEN_GIAI : String    
     });
-    const model = app.db.model('NGHI_CTAC', schema);
+    const model = app.db.model('nghi_ctac', schema);
 
-    app.model.NGHI_CTAC = {
+    app.model.nghi_ctac = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

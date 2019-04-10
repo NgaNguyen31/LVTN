@@ -3,9 +3,9 @@ module.exports = app => {
         MS_NUOC : Number,
         TEN_NUOC: String 
     });
-    const model = app.db.model('NUOC', schema);
+    const model = app.db.model('nuoc', schema);
 
-    app.model.NUOC = {
+    app.model.nuoc = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

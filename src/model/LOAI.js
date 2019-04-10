@@ -3,9 +3,9 @@ module.exports = app => {
         LOAI : String,
         DIEN_GIAI : String    
     });
-    const model = app.db.model('LOAI', schema);
+    const model = app.db.model('loai', schema);
 
-    app.model.LOAI = {
+    app.model.loai = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

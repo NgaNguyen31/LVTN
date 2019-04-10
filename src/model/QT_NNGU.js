@@ -1,13 +1,13 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'ALL_CBCNV' }],
-        N_NGU: [{ type: app.db.Schema.ObjectId, ref: 'NGOAI_NGU' }],
-        TRINH_DO: [{ type: app.db.Schema.ObjectId, ref: 'TRINH_DO' }],
+        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
+        N_NGU: [{ type: app.db.Schema.ObjectId, ref: 'ngoaingu' }],
+        TRINH_DO: [{ type: app.db.Schema.ObjectId, ref: 'trinhdo' }],
         GHI_CHU: String,
     });
-    const model = app.db.model('QT_NNGU', schema);
+    const model = app.db.model('qt_nngu', schema);
 
-    app.model.QT_NNGU = {
+    app.model.qt_nngu = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

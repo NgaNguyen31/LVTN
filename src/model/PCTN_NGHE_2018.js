@@ -11,9 +11,9 @@ module.exports = app => {
         PT_PCTN_NEW: Number,
         DON_VI: String
     });
-    const model = app.db.model('PCTN_NGHE_2018', schema);
+    const model = app.db.model('pctn_nghe_2018', schema);
 
-    app.model.PCTN_NGHE_2018 = {
+    app.model.pctn_nghe_2018 = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

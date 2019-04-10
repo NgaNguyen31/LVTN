@@ -11,9 +11,9 @@ module.exports = app => {
         PC: String,
         Xoa: Boolean
     });
-    const model = app.db.model('CBCNV_HD_KHOA',schema);
+    const model = app.db.model('cbcnv_hd_khoa',schema);
 
-    app.model.CBCNV_HD_KHOA = {
+    app.model.cbcnv_hd_khoa = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

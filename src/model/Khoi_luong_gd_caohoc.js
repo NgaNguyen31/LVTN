@@ -6,7 +6,7 @@ module.exports = app =>{
         TEN: String,
         Hocvi_hocham: String,
         Mon_giangday: String,
-        Day_khoa: [{ type: app.db.Schema.ObjectId, ref: 'ALL_KHOA' }],
+        Day_khoa: [{ type: app.db.Schema.ObjectId, ref: 'khoa' }],
         Nganh_day: String,
         Don_vi: String,
         St_day_LT_thucte: Number,
@@ -17,9 +17,9 @@ module.exports = app =>{
         Tong_cong: Number,
         Ghi_chu: String
     });
-    const model = app.db.model('Khoi_luong_gd_caohoc',schema);
+    const model = app.db.model('khoi_luong_gd_caohoc',schema);
 
-    app.model.Khoi_luong_gd_caohoc = {
+    app.model.khoi_luong_gd_caohoc = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

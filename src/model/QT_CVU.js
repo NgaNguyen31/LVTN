@@ -1,10 +1,10 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'ALL_CBCNV' }],
+        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
         STT: Number,
         QD_BO_NHIEM: String,
         NGAY_QD_BNHIEM: Date,        
-        MA_CV: [{ type: app.db.Schema.ObjectId, ref: 'CHUC_VU' }],
+        MA_CV: [{ type: app.db.Schema.ObjectId, ref: 'chucvu' }],
         CHUC_VU: String,
         HE_SO_PCCV: Number,
         NGAY_BO_NHIEM: Date,
@@ -12,12 +12,12 @@ module.exports = app => {
         NGAY_THOICV: Date,
         QD_THOI_CVU: String,
         NGAY_QD_THOI_CV: Date,
-        MS_BOMON: [{ type: app.db.Schema.ObjectId, ref: 'ALL_BO_MON' }],
+        MS_BOMON: [{ type: app.db.Schema.ObjectId, ref: 'bomon' }],
         GHI_CHU: String
     });
-    const model = app.db.model('QT_CVU', schema);
+    const model = app.db.model('qt_cvu', schema);
 
-    app.model.QT_CVU = {
+    app.model.qt_cvu = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

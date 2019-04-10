@@ -87,7 +87,7 @@
     "jimp": "^0.6.0",
     "jquery": "^3.3.1",
     "jsonwebtoken": "^8.5.0",
-    "mongodb": "^3.2.2",
+    "mongodb": "^3.2.3",
     "mongoose": "^5.1.0",
     "morgan": "^1.9.0",
     "multiparty": "^4.1.3",

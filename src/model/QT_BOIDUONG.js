@@ -1,6 +1,6 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'ALL_CBCNV' }],
+        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
         STT: Number,
         TU_THANG: Number,
         TU_NAM: Number,
@@ -13,9 +13,9 @@ module.exports = app => {
         NOP_CC: Boolean,
         GHI_CHU: String
     });
-    const model = app.db.model('QT_BOIDUONG', schema);
+    const model = app.db.model('qt_boiduong', schema);
 
-    app.model.QT_BOIDUONG = {
+    app.model.qt_boiduong = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

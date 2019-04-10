@@ -1,15 +1,15 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'ALL_CBCNV' }],
+        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
         STT: Number,
         TEN: String,
         NAM_SINH: Number,
-        CVU: [{ type: app.db.Schema.ObjectId, ref: 'CHUC_VU' }],
+        CVU: [{ type: app.db.Schema.ObjectId, ref: 'chucvu' }],
         CTAC: String
     });
-    const model = app.db.model('QT_CAC_CON', schema);
+    const model = app.db.model('qt_cac_con', schema);
 
-    app.model.QT_CAC_CON = {
+    app.model.qt_cac_con = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

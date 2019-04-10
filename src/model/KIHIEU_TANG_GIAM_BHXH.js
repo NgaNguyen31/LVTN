@@ -3,9 +3,9 @@ module.exports = app =>{
         Ky_hieu: String,
         Dien_giai: String       
     });
-    const model = app.db.model('KIHIEU_TANG_GIAM_BHXH',schema);
+    const model = app.db.model('kihieu_tang_giam_bhxh',schema);
 
-    app.model.KHIEU_TANG_GIAM_BHXH = {
+    app.model.kihieu_tang_giam_bhxh = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

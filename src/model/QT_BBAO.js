@@ -1,14 +1,14 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'ALL_CBCNV' }],
+        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
         STT: Number,
         BAI_BAO: String,
         TEN_TCHI: String,
         NAM: Number
     });
-    const model = app.db.model('QT_BBAO', schema);
+    const model = app.db.model('qt_bbao', schema);
 
-    app.model.QT_BBAO = {
+    app.model.qt_bbao = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

@@ -8,7 +8,7 @@ class ChauPage extends React.Component {
     constructor(props) {
         super(props);
         this.showChau = this.showChau.bind(this);
-        this.delete = this.delete.bind(this);
+        this.deleteChau = this.deleteChau.bind(this);
     }
 
     componentDidMount() {
@@ -24,7 +24,7 @@ class ChauPage extends React.Component {
         e.preventDefault();
     }
 
-    delete(e, item) {
+    deleteChau(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteChau(item._id);
         });
@@ -50,7 +50,7 @@ class ChauPage extends React.Component {
                                     <a className='btn btn-primary' href='#' onClick={e => this.showChau(e, item._id)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteChau(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -80,7 +80,7 @@ class ChauPage extends React.Component {
                 </div>
 
                 <div className='row tile'>{table}</div>
-                <Pagination name='adminContact'
+                <Pagination name='adminChau'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getChauInPage} />
             </main>

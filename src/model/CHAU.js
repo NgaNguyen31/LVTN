@@ -3,9 +3,9 @@ module.exports = app =>{
         MS_CHAU: Number,
         TEN_CHAU: String
     });
-    const model = app.db.model('CHAU',schema);
+    const model = app.db.model('chau',schema);
 
-    app.model.CHAU = {
+    app.model.chau = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

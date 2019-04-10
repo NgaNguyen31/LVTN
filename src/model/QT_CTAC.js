@@ -1,20 +1,20 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'ALL_CBCNV' }],
+        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
         STT: Number,
         TU_THANG: Number,
         TU_NAM: Number,
         DEN_THANG: Number,
         DEN_NAM: Number,
-        CHUC_VU: [{ type: app.db.Schema.ObjectId, ref: 'CHUC_VU' }],
+        CHUC_VU: [{ type: app.db.Schema.ObjectId, ref: 'chucvu' }],
         NOI_CONG_TAC: String,
         BO_MON_CT: String,
         CONG_VIEC: String,
         GHI_CHU: String
     });
-    const model = app.db.model('QT_CTAC', schema);
+    const model = app.db.model('qt_ctac', schema);
 
-    app.model.QT_CTAC = {
+    app.model.qt_ctac = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
