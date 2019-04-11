@@ -1,7 +1,7 @@
 module.exports = app =>{
     const schema = app.db.Schema({
         Hovaten: String,
-        Nuoc: String,
+        Nuoc: [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
         Ngaydi: Date,
         Ngayve: Date,
         Thoigian: Number,

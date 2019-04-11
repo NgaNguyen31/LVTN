@@ -38,8 +38,20 @@ class Qt_luongPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị lương</th>
-                            <th style={{ width: '60%' }}>Tên quản trị lương</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: 'auto' }}>STT</th>
+                            <th style={{ width: 'auto' }}>QĐ lương</th>
+                            <th style={{ width: 'auto' }}>Ngày QĐ</th>
+                            <th style={{ width: 'auto' }}>Ngày hưởng</th>
+                            <th style={{ width: 'auto' }}>Mốc nâng lương</th>
+                            <th style={{ width: 'auto' }}>Ngạch</th>
+                            <th style={{ width: 'auto' }}>Hệ số</th>
+                            <th style={{ width: 'auto' }}>Bậc</th>
+                            <th style={{ width: 'auto' }}>PT vượt khủng</th>
+                            <th style={{ width: 'auto' }}>Lương khoản chính</th>
+                            <th style={{ width: 'auto' }}>Tỷ lệ</th>
+                            <th style={{ width: 'auto' }}>Ghi chú lương</th>
+                            <th style={{ width: 'auto' }}>Ghi chú khác</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

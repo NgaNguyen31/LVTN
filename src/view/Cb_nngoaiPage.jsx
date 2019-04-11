@@ -38,8 +38,15 @@ class Cb_nngoaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số cán bộ nước ngoài</th>
-                            <th style={{ width: '60%' }}>Tên cán bộ nước ngoài</th>
+                            <th style={{ width: '40%' }}>Họ và tên</th>
+                            <th style={{ width: '60%' }}>Nước</th>
+                            <th style={{ width: 'auto' }}>Ngày đi</th>
+                            <th style={{ width: 'auto' }}>Ngày về</th>
+                            <th style={{ width: 'auto' }}>Thời gian</th>
+                            <th style={{ width: 'auto' }}>Mục đích</th>
+                            <th style={{ width: 'auto' }}>Gia hạn</th>
+                            <th style={{ width: 'auto' }}>Số công văn</th>
+                            <th style={{ width: 'auto' }}>Ngày công văn</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

@@ -38,8 +38,22 @@ class Khoi_luong_gd_caohocPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số khối lượng giảng dạy cao học</th>
-                            <th style={{ width: '60%' }}>Tên khối lượng giảng dạy cao học</th>
+                            <th style={{ width: '40%' }}>ID</th>
+                            <th style={{ width: '60%' }}>MSNV</th>
+                            <th style={{ width: 'auto' }}>Họ</th>
+                            <th style={{ width: 'auto' }}>Tên</th>
+                            <th style={{ width: 'auto' }}>Học vị học hàm</th>
+                            <th style={{ width: 'auto' }}>Môn giảng dạy</th>
+                            <th style={{ width: 'auto' }}>Dạy khoa</th>
+                            <th style={{ width: 'auto' }}>Ngành dạy</th>
+                            <th style={{ width: 'auto' }}>Đơn vị</th>
+                            <th style={{ width: 'auto' }}>St dạy LT thực tế</th>
+                            <th style={{ width: 'auto' }}>St dạy TH</th>
+                            <th style={{ width: 'auto' }}>St qui đôi giảng dạy</th>
+                            <th style={{ width: 'auto' }}>Số lượng tiểu luận</th>
+                            <th style={{ width: 'auto' }}>Tổng st qui đổi</th>
+                            <th style={{ width: 'auto' }}>Tổng cộng</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

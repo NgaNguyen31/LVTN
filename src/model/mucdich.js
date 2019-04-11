@@ -1,7 +1,5 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        STT : Number,
-        ID: Number,
         MUC_DICH : String    
     });
     const model = app.db.model('mucdich', schema);

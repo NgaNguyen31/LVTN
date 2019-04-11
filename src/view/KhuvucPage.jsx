@@ -38,8 +38,9 @@ class KhuvucPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số khu vực</th>
+                            <th style={{ width: '40%' }}>MS khu vực</th>
                             <th style={{ width: '60%' }}>Tên khu vực</th>
+                            <th style={{ width: 'auto' }}>MS châu</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

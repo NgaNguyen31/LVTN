@@ -38,8 +38,16 @@ class Cbcnv_hd_khoaPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số cán bộ công nhân viên hợp động khoa</th>
-                            <th style={{ width: '60%' }}>Tên cán bộ công nhân viên hợp động khoa</th>
+                            <th style={{ width: '40%' }}>Mã số bộ môn</th>
+                            <th style={{ width: 'auto' }}>Họ</th>
+                            <th style={{ width: 'auto' }}>Tên</th>
+                            <th style={{ width: 'auto' }}>Phái</th>
+                            <th style={{ width: 'auto' }}>Năm sinh</th>
+                            <th style={{ width: 'auto' }}>Thẻ BHYT</th>
+                            <th style={{ width: 'auto' }}>Nơi khám</th>
+                            <th style={{ width: 'auto' }}>LCB</th>
+                            <th style={{ width: 'auto' }}>PC</th>
+                            <th style={{ width: 'auto' }} nowrap='true'>Active</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

@@ -38,8 +38,11 @@ class ChucvuPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số chức vụ</th>
-                            <th style={{ width: '60%' }}>Tên chức vụ</th>
+                            <th style={{ width: '40%' }}>MS chức vụ</th>
+                            <th style={{ width: '60%' }}>Chức vụ</th>
+                            <th style={{ width: 'auto' }}>PC Chức vụ</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
+                            <th style={{ width: '60%' }} nowrap='true'>Xóa</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

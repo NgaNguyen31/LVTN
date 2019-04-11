@@ -38,8 +38,8 @@ class HesoPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số hệ số</th>
-                            <th style={{ width: '60%' }}>Tên hệ số</th>
+                            <th style={{ width: '40%' }}>MLTT</th>
+                            <th style={{ width: '60%' }}>TL</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

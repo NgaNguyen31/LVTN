@@ -38,8 +38,10 @@ class KiemnhiemPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số kiểm nhiệm</th>
-                            <th style={{ width: '60%' }}>Tên kiểm nhiệm</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: '40%' }}>MS BM</th>
+                            <th style={{ width: '40%' }}>MS Chức vụ</th>
+                            <th style={{ width: '40%' }}>Ngày chức vụ</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

@@ -172,7 +172,7 @@ class Menu extends React.Component {
                         </a>
                         <ul className='treeview-menu'>
                         <li>
-                                <Link className='treeview-item' to='/admin/qt_bbcao'>
+                                <Link className='treeview-item' to='/admin/qt_bbao'>
                                     <i className='icon fa fa-circle-o' />Quản trị bài báo
                                 </Link>
                             </li>
@@ -282,18 +282,8 @@ class Menu extends React.Component {
                                 </Link>
                             </li>
                             <li>
-                                <Link className='treeview-item' to='/admin/chinhsach'>
-                                    <i className='icon fa fa-circle-o' />Chính sách
-                                </Link>
-                            </li>
-                            <li>
                                 <Link className='treeview-item' to='/admin/chucvu'>
                                     <i className='icon fa fa-circle-o' />Chức vụ
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/chucdanh'>
-                                    <i className='icon fa fa-circle-o' />Chức danh
                                 </Link>
                             </li>
                             <li>
@@ -344,11 +334,6 @@ class Menu extends React.Component {
                             <li>
                                 <Link className='treeview-item' to='/admin/mucdich'>
                                     <i className='icon fa fa-circle-o' />Mục đích
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/mucdich1'>
-                                    <i className='icon fa fa-circle-o' />Mục đích 1
                                 </Link>
                             </li>
                             <li>

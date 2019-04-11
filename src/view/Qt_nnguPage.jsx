@@ -38,8 +38,10 @@ class Qt_nnguPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị ngôn ngữ</th>
-                            <th style={{ width: '60%' }}>Tên quản trị ngôn ngữ</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: 'auto' }}>Ngoại ngữ</th>                            
+                            <th style={{ width: 'auto' }}>Trình độ</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

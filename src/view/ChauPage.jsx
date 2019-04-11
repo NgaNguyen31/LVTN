@@ -38,7 +38,7 @@ class ChauPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số châu</th>
+                            <th style={{ width: '40%' }}>MS châu</th>
                             <th style={{ width: '60%' }}>Tên châu</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>

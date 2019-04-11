@@ -38,8 +38,12 @@ class Qt_cac_conPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị các con</th>
-                            <th style={{ width: '60%' }}>Tên quản trị các con</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: '60%' }}>STT</th>
+                            <th style={{ width: 'auto' }}>Tên</th>
+                            <th style={{ width: 'auto' }}>Năm sinh</th>
+                            <th style={{ width: 'auto' }}>Chức vụ</th>
+                            <th style={{ width: 'auto' }}>Công tác</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

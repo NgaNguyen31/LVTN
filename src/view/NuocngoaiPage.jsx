@@ -38,8 +38,9 @@ class NuocngoaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số nước ngoài</th>
-                            <th style={{ width: '60%' }}>Tên nước ngoài</th>
+                            <th style={{ width: '40%' }}>MS nước</th>
+                            <th style={{ width: '60%' }}>Tên nước</th>
+                            <th style={{ width: '60%' }}>MS khu vực</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

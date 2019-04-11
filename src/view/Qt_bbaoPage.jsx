@@ -38,8 +38,11 @@ class Qt_bbaoPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị bài báo</th>
-                            <th style={{ width: '60%' }}>Tên quản trị bài báo</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: '60%' }}>STT</th>
+                            <th style={{ width: 'auto' }}>Bài báo</th>
+                            <th style={{ width: 'auto' }}>Tên tchi</th>
+                            <th style={{ width: 'auto' }}>Năm</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

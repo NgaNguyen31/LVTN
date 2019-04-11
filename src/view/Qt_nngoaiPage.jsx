@@ -38,8 +38,30 @@ class Qt_nngoaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị nước ngoài</th>
-                            <th style={{ width: '60%' }}>Tên quản trị nước ngoài</th>
+                            <th style={{ width: 'auto' }}>STT</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: 'auto' }}>Họ</th>
+                            <th style={{ width: 'auto' }}>Tên</th>
+                            <th style={{ width: 'auto' }}>Số quyết định</th>
+                            <th style={{ width: 'auto' }}>Ngày quyết định</th>
+                            <th style={{ width: 'auto' }}>Đơn vị</th>
+                            <th style={{ width: 'auto' }}>Ngày đi</th>
+                            <th style={{ width: 'auto' }}>Ngày về</th>
+                            <th style={{ width: 'auto' }}>Ngày về thực</th>
+                            <th style={{ width: 'auto' }}>Số QĐ tiếp nhận</th>
+                            <th style={{ width: 'auto' }}>Ngày QĐ tiếp nhận</th>
+                            <th style={{ width: 'auto' }}>Mục đích</th>
+                            <th style={{ width: 'auto' }}>Nội dung</th>
+                            <th style={{ width: 'auto' }}>Ngành học</th>
+                            <th style={{ width: 'auto' }}>Gia hạn</th>
+                            <th style={{ width: 'auto' }}>Nước đến</th>
+                            <th style={{ width: 'auto' }}>Nơi đến</th>
+                            <th style={{ width: 'auto' }}>Chi phí</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
+                            <th style={{ width: 'auto' }}>Hoàn trả KP BHXH</th>
+                            <th style={{ width: 'auto' }}>Ngày nhập</th>
+                            <th style={{ width: 'auto' }}>BHXH</th>                            
+                            <th style={{ width: 'auto' }}>Field2</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

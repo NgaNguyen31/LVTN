@@ -38,8 +38,11 @@ class Qt_gtrinhPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị giáo trình</th>
-                            <th style={{ width: '60%' }}>Tên quản trị giáo trình</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: 'auto' }}>STT</th>
+                            <th style={{ width: 'auto' }}>Giáo trình</th>
+                            <th style={{ width: 'auto' }}>Năm XB</th>
+                            <th style={{ width: 'auto' }}>Nhà XB</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

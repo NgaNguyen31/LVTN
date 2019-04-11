@@ -38,8 +38,9 @@ class ChucdanhPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số chức danh</th>
-                            <th style={{ width: '60%' }}>Tên chức danh</th>
+                            <th style={{ width: '40%' }}>Chức danh</th>
+                            <th style={{ width: '60%' }}>Tên đầy đủ</th>
+                            <th style={{ width: 'auto' }}>Ord</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

@@ -38,8 +38,14 @@ class Qt_khenPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị khen</th>
-                            <th style={{ width: '60%' }}>Tên quản trị khen</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: 'auto' }}>STT</th>
+                            <th style={{ width: 'auto' }}>Năm</th>
+                            <th style={{ width: 'auto' }}>Hình thức</th>
+                            <th style={{ width: 'auto' }}>Cấp khen</th>
+                            <th style={{ width: 'auto' }}>Lý do</th>
+                            <th style={{ width: 'auto' }}>Danh hiệu</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

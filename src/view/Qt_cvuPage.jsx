@@ -38,8 +38,20 @@ class Qt_cvuPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị chức vụ</th>
-                            <th style={{ width: '60%' }}>Tên quản trị chức vụ</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: 'auto' }}>STT</th>
+                            <th style={{ width: 'auto' }}>QĐ bổ nhiệm</th>
+                            <th style={{ width: 'auto' }}>Ngày QĐ bổ nhiểm</th>
+                            <th style={{ width: 'auto' }}>Mã CV</th>
+                            <th style={{ width: 'auto' }}>Chức vụ</th>
+                            <th style={{ width: 'auto' }}>Hệ số PCCV</th>
+                            <th style={{ width: 'auto' }}>Ngày bổ nhiệm</th>
+                            <th style={{ width: 'auto' }}>Ghi chú BHXH</th>
+                            <th style={{ width: 'auto' }}>Ngày thôi CV</th>
+                            <th style={{ width: 'auto' }}>QĐ thôi CV</th>
+                            <th style={{ width: 'auto' }}>Ngày QĐ thôi CV</th>
+                            <th style={{ width: 'auto' }}>MS bộ môn</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

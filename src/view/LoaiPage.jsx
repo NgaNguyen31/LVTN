@@ -38,8 +38,8 @@ class LoaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số loại</th>
-                            <th style={{ width: '60%' }}>Tên loại</th>
+                            <th style={{ width: '40%' }}>Loại</th>
+                            <th style={{ width: '60%' }}>Diễn giải</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

@@ -15,6 +15,7 @@ import user, { changeUser } from './redux/user.jsx';
 import chau from './redux/chau.jsx';
 import dantoc from './redux/dantoc.jsx';
 import benhvien from './redux/benhvien.jsx';
+import chinhsach from './redux/chinhsach.jsx';
 import bomon from './redux/bomon.jsx';
 import cb_nngoai from './redux/cb_nngoai.jsx';
 import cbcnv_hd_dv_tu_tra from './redux/cbcnv_hd_dv_tu_tra.jsx';
@@ -32,7 +33,6 @@ import kiemnhiem from './redux/kiemnhiem.jsx';
 import kihieu_tang_giam_bhxh from './redux/kihieu_tang_giam_bhxh.jsx';
 import loai from './redux/loai.jsx';
 import mucdich from './redux/mucdich.jsx';
-import mucdich1 from './redux/mucdich1.jsx';
 import ngach from './redux/ngach.jsx';
 import nghi_ctac from './redux/nghi_ctac.jsx';
 import ngoaingu from './redux/ngoaingu.jsx';
@@ -70,7 +70,7 @@ import Menu from './Menu.jsx';
 import ContactModal from './ContactModal.jsx';
 
 // Initialize Redux ----------------------------------------------------------------------------------------------------
-const allReducers = combineReducers({ system, user, category, news, event, job, contact, chau, dantoc, chinhsach, benhvien, bomon, cb_nngoai, cbcnv_hd_dv_tu_tra, cbcnv_hd_khoa, cbcnv, chucdanh, chucvu, cv_klgd, dk_klgd, heso, khoa, khoi_luong_gd_caohoc, khuvuc, kiemnhiem, kihieu_tang_giam_bhxh, loai, mucdich, mucdich1, ngach, nghi_ctac, ngoaingu, nuoc, nuocngoai, pctn_nghe_2018, phanloai, qt_bbao, qt_boiduong, qt_cac_con, qt_ctac, qt_cvu, qt_dtai, qt_dtao, qt_gtrinh, qt_khen, qt_ky_luat, qt_luong, qt_nngoai, qt_nngu, qt_tnghiem, tinh, trinhdo, tongiao });
+const allReducers = combineReducers({ system, user, category, news, event, job, contact, chau, dantoc, chinhsach, benhvien, bomon, cb_nngoai, cbcnv_hd_dv_tu_tra, cbcnv_hd_khoa, cbcnv, chucdanh, chucvu, cv_klgd, dk_klgd, heso, khoa, khoi_luong_gd_caohoc, khuvuc, kiemnhiem, kihieu_tang_giam_bhxh, loai, mucdich, ngach, nghi_ctac, ngoaingu, nuoc, nuocngoai, pctn_nghe_2018, phanloai, qt_bbao, qt_boiduong, qt_cac_con, qt_ctac, qt_cvu, qt_dtai, qt_dtao, qt_gtrinh, qt_khen, qt_ky_luat, qt_luong, qt_nngoai, qt_nngu, qt_tnghiem, tinh, trinhdo, tongiao });
 const store = createStore(allReducers, {}, composeWithDevTools(applyMiddleware(thunk)));
 store.dispatch(getSystemState());
 window.T = T;
@@ -119,7 +119,6 @@ class Router extends React.Component {
             { path: '/admin/kihieu_tang_giam_bhxh', component: Loadable({ loading: Loading, loader: () => import('./Kihieu_tang_giam_bhxhPage.jsx') }) },
             { path: '/admin/loai', component: Loadable({ loading: Loading, loader: () => import('./LoaiPage.jsx') }) },
             { path: '/admin/mucdich', component: Loadable({ loading: Loading, loader: () => import('./MucdichPage.jsx') }) },
-            { path: '/admin/mucdich1', component: Loadable({ loading: Loading, loader: () => import('./Mucdich1Page.jsx') }) },
             { path: '/admin/ngach', component: Loadable({ loading: Loading, loader: () => import('./NgachPage.jsx') }) },
             { path: '/admin/nghi_ctac', component: Loadable({ loading: Loading, loader: () => import('./Nghi_ctacPage.jsx') }) },
             { path: '/admin/ngoaingu', component: Loadable({ loading: Loading, loader: () => import('./NgoainguPage.jsx') }) },

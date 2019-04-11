@@ -38,8 +38,13 @@ class Qt_dtaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số quản trị đề tài</th>
-                            <th style={{ width: '60%' }}>Tên quản trị đề tài</th>
+                            <th style={{ width: '40%' }}>MS NV</th>
+                            <th style={{ width: 'auto' }}>STT</th>
+                            <th style={{ width: 'auto' }}>Đề tài</th>
+                            <th style={{ width: 'auto' }}>Chủ nhiệm đề tài</th>
+                            <th style={{ width: 'auto' }}>Cấp</th>
+                            <th style={{ width: 'auto' }}>Ngày kết thúc</th>
+                            <th style={{ width: 'auto' }}>Năm</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

@@ -38,8 +38,16 @@ class Pctn_nghe_2018Page extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số pctn nghe 2018</th>
-                            <th style={{ width: '60%' }}>Tên pctn nghe 2018</th>
+                            <th style={{ width: '40%' }}>SHCC</th>
+                            <th style={{ width: 'auto' }}>Họ</th>
+                            <th style={{ width: 'auto' }}>Tên</th>
+                            <th style={{ width: 'auto' }}>Ngày sinh</th>
+                            <th style={{ width: 'auto' }}>MS CDNN</th>
+                            <th style={{ width: 'auto' }}>Ngày PCTN cũ</th>
+                            <th style={{ width: 'auto' }}>PT PCTN cũ</th>
+                            <th style={{ width: 'auto' }}>Ngày PCTN mới</th>
+                            <th style={{ width: 'auto' }}>PT PCTN mới</th>
+                            <th style={{ width: 'auto' }}>Đơn vị</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

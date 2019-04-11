@@ -38,8 +38,7 @@ class MucdichPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số mục đích</th>
-                            <th style={{ width: '60%' }}>Tên mục đích</th>
+                            <th style={{ width: '60%' }}>Mục đích</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

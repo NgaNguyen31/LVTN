@@ -38,8 +38,8 @@ class BenhvienPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số bệnh viện</th>
-                            <th style={{ width: '60%' }}>Tên bệnh viện</th>
+                            <th style={{ width: '40%' }}>MS BV</th>
+                            <th style={{ width: '60%' }}>Nơi khám</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

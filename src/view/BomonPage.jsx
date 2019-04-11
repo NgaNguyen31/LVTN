@@ -38,8 +38,13 @@ class BomonPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số bộ môn</th>
-                            <th style={{ width: '60%' }}>Tên bộ môn</th>
+                            <th style={{ width: '40%' }}>MS BM</th>
+                            <th style={{ width: '60%' }}>Tên BM</th>
+                            <th style={{ width: 'auto' }}>Tên tiếng anh</th>
+                            <th style={{ width: 'auto' }}>MS kho</th>
+                            <th style={{ width: 'auto' }}>Năm thành lập</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
+                            <th style={{ width: 'auto' }} nowrap='true'>Xóa</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

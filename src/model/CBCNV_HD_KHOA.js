@@ -1,6 +1,6 @@
 module.exports = app => {
     const schema = app.db.Schema({
-        MSBM: Number,
+        MSBM: [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
         HO: String,
         TEN: String,
         PHAI: String,

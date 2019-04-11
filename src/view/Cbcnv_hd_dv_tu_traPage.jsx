@@ -9,6 +9,19 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
         super(props);
         this.showCbcnv_hd_dv_tu_tra = this.showCbcnv_hd_dv_tu_tra.bind(this);
         this.deleteCbcnv_hd_dv_tu_tra = this.deleteCbcnv_hd_dv_tu_tra.bind(this);
+        this.handleInput = this.handleInput.bind(this);
+        this.state = {};
+    }
+
+    handleInput(type, field, args) {
+        return e => {
+            switch(type) {
+                default:
+                    e.preventDefault();
+                    return;
+            }
+            e.preventDefault();
+        }
     }
 
     componentDidMount() {
@@ -38,8 +51,17 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số cán bộ công nhân viên hợp động dịch vụ tự trả</th>
-                            <th style={{ width: '60%' }}>Tên cán bộ công nhân viên hợp động dịch vụ tự trả</th>
+                            <th style={{ width: '40%' }}>Mã số nhân viên</th>
+                            <th style={{ width: 'auto' }}>Họ</th>
+                            <th style={{ width: 'auto' }}>Tên</th>
+                            <th style={{ width: 'auto' }}>Ngày sinh</th>
+                            <th style={{ width: 'auto' }}>Nơi sinh</th>
+                            <th style={{ width: 'auto' }}>Ngày vào</th>
+                            <th style={{ width: 'auto' }}>Ngày nghỉ</th>
+                            <th style={{ width: 'auto' }}>Trình độ</th>
+                            <th style={{ width: 'auto' }}>Đơn vị</th>
+                            <th style={{ width: 'auto' }}>Địa chỉ</th>
+                            <th style={{ width: 'auto' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

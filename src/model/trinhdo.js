@@ -2,7 +2,7 @@ module.exports = app => {
     const schema = app.db.Schema ({
         trinh_do: String,
         Ten_day_du: String,
-        ord: Number
+        ord: [{ type: app.db.Schema.ObjectId, ref: 'phanloai' }],
     });
     const model = app.db.model('trinhdo', schema);
 
