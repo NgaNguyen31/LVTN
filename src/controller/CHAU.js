@@ -6,7 +6,6 @@ module.exports = app => {
     });
 
     app.post('/admin/chau', app.role.isAdmin, (req, res) => {
-        console.log(req.body);
         app.model.chau.create(req.body.chau, (error, chau) => {
             res.send({ error, chau })
         });

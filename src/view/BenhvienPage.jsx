@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getBenhvienInPage, getBenhvien, updateBenhvien, deleteBenhvien } from './redux/benhvien.jsx'
+import { getBenhvienInPage, createBenhvien, updateBenhvien, deleteBenhvien } from './redux/benhvien.jsx'
 import { Link } from 'react-router-dom';
+import BenhvienModal from './BenhvienModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class BenhvienPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showBenhvien = this.showBenhvien.bind(this);
-        this.deleteBenhvien = this.deleteBenhvien.bind(this);
+        this.benhvienModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getBenhvienInPage();
         });
     }
 
-    showBenhvien(e, benhvienId) {
-        console.log(data);
-        this.props.getBenhvien(benhvienId, benhvien => this.props.showBenhvien(benhvien));
+    edit(e, item){
+        this.benhvienModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteBenhvien(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteBenhvien(item._id);
         });
@@ -38,19 +39,21 @@ class BenhvienPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MS BV</th>
-                            <th style={{ width: '60%' }}>Nơi khám</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '100%', textAlign: 'center' }}>Tên bệnh viện</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.benhvien.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Noi_kham ? item.Noi_kham + ' ' : '')}</a>
+                                </td>                            
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showBenhvien(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteBenhvien(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -83,11 +86,17 @@ class BenhvienPage extends React.Component {
                 <Pagination name='adminBenhvien'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getBenhvienInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <BenhvienModal ref={this.benhvienModal} createBenhvien={this.props.createBenhvien} updateBenhvien={this.props.updateBenhvien} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ benhvien: state.benhvien });
-const mapActionsToProps = { getBenhvienInPage, getBenhvien, updateBenhvien, deleteBenhvien };
+const mapActionsToProps = { getBenhvienInPage, createBenhvien, updateBenhvien, deleteBenhvien  };
 export default connect(mapStateToProps, mapActionsToProps)(BenhvienPage);

@@ -1,19 +1,19 @@
 import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
-const GET_BENHVIEN = 'benhvien:getBenhvien';
-const GET_BENHVIEN_IN_PAGE = 'benhvien:getBenhvienInPage';
-const UPDATE_BENHVIEN = 'benhvien:UpdateBenhvien';
+const GET_CHAU = 'benhvien:getBenhvien';
+const GET_CHAU_IN_PAGE = 'benhvien:getBenhvienInPage';
+const UPDATE_CHAU = 'benhvien:UpdateBenhvien';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
-        case GET_BENHVIEN:
+        case GET_CHAU:
             return Object.assign({}, state, { items: data.items });
 
-        case GET_BENHVIEN_IN_PAGE:
+        case GET_CHAU_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
 
-        case UPDATE_BENHVIEN:
+        case UPDATE_CHAU:
             if (state) {
                 let updatedItems = Object.assign({}, state.items),
                     updatedPage = Object.assign({}, state.page),
@@ -55,7 +55,7 @@ export function getAllBenhvien(done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data.items);
-                dispatch({ type: GET_BENHVIEN, items: data.items });
+                dispatch({ type: GET_CHAU, items: data.items });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }
@@ -71,7 +71,7 @@ export function getBenhvienInPage(pageNumber, pageSize, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data.page.pageNumber, data.page.pageSize, data.page.pageTotal, data.page.totalItem);
-                dispatch({ type: GET_BENHVIEN_IN_PAGE, page: data.page });
+                dispatch({ type: GET_CHAU_IN_PAGE, page: data.page });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }
@@ -104,6 +104,7 @@ export function createBenhvien(benhvien, done) {
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
                 T.notify('Create successfully!', 'info');
+                console.log(data);
                 dispatch(getBenhvienInPage());
             }
             done && done(data);
@@ -143,5 +144,5 @@ export function deleteBenhvien(_id) {
 }
 
 export function changeBenhvien(benhvien) {
-    return { type: UPDATE_BENHVIEN, item: benhvien };
+    return { type: UPDATE_CHAU, item: benhvien };
 }
