@@ -104,6 +104,7 @@ export function createChau(chau, done) {
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
                 T.notify('Create successfully!', 'info');
+                console.log(data);
                 dispatch(getChauInPage());
             }
             done && done(data);

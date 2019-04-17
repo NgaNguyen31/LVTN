@@ -81,7 +81,7 @@ class Menu extends React.Component {
                     <li className='treeview'>
                         <a className='app-menu__item' href='#' data-toggle='treeview'>
                             <i className='app-menu__icon fa fa-file' />
-                            <span className='app-menu__label'>Bài báo</span>
+                            <span className='app-menu__label'>Tin tức</span>
                             <i className='treeview-indicator fa fa-angle-right' />
                         </a>
                         <ul className='treeview-menu'>
@@ -138,7 +138,7 @@ class Menu extends React.Component {
                     <li className='treeview'>
                         <a className='app-menu__item' href='#' data-toggle='treeview'>
                             <i className='app-menu__icon fa fa-pagelines' />
-                            <span className='app-menu__label'>Thông tin cán bộ công nhân viên</span>
+                            <span className='app-menu__label'>Thông tin CBCNV</span>
                             <i className='treeview-indicator fa fa-angle-right' />
                         </a>
                         <ul className='treeview-menu'>

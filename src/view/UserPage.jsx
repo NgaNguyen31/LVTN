@@ -62,8 +62,8 @@ class UserPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Name</th>
-                            <th style={{ width: '60%' }}>Email</th>
+                            <th style={{ width: '40%', textAlign: 'center' }}>Name</th>
+                            <th style={{ width: '60%', textAlign: 'center' }}>Email</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Avatar</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Role</th>
                             <th style={{ width: 'auto' }} nowrap='true'>Active</th>
