@@ -2,19 +2,31 @@ module.exports = app => {
     app.get('/admin/tongiao/page/:pageNumber/:pageSize', app.role.isAdmin, (req, res) => {
         const pageNumber = parseInt(req.params.pageNumber),
             pageSize = parseInt(req.params.pageSize);
-        app.model.tongiao.getPage(pageNumber, pageSize, {}, (error, page) => {
-            page.list = page.list.map(item => app.clone(item, { message: '' }));
-            res.send({ error, page });
+        app.model.tongiao.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
+    });
+
+    app.post('/admin/tongiao', app.role.isAdmin, (req, res) => {
+        app.model.tongiao.create(req.body.tongiao, (error, tongiao) => {
+            res.send({ error, tongiao })
         });
     });
-    app.delete('/admin/tongiao', app.role.isAdmin, (req, res) => app.model.tongiao.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/tongiao', (req, res) => app.model.tongiao.create(req.body.tongiao, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.put('/admin/tongiao', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        if (data.TON_GIAO && data.TON_GIAO != '') changes.TON_GIAO = data.TON_GIAO;
 
-        res.send({ error, item });
-    }));
-}
+        app.model.tongiao.update(req.body._id, changes, (error, tongiao) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, tongiao });
+            }
+        })
+    });
+
+    app.delete('/admin/tongiao', app.role.isAdmin, (req, res) => {
+        app.model.tongiao.delete(req.body._id, error => res.send({ error }))
+    }
+    );
+};

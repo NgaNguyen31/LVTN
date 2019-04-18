@@ -345,8 +345,18 @@ class Menu extends React.Component {
                                 <Link className='treeview-item' to='/admin/nghi_ctac'>
                                     <i className='icon fa fa-circle-o' />Nghỉ công tác
                                 </Link>
-                            </li>
-                            <li>
+                            </li>                           
+                            
+                        </ul>
+                    </li>
+                    <li className='treeview'>
+                        <a className='app-menu__item' href='#' data-toggle='treeview'>
+                            <i className='app-menu__icon fa fa-star' />
+                            <span className='app-menu__label'>Thông tin cơ bản</span>
+                            <i className='treeview-indicator fa fa-angle-right' />
+                        </a>
+                        <ul className='treeview-menu'>
+                        <li>
                                 <Link className='treeview-item' to='/admin/ngoaingu'>
                                     <i className='icon fa fa-circle-o' />Ngoại ngữ
                                 </Link>
@@ -386,9 +396,8 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Trình độ
                                 </Link>
                             </li>
-                            
-                        </ul>
-                    </li>
+                            </ul>
+                            </li>
                 </ul>
             </aside >
         ];

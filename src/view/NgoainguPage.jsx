@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getNgoainguInPage, getNgoaingu, updateNgoaingu, deleteNgoaingu } from './redux/ngoaingu.jsx'
+import { getNgoainguInPage, createNgoaingu, updateNgoaingu, deleteNgoaingu } from './redux/ngoaingu.jsx'
 import { Link } from 'react-router-dom';
+import NgoainguModal from './NgoainguModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class NgoainguPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showNgoaingu = this.showNgoaingu.bind(this);
-        this.deleteNgoaingu = this.deleteNgoaingu.bind(this);
+        this.ngoainguModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getNgoainguInPage();
         });
     }
 
-    showNgoaingu(e, ngoainguId) {
-        console.log(data);
-        this.props.getNgoaingu(ngoainguId, ngoaingu => this.props.showNgoaingu(ngoaingu));
+    edit(e, item){
+        this.ngoainguModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteNgoaingu(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteNgoaingu(item._id);
         });
@@ -38,18 +39,21 @@ class NgoainguPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Ngoại ngữ</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '100%', textAlign: 'center' }}>Tên ngoại ngữ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.ngoaingu.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.N_NGU ? item.N_NGU + ' ' : '')}</a>
+                                </td>                            
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showNgoaingu(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteNgoaingu(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -82,11 +86,17 @@ class NgoainguPage extends React.Component {
                 <Pagination name='adminNgoaingu'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getNgoainguInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <NgoainguModal ref={this.ngoainguModal} createNgoaingu={this.props.createNgoaingu} updateNgoaingu={this.props.updateNgoaingu} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ ngoaingu: state.ngoaingu });
-const mapActionsToProps = { getNgoainguInPage, getNgoaingu, updateNgoaingu, deleteNgoaingu };
+const mapActionsToProps = { getNgoainguInPage, createNgoaingu, updateNgoaingu, deleteNgoaingu  };
 export default connect(mapStateToProps, mapActionsToProps)(NgoainguPage);

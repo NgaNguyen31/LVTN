@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getTongiaoInPage, getTongiao, updateTongiao, deleteTongiao } from './redux/tongiao.jsx'
+import { getTongiaoInPage, createTongiao, updateTongiao, deleteTongiao } from './redux/tongiao.jsx'
 import { Link } from 'react-router-dom';
+import TongiaoModal from './TongiaoModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class TongiaoPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showTongiao = this.showTongiao.bind(this);
-        this.deleteTongiao = this.deleteTongiao.bind(this);
+        this.tongiaoModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getTongiaoInPage();
         });
     }
 
-    showTongiao(e, tongiaoId) {
-        console.log(data);
-        this.props.getTongiao(tongiaoId, tongiao => this.props.showTongiao(tongiao));
+    edit(e, item){
+        this.tongiaoModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteTongiao(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteTongiao(item._id);
         });
@@ -38,19 +39,21 @@ class TongiaoPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Tôn giáo</th>
-                            <th style={{ width: '60%' }}>Diễn giải</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '100%', textAlign: 'center' }}>Tôn giáo</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.tongiao.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TON_GIAO ? item.TON_GIAO + ' ' : '')}</a>
+                                </td>                            
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showTongiao(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteTongiao(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -83,11 +86,17 @@ class TongiaoPage extends React.Component {
                 <Pagination name='adminTongiao'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getTongiaoInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <TongiaoModal ref={this.tongiaoModal} createTongiao={this.props.createTongiao} updateTongiao={this.props.updateTongiao} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ tongiao: state.tongiao });
-const mapActionsToProps = { getTongiaoInPage, getTongiao, updateTongiao, deleteTongiao };
+const mapActionsToProps = { getTongiaoInPage, createTongiao, updateTongiao, deleteTongiao  };
 export default connect(mapStateToProps, mapActionsToProps)(TongiaoPage);
