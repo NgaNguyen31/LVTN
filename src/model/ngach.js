@@ -1,7 +1,7 @@
 module.exports = app => {
     const schema = app.db.Schema({
         NGACH: Number,
-        TEN_NGACH: Number,
+        TEN_NGACH: String,
     });
     const model = app.db.model('ngach',schema);
 

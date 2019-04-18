@@ -2,19 +2,32 @@ module.exports = app => {
     app.get('/admin/ngach/page/:pageNumber/:pageSize', app.role.isAdmin, (req, res) => {
         const pageNumber = parseInt(req.params.pageNumber),
             pageSize = parseInt(req.params.pageSize);
-        app.model.ngach.getPage(pageNumber, pageSize, {}, (error, page) => {
-            page.list = page.list.map(item => app.clone(item, { message: '' }));
-            res.send({ error, page });
+        app.model.ngach.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
+    });
+
+    app.post('/admin/ngach', app.role.isAdmin, (req, res) => {
+        app.model.ngach.create(req.body.ngach, (error, ngach) => {
+            res.send({ error, ngach })
         });
     });
-    app.delete('/admin/ngach', app.role.isAdmin, (req, res) => app.model.ngach.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/ngach', (req, res) => app.model.ngach.create(req.body.ngach, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.put('/admin/ngach', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        if (data.NGACH && data.NGACH != '') changes.NGACH = data.NGACH;
+        data.TEN_NGACH && data.TEN_NGACH != '' && (changes.TEN_NGACH = data.TEN_NGACH);
 
-        res.send({ error, item });
-    }));
-}
+        app.model.ngach.update(req.body._id, changes, (error, ngach) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, ngach });
+            }
+        })
+    });
+
+    app.delete('/admin/ngach', app.role.isAdmin, (req, res) => {
+        app.model.ngach.delete(req.body._id, error => res.send({ error }))
+    }
+    );
+};

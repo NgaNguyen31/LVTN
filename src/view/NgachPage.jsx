@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getNgachInPage, getNgach, updateNgach, deleteNgach } from './redux/ngach.jsx'
+import { getNgachInPage, createNgach, updateNgach, deleteNgach } from './redux/ngach.jsx'
 import { Link } from 'react-router-dom';
+import NgachModal from './NgachModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class NgachPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showNgach = this.showNgach.bind(this);
-        this.deleteNgach = this.deleteNgach.bind(this);
+        this.ngachModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getNgachInPage();
         });
     }
 
-    showNgach(e, ngachId) {
-        console.log(data);
-        this.props.getNgach(ngachId, ngach => this.props.showNgach(ngach));
+    edit(e, item){
+        this.ngachModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteNgach(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteNgach(item._id);
         });
@@ -38,19 +39,23 @@ class NgachPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Ngạch</th>
-                            <th style={{ width: '60%' }}>Tên ngạch</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '50%', textAlign: 'center' }}>Ngạch</th>
+                            <th style={{ width: '50%', textAlign: 'center' }}>Tên ngạch</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.ngach.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.NGACH ? item.NGACH + ' ' : '')}</a>
+                                </td>        
+                                <td>{item.TEN_NGACH}</td>                    
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showNgach(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteNgach(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -60,7 +65,7 @@ class NgachPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có ngạch nào!</p>;
+            table = <p>Chưa có loại nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.ngach && this.props.ngach.page ?
@@ -83,11 +88,17 @@ class NgachPage extends React.Component {
                 <Pagination name='adminNgach'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getNgachInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <NgachModal ref={this.ngachModal} createNgach={this.props.createNgach} updateNgach={this.props.updateNgach} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ ngach: state.ngach });
-const mapActionsToProps = { getNgachInPage, getNgach, updateNgach, deleteNgach };
+const mapActionsToProps = { getNgachInPage, createNgach, updateNgach, deleteNgach  };
 export default connect(mapStateToProps, mapActionsToProps)(NgachPage);

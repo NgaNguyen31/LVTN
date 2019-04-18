@@ -1,7 +1,7 @@
 module.exports = app => {
     const schema = app.db.Schema ({
         NGHI : String,
-        DIEN_GIAI : String    
+        Dien_giai : String    
     });
     const model = app.db.model('nghi_ctac', schema);
 

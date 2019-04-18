@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getMucdichInPage, getMucdich, updateMucdich, deleteMucdich } from './redux/mucdich.jsx'
+import { getMucdichInPage, createMucdich, updateMucdich, deleteMucdich } from './redux/mucdich.jsx'
 import { Link } from 'react-router-dom';
+import MucdichModal from './MucdichModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class MucdichPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showMucdich = this.showMucdich.bind(this);
-        this.deleteMucdich = this.deleteMucdich.bind(this);
+        this.mucdichModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getMucdichInPage();
         });
     }
 
-    showMucdich(e, mucdichId) {
-        console.log(data);
-        this.props.getMucdich(mucdichId, mucdich => this.props.showMucdich(mucdich));
+    edit(e, item){
+        this.mucdichModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteMucdich(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteMucdich(item._id);
         });
@@ -38,18 +39,21 @@ class MucdichPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '60%' }}>Mục đích</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '100%', textAlign: 'center' }}>Mục đích</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.mucdich.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MUC_DICH ? item.MUC_DICH + ' ' : '')}</a>
+                                </td>                            
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showMucdich(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteMucdich(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -82,11 +86,17 @@ class MucdichPage extends React.Component {
                 <Pagination name='adminMucdich'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getMucdichInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <MucdichModal ref={this.mucdichModal} createMucdich={this.props.createMucdich} updateMucdich={this.props.updateMucdich} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ mucdich: state.mucdich });
-const mapActionsToProps = { getMucdichInPage, getMucdich, updateMucdich, deleteMucdich };
+const mapActionsToProps = { getMucdichInPage, createMucdich, updateMucdich, deleteMucdich  };
 export default connect(mapStateToProps, mapActionsToProps)(MucdichPage);
