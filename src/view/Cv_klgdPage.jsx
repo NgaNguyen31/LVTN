@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCv_klgdInPage, getCv_klgd, updateCv_klgd, deleteCv_klgd } from './redux/cv_klgd.jsx'
+import { getCv_klgdInPage, createCv_klgd, updateCv_klgd, deleteCv_klgd } from './redux/cv_klgd.jsx'
 import { Link } from 'react-router-dom';
+import Cv_klgdModal from './Cv_klgdModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class Cv_klgdPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showCv_klgd = this.showCv_klgd.bind(this);
-        this.deleteCv_klgd = this.deleteCv_klgd.bind(this);
+        this.cv_klgdModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getCv_klgdInPage();
         });
     }
 
-    showCv_klgd(e, cv_klgdId) {
-        console.log(data);
-        this.props.getCv_klgd(cv_klgdId, cv_klgd => this.props.showCv_klgd(cv_klgd));
+    edit(e, item){
+        this.cv_klgdModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteCv_klgd(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteCv_klgd(item._id);
         });
@@ -38,19 +39,23 @@ class Cv_klgdPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số công việc khối lượng giảng dạy</th>
-                            <th style={{ width: '60%' }}>Tên công việc khối lượng giảng dạy</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '40%', textAlign: 'center' }}>Tên công việc khối lượng giảng dạy</th>
+                            <th style={{ width: '60%', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.cv_klgd.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_CV ? item.TEN_CV + ' ' : '')}</a>
+                                </td>   
+                                <td>{item.GHI_CHU}</td>                         
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showCv_klgd(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteCv_klgd(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -83,11 +88,17 @@ class Cv_klgdPage extends React.Component {
                 <Pagination name='adminCv_klgd'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getCv_klgdInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <Cv_klgdModal ref={this.cv_klgdModal} createCv_klgd={this.props.createCv_klgd} updateCv_klgd={this.props.updateCv_klgd} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ cv_klgd: state.cv_klgd });
-const mapActionsToProps = { getCv_klgdInPage, getCv_klgd, updateCv_klgd, deleteCv_klgd };
+const mapActionsToProps = { getCv_klgdInPage, createCv_klgd, updateCv_klgd, deleteCv_klgd  };
 export default connect(mapStateToProps, mapActionsToProps)(Cv_klgdPage);

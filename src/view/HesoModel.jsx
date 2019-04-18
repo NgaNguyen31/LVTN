@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class DantocModal extends React.Component {
+export default class HesoModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {text: ''}
@@ -28,14 +28,15 @@ export default class DantocModal extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#Dan_toc').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#MLTT').focus());
         }, 250));
     }
 
     show(item) {
-        const { _id, Dan_toc } = item ?
-            item : { _id: null, Dan_toc: '' };
-        $('#Dan_toc').val(Dan_toc);
+        const { _id, MLTT, TL } = item ?
+            item : { _id: null, MLTT: '', TL: '' };
+        $('#MLTT').val(MLTT);
+        $('#TL').val(TL);
         this.setState({ _id});
         $(this.modal.current).modal('show');
     }
@@ -43,17 +44,18 @@ export default class DantocModal extends React.Component {
     save(e) {
         e.preventDefault();
         const changes = {
-            Dan_toc: this.state.text.Dan_toc,
+            MLTT: this.state.text.MLTT,
+            TL: this.state.text.TL,
         };
-        if (changes.Dan_toc == '') {
-            T.notify('Tên dân tộc đang trống!', 'danger');
-            $('#Dan_toc').focus();
+        if (changes.MLTT == '') {
+            T.notify('MLTT!', 'danger');
+            $('#MLTT').focus();
         } else if (this.state._id) {
-            this.props.updateDantoc(this.state._id, changes, data => {
+            this.props.updateHeso(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
             });
         } else {
-            this.props.createDantoc(changes, data => {
+            this.props.createHeso(changes, data => {
                 $(this.modal.current).modal('hide');
             });
         }
@@ -66,15 +68,19 @@ export default class DantocModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin dân tộc</h5>
+                            <h5 className='modal-title'>Thông tin hê số</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='Dan_toc'>Tên dân tộc</label>
-                                <input className='form-control' id='Tendantoc' type='text' placeholder='Tên dân tộc' onChange={this.handleInput('text', 'Dan_toc')} value={this.state.text.Dan_toc}/>
+                                <label htmlFor='MLTT'>MLTT</label>
+                                <input className='form-control' id='Tenheso' type='number' onChange={this.handleInput('text', 'MLTT')} value={this.state.text.MLTT}/>
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='TL'>Tiền lương</label>
+                                <input className='form-control' id='tienluong' type='number' onChange={this.handleInput('text', 'TL')} value={this.state.text.TL}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

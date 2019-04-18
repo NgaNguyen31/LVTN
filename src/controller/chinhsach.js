@@ -2,19 +2,31 @@ module.exports = app => {
     app.get('/admin/chinhsach/page/:pageNumber/:pageSize', app.role.isAdmin, (req, res) => {
         const pageNumber = parseInt(req.params.pageNumber),
             pageSize = parseInt(req.params.pageSize);
-        app.model.chinhsach.getPage(pageNumber, pageSize, {}, (error, page) => {
-            page.list = page.list.map(item => app.clone(item, { message: '' }));
-            res.send({ error, page });
+        app.model.chinhsach.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
+    });
+
+    app.post('/admin/chinhsach', app.role.isAdmin, (req, res) => {
+        app.model.chinhsach.create(req.body.chinhsach, (error, chinhsach) => {
+            res.send({ error, chinhsach })
         });
     });
-    app.delete('/admin/chinhsach', app.role.isAdmin, (req, res) => app.model.chinhsach.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/chinhsach', (req, res) => app.model.chinhsach.create(req.body.chau, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm chính sách', item);
-            //TODO: send email
-        }
+    app.put('/admin/chinhsach', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        if (data.TEN_CS && data.TEN_CS != '') changes.TEN_CS = data.TEN_CS;
 
-        res.send({ error, item });
-    }));
-}
+        app.model.chinhsach.update(req.body._id, changes, (error, chinhsach) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, chinhsach });
+            }
+        })
+    });
+
+    app.delete('/admin/chinhsach', app.role.isAdmin, (req, res) => {
+        app.model.chinhsach.delete(req.body._id, error => res.send({ error }))
+    }
+    );
+};

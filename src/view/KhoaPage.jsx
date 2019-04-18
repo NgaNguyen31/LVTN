@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getKhoaInPage, getKhoa, updateKhoa, deleteKhoa } from './redux/khoa.jsx'
+import { getKhoaInPage, createKhoa, updateKhoa, deleteKhoa } from './redux/khoa.jsx'
 import { Link } from 'react-router-dom';
+import KhoaModal from './KhoaModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class KhoaPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showKhoa = this.showKhoa.bind(this);
-        this.deleteKhoa = this.deleteKhoa.bind(this);
+        this.khoaModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getKhoaInPage();
         });
     }
 
-    showKhoa(e, khoaId) {
-        console.log(data);
-        this.props.getKhoa(khoaId, khoa => this.props.showKhoa(khoa));
+    edit(e, item){
+        this.khoaModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteKhoa(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteKhoa(item._id);
         });
@@ -38,22 +39,25 @@ class KhoaPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MS khoa</th>
-                            <th style={{ width: 'auto' }}>Tên khoa</th>
-                            <th style={{ width: 'auto' }}>Tên tiếng anh</th>
-                            <th style={{ width: 'auto' }}>Tên khoa tắt</th>
-                            <th style={{ width: 'auto' }} nowrap='true'>Xóa</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                        <th style={{ width: '40%', textAlign: 'center' }}>Tên khoa</th>
+                            <th style={{ width: '40%', textAlign: 'center' }}>Tên tiếng anh</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Tên khoa tắt</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.khoa.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_KHOA ? item.TEN_KHOA + ' ' : '')}</a>
+                                </td>     
+                                <td>{item.TEN_TIENG_ANH}</td>
+                                <td>{item.TEN_KHOA_TAT}</td>
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showKhoa(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteKhoa(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -86,11 +90,17 @@ class KhoaPage extends React.Component {
                 <Pagination name='adminKhoa'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getKhoaInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <KhoaModal ref={this.khoaModal} createKhoa={this.props.createKhoa} updateKhoa={this.props.updateKhoa} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ khoa: state.khoa });
-const mapActionsToProps = { getKhoaInPage, getKhoa, updateKhoa, deleteKhoa };
+const mapActionsToProps = { getKhoaInPage, createKhoa, updateKhoa, deleteKhoa  };
 export default connect(mapStateToProps, mapActionsToProps)(KhoaPage);

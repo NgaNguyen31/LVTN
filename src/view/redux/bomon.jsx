@@ -8,7 +8,7 @@ const UPDATE_BOMON = 'bomon:UpdateBomon';
 export default function userReducer(state = null, data) {
     switch (data.type) {
         case GET_BOMON:
-            return Object.assign({}, state, { items: data.items });
+            return Object.assign({}, state, { items: data.items, khoas: data.khoas});
 
         case GET_BOMON_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
@@ -87,7 +87,7 @@ export function getBomon(bomonId, done) {
             } else {
                 
                 if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                dispatch({ type: GET_BOMON, items: data.items, khoa: data.khoa });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);

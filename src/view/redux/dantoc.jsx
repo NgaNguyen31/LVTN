@@ -3,7 +3,7 @@ import T from '../js/common';
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_DAN_TOC = 'dantoc:getDantoc';
 const GET_DAN_TOC_IN_PAGE = 'dantoc:getDantocInPage';
-const UPDATE_DAN_TOC = 'chau:UpdateDantoc';
+const UPDATE_DAN_TOC = 'dantoc:UpdateDantoc';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
@@ -95,10 +95,10 @@ export function getDantoc(dantocId, done) {
     }
 }
 
-export function createChau(chau, done) {
+export function createDantoc(dantoc, done) {
     return dispatch => {
-        const url = '/admin/chau';
-        T.post(url, { chau }, data => {
+        const url = '/admin/dantoc';
+        T.post(url, { dantoc }, data => {
             if (data.error) {
                 T.notify('Error when created!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);

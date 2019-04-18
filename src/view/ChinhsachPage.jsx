@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChinhsachInPage, getChinhsach, updateChinhsach, deleteChinhsach } from './redux/chinhsach.jsx'
+import { getChinhsachInPage, createChinhsach, updateChinhsach, deleteChinhsach } from './redux/chinhsach.jsx'
 import { Link } from 'react-router-dom';
+import ChinhsachModal from './ChinhsachModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class ChinhsachPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showChinhsach = this.showChinhsach.bind(this);
-        this.deleteChinhsach = this.deleteChinhsach.bind(this);
+        this.chinhsachModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getChinhsachInPage();
         });
     }
 
-    showChinhsach(e, chinhsachId) {
-        console.log(data);
-        this.props.getChinhsach(chinhsachId, chinhsach => this.props.showChinhsach(chinhsach));
+    edit(e, item){
+        this.chinhsachModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteChinhsach(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteChinhsach(item._id);
         });
@@ -38,19 +39,21 @@ class ChinhsachPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MS CS</th>
-                            <th style={{ width: '60%' }}>Tên CS</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '100%', textAlign: 'center' }}>Tên chính sách</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.chinhsach.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_CS ? item.TEN_CS + ' ' : '')}</a>
+                                </td>                            
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showChinhsach(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteChinhsach(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -83,11 +86,17 @@ class ChinhsachPage extends React.Component {
                 <Pagination name='adminChinhsach'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getChinhsachInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <ChinhsachModal ref={this.chinhsachModal} createChinhsach={this.props.createChinhsach} updateChinhsach={this.props.updateChinhsach} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ chinhsach: state.chinhsach });
-const mapActionsToProps = { getChinhsachInPage, getChinhsach, updateChinhsach, deleteChinhsach };
+const mapActionsToProps = { getChinhsachInPage, createChinhsach, updateChinhsach, deleteChinhsach  };
 export default connect(mapStateToProps, mapActionsToProps)(ChinhsachPage);

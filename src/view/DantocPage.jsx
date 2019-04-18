@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getDantocInPage, getDantoc, updateDantoc, deleteDantoc } from './redux/dantoc.jsx'
+import { getDantocInPage, createDantoc, updateDantoc, deleteDantoc } from './redux/dantoc.jsx'
 import { Link } from 'react-router-dom';
+import DantocModal from './DantocModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class DantocPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showDantoc = this.showDantoc.bind(this);
-        this.deleteDantoc = this.deleteDantoc.bind(this);
+        this.dantocModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getDantocInPage();
         });
     }
 
-    showDantoc(e, dantocId) {
-        console.log(data);
-        this.props.getDantoc(dantocId, dantoc => this.props.showDantoc(dantoc));
+    edit(e, item){
+        this.dantocModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteDantoc(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteDantoc(item._id);
         });
@@ -38,18 +39,21 @@ class DantocPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Dân tộc</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '100%', textAlign: 'center' }}>Tên dân tộc</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.dantoc.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Dan_toc ? item.Dan_toc + ' ' : '')}</a>
+                                </td>                            
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showDantoc(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteDantoc(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -82,11 +86,17 @@ class DantocPage extends React.Component {
                 <Pagination name='adminDantoc'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getDantocInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <DantocModal ref={this.dantocModal} createDantoc={this.props.createDantoc} updateDantoc={this.props.updateDantoc} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ dantoc: state.dantoc });
-const mapActionsToProps = { getDantocInPage, getDantoc, updateDantoc, deleteDantoc };
+const mapActionsToProps = { getDantocInPage, createDantoc, updateDantoc, deleteDantoc  };
 export default connect(mapStateToProps, mapActionsToProps)(DantocPage);

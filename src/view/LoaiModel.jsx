@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class DantocModal extends React.Component {
+export default class LoaiModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {text: ''}
@@ -28,14 +28,15 @@ export default class DantocModal extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#Dan_toc').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#LOAI').focus());
         }, 250));
     }
 
     show(item) {
-        const { _id, Dan_toc } = item ?
-            item : { _id: null, Dan_toc: '' };
-        $('#Dan_toc').val(Dan_toc);
+        const { _id, LOAI, Dien_giai } = item ?
+            item : { _id: null, LOAI: '', Dien_giai: '' };
+        $('#LOAI').val(LOAI);
+        $('#Dien_giai').val(Dien_giai);
         this.setState({ _id});
         $(this.modal.current).modal('show');
     }
@@ -43,17 +44,18 @@ export default class DantocModal extends React.Component {
     save(e) {
         e.preventDefault();
         const changes = {
-            Dan_toc: this.state.text.Dan_toc,
+            LOAI: this.state.text.LOAI,
+            Dien_giai: this.state.text.Dien_giai,
         };
-        if (changes.Dan_toc == '') {
-            T.notify('Tên dân tộc đang trống!', 'danger');
-            $('#Dan_toc').focus();
+        if (changes.LOAI == '') {
+            T.notify('Tên loại đang trống!', 'danger');
+            $('#LOAI').focus();
         } else if (this.state._id) {
-            this.props.updateDantoc(this.state._id, changes, data => {
+            this.props.updateLoai(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
             });
         } else {
-            this.props.createDantoc(changes, data => {
+            this.props.createLoai(changes, data => {
                 $(this.modal.current).modal('hide');
             });
         }
@@ -66,15 +68,19 @@ export default class DantocModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin dân tộc</h5>
+                            <h5 className='modal-title'>Thông tin loại</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='Dan_toc'>Tên dân tộc</label>
-                                <input className='form-control' id='Tendantoc' type='text' placeholder='Tên dân tộc' onChange={this.handleInput('text', 'Dan_toc')} value={this.state.text.Dan_toc}/>
+                                <label htmlFor='tenloai'>Loại</label>
+                                <input className='form-control' id='Tenloai' type='text' placeholder='Loại' onChange={this.handleInput('text', 'LOAI')} value={this.state.text.LOAI}/>
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='diengiai'>Diễn giải</label>
+                                <input className='form-control' id='Dien_giai' type='text' placeholder='Diễn giải' onChange={this.handleInput('text', 'Dien_giai')} value={this.state.text.Dien_giai}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

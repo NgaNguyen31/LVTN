@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getHesoInPage, getHeso, updateHeso, deleteHeso } from './redux/heso.jsx'
+import { getHesoInPage, createHeso, updateHeso, deleteHeso } from './redux/heso.jsx'
 import { Link } from 'react-router-dom';
+import HesoModal from './HesoModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class HesoPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showHeso = this.showHeso.bind(this);
-        this.deleteHeso = this.deleteHeso.bind(this);
+        this.hesoModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getHesoInPage();
         });
     }
 
-    showHeso(e, hesoId) {
-        console.log(data);
-        this.props.getHeso(hesoId, heso => this.props.showHeso(heso));
+    edit(e, item){
+        this.hesoModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteHeso(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteHeso(item._id);
         });
@@ -38,19 +39,23 @@ class HesoPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MLTT</th>
-                            <th style={{ width: '60%' }}>TL</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '50%', textAlign: 'center' }}>MLTT</th>
+                            <th style={{ width: '50%', textAlign: 'center' }}>Tiền lương</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.heso.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MLTT ? item.MLTT + ' ' : '')}</a>
+                                </td>        
+                                <td>{item.TL}</td>                    
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showHeso(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteHeso(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -83,11 +88,17 @@ class HesoPage extends React.Component {
                 <Pagination name='adminHeso'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getHesoInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <HesoModal ref={this.hesoModal} createHeso={this.props.createHeso} updateHeso={this.props.updateHeso} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ heso: state.heso });
-const mapActionsToProps = { getHesoInPage, getHeso, updateHeso, deleteHeso };
+const mapActionsToProps = { getHesoInPage, createHeso, updateHeso, deleteHeso  };
 export default connect(mapStateToProps, mapActionsToProps)(HesoPage);

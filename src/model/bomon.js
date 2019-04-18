@@ -1,12 +1,10 @@
 module.exports = app => {
     const schema = app.db.Schema({
-        MS_BM: Number,
         TEN_BM: String,
         TEN_TIENG_ANH: String,
-        MS_KHO: Number,
+        MS_KHOA: { type: app.db.Schema.ObjectId, ref: 'khoa' },
         NAM_THANH_LAP: Number,
-        GHI_CHU: String,
-        XOA: Boolean
+        GHI_CHU: String
     });
     const model = app.db.model('bomon',schema);
 
@@ -33,6 +31,14 @@ module.exports = app => {
         getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
         get: (_id,done) => model.findById(_id,done),
         update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
-        delete: (condition, done) => model.findOne(condition, done),
+        delete: (_id, done) => model.findById(_id, (error, item) => {
+            if (error) {
+                done(error);
+            } else if (item == null) {
+                done('Không có ID!');
+            } else {
+                item.remove(done);
+            }
+        }),
     };
 };

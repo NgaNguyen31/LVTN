@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class DantocModal extends React.Component {
+export default class Cv_klgdModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {text: ''}
@@ -28,14 +28,15 @@ export default class DantocModal extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#Dan_toc').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#TEN_CV').focus());
         }, 250));
     }
 
     show(item) {
-        const { _id, Dan_toc } = item ?
-            item : { _id: null, Dan_toc: '' };
-        $('#Dan_toc').val(Dan_toc);
+        const { _id, TEN_CV, GHI_CHU } = item ?
+            item : { _id: null, TEN_CV: '', GHI_CHU:'' };
+        $('#TEN_CV').val(TEN_CV);
+        $('#GHI_CHU').val(GHI_CHU);
         this.setState({ _id});
         $(this.modal.current).modal('show');
     }
@@ -43,17 +44,18 @@ export default class DantocModal extends React.Component {
     save(e) {
         e.preventDefault();
         const changes = {
-            Dan_toc: this.state.text.Dan_toc,
+            TEN_CV: this.state.text.TEN_CV,
+            GHI_CHU: this.state.text.GHI_CHU
         };
-        if (changes.Dan_toc == '') {
-            T.notify('Tên dân tộc đang trống!', 'danger');
-            $('#Dan_toc').focus();
+        if (changes.TEN_CV == '') {
+            T.notify('Tên công việc khối lượng giảng dạy đang trống!', 'danger');
+            $('#TEN_CV').focus();
         } else if (this.state._id) {
-            this.props.updateDantoc(this.state._id, changes, data => {
+            this.props.updateCv_klgd(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
             });
         } else {
-            this.props.createDantoc(changes, data => {
+            this.props.createCv_klgd(changes, data => {
                 $(this.modal.current).modal('hide');
             });
         }
@@ -66,15 +68,19 @@ export default class DantocModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin dân tộc</h5>
+                            <h5 className='modal-title'>Thông tin công việc khối lượng giảng dạy</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='Dan_toc'>Tên dân tộc</label>
-                                <input className='form-control' id='Tendantoc' type='text' placeholder='Tên dân tộc' onChange={this.handleInput('text', 'Dan_toc')} value={this.state.text.Dan_toc}/>
+                                <label htmlFor='TEN_CV'>Tên công việc khối lượng giảng dạy</label>
+                                <input className='form-control' id='Tencv_klgd' type='text' placeholder='Tên công việc khối lượng giảng dạy' onChange={this.handleInput('text', 'TEN_CV')} value={this.state.text.TEN_CV}/>
+                            </div>
+                            <div className='form-group'>
+                                <label htmlFor='GHI_CHU'>Ghi chú</label>
+                                <input className='form-control' id='Ghi_chu' type='text' placeholder='Ghi chú' onChange={this.handleInput('text', 'GHI_CHU')} value={this.state.text.GHI_CHU}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

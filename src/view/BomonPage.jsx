@@ -1,30 +1,32 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getBomonInPage, getBomon, updateBomon, deleteBomon } from './redux/bomon.jsx'
+import { getBomonInPage, createBomon, updateBomon, deleteBomon } from './redux/bomon.jsx'
+
 import { Link } from 'react-router-dom';
+import BomonModal from './BomonModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class BomonPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showBomon = this.showBomon.bind(this);
-        this.deleteBomon = this.deleteBomon.bind(this);
+        this.bomonModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getBomonInPage();
         });
     }
 
-    showBomon(e, bomonId) {
-        console.log(data);
-        this.props.getBomon(bomonId, bomon => this.props.showBomon(bomon));
+    edit(e, item){
+        this.bomonModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteBomon(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteBomon(item._id);
         });
@@ -38,24 +40,29 @@ class BomonPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MS BM</th>
-                            <th style={{ width: '60%' }}>Tên BM</th>
-                            <th style={{ width: 'auto' }}>Tên tiếng anh</th>
-                            <th style={{ width: 'auto' }}>MS kho</th>
-                            <th style={{ width: 'auto' }}>Năm thành lập</th>
-                            <th style={{ width: 'auto' }}>Ghi chú</th>
-                            <th style={{ width: 'auto' }} nowrap='true'>Xóa</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên bộ môn</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên tiếng anh</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Mã số khoa</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Năm thành lập</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.bomon.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.tenbomon ? item.tenbomon + ' ' : '')}</a>
+                                </td> 
+                                <td>{item.TEN_TIENG_ANH}</td>                           
+                                <td>{item.MS_KHOA}</td>
+                                <td>{item.NAM_THANH_LAP}</td>
+                                <td>{item.GHI_CHU}</td>
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showBomon(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteBomon(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -88,11 +95,17 @@ class BomonPage extends React.Component {
                 <Pagination name='adminBomon'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getBomonInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <BomonModal ref={this.bomonModal} createBomon={this.props.createBomon} updateBomon={this.props.updateBomon} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ bomon: state.bomon });
-const mapActionsToProps = { getBomonInPage, getBomon, updateBomon, deleteBomon };
+const mapStateToProps = state => ({ bomon: state.bomon});
+const mapActionsToProps = { getBomonInPage, createBomon, updateBomon, deleteBomon  };
 export default connect(mapStateToProps, mapActionsToProps)(BomonPage);

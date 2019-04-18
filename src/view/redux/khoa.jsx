@@ -87,7 +87,7 @@ export function getKhoa(khoaId, done) {
             } else {
                 
                 if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                dispatch({ type: GET_USERS, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);

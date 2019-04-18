@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getLoaiInPage, getLoai, updateLoai, deleteLoai } from './redux/loai.jsx'
+import { getLoaiInPage, createLoai, updateLoai, deleteLoai } from './redux/loai.jsx'
 import { Link } from 'react-router-dom';
+import LoaiModal from './LoaiModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class LoaiPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showLoai = this.showLoai.bind(this);
-        this.deleteLoai = this.deleteLoai.bind(this);
+        this.loaiModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getLoaiInPage();
         });
     }
 
-    showLoai(e, loaiId) {
-        console.log(data);
-        this.props.getLoai(loaiId, loai => this.props.showLoai(loai));
+    edit(e, item){
+        this.loaiModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteLoai(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteLoai(item._id);
         });
@@ -38,19 +39,23 @@ class LoaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Loại</th>
-                            <th style={{ width: '60%' }}>Diễn giải</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '50%', textAlign: 'center' }}>Loại</th>
+                            <th style={{ width: '50%', textAlign: 'center' }}>Diễn giải</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.loai.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.LOAI ? item.LOAI + ' ' : '')}</a>
+                                </td>        
+                                <td>{item.Dien_giai}</td>                    
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showLoai(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteLoai(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -83,11 +88,17 @@ class LoaiPage extends React.Component {
                 <Pagination name='adminLoai'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getLoaiInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <LoaiModal ref={this.loaiModal} createLoai={this.props.createLoai} updateLoai={this.props.updateLoai} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ loai: state.loai });
-const mapActionsToProps = { getLoaiInPage, getLoai, updateLoai, deleteLoai };
+const mapActionsToProps = { getLoaiInPage, createLoai, updateLoai, deleteLoai  };
 export default connect(mapStateToProps, mapActionsToProps)(LoaiPage);

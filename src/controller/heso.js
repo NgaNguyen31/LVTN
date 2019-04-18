@@ -2,19 +2,32 @@ module.exports = app => {
     app.get('/admin/heso/page/:pageNumber/:pageSize', app.role.isAdmin, (req, res) => {
         const pageNumber = parseInt(req.params.pageNumber),
             pageSize = parseInt(req.params.pageSize);
-        app.model.heso.getPage(pageNumber, pageSize, {}, (error, page) => {
-            page.list = page.list.map(item => app.clone(item, { message: '' }));
-            res.send({ error, page });
+        app.model.heso.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
+    });
+
+    app.post('/admin/heso', app.role.isAdmin, (req, res) => {
+        app.model.heso.create(req.body.heso, (error, heso) => {
+            res.send({ error, heso })
         });
     });
-    app.delete('/admin/heso', app.role.isAdmin, (req, res) => app.model.heso.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/heso', (req, res) => app.model.heso.create(req.body.heso, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.put('/admin/heso', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        if (data.MLTT && data.MLTT != '') changes.MLTT = data.MLTT;
+        data.TL && data.TL != '' && (changes.TL = data.TL);
 
-        res.send({ error, item });
-    }));
-}
+        app.model.heso.update(req.body._id, changes, (error, heso) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, heso });
+            }
+        })
+    });
+
+    app.delete('/admin/heso', app.role.isAdmin, (req, res) => {
+        app.model.heso.delete(req.body._id, error => res.send({ error }))
+    }
+    );
+};

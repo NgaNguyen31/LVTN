@@ -9,12 +9,24 @@ module.exports = app => {
     });
     app.delete('/admin/khoa', app.role.isAdmin, (req, res) => app.model.khoa.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/khoa', (req, res) => app.model.khoa.create(req.body.khoa, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.put('/admin/khoa', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        data.TEN_KHOA && data.TEN_KHOA != '' && (changes.TEN_KHOA = data.TEN_KHOA);
+        data.TEN_TIENG_ANH && data.TEN_TIENG_ANH != '' && (changes.TEN_TIENG_ANH = data.TEN_TIENG_ANH);
+        data.TEN_KHOA_TAT && data.TEN_KHOA_TAT != '' && (changes.TEN_KHOA_TAT = data.TEN_KHOA_TAT);
+        app.model.khoa.update(req.body._id, changes, (error, khoa) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, khoa });
+            }
+        })
+    });
 
-        res.send({ error, item });
-    }));
+    app.post('/admin/khoa', app.role.isAdmin, (req, res) => {
+        app.model.khoa.create(req.body.khoa, (error, khoa) => {
+            res.send({ error, khoa })
+        });
+    });
 }
