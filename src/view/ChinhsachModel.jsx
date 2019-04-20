@@ -45,7 +45,7 @@ export default class ChinhsachModal extends React.Component {
         const changes = {
             TEN_CS: this.state.text.TEN_CS,
         };
-        if (changes.TEN_CS == '') {
+        if (this.state.text == '') {
             T.notify('Tên chính sách đang trống!', 'danger');
             $('#TEN_CS').focus();
         } else if (this.state._id) {

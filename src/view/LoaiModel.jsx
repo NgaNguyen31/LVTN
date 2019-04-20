@@ -50,6 +50,9 @@ export default class LoaiModal extends React.Component {
         if (changes.LOAI == '') {
             T.notify('Tên loại đang trống!', 'danger');
             $('#LOAI').focus();
+        } else if (changes.Dien_giai == '') {
+            T.notify('Diễn giải đang trống!', 'danger');
+            $('#Dien_giai').focus();
         } else if (this.state._id) {
             this.props.updateLoai(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

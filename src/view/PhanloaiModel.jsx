@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class LoaiModal extends React.Component {
+export default class PhanloaiModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {text: ''}
@@ -33,7 +33,7 @@ export default class LoaiModal extends React.Component {
     }
 
     show(item) {
-        const { _id, ORD, LOAI } = item ?
+        const { _id, ORD , LOAI } = item ?
             item : { _id: null, ORD: '', LOAI: '' };
         $('#ORD').val(ORD);
         $('#LOAI').val(LOAI);
@@ -50,37 +50,39 @@ export default class LoaiModal extends React.Component {
         if (changes.ORD == '') {
             T.notify('Tên loại đang trống!', 'danger');
             $('#ORD').focus();
+        } else if (changes.LOAI == '') {
+            T.notify('Loại đang trống!', 'danger');
+            $('#LOAI').focus();
         } else if (this.state._id) {
-            this.props.updateLoai(this.state._id, changes, data => {
+            this.props.updatePhanloai(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
             });
         } else {
-            this.props.createLoai(changes, data => {
+            this.props.createPhanloai(changes, data => {
                 $(this.modal.current).modal('hide');
             });
         }
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin loại</h5>
+                            <h5 className='modal-title'>Phân loại</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='tenphanloai'>ORD</label>
-                                <input className='form-control' id='Tenphanloai' type='text' placeholder='ORD' onChange={this.handleInput('text', 'ORD')} value={this.state.text.ORD}/>
+                                <label htmlFor='tenloai'>ORD</label>
+                                <input className='form-control' id='Tenord' type='number' placeholder='ORD' onChange={this.handleInput('text', 'ORD')} value={this.state.text.ORD}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='diengiai'>Loại</label>
-                                <input className='form-control' id='LOAI' type='text' placeholder='Loại' onChange={this.handleInput('text', 'LOAI')} value={this.state.text.LOAI}/>
+                                <input className='form-control' id='loai' type='text' placeholder='Loại' onChange={this.handleInput('text', 'LOAI')} value={this.state.text.LOAI}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

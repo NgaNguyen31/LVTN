@@ -19,7 +19,6 @@ class TrinhdoPage extends React.Component {
     }
 
     showTrinhdo(e, trinhdoId) {
-        console.log(data);
         this.props.getTrinhdo(trinhdoId, trinhdo => this.props.showTrinhdo(trinhdo));
         e.preventDefault();
     }

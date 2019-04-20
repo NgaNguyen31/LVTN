@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getPctn_nghe_2018InPage, getPctn_nghe_2018, updatePctn_nghe_2018, deletePctn_nghe_2018 } from './redux/pctn_nghe_2018.jsx'
+import { getPctn_nghe_2018InPage, createPctn_nghe_2018, updatePctn_nghe_2018, deletePctn_nghe_2018 } from './redux/pctn_nghe_2018.jsx'
 import { Link } from 'react-router-dom';
+import Pctn_nghe_2018Modal from './Pctn_nghe_2018Model.jsx';
 import Pagination from './Pagination.jsx';
 
 class Pctn_nghe_2018Page extends React.Component {
     constructor(props) {
         super(props);
-        this.showPctn_nghe_2018 = this.showPctn_nghe_2018.bind(this);
-        this.deletePctn_nghe_2018 = this.deletePctn_nghe_2018.bind(this);
+        this.pctn_nghe_2018Modal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getPctn_nghe_2018InPage();
         });
     }
 
-    showPctn_nghe_2018(e, pctn_nghe_2018Id) {
-        console.log(data);
-        this.props.getPctn_nghe_2018(pctn_nghe_2018Id, pctn_nghe_2018 => this.props.showPctn_nghe_2018(pctn_nghe_2018));
+    edit(e, item){
+        this.pctn_nghe_2018Modal.current.show(item);
         e.preventDefault();
     }
 
-    deletePctn_nghe_2018(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deletePctn_nghe_2018(item._id);
         });
@@ -38,27 +39,39 @@ class Pctn_nghe_2018Page extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>SHCC</th>
-                            <th style={{ width: 'auto' }}>Họ</th>
-                            <th style={{ width: 'auto' }}>Tên</th>
-                            <th style={{ width: 'auto' }}>Ngày sinh</th>
-                            <th style={{ width: 'auto' }}>MS CDNN</th>
-                            <th style={{ width: 'auto' }}>Ngày PCTN cũ</th>
-                            <th style={{ width: 'auto' }}>PT PCTN cũ</th>
-                            <th style={{ width: 'auto' }}>Ngày PCTN mới</th>
-                            <th style={{ width: 'auto' }}>PT PCTN mới</th>
-                            <th style={{ width: 'auto' }}>Đơn vị</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>SHCC</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày sinh</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>MS CDNN</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày PCTN cũ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>PT PCTN cũ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày PCTN mới</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>PT PCTN mới</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Đơn vị</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.pctn_nghe_2018.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.SHCC ? item.SHCC + ' ' : '')}</a>
+                                </td>        
+                                <td>{item.HO}</td>                    
+                                <td>{item.TEN}</td>                    
+                                <td>{item.NGAY_SINH}</td>                    
+                                <td>{item.MS_CDNN}</td>                    
+                                <td>{item.NGAY_PCTN_OLD}</td>                    
+                                <td>{item.PT_PCTN_OLD}</td>                    
+                                <td>{item.NGAY_PCTN_NEW}</td>                    
+                                <td>{item.PT_PCTN_NEW}</td>                    
+                                <td>{item.DON_VI}</td>                    
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showPctn_nghe_2018(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deletePctn_nghe_2018(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -77,13 +90,13 @@ class Pctn_nghe_2018Page extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Pctn nghe 2018</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin PCTN Nghe 2018</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Pctn nghe 2018</li>
+                        <li className='breadcrumb-item'>PCTN Nghe 2018</li>
                     </ul>
                 </div>
 
@@ -91,11 +104,17 @@ class Pctn_nghe_2018Page extends React.Component {
                 <Pagination name='adminPctn_nghe_2018'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getPctn_nghe_2018InPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <Pctn_nghe_2018Modal ref={this.pctn_nghe_2018Modal} createPctn_nghe_2018={this.props.createPctn_nghe_2018} updatePctn_nghe_2018={this.props.updatePctn_nghe_2018} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ pctn_nghe_2018: state.pctn_nghe_2018 });
-const mapActionsToProps = { getPctn_nghe_2018InPage, getPctn_nghe_2018, updatePctn_nghe_2018, deletePctn_nghe_2018 };
+const mapActionsToProps = { getPctn_nghe_2018InPage, createPctn_nghe_2018, updatePctn_nghe_2018, deletePctn_nghe_2018  };
 export default connect(mapStateToProps, mapActionsToProps)(Pctn_nghe_2018Page);

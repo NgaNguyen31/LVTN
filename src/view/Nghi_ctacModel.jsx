@@ -48,8 +48,11 @@ export default class Nghi_ctacModal extends React.Component {
             Dien_giai: this.state.text.Dien_giai,
         };
         if (changes.NGHI == '') {
-            T.notify('Tên nghỉ công tác đang trống!', 'danger');
+            T.notify('Loại nghỉ công tác đang trống!', 'danger');
             $('#NGHI').focus();
+        } else if (changes.Dien_giai == '') {
+            T.notify('Diễn giải đang trống!', 'danger');
+            $('#Dien_giai').focus();
         } else if (this.state._id) {
             this.props.updateNghi_ctac(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

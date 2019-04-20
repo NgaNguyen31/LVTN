@@ -65,7 +65,7 @@ class PhanloaiPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có loại nào!</p>;
+            table = <p>Chưa có phân loại nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.phanloai && this.props.phanloai.page ?
@@ -74,13 +74,13 @@ class PhanloaiPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Loại</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin phân loại</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Loại</li>
+                        <li className='breadcrumb-item'>Phân loại</li>
                     </ul>
                 </div>
 

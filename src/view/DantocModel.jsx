@@ -45,7 +45,7 @@ export default class DantocModal extends React.Component {
         const changes = {
             Dan_toc: this.state.text.Dan_toc,
         };
-        if (changes.Dan_toc == '') {
+        if (this.state.text == '') {
             T.notify('Tên dân tộc đang trống!', 'danger');
             $('#Dan_toc').focus();
         } else if (this.state._id) {

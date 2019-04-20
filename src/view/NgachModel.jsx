@@ -50,6 +50,9 @@ export default class NgachModal extends React.Component {
         if (changes.NGACH == '') {
             T.notify('Tên loại đang trống!', 'danger');
             $('#NGACH').focus();
+        } else if (changes.TEN_NGACH == '') {
+            T.notify('Tên ngạch đang trống!', 'danger');
+            $('#TEN_NGACH').focus();
         } else if (this.state._id) {
             this.props.updateNgach(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

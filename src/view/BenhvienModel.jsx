@@ -45,7 +45,7 @@ export default class BenhvienModal extends React.Component {
         const changes = {
             Noi_kham: this.state.text.Noi_kham,
         };
-        if (changes.Noi_kham == '') {
+        if (this.state.text == '') {
             T.notify('Tên bệnh viện đang trống!', 'danger');
             $('#Noi_kham').focus();
         } else if (this.state._id) {

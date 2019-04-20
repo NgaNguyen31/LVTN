@@ -45,7 +45,7 @@ export default class ChauModal extends React.Component {
         const changes = {
             tenchau: this.state.text.tenchau,
         };
-        if (changes.tenchau == '') {
+        if (this.state.text == "") {
             T.notify('Tên châu đang trống!', 'danger');
             $('#tenchau').focus();
         } else if (this.state._id) {
@@ -60,7 +60,6 @@ export default class ChauModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

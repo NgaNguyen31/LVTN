@@ -50,6 +50,9 @@ export default class Kihieu_tang_giam_bhxhModal extends React.Component {
         if (changes.Ky_hieu == '') {
             T.notify('Tên kí hiệu tăng giảm BHXH đang trống!', 'danger');
             $('#Ky_hieu').focus();
+        } else if (changes.Dien_giai == '') {
+            T.notify('Diễn giải đang trống!', 'danger');
+            $('#Dien_giai').focus();
         } else if (this.state._id) {
             this.props.updateKihieu_tang_giam_bhxh(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
