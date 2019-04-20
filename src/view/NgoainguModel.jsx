@@ -45,7 +45,7 @@ export default class NgoainguModal extends React.Component {
         const changes = {
             N_NGU: this.state.text.N_NGU,
         };
-        if (changes.N_NGU == '') {
+        if (this.state.text == '') {
             T.notify('Tên ngoại ngữ đang trống!', 'danger');
             $('#N_NGU').focus();
         } else if (this.state._id) {
@@ -60,7 +60,6 @@ export default class NgoainguModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

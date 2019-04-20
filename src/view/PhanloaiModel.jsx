@@ -47,10 +47,13 @@ export default class PhanloaiModal extends React.Component {
             ORD: this.state.text.ORD,
             LOAI: this.state.text.LOAI,
         };
-        if (changes.ORD == '') {
-            T.notify('Tên loại đang trống!', 'danger');
+        if (this.state.text == '')  {
+            T.notify('Bạn phải điền dữ liệu!', 'danger');
+            $('#TEN_KHOA').focus();
+        } else if (!changes.ORD) {
+            T.notify('ORD đang trống!', 'danger');
             $('#ORD').focus();
-        } else if (changes.LOAI == '') {
+        } else if (!changes.LOAI) {
             T.notify('Loại đang trống!', 'danger');
             $('#LOAI').focus();
         } else if (this.state._id) {

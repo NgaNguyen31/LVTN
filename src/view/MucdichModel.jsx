@@ -45,7 +45,7 @@ export default class MucdichModal extends React.Component {
         const changes = {
             MUC_DICH: this.state.text.MUC_DICH,
         };
-        if (changes.MUC_DICH == '') {
+        if (this.state.text == '') {
             T.notify('Tên mục đích đang trống!', 'danger');
             $('#MUC_DICH').focus();
         } else if (this.state._id) {
@@ -60,7 +60,6 @@ export default class MucdichModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

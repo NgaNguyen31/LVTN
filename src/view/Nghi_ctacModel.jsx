@@ -47,10 +47,13 @@ export default class Nghi_ctacModal extends React.Component {
             NGHI: this.state.text.NGHI,
             Dien_giai: this.state.text.Dien_giai,
         };
-        if (changes.NGHI == '') {
+        if (this.state.text =='') {
+            T.notify('Bạn phải điền giá trị!', 'danger');
+            $('#NGHI').focus();
+        }else if (!changes.NGHI) {
             T.notify('Loại nghỉ công tác đang trống!', 'danger');
             $('#NGHI').focus();
-        } else if (changes.Dien_giai == '') {
+        } else if (!changes.Dien_giai) {
             T.notify('Diễn giải đang trống!', 'danger');
             $('#Dien_giai').focus();
         } else if (this.state._id) {
@@ -65,7 +68,6 @@ export default class Nghi_ctacModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

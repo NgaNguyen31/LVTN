@@ -46,8 +46,14 @@ export default class NuocModal extends React.Component {
             MS_NUOC: this.state.text.MS_NUOC,
             TEN_NUOC: this.state.text.TEN_NUOC,
         };
-        if (changes.MS_NUOC == '') {
+        if (this.state.text =='') {
+            T.notify('Bạn phải điền giá trị!', 'danger');
+            $('#NGHI').focus();
+        } else if (!changes.MS_NUOC) {
             T.notify('Mã số nước đang trống!', 'danger');
+            $('#MS_NUOC').focus();
+        } else if (!changes.TEN_NUOC) {
+            T.notify('Tên nước đang trống!', 'danger');
             $('#MS_NUOC').focus();
         } else if (this.state._id) {
             this.props.updateNuoc(this.state._id, changes, data => {
@@ -61,7 +67,6 @@ export default class NuocModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

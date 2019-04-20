@@ -45,7 +45,7 @@ export default class TongiaoModal extends React.Component {
         const changes = {
             TON_GIAO: this.state.text.TON_GIAO,
         };
-        if (changes.TON_GIAO == '') {
+        if (!changes.TON_GIAO) {
             T.notify('Tên tôn giáo đang trống!', 'danger');
             $('#TON_GIAO').focus();
         } else if (this.state._id) {
@@ -60,7 +60,6 @@ export default class TongiaoModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

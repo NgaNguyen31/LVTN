@@ -47,10 +47,13 @@ export default class NgachModal extends React.Component {
             NGACH: this.state.text.NGACH,
             TEN_NGACH: this.state.text.TEN_NGACH,
         };
-        if (changes.NGACH == '') {
-            T.notify('Tên loại đang trống!', 'danger');
+        if (this.state.text =='') {
+            T.notify('Bạn phải điền giá trị!', 'danger');
             $('#NGACH').focus();
-        } else if (changes.TEN_NGACH == '') {
+        } else if (!changes.NGACH) {
+            T.notify('Ngạch đang trống!', 'danger');
+            $('#NGACH').focus();
+        } else if (!changes.TEN_NGACH) {
             T.notify('Tên ngạch đang trống!', 'danger');
             $('#TEN_NGACH').focus();
         } else if (this.state._id) {
@@ -65,7 +68,6 @@ export default class NgachModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

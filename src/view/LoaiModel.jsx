@@ -47,10 +47,13 @@ export default class LoaiModal extends React.Component {
             LOAI: this.state.text.LOAI,
             Dien_giai: this.state.text.Dien_giai,
         };
-        if (changes.LOAI == '') {
+        if (this.state.text == '')  {
+            T.notify('Bạn phải điền dữ liệu!', 'danger');
+            $('#LOAI').focus();
+        } else if (!changes.LOAI) {
             T.notify('Tên loại đang trống!', 'danger');
             $('#LOAI').focus();
-        } else if (changes.Dien_giai == '') {
+        } else if (!changes.Dien_giai) {
             T.notify('Diễn giải đang trống!', 'danger');
             $('#Dien_giai').focus();
         } else if (this.state._id) {
@@ -65,7 +68,6 @@ export default class LoaiModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>

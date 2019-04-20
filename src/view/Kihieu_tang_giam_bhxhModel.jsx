@@ -47,10 +47,13 @@ export default class Kihieu_tang_giam_bhxhModal extends React.Component {
             Ky_hieu: this.state.text.Ky_hieu,
             Dien_giai: this.state.text.Dien_giai,
         };
-        if (changes.Ky_hieu == '') {
+        if (changes == '') {
+            T.notify('Bạn phải điền giá trị!', 'danger');
+            $('#MLTT').focus();
+        }else if (changes.Dien_giai != '' && !changes.Ky_hieu) {
             T.notify('Tên kí hiệu tăng giảm BHXH đang trống!', 'danger');
             $('#Ky_hieu').focus();
-        } else if (changes.Dien_giai == '') {
+        } else if (changes.Ky_hieu != '' && !changes.Dien_giai) {
             T.notify('Diễn giải đang trống!', 'danger');
             $('#Dien_giai').focus();
         } else if (this.state._id) {
@@ -65,7 +68,6 @@ export default class Kihieu_tang_giam_bhxhModal extends React.Component {
     }
 
     render() {
-        console.log(this.state);
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
