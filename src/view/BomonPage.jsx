@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getBomonInPage, createBomon, updateBomon, deleteBomon } from './redux/bomon.jsx'
-
+import { getBomonInPage, createBomon, updateBomon, deleteBomon, getAllBomon } from './redux/bomon.jsx';
+import {getAllKhoa} from './redux/khoa.jsx';
 import { Link } from 'react-router-dom';
 import BomonModal from './BomonModel.jsx';
 import Pagination from './Pagination.jsx';
@@ -19,10 +19,11 @@ class BomonPage extends React.Component {
             T.selectMenu(1, 4);
             this.props.getBomonInPage();
         });
+        this.props.getAllKhoa();
     }
 
     edit(e, item){
-        this.bomonModal.current.show(item);
+        this.bomonModal.current.show(item, this.props.khoa.data.items);
         e.preventDefault();
     }
 
@@ -34,7 +35,7 @@ class BomonPage extends React.Component {
     }
 
     render() {
-        let table = null;
+        let table = null;              
         if (this.props.bomon && this.props.bomon.page && this.props.bomon.page.list && this.props.bomon.page.list.length > 0) {
             table = (
                 <table className='table table-hover table-bordered' ref={this.table}>
@@ -52,7 +53,7 @@ class BomonPage extends React.Component {
                         {this.props.bomon.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.tenbomon ? item.tenbomon + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_BM ? item.TEN_BM + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.TEN_TIENG_ANH}</td>                           
                                 <td>{item.MS_KHOA}</td>
@@ -68,6 +69,7 @@ class BomonPage extends React.Component {
                                 </td>
                             </tr>
                         ))}
+                        
                     </tbody>
                 </table>
             );
@@ -106,6 +108,6 @@ class BomonPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ bomon: state.bomon});
-const mapActionsToProps = { getBomonInPage, createBomon, updateBomon, deleteBomon  };
+const mapStateToProps = state => ({ bomon: state.bomon, khoa: state.khoa});
+const mapActionsToProps = { getBomonInPage, createBomon, updateBomon, deleteBomon, getAllBomon, getAllKhoa };
 export default connect(mapStateToProps, mapActionsToProps)(BomonPage);

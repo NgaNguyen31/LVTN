@@ -7,6 +7,16 @@ module.exports = app => {
             res.send({ error, page });
         });
     });
+    app.get('/admin/khoa/all', app.role.isAdmin, (req, res) => {
+        app.model.khoa.getAll((error, result) => {
+            if (error) {
+                res.send({ error });
+            } else {                
+                res.send(result);
+            }
+        })
+    })
+
     app.delete('/admin/khoa', app.role.isAdmin, (req, res) => app.model.khoa.delete(req.body._id, error => res.send({ error })));
 
     app.put('/admin/khoa', app.role.isAdmin, (req, res) => {

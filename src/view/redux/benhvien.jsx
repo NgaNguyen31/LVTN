@@ -104,7 +104,6 @@ export function createBenhvien(benhvien, done) {
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
                 T.notify('Create successfully!', 'info');
-                console.log(data);
                 dispatch(getBenhvienInPage());
             }
             done && done(data);

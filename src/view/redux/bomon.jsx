@@ -96,13 +96,13 @@ export function getBomon(bomonId, done) {
 }
 
 export function createBomon(bomon, done) {
-    return dispatch => {
+    return dispatch => {        
         const url = '/admin/bomon';
         T.post(url, { bomon }, data => {
             if (data.error) {
                 T.notify('Error when created!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
-            } else {
+            } else {                
                 T.notify('Create successfully!', 'info');
                 dispatch(getBomonInPage());
             }

@@ -2,6 +2,7 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_KHOA = 'khoa:getKhoa';
+const GET_ALL = 'khoa:getAll';
 const GET_KHOA_IN_PAGE = 'khoa:getKhoaInPage';
 const UPDATE_KHOA = 'khoa:UpdateKhoa';
 
@@ -9,6 +10,12 @@ export default function userReducer(state = null, data) {
     switch (data.type) {
         case GET_KHOA:
             return Object.assign({}, state, { items: data.items });
+
+        case GET_ALL:
+            return {
+                ...state,
+                data
+            }
 
         case GET_KHOA_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
@@ -54,8 +61,8 @@ export function getAllKhoa(done) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
-                if (done) done(data.items);
-                dispatch({ type: GET_KHOA, items: data.items });
+                if (done) done(data);
+                dispatch({ type: GET_ALL, items: data });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

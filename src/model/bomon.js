@@ -2,7 +2,7 @@ module.exports = app => {
     const schema = app.db.Schema({
         TEN_BM: String,
         TEN_TIENG_ANH: String,
-        MS_KHOA: { type: app.db.Schema.ObjectId, ref: 'khoa' },
+        MS_KHOA: [{ type: app.db.Schema.ObjectId, ref: 'khoa' }],
         NAM_THANH_LAP: Number,
         GHI_CHU: String
     });

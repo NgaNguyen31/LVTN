@@ -9,14 +9,11 @@ module.exports = app => {
     });
     app.delete('/admin/bomon', app.role.isAdmin, (req, res) => app.model.bomon.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/bomon', (req, res) => app.model.bomon.create(req.body.bomon, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm châu', item);
-            //TODO: send email
-        }
-
-        res.send({ error, item });
-    }));
+    app.post('/admin/bomon', app.role.isAdmin, (req, res) => {        
+        app.model.bomon.create(req.body.bomon, (error, bomon) => {
+            res.send({ error, bomon })
+        });
+    });
 
     app.put('/admin/bomon', app.role.isAdmin, (req, res) => {
         let data = req.body.changes,
