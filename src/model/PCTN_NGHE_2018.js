@@ -1,6 +1,12 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        SHCC : Number,
+        SHCC : {
+            type: Number,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
         HO: String,
         TEN: String,
         NGAY_SINH: Date,

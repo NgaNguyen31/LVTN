@@ -2,7 +2,7 @@ module.exports = app =>{
     const schema = app.db.Schema({
         MLTT: Number,
         TL: Number       
-    });
+    }, {unique: true});
     const model = app.db.model('heso',schema);
 
     app.model.heso = {

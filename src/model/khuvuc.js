@@ -1,7 +1,12 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        MS_KVUC: Number,
-        TEN_KVUC: String,
+        TEN_KVUC: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
         MS_CHAU: [{ type: app.db.Schema.ObjectId, ref: 'chau' }],      
     });
     const model = app.db.model('khuvuc',schema);

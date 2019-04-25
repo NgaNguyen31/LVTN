@@ -2,7 +2,8 @@ module.exports = app =>{
     const schema = app.db.Schema({
         TEN_TINH: String,
         MS_VUNG: Number,
-    });
+    }, 
+    {unique: true});
     const model = app.db.model('tinh',schema);
 
     app.model.tinh = {

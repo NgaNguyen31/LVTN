@@ -6,7 +6,6 @@ module.exports = app =>{
         IN_NUOC: Boolean,
         LOAI: [{ type: app.db.Schema.ObjectId, ref: 'loai' }],
         SHCC:  [{ type: app.db.Schema.ObjectId, ref: 'pctn_nghe_2018' }],
-        MS_NV: Number,
         MS_NV_CU: String,
         HO: String,
         TEN: String,
@@ -140,7 +139,8 @@ module.exports = app =>{
         DONG_BHXH: String,
         HL_DEN_NGAY: Date,
         DIEN_GIAI_HD: Number
-    });
+    },
+    {unique: true});
     const model = app.db.model('cbcnv',schema);
 
     app.model.cbcnv = {

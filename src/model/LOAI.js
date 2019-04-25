@@ -2,7 +2,8 @@ module.exports = app => {
     const schema = app.db.Schema ({
         LOAI : String,
         Dien_giai : String    
-    });
+    }, 
+    { unique: true});
     const model = app.db.model('loai', schema);
 
     app.model.loai = {

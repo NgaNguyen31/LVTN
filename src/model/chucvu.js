@@ -1,7 +1,19 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        CHUC_VU: String,
-        PC_CVU: Number,
+        CHUC_VU: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
+        PC_CVU: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
         Ghi_chu: String
     });
     const model = app.db.model('chucvu',schema);

@@ -1,6 +1,12 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        Dan_toc: String
+        Dan_toc: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        }
     });
     const model = app.db.model('dantoc',schema);
 

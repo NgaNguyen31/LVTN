@@ -1,7 +1,6 @@
 module.exports = app => {
     const schema = app.db.Schema ({
         MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
-        STT: Number,
         BAI_BAO: String,
         TEN_TCHI: String,
         NAM: Number

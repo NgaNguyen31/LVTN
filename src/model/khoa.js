@@ -3,7 +3,8 @@ module.exports = app =>{
         TEN_KHOA: String,
         TEN_TIENG_ANH: String,
         TEN_KHOA_TAT: String
-    });
+    },
+    {unique: true});
     const model = app.db.model('khoa',schema);
 
     app.model.khoa = {

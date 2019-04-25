@@ -3,7 +3,7 @@ module.exports = app => {
         trinh_do: String,
         Ten_day_du: String,
         ord: [{ type: app.db.Schema.ObjectId, ref: 'phanloai' }],
-    });
+    }, {unique: true});
     const model = app.db.model('trinhdo', schema);
 
     app.model.trinhdo = {

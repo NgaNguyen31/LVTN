@@ -1,6 +1,6 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        Hovaten: String,
+        Hovaten: { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         Nuoc: [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
         Ngaydi: Date,
         Ngayve: Date,
@@ -9,7 +9,8 @@ module.exports = app =>{
         Giahan: Number,
         SoCVan: Number,
         NgayCVan: Date
-    });
+    },
+    { unique: true });
     const model = app.db.model('cb_nngoai',schema);
 
     app.model.cb_nngoai = {

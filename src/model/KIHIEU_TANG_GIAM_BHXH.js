@@ -2,7 +2,8 @@ module.exports = app =>{
     const schema = app.db.Schema({
         Ky_hieu: String,
         Dien_giai: String       
-    });
+    },
+    {unique: true});
     const model = app.db.model('kihieu_tang_giam_bhxh',schema);
 
     app.model.kihieu_tang_giam_bhxh = {

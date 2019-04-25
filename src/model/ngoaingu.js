@@ -1,6 +1,12 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        N_NGU: String  
+        N_NGU: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        }  
     });
     const model = app.db.model('ngoaingu', schema);
 

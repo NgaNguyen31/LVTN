@@ -1,6 +1,12 @@
 module.exports = app => {
     const schema = app.db.Schema({
-        MSBM: [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
+        MSBM: { type: app.db.Schema.ObjectId, 
+                 ref: 'nuoc',
+                 index: {
+                    unique: true,
+                    dropDups: true
+                }
+                },
         HO: String,
         TEN: String,
         PHAI: String,

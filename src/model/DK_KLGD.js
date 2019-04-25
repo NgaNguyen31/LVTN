@@ -14,7 +14,7 @@ module.exports = app =>{
         TU_NGAY: Date,
         DEN_NGAY: Date,
         GHI_CHU: String
-    });
+    }, {unique: true});
     const model = app.db.model('dk_klgd',schema);
 
     app.model.dk_klgd = {

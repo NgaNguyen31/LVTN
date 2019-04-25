@@ -1,6 +1,12 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MUC_DICH : String    
+        MUC_DICH : {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        }    
     });
     const model = app.db.model('mucdich', schema);
 

@@ -2,7 +2,7 @@ module.exports = app => {
     const schema = app.db.Schema ({
         NGHI : String,
         Dien_giai : String    
-    });
+    }, {unique: true});
     const model = app.db.model('nghi_ctac', schema);
 
     app.model.nghi_ctac = {

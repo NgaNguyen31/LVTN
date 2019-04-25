@@ -1,7 +1,13 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        ID: Number,
-        MSNV: Number,
+        MSNV: {
+            type: app.db.Schema.ObjectId,
+            ref: 'cbcnv',
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
         HO: String,
         TEN: String,
         Hocvi_hocham: String,

@@ -2,7 +2,7 @@ module.exports = app => {
     const schema = app.db.Schema({
         NGACH: Number,
         TEN_NGACH: String,
-    });
+    }, {unique: true});
     const model = app.db.model('ngach',schema);
 
     app.model.ngach = {

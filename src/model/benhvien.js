@@ -1,6 +1,12 @@
 module.exports = app => {
     const schema = app.db.Schema({
-        Noi_kham: String
+        Noi_kham: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        }
     });
     const model = app.db.model('benhvien', schema);
 

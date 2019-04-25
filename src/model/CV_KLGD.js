@@ -1,6 +1,12 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        TEN_CV: String,
+        TEN_CV: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
         GHI_CHU: String
     });
     const model = app.db.model('cv_klgd',schema);

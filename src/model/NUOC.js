@@ -2,7 +2,8 @@ module.exports = app => {
     const schema = app.db.Schema ({
         MS_NUOC: String,
         TEN_NUOC: String 
-    });
+    },
+    {unique: true});
     const model = app.db.model('nuoc', schema);
 
     app.model.nuoc = {

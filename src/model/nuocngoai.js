@@ -1,7 +1,13 @@
 module.exports = app => {
     const schema = app.db.Schema ({
         MS_NUOC : [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
-        TEN_NUOC: String,
+        TEN_NUOC: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
         MS_KVUC: [{ type: app.db.Schema.ObjectId, ref: 'khuvuc' }]
     });
     const model = app.db.model('nuocngoai', schema);
