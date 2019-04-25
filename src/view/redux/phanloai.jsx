@@ -2,11 +2,14 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_PHANLOAI = 'phanloai:getPhanloai';
+const GET_ALL = 'phanloai:getAll';
 const GET_PHANLOAI_IN_PAGE = 'phanloai:getPhanloaiInPage';
 const UPDATE_PHANLOAI = 'phanloai:UpdatePhanloai';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL: 
+            return { ...state,data};
         case GET_PHANLOAI:
             return Object.assign({}, state, { items: data.items });
 
@@ -55,7 +58,7 @@ export function getAllPhanloai(done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data.items);
-                dispatch({ type: GET_PHANLOAI, items: data.items });
+                dispatch({ type: GET_ALL, items: data });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

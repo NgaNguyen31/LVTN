@@ -4,9 +4,12 @@ import T from '../js/common';
 const GET_NUOC = 'nuoc:getNuoc';
 const GET_NUOC_IN_PAGE = 'nuoc:getNuocInPage';
 const UPDATE_NUOC = 'nuoc:UpdateNuoc';
+const GET_ALL = 'nuoc:getAll';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL: return {...state,data} ;
+
         case GET_NUOC:
             return Object.assign({}, state, { items: data.items });
 
@@ -54,8 +57,8 @@ export function getAllNuoc(done) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
-                if (done) done(data.items);
-                dispatch({ type: GET_NUOC, items: data.items });
+                if (done) done(data);
+                dispatch({ type: GET_ALL, items: data });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

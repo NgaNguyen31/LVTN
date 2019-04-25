@@ -2,8 +2,21 @@ module.exports = app => {
     app.get('/admin/nuoc/page/:pageNumber/:pageSize', app.role.isAdmin, (req, res) => {
         const pageNumber = parseInt(req.params.pageNumber),
             pageSize = parseInt(req.params.pageSize);
-        app.model.nuoc.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
+        app.model.nuoc.getPage(pageNumber, pageSize, {}, (error, page) => {
+            page.list = page.list.map(item => app.clone(item, { message: '' }));
+            res.send({ error, page });
+        });
     });
+    
+    app.get('/admin/nuoc/all', app.role.isAdmin, (req, res) => {
+        app.model.nuoc.getAll((error, result) => {
+            if (error) {
+                res.send({ error });
+            } else {                
+                res.send(result);
+            }
+        })
+    })
 
     app.post('/admin/nuoc', app.role.isAdmin, (req, res) => {
         app.model.nuoc.create(req.body.nuoc, (error, nuoc) => {

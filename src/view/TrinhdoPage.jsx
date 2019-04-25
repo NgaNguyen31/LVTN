@@ -1,14 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getTrinhdoInPage, getTrinhdo, updateTrinhdo, deleteTrinhdo } from './redux/trinhdo.jsx'
+import {getAllPhanloai} from './redux/phanloai.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination.jsx';
+import TrinhdoModal from './TrinhdoModel.jsx';
 
 class TrinhdoPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showTrinhdo = this.showTrinhdo.bind(this);
-        this.deleteTrinhdo = this.deleteTrinhdo.bind(this);
+        this.TrinhdoModal = React.createRef();
+        this.edit = this.edit.bind(this);
+        this.delete = this.delete.bind(this);
     }
 
     componentDidMount() {
@@ -16,16 +19,17 @@ class TrinhdoPage extends React.Component {
             T.selectMenu(4);
             this.props.getTrinhdoInPage();
         });
+        this.props.getAllPhanloai();
     }
 
-    showTrinhdo(e, trinhdoId) {
-        this.props.getTrinhdo(trinhdoId, trinhdo => this.props.showTrinhdo(trinhdo));
+    edit(e, item) {                
+        this.TrinhdoModal.current.show(item, this.props.phanloai.data.items);
         e.preventDefault();
     }
 
-    deleteTrinhdo(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
-            isConfirm && this.props.deleteTrinhdo(item._id);
+            isConfirm && this.props.delete(item._id);
         });
         e.preventDefault();
     }
@@ -38,7 +42,7 @@ class TrinhdoPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '40%' }}>Trình độ</th>
-                            <th style={{ width: 'auto' }}>STT</th>                            
+                            <th style={{ width: 'auto' }}>Tên đầy đủ</th>                            
                             <th style={{ width: 'auto' }}>ORD</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
@@ -47,10 +51,10 @@ class TrinhdoPage extends React.Component {
                         {this.props.trinhdo.page.list.map((item, index) => (
                             <tr key={index}>                               
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showTrinhdo(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteTrinhdo(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -83,11 +87,17 @@ class TrinhdoPage extends React.Component {
                 <Pagination name='adminTrinhdo'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getTrinhdoInPage} />
+                    
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <TrinhdoModal ref={this.TrinhdoModal} createTrinhdo={this.props.createTrinhdo} updateTrinhdo={this.props.updateTrinhdo} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ trinhdo: state.trinhdo });
-const mapActionsToProps = { getTrinhdoInPage, getTrinhdo, updateTrinhdo, deleteTrinhdo };
+const mapStateToProps = state => ({ trinhdo: state.trinhdo, phanloai: state.phanloai });
+const mapActionsToProps = { getTrinhdoInPage, getTrinhdo, updateTrinhdo, deleteTrinhdo, getAllPhanloai };
 export default connect(mapStateToProps, mapActionsToProps)(TrinhdoPage);

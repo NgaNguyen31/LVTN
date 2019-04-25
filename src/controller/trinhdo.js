@@ -7,14 +7,36 @@ module.exports = app => {
             res.send({ error, page });
         });
     });
+
+    app.get('/admin/trinhdo/all', app.role.isAdmin, (req, res) => {
+        app.model.trinh_do.getAll((error, result) => {
+            if (error) {
+                res.send(error);
+            }
+            else res.send(result);        
+        });
+    });
+
     app.delete('/admin/trinhdo', app.role.isAdmin, (req, res) => app.model.trinhdo.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/trinhdo', (req, res) => app.model.trinhdo.create(req.body.trinhdo, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.post('/admin/trinhdo', (req, res) => {
+        app.model.trinhdo.create(req.body.trinhdo, (error, trinhdo) => {
+            res.send({ error, trinhdo})
+        })
+    });
 
-        res.send({ error, item });
-    }));
+    app.put('/admin/trinhdo', (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+            if (data.trinh_do && data.trinh_do != '') changes.trinh_do = data.trinh_do;
+            if (data.Ten_day_du && data.Ten_day_du != '') changes.Ten_day_du = data.Ten_day_du;
+            if (data.ord && data.ord != '') changes.ord = data.ord;
+
+        app.model.trinh_do.update(req.body._id, changes, (error, trinh_do) =>{
+        if (error) {
+            res.send(error);
+        }
+        else res.send(trinh_do);
+        });
+    })
 }

@@ -7,6 +7,14 @@ module.exports = app => {
             res.send({ error, page });
         });
     });
+
+    app.get('/admin/bomon/all', app.role.isAdmin, (req, res) => {
+        app.model.bomon.getAll((error, bomon) => {
+            if (error) res.send(error);
+            else res.send(bomon);
+        })
+    })
+
     app.delete('/admin/bomon', app.role.isAdmin, (req, res) => app.model.bomon.delete(req.body._id, error => res.send({ error })));
 
     app.post('/admin/bomon', app.role.isAdmin, (req, res) => {        

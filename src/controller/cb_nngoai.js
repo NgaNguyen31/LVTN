@@ -7,14 +7,42 @@ module.exports = app => {
             res.send({ error, page });
         });
     });
+
+    app.get('/admin/cb_nngoai/all', app.role.isAdmin, (req, res) =>{
+        app.model.cb_nngoai.getAll((error,cb_nngoai) => {
+            if (error) {
+                res.send(error);
+            }
+            else res.send(cb_nngoai);
+        })
+    })
+
     app.delete('/admin/cb_nngoai', app.role.isAdmin, (req, res) => app.model.cb_nngoai.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/cb_nngoai', (req, res) => app.model.cb_nngoai.create(req.body.cb_nngoai, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.post('/admin/cb_nngoai', app.role.isAdmin, (req, res) => {        
+        app.model.cb_nngoai.create(req.body.cb_nngoai, (error, cb_nngoai) => {
+            res.send({ error, cb_nngoai })
+        });
+    });
 
-        res.send({ error, item });
-    }));
+    app.put('/admin/cb_nngoai', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        if (data.hovaten && data.hovaten != '') changes.hovaten = data.hovaten;
+        if (data.Nuoc && data.Nuoc != '') changes.Nuoc = data.Nuoc;
+        if (data.Ngaydi) changes.Ngaydi = data.Ngaydi;
+        if (data.Ngayve && data.Ngayve != '') changes.Ngayve = data.Ngayve;
+        if (data.Mucdich && data.Mucdich != '') changes.Mucdich = data.Mucdich;
+        if (data.Giahan && data.Giahan != '') changes.Giahan = data.Giahan;
+        if (data.SoCVan && data.SoCVan != '') changes.SoCVan = data.SoCVan;
+        if (data.NgayCVan && data.NgayCVan != '') changes.NgayCVan = data.NgayCVan;
+
+        app.model.cb_nngoai.update(req.body._id, changes, (error, cb_nngoai) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, cb_nngoai });
+            }
+        })
+    });
 }

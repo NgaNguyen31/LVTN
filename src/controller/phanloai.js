@@ -5,6 +5,14 @@ module.exports = app => {
         app.model.phanloai.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/phanloai/all', app.role.isAdmin, (req, res) => {
+        app.model.phanloai.getAll((error, result) =>{
+            if(error)
+                res.send(error);
+            else res.send(result);
+        });
+    });
+
     app.post('/admin/phanloai', app.role.isAdmin, (req, res) => {
         app.model.phanloai.create(req.body.phanloai, (error, phanloai) => {
             res.send({ error, phanloai })

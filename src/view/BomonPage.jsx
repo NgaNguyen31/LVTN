@@ -34,7 +34,7 @@ class BomonPage extends React.Component {
         e.preventDefault();
     }
 
-    render() {
+    render() {                
         let table = null;              
         if (this.props.bomon && this.props.bomon.page && this.props.bomon.page.list && this.props.bomon.page.list.length > 0) {
             table = (
@@ -55,7 +55,7 @@ class BomonPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_BM ? item.TEN_BM + ' ' : '')}</a>
                                 </td> 
-                                <td>{item.TEN_TIENG_ANH}</td>                           
+                                <td>{item.TEN_TIENG_ANH}</td>          
                                 <td>{item.MS_KHOA}</td>
                                 <td>{item.NAM_THANH_LAP}</td>
                                 <td>{item.GHI_CHU}</td>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-export default class ChauModal extends React.Component {
+export default class BenhvienModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {text: ''}
@@ -28,35 +28,35 @@ export default class ChauModal extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#tenchau').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#Noi_kham').focus());
         }, 250));
     }
 
     show(item) {
-        const { _id, tenchau } = item ?
-            item : { _id: null, tenchau: '' };
-        $('#tenchau').val(tenchau);
+        const { _id, Noi_kham } = item ?
+            item : { _id: null, Noi_kham: '' };
+        $('#Noi_kham').val(Noi_kham);
         this.setState({ _id});
         $(this.modal.current).modal('show');
     }
 
-    save(e) {        
+    save(e) {
+        e.preventDefault();
         const changes = {
-            tenchau: this.state.text.tenchau,
+            Noi_kham: this.state.text.Noi_kham,
         };
-        if (this.state.text == "") {
-            T.notify('Tên châu đang trống!', 'danger');
-            $('#tenchau').focus();
+        if (this.state.text == '') {
+            T.notify('Tên bệnh viện đang trống!', 'danger');
+            $('#Noi_kham').focus();
         } else if (this.state._id) {
-            this.props.updateChau(this.state._id, changes, data => {
+            this.props.updateBenhvien(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
             });
         } else {
-            this.props.createChau(changes, data => {
+            this.props.createBenhvien(changes, data => {
                 $(this.modal.current).modal('hide');
             });
         }
-        e.preventDefault();
     }
 
     render() {
@@ -65,15 +65,15 @@ export default class ChauModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin châu</h5>
+                            <h5 className='modal-title'>Thông tin bệnh viện</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='tenchau'>Tên châu</label>
-                                <input className='form-control' id='Tenchau' type='text' placeholder='Tên châu' onChange={this.handleInput('text', 'tenchau')} value={this.state.text.tenchau}/>
+                                <label htmlFor='Noi_kham'>Tên bệnh viện</label>
+                                <input className='form-control' id='Tenbenhvien' type='text' placeholder='Tên bệnh viện' onChange={this.handleInput('text', 'Noi_kham')} value={this.state.text.Noi_kham}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

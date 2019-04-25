@@ -2,11 +2,14 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_CBCNV = 'cbcnv:getCbcnv';
+const GET_ALL = 'cbcnv:getAll';
 const GET_CBCNV_IN_PAGE = 'cbcnv:getCbcnvInPage';
 const UPDATE_CBCNV = 'cbcnv:UpdateCbcnv';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {... state,data};
         case GET_CBCNV:
             return Object.assign({}, state, { items: data.items });
 
@@ -55,7 +58,7 @@ export function getAllCbcnv(done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data.items);
-                dispatch({ type: GET_CBCNV, items: data.items });
+                dispatch({ type: GET_ALL, items: data });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

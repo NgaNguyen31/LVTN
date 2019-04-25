@@ -45,7 +45,7 @@ module.exports = app =>{
         CHUC_VU_BCH_DOAN_TN: String,
         PC_DOC_HAI: Number,
         MOI_TRUONG_DOC_HAI: String,
-        MS_CVU: Number,
+        MS_CVU: [{ type: app.db.Schema.ObjectId, ref: 'chucvu' }],
         TEN_CV: String,
         PCCV: Number,
         NGAY_PCCV: Date,
@@ -120,7 +120,7 @@ module.exports = app =>{
         MA_TINH_BV: Number,
         QUOC_TICH: String,
         TRA_THE_BHYT: String,
-        MA_BV: [{ type: app.db.Schema.ObjectId, ref: 'benhvien' }],
+        MA_BV: { type: app.db.Schema.ObjectId, ref: 'benhvien' },
         MASO_BHXH: Number,
         GHI_CHU_NOP_SO_BHXH: String,
         SO_BHXH: Number,
@@ -163,7 +163,7 @@ module.exports = app =>{
                 });
             }
         }),
-        getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
+        getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
         update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
         delete: (_id, done) => model.findById(_id, (error, item) => {

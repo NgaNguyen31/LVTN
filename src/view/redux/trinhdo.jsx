@@ -2,11 +2,14 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_TRINHDO = 'trinhdo:getTrinhdo';
+const GET_ALL = 'trinhdo:getAll';
 const GET_TRINHDO_IN_PAGE = 'trinhdo:getTrinhdoInPage';
 const UPDATE_TRINHDO = 'trinhdo:UpdateTrinhdo';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
         case GET_TRINHDO:
             return Object.assign({}, state, { items: data.items });
 
@@ -55,7 +58,7 @@ export function getAllTrinhdo(done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data.items);
-                dispatch({ type: GET_TRINHDO, items: data.items });
+                dispatch({ type: GET_ALL, items: data.items });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

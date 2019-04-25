@@ -18,8 +18,7 @@ class CbcnvPage extends React.Component {
         });
     }
 
-    showCbcnv(e, cbcnvId) {
-        console.log(data);
+    edit(e, item) {
         this.props.getCbcnv(cbcnvId, cbcnv => this.props.showCbcnv(cbcnv));
         e.preventDefault();
     }

@@ -1,14 +1,18 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCb_nngoaiInPage, getCb_nngoai, updateCb_nngoai, deleteCb_nngoai } from './redux/cb_nngoai.jsx'
+import { getCb_nngoaiInPage, createCb_nngoai, getCb_nngoai, updateCb_nngoai, deleteCb_nngoai } from './redux/cb_nngoai.jsx'
+import {getAllCbcnv} from './redux/cbcnv.jsx';
+import {getAllNuoc} from './redux/nuoc.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination.jsx';
+import Cb_nngoaiModal from './Cb_nngoaiModel.jsx';
 
 class Cb_nngoaiPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showCb_nngoai = this.showCb_nngoai.bind(this);
-        this.deleteCb_nngoai = this.deleteCb_nngoai.bind(this);
+        this.Cb_nngoaiModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
@@ -16,15 +20,16 @@ class Cb_nngoaiPage extends React.Component {
             T.selectMenu(4);
             this.props.getCb_nngoaiInPage();
         });
+        this.props.getAllNuoc();
+        this.props.getAllCbcnv();
     }
 
-    showCb_nngoai(e, cb_nngoaiId) {
-        console.log(data);
-        this.props.getCb_nngoai(cb_nngoaiId, cb_nngoai => this.props.showCb_nngoai(cb_nngoai));
+    edit(e,item){        
+        this.Cb_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.nuoc.data.items);
         e.preventDefault();
     }
 
-    deleteCb_nngoai(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteCb_nngoai(item._id);
         });
@@ -52,12 +57,23 @@ class Cb_nngoaiPage extends React.Component {
                     </thead>
                     <tbody>
                         {this.props.cb_nngoai.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>         
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten + ' ' : '')}</a>
+                                </td> 
+                                <td>{item.Nuoc}</td>      
+                                <td>{item.Ngaydi}</td>
+                                <td>{item.Ngayve}</td>                            
+                                <td>{item.Thoigian}</td>
+                                <td>{item.Mucdich}</td>
+                                <td>{item.Giahan}</td>    
+                                <td>{item.SoCVan}</td>
+                                <td>{item.NgayCVan}</td>                     
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showCb_nngoai(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteCb_nngoai(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -90,11 +106,17 @@ class Cb_nngoaiPage extends React.Component {
                 <Pagination name='adminCb_nngoai'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getCb_nngoaiInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <Cb_nngoaiModal ref={this.Cb_nngoaiModal} createCb_nngoai={this.props.createCb_nngoai} updateCb_nngoai={this.props.updateCb_nngoai} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ cb_nngoai: state.cb_nngoai });
-const mapActionsToProps = { getCb_nngoaiInPage, getCb_nngoai, updateCb_nngoai, deleteCb_nngoai };
+const mapStateToProps = state => ({ cb_nngoai: state.cb_nngoai, cbcnv: state.cbcnv, nuoc: state.nuoc });
+const mapActionsToProps = { getCb_nngoaiInPage,createCb_nngoai ,getCb_nngoai, updateCb_nngoai, deleteCb_nngoai, getAllCbcnv, getAllNuoc };
 export default connect(mapStateToProps, mapActionsToProps)(Cb_nngoaiPage);

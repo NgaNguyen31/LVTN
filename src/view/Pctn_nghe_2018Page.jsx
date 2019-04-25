@@ -11,6 +11,10 @@ class Pctn_nghe_2018Page extends React.Component {
         this.pctn_nghe_2018Modal = React.createRef();
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
+        Date.prototype.getDateText = function () {
+            const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+            return months[this.getMonth()] + ' ' + T.get2(this.getDate()) + ', ' + this.getFullYear();
+        };
     }
 
     componentDidMount() {
@@ -58,6 +62,7 @@ class Pctn_nghe_2018Page extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.SHCC ? item.SHCC + ' ' : '')}</a>
                                 </td>        
+                                {console.log(typeof item.NGAY_SINH)}
                                 <td>{item.HO}</td>                    
                                 <td>{item.TEN}</td>                    
                                 <td>{item.NGAY_SINH}</td>                    
