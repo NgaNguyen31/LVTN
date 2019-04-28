@@ -3,12 +3,16 @@ import T from '../js/common';
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_CB_NNGOAI = 'cb_nngoai:getCb_nngoai';
 const GET_CB_NNGOAI_IN_PAGE = 'cb_nngoai:getCb_nngoaiInPage';
+const GET_ALL = 'cb_nngoai:getAllCb_nngoai';
 const UPDATE_CB_NNGOAI = 'cb_nngoai:UpdateCb_nngoai';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
         case GET_CB_NNGOAI:
             return Object.assign({}, state, { items: data.items });
+
+        case GET_ALL :
+            return {...state,data};
 
         case GET_CB_NNGOAI_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
@@ -86,8 +90,8 @@ export function getCb_nngoai(cb_nngoaiId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_CB_NNGOAI, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createCb_nngoai(cb_nngoai, done) {
         const url = '/admin/cb_nngoai';
         T.post(url, { cb_nngoai }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getCb_nngoaiInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateCb_nngoai(_id, changes, done) {
         const url = '/admin/cb_nngoai';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getCb_nngoaiInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_KHOI_LUONG_GD_CAOHOC = 'khoi_luong_gd_caohoc:getKhoi_luong_gd_caohoc';
+const GET_ALL = 'khoi_luong_gd_caohoc:getAllKhoi_luong_gd_caohoc';
 const GET_KHOI_LUONG_GD_CAOHOC_IN_PAGE = 'khoi_luong_gd_caohoc:getKhoi_luong_gd_caohocInPage';
 const UPDATE_KHOI_LUONG_GD_CAOHOC = 'khoi_luong_gd_caohoc:UpdateKhoi_luong_gd_caohoc';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_KHOI_LUONG_GD_CAOHOC:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getKhoi_luong_gd_caohoc(khoi_luong_gd_caohocId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_KHOI_LUONG_GD_CAOHOC, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createKhoi_luong_gd_caohoc(khoi_luong_gd_caohoc, done) {
         const url = '/admin/khoi_luong_gd_caohoc';
         T.post(url, { khoi_luong_gd_caohoc }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getKhoi_luong_gd_caohocInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateKhoi_luong_gd_caohoc(_id, changes, done) {
         const url = '/admin/khoi_luong_gd_caohoc';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getKhoi_luong_gd_caohocInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_NGOAINGU = 'ngoaingu:getNgoaingu';
+const GET_ALL = 'ngoaingu:getAllNgoaingu';
 const GET_NGOAINGU_IN_PAGE = 'ngoaingu:getNgoainguInPage';
 const UPDATE_NGOAINGU = 'ngoaingu:UpdateNgoaingu';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_NGOAINGU:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getNgoaingu(ngoainguId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_NGOAINGU, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createNgoaingu(ngoaingu, done) {
         const url = '/admin/ngoaingu';
         T.post(url, { ngoaingu }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getNgoainguInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateNgoaingu(_id, changes, done) {
         const url = '/admin/ngoaingu';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getNgoainguInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

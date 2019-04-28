@@ -3,12 +3,16 @@ import T from '../js/common';
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_CBCNV_HD_KHOA = 'cbcnv_hd_khoa:getCbcnv_hd_khoa';
 const GET_CBCNV_HD_KHOA_IN_PAGE = 'cbcnv_hd_khoa:getCbcnv_hd_khoaInPage';
+const GET_ALL = 'cbcnv_hd_khoa:getAllCbcnv_hd_khoa';
 const UPDATE_CBCNV_HD_KHOA = 'cbcnv_hd_khoa:UpdateCbcnv_hd_khoa';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
         case GET_CBCNV_HD_KHOA:
             return Object.assign({}, state, { items: data.items });
+
+        case GET_ALL:
+            return {...state,data};
 
         case GET_CBCNV_HD_KHOA_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
@@ -86,8 +90,8 @@ export function getCbcnv_hd_khoa(cbcnv_hd_khoaId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_CBCNV_HD_KHOA, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createCbcnv_hd_khoa(cbcnv_hd_khoa, done) {
         const url = '/admin/cbcnv_hd_khoa';
         T.post(url, { cbcnv_hd_khoa }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getCbcnv_hd_khoaInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateCbcnv_hd_khoa(_id, changes, done) {
         const url = '/admin/cbcnv_hd_khoa';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getCbcnv_hd_khoaInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

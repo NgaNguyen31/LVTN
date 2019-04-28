@@ -36,9 +36,7 @@ export default class Cb_nngoaiModal extends React.Component {
         }, 250));
     }
 
-    show(item, cbcnv, nuoc ) {
-        console.log('abc', this);
-        
+    show(item, cbcnv, nuoc ) {        
         const { _id, Hovaten, Nuoc, Ngaydi, Ngayve, Thoigian, Mucdich, Giahan, SoCVan, NgayCVan } = item ?
             item : { _id: null, Hovaten: '', Nuoc: '', Ngaydi: '', Ngayve: '', Thoigian:'', Mucdich: '', Giahan: '', SoCVan: '', NgayCVan: '' };
         $('#Hovaten').val(Hovaten);

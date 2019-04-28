@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_MUCDICH = 'mucdich:getMucdich';
+const GET_ALL = 'mucdich:getAllMucdich';
 const GET_MUCDICH_IN_PAGE = 'mucdich:getMucdichInPage';
 const UPDATE_MUCDICH = 'mucdich:UpdateMucdich';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_MUCDICH:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getMucdich(mucdichId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_MUCDICH, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createMucdich(mucdich, done) {
         const url = '/admin/mucdich';
         T.post(url, { mucdich }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getMucdichInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateMucdich(_id, changes, done) {
         const url = '/admin/mucdich';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getMucdichInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

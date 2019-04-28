@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_QT_CVU = 'qt_cvu:getQt_cvu';
+const GET_ALL = 'qt_cvu:getAllQt_cvu';
 const GET_QT_CVU_IN_PAGE = 'qt_cvu:getQt_cvuInPage';
 const UPDATE_QT_CVU = 'qt_cvu:UpdateQt_cvu';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_QT_CVU:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getQt_cvu(qt_cvuId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_QT_CVU, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createQt_cvu(qt_cvu, done) {
         const url = '/admin/qt_cvu';
         T.post(url, { qt_cvu }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getQt_cvuInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateQt_cvu(_id, changes, done) {
         const url = '/admin/qt_cvu';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getQt_cvuInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

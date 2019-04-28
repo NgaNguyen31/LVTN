@@ -3,10 +3,14 @@ import T from '../js/common';
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_QT_NNGOAI = 'qt_nngoai:getQt_nngoai';
 const GET_QT_NNGOAI_IN_PAGE = 'qt_nngoai:getQt_nngoaiInPage';
+const GET_ALL = 'qt_nngoai:getAllQt_nngoai';
 const UPDATE_QT_NNGOAI = 'qt_nngoai:UpdateQt_nngoai';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_QT_NNGOAI:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getQt_nngoai(qt_nngoaiId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_QT_NNGOAI, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createQt_nngoai(qt_nngoai, done) {
         const url = '/admin/qt_nngoai';
         T.post(url, { qt_nngoai }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getQt_nngoaiInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateQt_nngoai(_id, changes, done) {
         const url = '/admin/qt_nngoai';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getQt_nngoaiInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_QT_GTRINH = 'qt_gtrinh:getQt_gtrinh';
+const GET_ALL = 'qt_gtrinh:getAllQt_gtrinh';
 const GET_QT_GTRINH_IN_PAGE = 'qt_gtrinh:getQt_gtrinhInPage';
 const UPDATE_QT_GTRINH = 'qt_gtrinh:UpdateQt_gtrinh';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_QT_GTRINH:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getQt_gtrinh(qt_gtrinhId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_QT_GTRINH, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createQt_gtrinh(qt_gtrinh, done) {
         const url = '/admin/qt_gtrinh';
         T.post(url, { qt_gtrinh }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getQt_gtrinhInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateQt_gtrinh(_id, changes, done) {
         const url = '/admin/qt_gtrinh';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getQt_gtrinhInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

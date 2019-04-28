@@ -3,10 +3,14 @@ import T from '../js/common';
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_DAN_TOC = 'dantoc:getDantoc';
 const GET_DAN_TOC_IN_PAGE = 'dantoc:getDantocInPage';
+const GET_ALL = 'dantoc:getAllDantoc';
 const UPDATE_DAN_TOC = 'dantoc:UpdateDantoc';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_DAN_TOC:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getDantoc(dantocId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_DAN_TOC, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createDantoc(dantoc, done) {
         const url = '/admin/dantoc';
         T.post(url, { dantoc }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getDantocInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateDantoc(_id, changes, done) {
         const url = '/admin/dantoc';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getDantocInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

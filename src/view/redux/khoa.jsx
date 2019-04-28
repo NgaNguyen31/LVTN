@@ -2,7 +2,7 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_KHOA = 'khoa:getKhoa';
-const GET_ALL = 'khoa:getAll';
+const GET_ALL = 'khoa:getAllKhoa';
 const GET_KHOA_IN_PAGE = 'khoa:getKhoaInPage';
 const UPDATE_KHOA = 'khoa:UpdateKhoa';
 
@@ -93,8 +93,8 @@ export function getKhoa(khoaId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_KHOA, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -107,14 +107,14 @@ export function createKhoa(khoa, done) {
         const url = '/admin/khoa';
         T.post(url, { khoa }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công', 'info');
                 dispatch(getKhoaInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -123,14 +123,14 @@ export function updateKhoa(_id, changes, done) {
         const url = '/admin/khoa';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getKhoaInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

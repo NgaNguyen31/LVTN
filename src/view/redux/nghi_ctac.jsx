@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_NGHI_CTAC = 'nghi_ctac:getNghi_ctac';
+const GET_ALL = 'nghi_ctac:getAllNghi_ctac';
 const GET_NGHI_CTAC_IN_PAGE = 'nghi_ctac:getNghi_ctacInPage';
 const UPDATE_NGHI_CTAC = 'nghi_ctac:UpdateNghi_ctac';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_NGHI_CTAC:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getNghi_ctac(nghi_ctacId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_NGHI_CTAC, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createNghi_ctac(nghi_ctac, done) {
         const url = '/admin/nghi_ctac';
         T.post(url, { nghi_ctac }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getNghi_ctacInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateNghi_ctac(_id, changes, done) {
         const url = '/admin/nghi_ctac';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getNghi_ctacInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

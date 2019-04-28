@@ -1,19 +1,23 @@
 import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
-const GET_CHAU = 'benhvien:getBenhvien';
-const GET_CHAU_IN_PAGE = 'benhvien:getBenhvienInPage';
-const UPDATE_CHAU = 'benhvien:UpdateBenhvien';
+const GET_BENHVIEN = 'benhvien:getBenhvien';
+const GET_BENHVIEN_IN_PAGE = 'benhvien:getBenhvienInPage';
+const UPDATE_BENHVIEN = 'benhvien:UpdateBenhvien';
+const GET_ALL = 'benhvien:getAllBenhvien';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
-        case GET_CHAU:
+        case GET_BENHVIEN:
             return Object.assign({}, state, { items: data.items });
 
-        case GET_CHAU_IN_PAGE:
+        case GET_ALL:
+            return {...state,data};
+
+        case GET_BENHVIEN_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
 
-        case UPDATE_CHAU:
+        case UPDATE_BENHVIEN:
             if (state) {
                 let updatedItems = Object.assign({}, state.items),
                     updatedPage = Object.assign({}, state.page),
@@ -55,7 +59,7 @@ export function getAllBenhvien(done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data.items);
-                dispatch({ type: GET_CHAU, items: data.items });
+                dispatch({ type: GET_ALL, items: data.items });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }
@@ -71,7 +75,7 @@ export function getBenhvienInPage(pageNumber, pageSize, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data.page.pageNumber, data.page.pageSize, data.page.pageTotal, data.page.totalItem);
-                dispatch({ type: GET_CHAU_IN_PAGE, page: data.page });
+                dispatch({ type: GET_BENHVIEN_IN_PAGE, page: data.page });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }
@@ -86,8 +90,8 @@ export function getBenhvien(benhvienId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_BENHVIEN, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createBenhvien(benhvien, done) {
         const url = '/admin/benhvien';
         T.post(url, { benhvien }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công', 'info');
                 dispatch(getBenhvienInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateBenhvien(_id, changes, done) {
         const url = '/admin/benhvien';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getBenhvienInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -143,5 +147,5 @@ export function deleteBenhvien(_id) {
 }
 
 export function changeBenhvien(benhvien) {
-    return { type: UPDATE_CHAU, item: benhvien };
+    return { type: UPDATE_BENHVIEN, item: benhvien };
 }

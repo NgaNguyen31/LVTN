@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_PCTN_NGHE_2018 = 'pctn_nghe_2018:getPctn_nghe_2018';
+const GET_ALL = 'pctn_nghe_2018:getAllPctn_nghe_2018';
 const GET_PCTN_NGHE_2018_IN_PAGE = 'pctn_nghe_2018:getPctn_nghe_2018InPage';
 const UPDATE_PCTN_NGHE_2018 = 'pctn_nghe_2018:UpdatePctn_nghe_2018';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_PCTN_NGHE_2018:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getPctn_nghe_2018(pctn_nghe_2018Id, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_PCTN_NGHE_2018, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createPctn_nghe_2018(pctn_nghe_2018, done) {
         const url = '/admin/pctn_nghe_2018';
         T.post(url, { pctn_nghe_2018 }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getPctn_nghe_2018InPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updatePctn_nghe_2018(_id, changes, done) {
         const url = '/admin/pctn_nghe_2018';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getPctn_nghe_2018InPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

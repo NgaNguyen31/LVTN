@@ -2,11 +2,15 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_KIEMNHIEM = 'kiemnhiem:getKiemnhiem';
+const GET_ALL = 'kiemnhiem:getAllKiemnhiem';
 const GET_KIEMNHIEM_IN_PAGE = 'kiemnhiem:getKiemnhiemInPage';
 const UPDATE_KIEMNHIEM = 'kiemnhiem:UpdateKiemnhiem';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
+        case GET_ALL:
+            return {...state,data};
+
         case GET_KIEMNHIEM:
             return Object.assign({}, state, { items: data.items });
 
@@ -86,8 +90,8 @@ export function getKiemnhiem(kiemnhiemId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                // dispatch({ type: GET_USERS, items: data.items });
+                if (done) done(data.items);
+                dispatch({ type: GET_KIEMNHIEM, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createKiemnhiem(kiemnhiem, done) {
         const url = '/admin/kiemnhiem';
         T.post(url, { kiemnhiem }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getKiemnhiemInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateKiemnhiem(_id, changes, done) {
         const url = '/admin/kiemnhiem';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getKiemnhiemInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 

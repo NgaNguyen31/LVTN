@@ -3,12 +3,16 @@ import T from '../js/common';
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_BOMON = 'bomon:getBomon';
 const GET_BOMON_IN_PAGE = 'bomon:getBomonInPage';
+const GET_ALL = 'bomon:getAllBomon';
 const UPDATE_BOMON = 'bomon:UpdateBomon';
 
 export default function userReducer(state = null, data) {
     switch (data.type) {
         case GET_BOMON:
-            return Object.assign({}, state, { items: data.items, khoas: data.khoas});
+            return Object.assign({}, state, { items: data.items, bomons: data.bomons});
+
+        case GET_ALL:
+            return { ... state,data};
 
         case GET_BOMON_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
@@ -86,8 +90,8 @@ export function getBomon(bomonId, done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 
-                if (done) done(data.item);
-                dispatch({ type: GET_BOMON, items: data.items, khoa: data.khoa });
+                if (done) done(data.items);
+                dispatch({ type: GET_BOMON, items: data.items, bomon: data.bomon });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -100,14 +104,14 @@ export function createBomon(bomon, done) {
         const url = '/admin/bomon';
         T.post(url, { bomon }, data => {
             if (data.error) {
-                T.notify('Error when created!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {                
-                T.notify('Create successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getBomonInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
@@ -116,14 +120,14 @@ export function updateBomon(_id, changes, done) {
         const url = '/admin/bomon';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated!', 'danger');
+                T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getBomonInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra!', 'danger'));
     }
 }
 
