@@ -1,30 +1,31 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChucvuInPage, getChucvu, updateChucvu, deleteChucvu } from './redux/chucvu.jsx'
+import { getChucvuInPage, createChucvu, updateChucvu, deleteChucvu } from './redux/chucvu.jsx'
 import { Link } from 'react-router-dom';
+import ChucvuModal from './ChucvuModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class ChucvuPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showChucvu = this.showChucvu.bind(this);
-        this.deleteChucvu = this.deleteChucvu.bind(this);
+        this.chucvuModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getChucvuInPage();
         });
     }
 
-    showChucvu(e, chucvuId) {
-        console.log(data);
-        this.props.getChucvu(chucvuId, chucvu => this.props.showChucvu(chucvu));
+    edit(e, item){
+        this.chucvuModal.current.show(item);
         e.preventDefault();
     }
 
-    deleteChucvu(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteChucvu(item._id);
         });
@@ -38,22 +39,25 @@ class ChucvuPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MS chức vụ</th>
-                            <th style={{ width: '60%' }}>Chức vụ</th>
-                            <th style={{ width: 'auto' }}>PC Chức vụ</th>
-                            <th style={{ width: 'auto' }}>Ghi chú</th>
-                            <th style={{ width: '60%' }} nowrap='true'>Xóa</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Chức vụ</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Phân cấp chức vụ</th>
+                            <th style={{ width: '40%', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.chucvu.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.CHUC_VU ? item.CHUC_VU + ' ' : '')}</a>
+                                </td>             
+                                <td>{item.PC_CVU}</td>               
+                                <td>{item.Ghi_chu}</td>               
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showChucvu(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteChucvu(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -72,13 +76,13 @@ class ChucvuPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Chức vụ</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin chức vụ</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Chức vụ</li>
+                        <li className='breadcrumb-item'>chức vụ</li>
                     </ul>
                 </div>
 
@@ -86,11 +90,17 @@ class ChucvuPage extends React.Component {
                 <Pagination name='adminChucvu'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getChucvuInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <ChucvuModal ref={this.chucvuModal} createChucvu={this.props.createChucvu} updateChucvu={this.props.updateChucvu} />    
             </main>
         );
     }
 }
 
 const mapStateToProps = state => ({ chucvu: state.chucvu });
-const mapActionsToProps = { getChucvuInPage, getChucvu, updateChucvu, deleteChucvu };
+const mapActionsToProps = { getChucvuInPage, createChucvu, updateChucvu, deleteChucvu  };
 export default connect(mapStateToProps, mapActionsToProps)(ChucvuPage);

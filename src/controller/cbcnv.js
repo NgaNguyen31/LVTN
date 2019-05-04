@@ -134,6 +134,7 @@ module.exports = app => {
         if (data.CHA_NNGHIEP && data.CHA_NNGHIEP != '') changes.CHA_NNGHIEP = data.CHA_NNGHIEP;
         if (data.CHA_CONGTAC && data.CHA_CONGTAC != '') changes.CHA_CONGTAC = data.CHA_CONGTAC;
         if (data.ME_TEN && data.ME_TEN != '') changes.ME_TEN = data.ME_TEN;
+        if (data.ME_NAM_SINH && data.ME_NAM_SINH != '') changes.ME_NAM_SINH = data.ME_NAM_SINH;
         if (data.ME_NNGHIEP && data.ME_NNGHIEP != '') changes.ME_NNGHIEP = data.ME_NNGHIEP;
         if (data.ME_CONGTAC && data.ME_CONGTAC != '') changes.ME_CONGTAC = data.ME_CONGTAC;
         if (data.VC_TEN && data.VC_TEN != '') changes.VC_TEN = data.VC_TEN;

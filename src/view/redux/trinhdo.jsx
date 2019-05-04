@@ -2,7 +2,7 @@ import T from '../js/common';
 
 // Reducer ------------------------------------------------------------------------------------------------------------
 const GET_TRINHDO = 'trinhdo:getTrinhdo';
-const GET_ALL = 'trinhdo:getAll';
+const GET_ALL = 'trinhdo:getAllTrinhdo';
 const GET_TRINHDO_IN_PAGE = 'trinhdo:getTrinhdoInPage';
 const UPDATE_TRINHDO = 'trinhdo:UpdateTrinhdo';
 
@@ -58,8 +58,8 @@ export function getAllTrinhdo(done) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
-                if (done) done(data.items);
-                dispatch({ type: GET_ALL, items: data.items });
+                if (done) done(data);
+                dispatch({ type: GET_ALL, items: data });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

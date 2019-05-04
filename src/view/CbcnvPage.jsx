@@ -1,34 +1,60 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCbcnvInPage, getCbcnv, updateCbcnv, deleteCbcnv } from './redux/cbcnv.jsx'
+import { getCbcnvInPage, createCbcnv, getCbcnv, updateCbcnv, deleteCbcnv } from './redux/cbcnv.jsx';
+import {getAllNghi_ctac} from './redux/nghi_ctac.jsx';
+import {getAllLoai} from './redux/loai.jsx';
+import {getAllPctn_nghe_2018} from './redux/pctn_nghe_2018.jsx';
+import {getAllChucdanh} from './redux/chucdanh.jsx';
+import {getAllTrinhdo} from './redux/trinhdo.jsx';
+import {getAllNgach} from './redux/ngach.jsx';
+import {getAllChucvu} from './redux/chucvu.jsx';
+import {getAllBomon} from './redux/bomon.jsx';
+import {getAllDantoc} from './redux/dantoc.jsx';
+import {getAllTongiao} from './redux/tongiao.jsx';
+import {getAllBenhvien} from './redux/benhvien.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination.jsx';
+import CbcnvModal from './CbcnvModel.jsx';
+import { react } from 'babel-types';
 
 class CbcnvPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showCbcnv = this.showCbcnv.bind(this);
-        this.deleteCbcnv = this.deleteCbcnv.bind(this);
+        this.cbcnvModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1,4);
             this.props.getCbcnvInPage();
         });
+        this.props.getAllNghi_ctac();
+        this.props.getAllLoai();
+        this.props.getAllPctn_nghe_2018();
+        this.props.getAllChucdanh();
+        this.props.getAllTrinhdo();
+        this.props.getAllNgach();
+        this.props.getAllChucvu();
+        this.props.getAllBomon();
+        this.props.getAllDantoc();
+        this.props.getAllTongiao();
+        this.props.getAllBenhvien();
     }
 
-    edit(e, item) {
-        this.props.getCbcnv(cbcnvId, cbcnv => this.props.showCbcnv(cbcnv));
+    edit(e, item){
+        this.cbcnvModal.current.show(item, this.props.nghi_ctac.data.items, this.props.loai.data.items, this.props.pctn_nghe_2018.data.items, this.props.chucdanh.data.items, this.props.trinhdo.data.items, this.props.ngach.data.items, this.props.chucvu.data.items, this.props.bomon.data.items, this.props.dantoc.data.items, this.props.tongiao.data.items, this.props.benhvien.data.items);
         e.preventDefault();
     }
 
-    deleteCbcnv(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteCbcnv(item._id);
         });
         e.preventDefault();
     }
+
 
     render() {
         let table = null;
@@ -182,12 +208,155 @@ class CbcnvPage extends React.Component {
                     </thead>
                     <tbody>
                         {this.props.cbcnv.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>     
+                                <td>{item.NGHI}</td>
+                                <td>{item.TAM_NGUNG}</td>          
+                                <td>{item.IS_NNGOAI}</td>
+                                <td>{item.IN_NUOC}</td>
+                                <td>{item.SHCC}</td>                                                  
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV + ' ' : '')}</a>
+                                </td>                          
+                                <td>{item.MS_NV_CU}</td>                          
+                                <td>{item.HO}</td>                          
+                                <td>{item.TEN}</td>                          
+                                <td>{item.PHAI}</td>                       
+                                <td>{item.NGAY_SINH}</td>                          
+                                <td>{item.XA_PHUONG_NOISINH}</td>                          
+                                <td>{item.QUAN_HUYEN_NOISINH}</td>                          
+                                <td>{item.NOI_SINH_TINH_TP}</td>                          
+                                <td>{item.NGAY_BD_CT}</td>                          
+                                <td>{item.NGAY_VAO}</td>                          
+                                <td>{item.NGAY_BC}</td>                          
+                                <td>{item.NGAY_CBGD}</td>                          
+                                <td>{item.NGAY_NGHI}</td>                          
+                                <td>{item.GIAY_TT_RA_TRUONG}</td>                          
+                                <td>{item.So_BHXH_LD}</td>                          
+                                <td>{item.THU_BHXH}</td>                          
+                                <td>{item.CHUC_DANH}</td>                          
+                                <td>{item.TRINH_DO}</td>                          
+                                <td>{item.NGACH}</td>                          
+                                <td>{item.NGACHMOI}</td>                          
+                                <td>{item.BAC_LG}</td>                          
+                                <td>{item.HESO_LG}</td>                          
+                                <td>{item.MOC_NANG_LG}</td>                          
+                                <td>{item.NGAY_HUONG_LG}</td>                          
+                                <td>{item.HD_KY_DEN}</td>                          
+                                <td>{item.VUOT_KHUNG}</td>                          
+                                <td>{item.NGAY_HUONG_VK}</td>                          
+                                <td>{item.PCTN_CU}</td>                          
+                                <td>{item.NGAY_PCTN_NEW}</td>                          
+                                <td>{item.PCTN_NEW}</td>                          
+                                <td>{item.THOI_DIEM_TANG_1}</td>                          
+                                <td>{item.GHI_CHU_LG}</td>                          
+                                <td>{item.TYLE_PCUD}</td>                          
+                                <td>{item.CHUC_VU_BCH_DANG_BO}</td>                          
+                                <td>{item.CHUC_VU_BCH_CONG_DOAN}</td>                          
+                                <td>{item.CHUC_VU_BCH_DOAN_TN}</td>                          
+                                <td>{item.PC_DOC_HAI}</td>                          
+                                <td>{item.MOI_TRUONG_DOC_HAI}</td>                                                          <td>{item.LOAI}</td>                          
+                                <td>{item.MS_CVU}</td>                          
+                                <td>{item.TEN_CV}</td>                          
+                                <td>{item.PCCV}</td>                          
+                                <td>{item.NGAY_PCCV}</td>                          
+                                <td>{item.NUOC_NGOAI}</td>                          
+                                <td>{item.TU_NGAY_NN}</td>                          
+                                <td>{item.DEN_NGAY_NN}</td>                          
+                                <td>{item.NGAY_VE_THUC_TE_NN}</td>                          
+                                <td>{item.TUNGAY_KOLUONG}</td>                          
+                                <td>{item.DENNGAY_KOLUONG}</td>                          
+                                <td>{item.NGAYTIEPNHAN_KOLUONG}</td>                          
+                                <td>{item.PHUC_LOI}</td>                          
+                                <td>{item.GHI_CHU_IN}</td>                          
+                                <td>{item.MS_BM}</td>                          
+                                <td>{item.TDO_LLCT}</td>                          
+                                <td>{item.TIN_HOC}</td>                          
+                                <td>{item.NGOAI_NGU}</td>                          
+                                <td>{item.GHI_CHU_NOP_BANG}</td>                          
+                                <td>{item.CONG_NHAN_BANG}</td>                          
+                                <td>{item.CHUYEN_NGANH}</td>                          
+                                <td>{item.CD}</td>                          
+                                <td>{item.KS}</td>                          
+                                <td>{item.CH}</td>                          
+                                <td>{item.TS}</td>                          
+                                <td>{item.TSKH}</td>                          
+                                <td>{item.TC}</td>                          
+                                <td>{item.KHAC}</td>                          
+                                <td>{item.GS}</td>                          
+                                <td>{item.PGS}</td>                          
+                                <td>{item.GVC}</td>                          
+                                <td>{item.GV}</td>                          
+                                <td>{item.GVTH}</td>                       
+                                <td>{item.TG}</td>                          
+                                <td>{item.NVC}</td>                          
+                                <td>{item.CVC}</td>                          
+                                <td>{item.TG_QUANDOI}</td>                          
+                                <td>{item.CAP_BAC}</td>                          
+                                <td>{item.HUY_CHUONG_SNGD}</td>                          
+                                <td>{item.NGND}</td>                          
+                                <td>{item.NGUT}</td>                          
+                                <td>{item.SO_THE}</td>                          
+                                <td>{item.NGAY_DANG_DB}</td>                          
+                                <td>{item.NOI_DANG_DB}</td>                          
+                                <td>{item.DANG_VIEN}</td>                          
+                                <td>{item.NGAY_DANG_CT}</td>                          
+                                <td>{item.NOI_DANG_CT}</td>                          
+                                <td>{item.DOAN_VIEN}</td>                          
+                                <td>{item.NGAY_DOAN}</td>
+                                <td>{item.NOI_DOAN}</td>                          
+                                <td>{item.NOI_DKHK}</td>
+                                <td>{item.DC_HIENTAI}</td>
+                                <td>{item.DIEN_THOAI}</td>
+                                <td>{item.EMAIL}</td>
+                                <td>{item.NGUYEN_QUAN}</td>
+                                <td>{item.SO_CMND}</td>
+                                <td>{item.NOI_NGAYCAP}</td>
+                                <td>{item.DANTOC}</td>
+                                <td>{item.TON_GIAO}</td>
+                                <td>{item.CHA_TEN}</td>
+                                <td>{item.CHA_NAM_SINH}</td>
+                                <td>{item.CHA_NNGHIEP}</td>
+                                <td>{item.CHA_CONGTAC}</td>
+                                <td>{item.ME_TEN}</td>
+                                <td>{item.ME_NAM_SINH}</td>
+                                <td>{item.ME_NNGHIEP}</td>
+                                <td>{item.ME_CONGTAC}</td>
+                                <td>{item.VC_TEN}</td>
+                                <td>{item.VC_NAMSINH}</td>
+                                <td>{item.VC_NNGHIEP}</td>
+                                <td>{item.VC_CONGTAC}</td>
+                                <td>{item.SO_SO_HK}</td>
+                                <td>{item.HOTEN_CHU_HO_HK}</td>
+                                <td>{item.LOAI_GIAY_TO}</td>
+                                <td>{item.MA_TINH_BV}</td>
+                                <td>{item.QUOC_TICH}</td>
+                                <td>{item.TRA_THE_BHYT}</td>
+                                <td>{item.MA_BV}</td>
+                                <td>{item.MASO_BHXH}</td>
+                                <td>{item.GHI_CHU_NOP_SO_BHXH}</td>
+                                <td>{item.SO_BHXH}</td>
+                                <td>{item.NO_PC}</td>
+                                <td>{item.NO_DONG_BHXH}</td>
+                                <td>{item.GHICHU_BHXH}</td>
+                                <td>{item.NO_BHXH}</td>
+                                <td>{item.GHICHU_KY_HIEU}</td>
+                                <td>{item.HIEULUC_GD_HD}</td>
+                                <td>{item.TANG}</td>
+                                <td>{item.KH_TANG}</td>
+                                <td>{item.GIAM}</td>
+                                <td>{item.KH_GIAM}</td>
+                                <td>{item.SO_QH_HD}</td>
+                                <td>{item.NGAY_KY_QH_HD}</td>
+                                <td>{item.NGAY_NHAP_HS}</td>
+                                <td>{item.DONG_BHXH}</td>
+                                <td>{item.HL_DEN_NGAY}</td>
+                                <td>{item.DIEN_GIAI_HD}</td>
+
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showCbcnv(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteCbcnv(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -220,11 +389,18 @@ class CbcnvPage extends React.Component {
                 <Pagination name='adminCbcnv'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getCbcnvInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <CbcnvModal ref={this.CbcnvModal} createCbcnv ={this.props.createCbcnv} updateCbcnv={this.props.updateCbcnv} />    
+            
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ cbcnv: state.cbcnv });
-const mapActionsToProps = { getCbcnvInPage, getCbcnv, updateCbcnv, deleteCbcnv };
+const mapStateToProps = state => ({ cbcnv: state.cbcnv, nghi_ctac: state.nghi_ctac, loai: state.loai, pctn_nghe_2018: state.pctn_nghe_2018, chucdanh: state.chucdanh, trinhdo: state.trinhdo, ngach: state.ngach, chucvu: state.chucvu, bomon: state.bomon, dantoc: state.dantoc, tongiao: state.tongiao, benhvien: state.benhvien});
+const mapActionsToProps = { getCbcnvInPage, getCbcnv, updateCbcnv, deleteCbcnv, createCbcnv, getAllNghi_ctac, getAllLoai, getAllPctn_nghe_2018, getAllChucdanh, getAllTrinhdo, getAllNgach, getAllChucvu, getAllBomon, getAllDantoc, getAllTongiao, getAllBenhvien };
 export default connect(mapStateToProps, mapActionsToProps)(CbcnvPage);

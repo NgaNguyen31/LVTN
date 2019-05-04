@@ -1,62 +1,71 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getChucdanhInPage, getChucdanh, updateChucdanh, deleteChucdanh } from './redux/chucdanh.jsx'
+import { getChucdanhInPage, createChucdanh, updateChucdanh, deleteChucdanh, getAllChucdanh } from './redux/chucdanh.jsx';
+import {getAllPhanloai} from './redux/phanloai.jsx';
 import { Link } from 'react-router-dom';
+import ChucdanhModal from './ChucdanhModel.jsx';
 import Pagination from './Pagination.jsx';
 
 class ChucdanhPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showChucdanh = this.showChucdanh.bind(this);
-        this.deleteChucdanh = this.deleteChucdanh.bind(this);
+        this.chucdanhModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(1, 4);
             this.props.getChucdanhInPage();
         });
+        this.props.getAllPhanloai();
     }
 
-    showChucdanh(e, chucdanhId) {
-        console.log(data);
-        this.props.getChucdanh(chucdanhId, chucdanh => this.props.showChucdanh(chucdanh));
+    edit(e, item){
+        this.chucdanhModal.current.show(item, this.props.phanloai.data.items);
         e.preventDefault();
     }
 
-    deleteChucdanh(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteChucdanh(item._id);
         });
         e.preventDefault();
     }
 
-    render() {
-        let table = null;
+    render() {           
+        let table = null;              
         if (this.props.chucdanh && this.props.chucdanh.page && this.props.chucdanh.page.list && this.props.chucdanh.page.list.length > 0) {
             table = (
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Chức danh</th>
-                            <th style={{ width: '60%' }}>Tên đầy đủ</th>
-                            <th style={{ width: 'auto' }}>Ord</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Chức danh</th>
+                            <th style={{ width: '40%', textAlign: 'center' }}>Tên đầy đủ</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>ORD</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {this.props.chucdanh.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                            <tr key={index}>   
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.chuc_danh ? item.chuc_danh + ' ' : '')}</a>
+                                </td> 
+                                <td>{item.ten_day_du}</td>          
+                                <td>{item.ord}</td>
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showChucdanh(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteChucdanh(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
                             </tr>
                         ))}
+                        
                     </tbody>
                 </table>
             );
@@ -70,7 +79,7 @@ class ChucdanhPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Chức danh</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin chức danh</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
@@ -84,11 +93,17 @@ class ChucdanhPage extends React.Component {
                 <Pagination name='adminChucdanh'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getChucdanhInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <ChucdanhModal ref={this.chucdanhModal} createChucdanh={this.props.createChucdanh} updateChucdanh={this.props.updateChucdanh} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ chucdanh: state.chucdanh });
-const mapActionsToProps = { getChucdanhInPage, getChucdanh, updateChucdanh, deleteChucdanh };
+const mapStateToProps = state => ({ chucdanh: state.chucdanh, phanloai: state.phanloai});
+const mapActionsToProps = { getChucdanhInPage, createChucdanh, updateChucdanh, deleteChucdanh, getAllChucdanh, getAllPhanloai };
 export default connect(mapStateToProps, mapActionsToProps)(ChucdanhPage);

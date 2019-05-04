@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.chau.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('admin/chau/all', app.role.isAdmin, (req, res) => {
+        app.model.chau.getAll((error, chau) => {
+            if (error) res.send(error);
+            else res.send(chau);
+        })
+    })
+    
     app.post('/admin/chau', app.role.isAdmin, (req, res) => {
         app.model.chau.create(req.body.chau, (error, chau) => {
             res.send({ error, chau })

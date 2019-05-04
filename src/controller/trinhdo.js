@@ -9,7 +9,7 @@ module.exports = app => {
     });
 
     app.get('/admin/trinhdo/all', app.role.isAdmin, (req, res) => {
-        app.model.trinh_do.getAll((error, result) => {
+        app.model.trinhdo.getAll((error, result) => {
             if (error) {
                 res.send(error);
             }
@@ -30,13 +30,13 @@ module.exports = app => {
             changes = {};
             if (data.trinh_do && data.trinh_do != '') changes.trinh_do = data.trinh_do;
             if (data.Ten_day_du && data.Ten_day_du != '') changes.Ten_day_du = data.Ten_day_du;
-            if (data.ord && data.ord != '') changes.ord = data.ord;
+            if (data.ord) changes.ord = data.ord;
 
-        app.model.trinh_do.update(req.body._id, changes, (error, trinh_do) =>{
+        app.model.trinhdo.update(req.body._id, changes, (error, trinhdo) =>{
         if (error) {
             res.send(error);
         }
-        else res.send(trinh_do);
+        else res.send(trinhdo);
         });
     })
 }

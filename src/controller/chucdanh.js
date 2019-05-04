@@ -5,6 +5,12 @@ module.exports = app => {
         app.model.chucdanh.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/chucdanh/all', app.role.isAdmin, (req, res) => {
+        app.model.chucdanh.getAll((error, chucdanh) => {
+            if(error) res.send(error);
+            else res.send(chucdanh);
+        })
+    })
     app.post('/admin/chucdanh', app.role.isAdmin, (req, res) => {
         app.model.chucdanh.create(req.body.chucdanh, (error, chucdanh) => {
             res.send({ error, chucdanh })
@@ -16,6 +22,7 @@ module.exports = app => {
             changes = {};
         data.chuc_danh && data.chuc_danh != '' && (changes.chuc_danh = data.chuc_danh);
         data.ten_day_du & data.ten_day_du != '' && (changes.ten_day_du = data.ten_day_du);
+        if (data.ord) changes.ord = data.ord;
         
         app.model.chucdanh.update(req.body._id, changes, (error, chucdanh) => {
             if (error) {

@@ -12,7 +12,7 @@ export default function userReducer(state = null, data) {
             return {...state,data};
 
         case GET_CHUCDANH:
-            return Object.assign({}, state, { items: data.items });
+            return Object.assign({}, state, { items: data.items, chucdanhs: data.chucdanhs});
 
         case GET_CHUCDANH_IN_PAGE:
             return Object.assign({}, state, { page: data.page });
@@ -58,8 +58,8 @@ export function getAllChucdanh(done) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
-                if (done) done(data.items);
-                dispatch({ type: GET_CHUCDANH, items: data.items });
+                if (done) done(data);
+                dispatch({ type: GET_ALL, items: data.items});
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

@@ -5,7 +5,7 @@ import Cb_nngoaiPage from './Cb_nngoaiPage.jsx'
 export default class Cb_nngoaiModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', nuoc: []}
+        this.state = {text: '', nuoc: [], cbcnv: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -118,7 +118,7 @@ export default class Cb_nngoaiModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='Hovaten'>Họ và tên</label>
-                                <Dropdown ref={this.cbcnv} number='' items={this.state.cbcnv.map(e => Object.assign({}, e, {text: e.HOTEN + e.TEN}))} />
+                                <Dropdown ref={this.cbcnv} number='' items={this.state.cbcnv.map(e => Object.assign({}, e, {text: e.TEN}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Nuoc'>Nước</label>

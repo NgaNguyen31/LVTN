@@ -7,13 +7,7 @@ module.exports = app =>{
                 dropDups: true
             }
         },
-        PC_CVU: {
-            type: String,
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        },
+        PC_CVU: Number,
         Ghi_chu: String
     });
     const model = app.db.model('chucvu',schema);
@@ -38,7 +32,7 @@ module.exports = app =>{
                 });
             }
         }),
-        getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
+        getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
         update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
         delete: (_id, done) => model.findById(_id, (error, item) => {

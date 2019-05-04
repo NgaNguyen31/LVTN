@@ -58,8 +58,8 @@ export function getAllCbcnv_hd_dv_tu_tra(done) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
-                if (done) done(data.items);
-                dispatch({ type: GET_CBCNV_HD_DV_TU_TRA, items: data.items });
+                if (done) done(data);
+                dispatch({ type: GET_ALL, items: data });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

@@ -58,8 +58,8 @@ export function getAllCbcnv_hd_khoa(done) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
-                if (done) done(data.items);
-                dispatch({ type: GET_CBCNV_HD_KHOA, items: data.items });
+                if (done) done(data);
+                dispatch({ type: GET_CBCNV_HD_KHOA, items: data });
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }
