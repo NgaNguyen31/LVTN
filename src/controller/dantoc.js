@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.dantoc.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/dantoc/all', app.role.isAdmin, (req, res) => {
+        app.model.dantoc.getAll((error, dantoc) => {
+            if (error) res.send(error);
+            else res.send(dantoc);
+        })
+    })
+
     app.post('/admin/dantoc', app.role.isAdmin, (req, res) => {
         app.model.dantoc.create(req.body.dantoc, (error, dantoc) => {
             res.send({ error, dantoc })

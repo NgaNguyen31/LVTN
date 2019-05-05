@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.loai.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/loai/all', app.role.isAdmin, (req, res) => {
+        app.model.loai.getAll((error, loai) => {
+            if (error) res.send(error);
+            else res.send(loai);
+        })
+    })
+
     app.post('/admin/loai', app.role.isAdmin, (req, res) => {
         app.model.loai.create(req.body.loai, (error, loai) => {
             res.send({ error, loai })

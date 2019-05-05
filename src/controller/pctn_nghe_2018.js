@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.pctn_nghe_2018.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/pctn_nghe_2018/all', app.role.isAdmin, (req, res) => {
+        app.model.pctn_nghe_2018.getAll((error, pctn_nghe_2018) => {
+            if (error) res.send(error);
+            else res.send({pctn_nghe_2018});
+        })
+    })
+
     app.post('/admin/pctn_nghe_2018', app.role.isAdmin, (req, res) => {
         app.model.pctn_nghe_2018.create(req.body.pctn_nghe_2018, (error, pctn_nghe_2018) => {
             res.send({ error, pctn_nghe_2018 })

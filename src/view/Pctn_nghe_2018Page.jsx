@@ -61,7 +61,9 @@ class Pctn_nghe_2018Page extends React.Component {
                             <tr key={index}>   
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.SHCC ? item.SHCC + ' ' : '')}</a>
-                                </td>        
+                                </td>   
+                                {console.log(typeof item.NGAY_SINH)
+                                }     
                                 <td>{item.HO}</td>                    
                                 <td>{item.TEN}</td>                    
                                 <td>{item.NGAY_SINH}</td>                 

@@ -15,7 +15,6 @@ import {getAllBenhvien} from './redux/benhvien.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination.jsx';
 import CbcnvModal from './CbcnvModel.jsx';
-import { react } from 'babel-types';
 
 class CbcnvPage extends React.Component {
     constructor(props) {
@@ -44,7 +43,18 @@ class CbcnvPage extends React.Component {
     }
 
     edit(e, item){
-        this.cbcnvModal.current.show(item, this.props.nghi_ctac.data.items, this.props.loai.data.items, this.props.pctn_nghe_2018.data.items, this.props.chucdanh.data.items, this.props.trinhdo.data.items, this.props.ngach.data.items, this.props.chucvu.data.items, this.props.bomon.data.items, this.props.dantoc.data.items, this.props.tongiao.data.items, this.props.benhvien.data.items);
+        this.cbcnvModal.current.show(item, 
+            this.props.nghi_ctac.data.items, 
+            this.props.loai.data.items, 
+            this.props.pctn_nghe_2018.data.items, 
+            this.props.chucdanh.data.items, 
+            this.props.trinhdo.data.items, 
+            this.props.ngach.data.items, 
+            this.props.chucvu.data.items, 
+            this.props.bomon.data.items, 
+            this.props.dantoc.data.items, 
+            this.props.tongiao.data.items, 
+            this.props.benhvien.data.items);
         e.preventDefault();
     }
 
@@ -57,6 +67,8 @@ class CbcnvPage extends React.Component {
 
 
     render() {
+        console.log(this.props.nghi_ctac);
+        
         let table = null;
         if (this.props.cbcnv && this.props.cbcnv.page && this.props.cbcnv.page.list && this.props.cbcnv.page.list.length > 0) {
             table = (

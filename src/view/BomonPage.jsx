@@ -43,7 +43,7 @@ class BomonPage extends React.Component {
                         <tr>
                             <th style={{ width: '30%', textAlign: 'center' }}>Tên bộ môn</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Tên tiếng anh</th>
-                            <th style={{ width: '30%', textAlign: 'center' }}>Mã số khoa</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên khoa</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Năm thành lập</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
@@ -56,7 +56,7 @@ class BomonPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_BM ? item.TEN_BM + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.TEN_TIENG_ANH}</td>          
-                                <td>{item.MS_KHOA}</td>
+                                <td>{item.MS_KHOA.reduce((pre, value) => pre + ', ' +  value.TEN_KHOA, '')}</td>
                                 <td>{item.NAM_THANH_LAP}</td>
                                 <td>{item.GHI_CHU}</td>
                                 <td className='btn-group'>

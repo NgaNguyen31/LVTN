@@ -12,7 +12,7 @@ module.exports = app =>{
 
     app.model.chinhsach = {
         create: (data, done) => model.create(data, done),
-        getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
+        getAll: (done) => model.find({},done),
         get: (_id, done) => model.findById(_id, done),
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {

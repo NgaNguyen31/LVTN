@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.ngach.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/ngach/all', app.role.isAdmin, (req, res) => {
+        app.model.ngach.getAll((error, ngach) => {
+            if (error) res.send(error);
+            else res.send(ngach);
+        })
+    })
+
     app.post('/admin/ngach', app.role.isAdmin, (req, res) => {
         app.model.ngach.create(req.body.ngach, (error, ngach) => {
             res.send({ error, ngach })

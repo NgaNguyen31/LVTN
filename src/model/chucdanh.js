@@ -14,7 +14,7 @@ module.exports = app =>{
                 dropDups: true
             }
         },
-        ord: [{ type: app.db.Schema.ObjectId, ref: 'phanloai' }],
+        ord: { type: app.db.Schema.ObjectId, ref: 'phanloai' },
     });
     const model = app.db.model('chucdanh',schema);
 

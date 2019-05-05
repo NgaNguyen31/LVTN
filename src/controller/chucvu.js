@@ -5,7 +5,7 @@ module.exports = app => {
         app.model.chucvu.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
-    app.get('admin/chucvu/all', app.role.isAdmin, (req, res) => {
+    app.get('/admin/chucvu/all', app.role.isAdmin, (req, res) => {
         app.model.chucvu.getAll((error, chucvu) => {
             if (error) res.send(error);
             else res.send(chucvu);

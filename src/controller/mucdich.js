@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.mucdich.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/mucdich/all', app.role.isAdmin, (req, res) => {
+        app.model.mucdich.getAll((error, mucdich) => {
+            if (error) res.send(error);
+            else res.send(mucdich);
+        })
+    })
+
     app.post('/admin/mucdich', app.role.isAdmin, (req, res) => {
         app.model.mucdich.create(req.body.mucdich, (error, mucdich) => {
             res.send({ error, mucdich })

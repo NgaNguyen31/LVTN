@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.kihieu_tang_giam_bhxh.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/kihieu_tang_giam_bhxh/all', app.role.isAdmin, (req, res) => {
+        app.model.kihieu_tang_giam_bhxh.getAll((error, kihieu_tang_giam_bhxh) => {
+            if (error) res.send(error);
+            else res.send(kihieu_tang_giam_bhxh);
+        })
+    })
+
     app.post('/admin/kihieu_tang_giam_bhxh', app.role.isAdmin, (req, res) => {
         app.model.kihieu_tang_giam_bhxh.create(req.body.kihieu_tang_giam_bhxh, (error, kihieu_tang_giam_bhxh) => {
             res.send({ error, kihieu_tang_giam_bhxh })

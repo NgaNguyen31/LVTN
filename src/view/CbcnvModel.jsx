@@ -19,9 +19,9 @@ export default class CbcnvModal extends React.Component {
         this.trinhdo = React.createRef();
         this.ngach = React.createRef();
         this.chucvu = React.createRef();
-        this.nuocngoai = React.createRef();
+        //this.nuocngoai = React.createRef();
         this.bomon = React.createRef();
-        this.ngoaingu = React.createRef();
+        //this.ngoaingu = React.createRef();
         this.dantoc = React.createRef();
         this.tongiao = React.createRef();
         this.benhvien = React.createRef();
@@ -481,7 +481,18 @@ export default class CbcnvModal extends React.Component {
         $('#HL_DEN_NGAY').val(HL_DEN_NGAY);
         $('#DIEN_GIAI_HD').val(DIEN_GIAI_HD);
 
-        this.setState({ _id, nghi_ctac : nghi_ctac ? nghi_ctac : [], loai : loai ? loai : [], pctn_nghe_2018 : pctn_nghe_2018 ? pctn_nghe_2018 : [], chucdanh : chucdanh ? chucdanh : [], trinhdo : trinhdo ? trinhdo : [], ngach : ngach ? ngach : [], chucvu : chucvu ? chucvu : [], bomon : bomon ? bomon : [], dantoc : dantoc ? dantoc : [], tongiao : tongiao ? tongiao : [], benhvien : benhvien ? benhvien : []});
+        this.setState({ _id, 
+            nghi_ctac : nghi_ctac ? nghi_ctac : [], 
+            loai : loai ? loai : [], 
+            pctn_nghe_2018 : pctn_nghe_2018 ? pctn_nghe_2018 : [], 
+            chucdanh : chucdanh ? chucdanh : [], 
+            trinhdo : trinhdo ? trinhdo : [], 
+            ngach : ngach ? ngach : [], 
+            chucvu : chucvu ? chucvu : [], 
+            bomon : bomon ? bomon : [], 
+            dantoc : dantoc ? dantoc : [], 
+            tongiao : tongiao ? tongiao : [], 
+            benhvien : benhvien ? benhvien : []});
         $(this.modal.current).modal('show');
     }
 
@@ -494,6 +505,7 @@ export default class CbcnvModal extends React.Component {
             trinhdo = this.trinhdo.current.getSelectedItem(),
             ngach = this.ngach.current.getSelectedItem(),
             chucvu = this.chucvu.current.getSelectedItem(),
+            bomon = this.bomon.current.getSelectedItem(),
             dantoc = this.dantoc.current.getSelectedItem(),
             tongiao = this.tongiao.current.getSelectedItem(),
             benhvien = this.benhvien.current.getSelectedItem(),
@@ -715,7 +727,7 @@ export default class CbcnvModal extends React.Component {
                                 <input className='form-control' id='IN_NUOC' type='boolean' placeholder='' onChange={this.handleInput('boolean', 'IN_NUOC')} value={this.state.boolean.IN_NUOC}/>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='NGHI'>Nghỉ công tác</label>
+                                <label htmlFor='LOAI'>Loại</label>
                                 <Dropdown ref={this.loai} number='' items={this.state.loai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
                             </div>
                             <div className='form-group'>

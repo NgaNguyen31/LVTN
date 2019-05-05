@@ -12,7 +12,7 @@ export default function userReducer(state = null, data) {
             return {... state,data};
 
         case GET_CBCNV:
-            return Object.assign({}, state, { items: data.items });
+            return Object.assign({}, state, { items: data.items, cbcnvs: data.cbcnvs });
 
         case GET_CBCNV_IN_PAGE:
             return Object.assign({}, state, { page: data.page });

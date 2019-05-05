@@ -74,6 +74,8 @@ export function getPctn_nghe_2018InPage(pageNumber, pageSize, done) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
+                console.log(data.page);
+                console.log( data.page.list.map(a => typeof a.NGAY_SINH))
                 if (done) done(data.page.pageNumber, data.page.pageSize, data.page.pageTotal, data.page.totalItem);
                 dispatch({ type: GET_PCTN_NGHE_2018_IN_PAGE, page: data.page });
             }

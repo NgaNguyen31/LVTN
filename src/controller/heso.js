@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.heso.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/heso/all', app.role.isAdmin, (req, res) => {
+        app.model.heso.getAll((error, heso) => {
+            if (error) res.send(error);
+            else res.send(heso);
+        })
+    })
+
     app.post('/admin/heso', app.role.isAdmin, (req, res) => {
         app.model.heso.create(req.body.heso, (error, heso) => {
             res.send({ error, heso })

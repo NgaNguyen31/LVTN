@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.ngoaingu.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/ngoaingu/all', app.role.isAdmin, (req, res) => {
+        app.model.ngoaingu.getAll((error, ngoaingu) => {
+            if (error) res.send(error);
+            else res.send(ngoaingu);
+        })
+    })
+
     app.post('/admin/ngoaingu', app.role.isAdmin, (req, res) => {
         app.model.ngoaingu.create(req.body.ngoaingu, (error, ngoaingu) => {
             res.send({ error, ngoaingu })

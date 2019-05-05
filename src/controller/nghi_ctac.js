@@ -5,6 +5,13 @@ module.exports = app => {
         app.model.nghi_ctac.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/nghi_ctac/all', app.role.isAdmin, (req, res) => {
+        app.model.nghi_ctac.getAll((error, nghi_ctac) => {
+            if (error) res.send(error);
+            else res.send(nghi_ctac);
+        })
+    })
+
     app.post('/admin/nghi_ctac', app.role.isAdmin, (req, res) => {
         app.model.nghi_ctac.create(req.body.nghi_ctac, (error, nghi_ctac) => {
             res.send({ error, nghi_ctac })
