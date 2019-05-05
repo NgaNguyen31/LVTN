@@ -1,9 +1,20 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        TEN_TINH: String,
-        MS_VUNG: Number,
-    }, 
-    {unique: true});
+        TEN_TINH: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        }, 
+        MS_VUNG: {
+            type: Number,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
+    });
     const model = app.db.model('tinh',schema);
 
     app.model.tinh = {
@@ -26,7 +37,7 @@ module.exports = app =>{
                 });
             }
         }),
-        getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
+        getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
         update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
         delete: (_id, done) => model.findById(_id, (error, item) => {

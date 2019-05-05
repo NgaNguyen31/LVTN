@@ -7,7 +7,7 @@ module.exports = app =>{
                 dropDups: true
             }
         },
-        MS_CHAU: [{ type: app.db.Schema.ObjectId, ref: 'chau' }],      
+        MS_CHAU: String,      
     });
     const model = app.db.model('khuvuc',schema);
 
@@ -31,7 +31,7 @@ module.exports = app =>{
                 });
             }
         }),
-        getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
+        getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
         update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
         delete: (_id, done) => model.findById(_id, (error, item) => {

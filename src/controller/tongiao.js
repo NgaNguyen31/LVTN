@@ -5,6 +5,15 @@ module.exports = app => {
         app.model.tongiao.getPage(pageNumber, pageSize, {}, (error, page) => res.send({ error, page }));
     });
 
+    app.get('/admin/tongiao/all', app.role.isAdmin, (req, res) => {
+        app.model.tongiao.getAll((error, result) => {
+            if (error) {
+                res.send(error);
+            }
+            else res.send(result);        
+        });
+    });
+
     app.post('/admin/tongiao', app.role.isAdmin, (req, res) => {
         app.model.tongiao.create(req.body.tongiao, (error, tongiao) => {
             res.send({ error, tongiao })

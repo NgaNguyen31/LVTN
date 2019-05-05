@@ -8,7 +8,7 @@ module.exports = app =>{
             }
         }
     });
-    const model = app.db.model('Chau',schema);
+    const model = app.db.model('chau',schema);
 
     app.model.chau = {
         create: (data, done) => model.create(data,done),

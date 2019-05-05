@@ -12,7 +12,7 @@ export default function userReducer(state = null, data) {
             return {...state,data};
 
         case GET_KHUVUC:
-            return Object.assign({}, state, { items: data.items });
+            return Object.assign({}, state, { items: data.items, khuvucs: data.khuvucs });
 
         case GET_KHUVUC_IN_PAGE:
             return Object.assign({}, state, { page: data.page });

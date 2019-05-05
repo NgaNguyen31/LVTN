@@ -255,11 +255,11 @@ class Menu extends React.Component {
                             <i className='treeview-indicator fa fa-angle-right' />
                         </a>
                         <ul className='treeview-menu'>
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/chau'>
                                     <i className='icon fa fa-circle-o' />Châu
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className='treeview-item' to='/admin/dantoc'>
                                     <i className='icon fa fa-circle-o' />Dân tộc

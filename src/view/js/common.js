@@ -16,6 +16,7 @@ const getCookiePageName = (cookieName) => {
 let T = {
     PropTypes,
     roles: ['admin', 'editor', 'user'],
+    chaus: ['Châu Á', 'Châu Âu', 'Châu Mỹ', 'Châu Phi', 'Châu Úc'],
     defaultPageSize: 50,
     defaultUserPageSize: 21,
     newsFeedPageSize: 3,
