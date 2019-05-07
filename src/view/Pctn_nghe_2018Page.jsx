@@ -19,7 +19,7 @@ class Pctn_nghe_2018Page extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(8, 5);
             this.props.getPctn_nghe_2018InPage();
         });
     }

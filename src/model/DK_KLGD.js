@@ -1,11 +1,11 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        MS_NV: Number,
+        MS_NV: { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         STT: Number,
         HO: String,
         TEN: String,
-        MS_BM: [{ type: app.db.Schema.ObjectId, ref: 'bomon' }],
-        MS_CV: [{ type: app.db.Schema.ObjectId, ref: 'cv_klgd' }],
+        MS_BM: { type: app.db.Schema.ObjectId, ref: 'bomon' },
+        MS_CV: { type: app.db.Schema.ObjectId, ref: 'cv_klgd' },
         TU_DK: String,
         NHOMLOP: String,
         SO_SV: Number,
@@ -31,7 +31,7 @@ module.exports = app =>{
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['MS_NV', 'MS_BM', 'MS_CV']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });

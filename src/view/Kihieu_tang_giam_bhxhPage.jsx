@@ -15,7 +15,7 @@ class Kihieu_tang_giam_bhxhPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(10, 13);
             this.props.getKihieu_tang_giam_bhxhInPage();
         });
     }

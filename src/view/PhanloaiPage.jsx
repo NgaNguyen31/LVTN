@@ -15,7 +15,7 @@ class PhanloaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(11, 3);
             this.props.getPhanloaiInPage();
         });
     }

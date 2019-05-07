@@ -15,7 +15,7 @@ class Nghi_ctacPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(10, 17);
             this.props.getNghi_ctacInPage();
         });
     }

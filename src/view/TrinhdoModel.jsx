@@ -48,12 +48,12 @@ export default class TrinhdoModal extends React.Component {
     save(e) {        
         e.preventDefault();
         const phanloai = this.phanloai.current.getSelectedItem(),
-            Phanloai = phanloai? phanloai._id: null,
+            ord = phanloai? phanloai._id: null,
             changes = {
                 trinh_do: this.state.text.trinh_do,
                 Ten_day_du: this.state.text.Ten_day_du,
-                Phanloai,
-        };
+                ord,
+        };        
         if (this.state.text == '') {
             T.notify('Bạn chưa điền thông tin!', 'danger');
             $('#Hovaten').focus();
@@ -63,7 +63,7 @@ export default class TrinhdoModal extends React.Component {
         } else if (!changes.Ten_day_du) {
             T.notify('Tên đầy đủ đang trống!', 'danger');
             $('#Ten_day_du').focus();            
-        } else if (!changes.Phanloai) {
+        } else if (!changes.ord) {
             T.notify('Ord đang trống!', 'danger');
             $('#ord').focus();                 
         } else if (this.state._id) {

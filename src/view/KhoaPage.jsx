@@ -15,7 +15,7 @@ class KhoaPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(10, 9);
             this.props.getKhoaInPage();
         });
     }

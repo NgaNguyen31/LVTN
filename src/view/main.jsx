@@ -113,7 +113,7 @@ class Router extends React.Component {
             { path: '/admin/dk_klgd', component: Loadable({ loading: Loading, loader: () => import('./Dk_klgdPage.jsx') }) },
             { path: '/admin/heso', component: Loadable({ loading: Loading, loader: () => import('./HesoPage.jsx') }) },
             { path: '/admin/khoa', component: Loadable({ loading: Loading, loader: () => import('./KhoaPage.jsx') }) },
-            { path: '/admin/khoi_luong_gd_caohoc', component: Loadable({ loading: Loading, loader: () => import('./khoi_luong_gd_caohocPage.jsx') }) },
+            { path: '/admin/khoi_luong_gd_caohoc', component: Loadable({ loading: Loading, loader: () => import('./Khoi_luong_gd_caohocPage.jsx') }) },
             { path: '/admin/khuvuc', component: Loadable({ loading: Loading, loader: () => import('./KhuvucPage.jsx') }) },
             { path: '/admin/kiemnhiem', component: Loadable({ loading: Loading, loader: () => import('./KiemnhiemPage.jsx') }) },
             { path: '/admin/kihieu_tang_giam_bhxh', component: Loadable({ loading: Loading, loader: () => import('./Kihieu_tang_giam_bhxhPage.jsx') }) },

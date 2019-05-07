@@ -1,6 +1,6 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { getCbcnvInPage, createCbcnv, getCbcnv, updateCbcnv, deleteCbcnv } from './redux/cbcnv.jsx';
+import {connect} from 'react-redux';
+import {getCbcnvInPage, createCbcnv, getCbcnv, updateCbcnv, deleteCbcnv} from './redux/cbcnv.jsx';
 import {getAllNghi_ctac} from './redux/nghi_ctac.jsx';
 import {getAllLoai} from './redux/loai.jsx';
 import {getAllPctn_nghe_2018} from './redux/pctn_nghe_2018.jsx';
@@ -12,7 +12,7 @@ import {getAllBomon} from './redux/bomon.jsx';
 import {getAllDantoc} from './redux/dantoc.jsx';
 import {getAllTongiao} from './redux/tongiao.jsx';
 import {getAllBenhvien} from './redux/benhvien.jsx';
-import { Link } from 'react-router-dom';
+import {Link} from 'react-router-dom';
 import Pagination from './Pagination.jsx';
 import CbcnvModal from './CbcnvModel.jsx';
 
@@ -26,7 +26,7 @@ class CbcnvPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1,4);
+            T.selectMenu(8, 3);
             this.props.getCbcnvInPage();
         });
         this.props.getAllNghi_ctac();
@@ -55,6 +55,8 @@ class CbcnvPage extends React.Component {
             this.props.dantoc.data.items, 
             this.props.tongiao.data.items, 
             this.props.benhvien.data.items);
+        console.log(this.props.nghi_ctac.data.items);
+        
         e.preventDefault();
     }
 
@@ -67,7 +69,6 @@ class CbcnvPage extends React.Component {
 
 
     render() {
-        console.log(this.props.nghi_ctac);
         
         let table = null;
         if (this.props.cbcnv && this.props.cbcnv.page && this.props.cbcnv.page.list && this.props.cbcnv.page.list.length > 0) {
@@ -221,13 +222,14 @@ class CbcnvPage extends React.Component {
                     <tbody>
                         {this.props.cbcnv.page.list.map((item, index) => (
                             <tr key={index}>     
-                                <td>{item.NGHI}</td>
+                                <td>{item.NGHI.reduce((pre, value) => pre + ' ' +  value.Dien_giai, ' ')}</td>
                                 <td>{item.TAM_NGUNG}</td>          
                                 <td>{item.IS_NNGOAI}</td>
                                 <td>{item.IN_NUOC}</td>
-                                <td>{item.SHCC}</td>                                                  
+                                <td>{item.LOAI.reduce((pre, value) => pre + ' ' +  value.Dien_giai, ' ')}</td>
+                                <td>{item.SHCC.reduce((pre,value) => pre + ' ' + value.SHCC, ' ')}</td>                                                  
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.reduce((pre, value) => pre + ' ' +  value.HO + ' ' + value.TEN, '') + ' ' : ' ')}</a>
                                 </td>                          
                                 <td>{item.MS_NV_CU}</td>                          
                                 <td>{item.HO}</td>                          
@@ -245,9 +247,9 @@ class CbcnvPage extends React.Component {
                                 <td>{item.GIAY_TT_RA_TRUONG}</td>                          
                                 <td>{item.So_BHXH_LD}</td>                          
                                 <td>{item.THU_BHXH}</td>                          
-                                <td>{item.CHUC_DANH}</td>                          
-                                <td>{item.TRINH_DO}</td>                          
-                                <td>{item.NGACH}</td>                          
+                                <td>{item.CHUC_DANH.reduce((pre, value) => pre + ' ' +  value.ten_day_du, ' ')}</td>
+                                <td>{item.TRINH_DO.reduce((pre, value) => pre + ' ' +  value.Ten_day_du, ' ')}</td>
+                                <td>{item.NGACH.reduce((pre, value) => pre + ' ' +  value.TEN_NGACH, ' ')}</td>
                                 <td>{item.NGACHMOI}</td>                          
                                 <td>{item.BAC_LG}</td>                          
                                 <td>{item.HESO_LG}</td>                          
@@ -266,8 +268,8 @@ class CbcnvPage extends React.Component {
                                 <td>{item.CHUC_VU_BCH_CONG_DOAN}</td>                          
                                 <td>{item.CHUC_VU_BCH_DOAN_TN}</td>                          
                                 <td>{item.PC_DOC_HAI}</td>                          
-                                <td>{item.MOI_TRUONG_DOC_HAI}</td>                                                          <td>{item.LOAI}</td>                          
-                                <td>{item.MS_CVU}</td>                          
+                                <td>{item.MOI_TRUONG_DOC_HAI}</td>               
+                                <td>{item.MS_CVU.reduce((pre, value) => pre + ' ' + value.CHUC_VU, ' ')}</td>                          
                                 <td>{item.TEN_CV}</td>                          
                                 <td>{item.PCCV}</td>                          
                                 <td>{item.NGAY_PCCV}</td>                          
@@ -280,7 +282,7 @@ class CbcnvPage extends React.Component {
                                 <td>{item.NGAYTIEPNHAN_KOLUONG}</td>                          
                                 <td>{item.PHUC_LOI}</td>                          
                                 <td>{item.GHI_CHU_IN}</td>                          
-                                <td>{item.MS_BM}</td>                          
+                                <td>{item.MS_BM.reduce((pre, value) => pre + ' ' + value.TEN_BM, ' ')}</td>                          
                                 <td>{item.TDO_LLCT}</td>                          
                                 <td>{item.TIN_HOC}</td>                          
                                 <td>{item.NGOAI_NGU}</td>                          
@@ -323,8 +325,8 @@ class CbcnvPage extends React.Component {
                                 <td>{item.NGUYEN_QUAN}</td>
                                 <td>{item.SO_CMND}</td>
                                 <td>{item.NOI_NGAYCAP}</td>
-                                <td>{item.DANTOC}</td>
-                                <td>{item.TON_GIAO}</td>
+                                <td>{item.DANTOC.reduce((pre,value) => pre + ' ' + value.Dan_toc, ' ')}</td>
+                                <td>{item.TON_GIAO.reduce((pre, value) => pre + ' ' + value.TON_GIAO, ' ')}</td>
                                 <td>{item.CHA_TEN}</td>
                                 <td>{item.CHA_NAM_SINH}</td>
                                 <td>{item.CHA_NNGHIEP}</td>
@@ -343,7 +345,7 @@ class CbcnvPage extends React.Component {
                                 <td>{item.MA_TINH_BV}</td>
                                 <td>{item.QUOC_TICH}</td>
                                 <td>{item.TRA_THE_BHYT}</td>
-                                <td>{item.MA_BV}</td>
+                                <td>{item.MA_BV.reduce((pre, value) => pre + ' ' + value.Noi_kham , ' ')}</td>
                                 <td>{item.MASO_BHXH}</td>
                                 <td>{item.GHI_CHU_NOP_SO_BHXH}</td>
                                 <td>{item.SO_BHXH}</td>
@@ -413,6 +415,22 @@ class CbcnvPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ cbcnv: state.cbcnv, nghi_ctac: state.nghi_ctac, loai: state.loai, pctn_nghe_2018: state.pctn_nghe_2018, chucdanh: state.chucdanh, trinhdo: state.trinhdo, ngach: state.ngach, chucvu: state.chucvu, bomon: state.bomon, dantoc: state.dantoc, tongiao: state.tongiao, benhvien: state.benhvien});
-const mapActionsToProps = { getCbcnvInPage, getCbcnv, updateCbcnv, deleteCbcnv, createCbcnv, getAllNghi_ctac, getAllLoai, getAllPctn_nghe_2018, getAllChucdanh, getAllTrinhdo, getAllNgach, getAllChucvu, getAllBomon, getAllDantoc, getAllTongiao, getAllBenhvien };
+const mapStateToProps = state => ({ cbcnv: state.cbcnv, 
+    nghi_ctac: state.nghi_ctac, 
+    loai: state.loai, 
+    pctn_nghe_2018: state.pctn_nghe_2018, 
+    chucdanh: state.chucdanh, 
+    trinhdo: state.trinhdo, 
+    ngach: state.ngach, 
+    chucvu: state.chucvu, 
+    bomon: state.bomon, 
+    dantoc: state.dantoc, 
+    tongiao: state.tongiao, 
+    benhvien: state.benhvien});
+const mapActionsToProps = { getCbcnvInPage, 
+    getCbcnv, updateCbcnv, deleteCbcnv, 
+    createCbcnv, getAllNghi_ctac, getAllLoai, 
+    getAllPctn_nghe_2018, getAllChucdanh, getAllTrinhdo, 
+    getAllNgach, getAllChucvu, getAllBomon, getAllDantoc, 
+    getAllTongiao, getAllBenhvien };
 export default connect(mapStateToProps, mapActionsToProps)(CbcnvPage);

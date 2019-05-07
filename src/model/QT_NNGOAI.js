@@ -1,7 +1,7 @@
 module.exports = app => {
     const schema = app.db.Schema ({
         STT: Number,
-        MSNV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
+        MSNV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         HO: String,
         TEN: String,
         SO_QUYET_DINH: String,
@@ -41,7 +41,7 @@ module.exports = app => {
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['MSNV', 'MUC_DICH', 'NUOC_DEN']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });

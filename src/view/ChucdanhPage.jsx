@@ -16,7 +16,7 @@ class ChucdanhPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(10, 4);
             this.props.getChucdanhInPage();
         });
         this.props.getAllPhanloai();
@@ -54,7 +54,7 @@ class ChucdanhPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.chuc_danh ? item.chuc_danh + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.ten_day_du}</td>          
-                                <td>{item.ord}</td>
+                                <td>{item.ord.reduce((pre, value) => pre + ' ' + value.LOAI, ' ')}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

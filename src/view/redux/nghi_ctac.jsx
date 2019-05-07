@@ -54,6 +54,7 @@ export function getAllNghi_ctac(done) {
     return dispatch => {
         const url = '/admin/nghi_ctac/all';
         T.get(url, data => {
+            
             if (data.error) {
                 T.notify('Lấy danh sách bị lỗi!', 'danger');
                 console.error('GET: ' + url + '. ' + data.error);

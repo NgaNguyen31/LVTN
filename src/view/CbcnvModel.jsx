@@ -19,9 +19,7 @@ export default class CbcnvModal extends React.Component {
         this.trinhdo = React.createRef();
         this.ngach = React.createRef();
         this.chucvu = React.createRef();
-        //this.nuocngoai = React.createRef();
         this.bomon = React.createRef();
-        //this.ngoaingu = React.createRef();
         this.dantoc = React.createRef();
         this.tongiao = React.createRef();
         this.benhvien = React.createRef();

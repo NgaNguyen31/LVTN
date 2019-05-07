@@ -1,6 +1,6 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        NGHI: [{ type: app.db.Schema.ObjectId, ref: 'nghi_ctac' }],
+        NGHI: { type: app.db.Schema.ObjectId, ref: 'nghi_ctac' },
         TAM_NGUNG: Number,
         IS_NNGOAI: Boolean,
         IN_NUOC: Boolean,
@@ -122,7 +122,7 @@ module.exports = app =>{
         QUOC_TICH: String,
         TRA_THE_BHYT: String,
         MA_BV: { type: app.db.Schema.ObjectId, ref: 'benhvien' },
-        MASO_BHXH: T=String,//?
+        MASO_BHXH: String,//?
         GHI_CHU_NOP_SO_BHXH: String,
         SO_BHXH: Number,
         NO_PC: Boolean,
@@ -159,7 +159,7 @@ module.exports = app =>{
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['NGHI', 'LOAI', 'SHCC', 'CHUC_DANH', 'TRINH_DO', 'NGACH', 'MS_CVU', 'MS_BM', 'DANTOC', 'TON_GIAO', 'MA_BV']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });

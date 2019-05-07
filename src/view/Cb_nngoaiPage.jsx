@@ -17,7 +17,7 @@ class Cb_nngoaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(8, 0);
             this.props.getCb_nngoaiInPage();
         });
         this.props.getAllNuoc();
@@ -59,9 +59,9 @@ class Cb_nngoaiPage extends React.Component {
                         {this.props.cb_nngoai.page.list.map((item, index) => (
                             <tr key={index}>         
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten.reduce((pre, value) => pre + ' ' +  value.HO + ' ' + value.TEN, '') + ' ' : '')}</a>
                                 </td> 
-                                <td>{item.Nuoc}</td>      
+                                <td>{item.Nuoc.reduce((pre, value) => pre + ' ' + value.TEN_NUOC, ' ')}</td>      
                                 <td>{item.Ngaydi}</td>
                                 <td>{item.Ngayve}</td>                            
                                 <td>{item.Thoigian}</td>

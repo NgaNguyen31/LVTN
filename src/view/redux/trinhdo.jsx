@@ -12,7 +12,7 @@ export default function userReducer(state = null, data) {
             return {...state,data};
 
         case GET_TRINHDO:
-            return Object.assign({}, state, { items: data.items });
+            return Object.assign({}, state, { items: data.items, trinhdos: data.trinhdos });
 
         case GET_TRINHDO_IN_PAGE:
             return Object.assign({}, state, { page: data.page });

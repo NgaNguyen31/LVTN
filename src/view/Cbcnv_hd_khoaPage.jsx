@@ -1,64 +1,79 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCbcnv_hd_khoaInPage, getCbcnv_hd_khoa, updateCbcnv_hd_khoa, deleteCbcnv_hd_khoa } from './redux/cbcnv_hd_khoa.jsx'
+import { getCb_nngoaiInPage, createCb_nngoai, getCb_nngoai, updateCb_nngoai, deleteCb_nngoai } from './redux/cb_nngoai.jsx'
+import {getAllCbcnv} from './redux/cbcnv.jsx';
+import {getAllNuoc} from './redux/nuoc.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination.jsx';
+import Cb_nngoaiModal from './Cb_nngoaiModel.jsx';
 
-class Cbcnv_hd_khoaPage extends React.Component {
+class Cb_nngoaiPage extends React.Component {
     constructor(props) {
         super(props);
-        this.showCbcnv_hd_khoa = this.showCbcnv_hd_khoa.bind(this);
-        this.deleteCbcnv_hd_khoa = this.deleteCbcnv_hd_khoa.bind(this);
+        this.Cb_nngoaiModal = React.createRef();
+        this.delete = this.delete.bind(this);
+        this.edit = this.edit.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
-            this.props.getCbcnv_hd_khoaInPage();
+            T.selectMenu(8, 2);
+            this.props.getCb_nngoaiInPage();
         });
+        this.props.getAllNuoc();
+        this.props.getAllCbcnv();
     }
 
-    showCbcnv_hd_khoa(e, cbcnv_hd_khoaId) {
-        console.log(data);
-        this.props.getCbcnv_hd_khoa(cbcnv_hd_khoaId, cbcnv_hd_khoa => this.props.showCbcnv_hd_khoa(cbcnv_hd_khoa));
+    edit(e,item){        
+        this.Cb_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.nuoc.data.items);
         e.preventDefault();
     }
 
-    deleteCbcnv_hd_khoa(e, item) {
+    delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
-            isConfirm && this.props.deleteCbcnv_hd_khoa(item._id);
+            isConfirm && this.props.deleteCb_nngoai(item._id);
         });
         e.preventDefault();
     }
 
     render() {
         let table = null;
-        if (this.props.cbcnv_hd_khoa && this.props.cbcnv_hd_khoa.page && this.props.cbcnv_hd_khoa.page.list && this.props.cbcnv_hd_khoa.page.list.length > 0) {
+        if (this.props.cb_nngoai && this.props.cb_nngoai.page && this.props.cb_nngoai.page.list && this.props.cb_nngoai.page.list.length > 0) {
             table = (
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Mã số bộ môn</th>
-                            <th style={{ width: 'auto' }}>Họ</th>
-                            <th style={{ width: 'auto' }}>Tên</th>
-                            <th style={{ width: 'auto' }}>Phái</th>
-                            <th style={{ width: 'auto' }}>Năm sinh</th>
-                            <th style={{ width: 'auto' }}>Thẻ BHYT</th>
-                            <th style={{ width: 'auto' }}>Nơi khám</th>
-                            <th style={{ width: 'auto' }}>LCB</th>
-                            <th style={{ width: 'auto' }}>PC</th>
-                            <th style={{ width: 'auto' }} nowrap='true'>Active</th>
+                            <th style={{ width: '40%' }}>Họ và tên</th>
+                            <th style={{ width: '60%' }}>Nước</th>
+                            <th style={{ width: 'auto' }}>Ngày đi</th>
+                            <th style={{ width: 'auto' }}>Ngày về</th>
+                            <th style={{ width: 'auto' }}>Thời gian</th>
+                            <th style={{ width: 'auto' }}>Mục đích</th>
+                            <th style={{ width: 'auto' }}>Gia hạn</th>
+                            <th style={{ width: 'auto' }}>Số công văn</th>
+                            <th style={{ width: 'auto' }}>Ngày công văn</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.cbcnv_hd_khoa.page.list.map((item, index) => (
-                            <tr key={index}>                               
+                        {this.props.cb_nngoai.page.list.map((item, index) => (
+                            <tr key={index}>         
+                                <td>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten + ' ' : '')}</a>
+                                </td> 
+                                <td>{item.Nuoc}</td>      
+                                <td>{item.Ngaydi}</td>
+                                <td>{item.Ngayve}</td>                            
+                                <td>{item.Thoigian}</td>
+                                <td>{item.Mucdich}</td>
+                                <td>{item.Giahan}</td>    
+                                <td>{item.SoCVan}</td>
+                                <td>{item.NgayCVan}</td>                     
                                 <td className='btn-group'>
-                                    <a className='btn btn-primary' href='#' onClick={e => this.showCbcnv_hd_khoa(e, item._id)}>
+                                    <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
                                     </a>
-                                    <a className='btn btn-danger' href='#' onClick={e => this.deleteCbcnv_hd_khoa(e, item)}>
+                                    <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
                                     </a>
                                 </td>
@@ -68,34 +83,40 @@ class Cbcnv_hd_khoaPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có cán bộ công nhân viên hợp động khoa nào!</p>;
+            table = <p>Chưa có cán bộ nước ngoài nào!</p>;
         }
 
-        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.cbcnv_hd_khoa && this.props.cbcnv_hd_khoa.page ?
-            this.props.cbcnv_hd_khoa.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
+        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.cb_nngoai && this.props.cb_nngoai.page ?
+            this.props.cb_nngoai.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
         return (
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Cán bộ công nhân viên hợp động khoa</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin Cán bộ nước ngoài</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Cán bộ công nhân viên hợp động khoa</li>
+                        <li className='breadcrumb-item'>Cán bộ nước ngoài</li>
                     </ul>
                 </div>
 
                 <div className='row tile'>{table}</div>
-                <Pagination name='adminCbcnv_hd_khoa'
+                <Pagination name='adminCb_nngoai'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
-                    getPage={this.props.getCbcnv_hd_khoaInPage} />
+                    getPage={this.props.getCb_nngoaiInPage} />
+
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                    <i className='fa fa-lg fa-plus' />
+                </button>
+
+                <Cb_nngoaiModal ref={this.Cb_nngoaiModal} createCb_nngoai={this.props.createCb_nngoai} updateCb_nngoai={this.props.updateCb_nngoai} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ cbcnv_hd_khoa: state.cbcnv_hd_khoa });
-const mapActionsToProps = { getCbcnv_hd_khoaInPage, getCbcnv_hd_khoa, updateCbcnv_hd_khoa, deleteCbcnv_hd_khoa };
-export default connect(mapStateToProps, mapActionsToProps)(Cbcnv_hd_khoaPage);
+const mapStateToProps = state => ({ cb_nngoai: state.cb_nngoai, cbcnv: state.cbcnv, nuoc: state.nuoc });
+const mapActionsToProps = { getCb_nngoaiInPage,createCb_nngoai ,getCb_nngoai, updateCb_nngoai, deleteCb_nngoai, getAllCbcnv, getAllNuoc };
+export default connect(mapStateToProps, mapActionsToProps)(Cb_nngoaiPage);

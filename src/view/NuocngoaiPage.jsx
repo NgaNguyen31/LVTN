@@ -13,7 +13,7 @@ class NuocngoaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4);
+            T.selectMenu(11, 2);
             this.props.getNuocngoaiInPage();
         });
     }

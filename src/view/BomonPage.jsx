@@ -16,7 +16,7 @@ class BomonPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(10, 3);
             this.props.getBomonInPage();
         });
         this.props.getAllKhoa();
@@ -56,7 +56,7 @@ class BomonPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_BM ? item.TEN_BM + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.TEN_TIENG_ANH}</td>          
-                                <td>{item.MS_KHOA.reduce((pre, value) => pre + ', ' +  value.TEN_KHOA, '')}</td>
+                                <td>{item.MS_KHOA.reduce((pre, value) => pre + ' ' +  value.TEN_KHOA, ' ')}</td>
                                 <td>{item.NAM_THANH_LAP}</td>
                                 <td>{item.GHI_CHU}</td>
                                 <td className='btn-group'>

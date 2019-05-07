@@ -15,7 +15,7 @@ class NuocPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(1, 4);
+            T.selectMenu(11, 1);
             this.props.getNuocInPage();
         });
     }
