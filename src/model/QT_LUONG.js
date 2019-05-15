@@ -6,15 +6,15 @@ module.exports = app => {
         Ngay_QD: Date,
         Ngay_huong: Date,
         Moc_nang_luong: Date,
-        Ngach: [{ type: app.db.Schema.ObjectId, ref: 'ngach' }],
-        Heso: [{ type: app.db.Schema.ObjectId, ref: 'heso' }],
+        Ngach: { type: app.db.Schema.ObjectId, ref: 'ngach' },
+        Heso: Number,
         Bac: Number,
         PT_Vuot_Khung: Number,
         LG_Khoan_Chinh: Number,
         Ty_le:Number,
         GHI_CHU_LUONG: String,
         GHI_CHU_KHAC: String
-    });
+    }, {unique: true});
     const model = app.db.model('qt_luong', schema);
 
     app.model.qt_luong = {
@@ -31,7 +31,7 @@ module.exports = app => {
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).populate(['MS_NV', 'Ngach', 'Heso']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['MS_NV', 'Ngach']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });

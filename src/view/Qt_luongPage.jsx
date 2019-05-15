@@ -1,74 +1,85 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCb_nngoaiInPage, createCb_nngoai, getCb_nngoai, updateCb_nngoai, deleteCb_nngoai } from './redux/cb_nngoai.jsx'
+import { getQt_luongInPage, createQt_luong, updateQt_luong, deleteQt_luong, getAllQt_luong } from './redux/qt_luong.jsx';
 import {getAllCbcnv} from './redux/cbcnv.jsx';
-import {getAllNuoc} from './redux/nuoc.jsx';
+import {getAllNgach} from './redux/ngach.jsx';
 import { Link } from 'react-router-dom';
+import Qt_luongModal from './Qt_luongModel.jsx';
 import Pagination from './Pagination.jsx';
-import Cb_nngoaiModal from './Cb_nngoaiModel.jsx';
 
-class Cb_nngoaiPage extends React.Component {
+class Qt_luongPage extends React.Component {
     constructor(props) {
         super(props);
-        this.Cb_nngoaiModal = React.createRef();
+        this.qt_luongModal = React.createRef();
         this.delete = this.delete.bind(this);
-        this.edit = this.edit.bind(this);
+        this.edit = this.edit.bind(this);        
     }
 
     componentDidMount() {
         $(document).ready(() => {
             T.selectMenu(9, 10);
-            this.props.getCb_nngoaiInPage();
+            this.props.getQt_luongInPage();
         });
-        this.props.getAllNuoc();
         this.props.getAllCbcnv();
+        this.props.getAllNgach();
     }
 
-    edit(e,item){        
-        this.Cb_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.nuoc.data.items);
+    edit(e, item){
+        this.qt_luongModal.current.show(item, this.props.cbcnv.data.items, this.props.ngach.data.items);
         e.preventDefault();
     }
 
     delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
-            isConfirm && this.props.deleteCb_nngoai(item._id);
+            isConfirm && this.props.deleteQt_luong(item._id);
         });
         e.preventDefault();
     }
+    
 
-    render() {
-        let table = null;
-        if (this.props.cb_nngoai && this.props.cb_nngoai.page && this.props.cb_nngoai.page.list && this.props.cb_nngoai.page.list.length > 0) {
+    render() {                   
+        let table = null;              
+        if (this.props.qt_luong && this.props.qt_luong.page && this.props.qt_luong.page.list && this.props.qt_luong.page.list.length > 0) {
             table = (
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Họ và tên</th>
-                            <th style={{ width: '60%' }}>Nước</th>
-                            <th style={{ width: 'auto' }}>Ngày đi</th>
-                            <th style={{ width: 'auto' }}>Ngày về</th>
-                            <th style={{ width: 'auto' }}>Thời gian</th>
-                            <th style={{ width: 'auto' }}>Mục đích</th>
-                            <th style={{ width: 'auto' }}>Gia hạn</th>
-                            <th style={{ width: 'auto' }}>Số công văn</th>
-                            <th style={{ width: 'auto' }}>Ngày công văn</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>MSNV</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>QĐ lương</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày hưởng</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Mốc năng lượng</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngạch</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Hệ số</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Bậc</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>% vượt khủng</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Lương khoản chính</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Tỷ lệ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú lương</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú khác</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.cb_nngoai.page.list.map((item, index) => (
-                            <tr key={index}>         
+                        {this.props.qt_luong.page.list.map((item, index) => (
+                            <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten + ' ' : '')}</a>
-                                </td> 
-                                <td>{item.Nuoc}</td>      
-                                <td>{item.Ngaydi}</td>
-                                <td>{item.Ngayve}</td>                            
-                                <td>{item.Thoigian}</td>
-                                <td>{item.Mucdich}</td>
-                                <td>{item.Giahan}</td>    
-                                <td>{item.SoCVan}</td>
-                                <td>{item.NgayCVan}</td>                     
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
+                                </td>       
+                                <td>{item.STT}</td>
+                                <td>{item.QD_luong}</td>
+                                <td>{item.Ngay_QD}</td>
+                                <td>{item.Ngay_huong}</td>
+                                <td>{item.Moc_nang_luong}</td>
+                                <td>{item.Ngach.NGACH}</td>
+                                <td>{item.Heso}</td>
+                                <td>{item.Bac}</td>
+                                <td>{item.PT_Vuot_Khung}</td>
+                                <td>{item.LG_Khoan_Chinh}</td>
+                                <td>{item.Ty_le}</td>
+                                <td>{item.GHI_CHU_LUONG}</td>
+                                <td>{item.GHI_CHU_KHAC}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
@@ -79,44 +90,45 @@ class Cb_nngoaiPage extends React.Component {
                                 </td>
                             </tr>
                         ))}
+                        
                     </tbody>
                 </table>
             );
         } else {
-            table = <p>Chưa có cán bộ nước ngoài nào!</p>;
+            table = <p>Chưa có quản trị lương nào!</p>;
         }
 
-        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.cb_nngoai && this.props.cb_nngoai.page ?
-            this.props.cb_nngoai.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
+        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.qt_luong && this.props.qt_luong.page ?
+            this.props.qt_luong.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
         return (
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Cán bộ nước ngoài</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin quản trị lương</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Cán bộ nước ngoài</li>
+                        <li className='breadcrumb-item'>Quản trị lương</li>
                     </ul>
                 </div>
 
                 <div className='row tile'>{table}</div>
-                <Pagination name='adminCb_nngoai'
+                <Pagination name='adminQt_luong'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
-                    getPage={this.props.getCb_nngoaiInPage} />
+                    getPage={this.props.getQt_luongInPage} />
 
                 <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
                     <i className='fa fa-lg fa-plus' />
                 </button>
 
-                <Cb_nngoaiModal ref={this.Cb_nngoaiModal} createCb_nngoai={this.props.createCb_nngoai} updateCb_nngoai={this.props.updateCb_nngoai} />    
+                <Qt_luongModal ref={this.qt_luongModal} createQt_luong={this.props.createQt_luong} updateQt_luong={this.props.updateQt_luong} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ cb_nngoai: state.cb_nngoai, cbcnv: state.cbcnv, nuoc: state.nuoc });
-const mapActionsToProps = { getCb_nngoaiInPage,createCb_nngoai ,getCb_nngoai, updateCb_nngoai, deleteCb_nngoai, getAllCbcnv, getAllNuoc };
-export default connect(mapStateToProps, mapActionsToProps)(Cb_nngoaiPage);
+const mapStateToProps = state => ({ qt_luong: state.qt_luong, cbcnv: state.cbcnv, ngach: state.ngach});
+const mapActionsToProps = { getQt_luongInPage, createQt_luong, updateQt_luong, deleteQt_luong, getAllQt_luong, getAllCbcnv, getAllNgach};
+export default connect(mapStateToProps, mapActionsToProps)(Qt_luongPage);

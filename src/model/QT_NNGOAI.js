@@ -1,21 +1,20 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        STT: Number,
-        MSNV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
+        MS_NV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         HO: String,
         TEN: String,
         SO_QUYET_DINH: String,
-        Ngay_QUYET_DINH: Date,
+        NGAY_QDINH: Date,
         DON_VI: String,
         NGAY_DI: Date,
         NGAY_VE: Date,
         NGAY_VE_THUC: Date,
         SO_QD_TIEP_NHAN: String,
         NGAY_QD_TIEP_NHAN: Date,
-        MUC_DICH: [{ type: app.db.Schema.ObjectId, ref: 'mucdich' }],
+        MUC_DICH: { type: app.db.Schema.ObjectId, ref: 'mucdich' },
         NOI_DUNG: String,
         NGANH_HOC: String,
-        GIA_HAN: Boolean,
+        GIA_HAN: String,
         NUOC_DEN: [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
         NOI_DEN: String,
         CHI_PHI:String,
@@ -23,8 +22,7 @@ module.exports = app => {
         HOAN_TRA_KP_BHXH: String,
         NGAY_NHAP: Date,
         BHXH: String,
-        FIELD2: String
-    });
+    }, {unique: true});
     const model = app.db.model('qt_nngoai', schema);
 
     app.model.qt_nngoai = {
@@ -41,7 +39,7 @@ module.exports = app => {
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).populate(['MSNV', 'MUC_DICH', 'NUOC_DEN']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['MS_NV', 'MUC_DICH', 'NUOC_DEN']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });
