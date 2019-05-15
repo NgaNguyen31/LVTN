@@ -7,14 +7,38 @@ module.exports = app => {
             res.send({ error, page });
         });
     });
+
+    app.get('/admin/kiemnhiem/all', app.role.isAdmin, (req, res) => {
+        app.model.kiemnhiem.getAll((error, kiemnhiem) => {
+            if (error) res.send({error});
+            else res.send({kiemnhiem});
+        })
+    })
+
     app.delete('/admin/kiemnhiem', app.role.isAdmin, (req, res) => app.model.kiemnhiem.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/kiemnhiem', (req, res) => app.model.kiemnhiem.create(req.body.kiemnhiem, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.post('/admin/kiemnhiem', app.role.isAdmin, (req, res) => {                
+        app.model.kiemnhiem.create(req.body.kiemnhiem, (error, kiemnhiem) => {            
+            res.send({ error, kiemnhiem })
+        });
+    });
 
-        res.send({ error, item });
-    }));
+    app.put('/admin/kiemnhiem', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        if (data.MS_NV ) changes.MS_NV = data.MS_NV;        
+        if (data.MS_BM) changes.MS_BM = data.MS_BM;
+        if (data.MS_CVU ) changes.MS_CVU = data.MS_CVU;        
+        if (data.NGAY_CVU && data.NGAY_CVU != '') changes.NGAY_CVU = data.NGAY_CVU;
+        if (data.GHICHU && data.GHICHU != '') changes.GHICHU = data.GHICHU;
+        if (data.Xoa!= null) changes.Xoa = data.Xoa;
+              
+        app.model.kiemnhiem.update(req.body._id, changes, (error, kiemnhiem) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, kiemnhiem });
+            }
+        })
+    });
 }

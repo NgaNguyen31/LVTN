@@ -9,11 +9,11 @@ module.exports = app => {
     });
     
     app.get('/admin/nuoc/all', app.role.isAdmin, (req, res) => {
-        app.model.nuoc.getAll((error, result) => {
+        app.model.nuoc.getAll((error, nuoc) => {
             if (error) {
                 res.send({ error });
             } else {                
-                res.send(result);
+                res.send({nuoc});
             }
         })
     })

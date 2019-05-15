@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/chau/all', app.role.isAdmin, (req, res) => {
         app.model.chau.getAll((error, chau) => {
-            if (error) res.send(error);
-            else res.send(chau);
+            if (error) res.send({error});
+            else res.send({chau});
         })
     })
     

@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/mucdich/all', app.role.isAdmin, (req, res) => {
         app.model.mucdich.getAll((error, mucdich) => {
-            if (error) res.send(error);
-            else res.send(mucdich);
+            if (error) res.send({error});
+            else res.send({mucdich});
         })
     })
 

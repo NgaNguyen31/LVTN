@@ -1,74 +1,66 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getCb_nngoaiInPage, createCb_nngoai, getCb_nngoai, updateCb_nngoai, deleteCb_nngoai } from './redux/cb_nngoai.jsx'
+import { getQt_bbaoInPage, createQt_bbao, updateQt_bbao, deleteQt_bbao, getAllQt_bbao } from './redux/qt_bbao.jsx';
 import {getAllCbcnv} from './redux/cbcnv.jsx';
-import {getAllNuoc} from './redux/nuoc.jsx';
 import { Link } from 'react-router-dom';
+import Qt_bbaoModal from './Qt_bbaoModel.jsx';
 import Pagination from './Pagination.jsx';
-import Cb_nngoaiModal from './Cb_nngoaiModel.jsx';
 
-class Cb_nngoaiPage extends React.Component {
+class Qt_bbaoPage extends React.Component {
     constructor(props) {
         super(props);
-        this.Cb_nngoaiModal = React.createRef();
+        this.qt_bbaoModal = React.createRef();
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
+        
     }
 
     componentDidMount() {
         $(document).ready(() => {
             T.selectMenu(9, 0);
-            this.props.getCb_nngoaiInPage();
+            this.props.getQt_bbaoInPage();
         });
-        this.props.getAllNuoc();
         this.props.getAllCbcnv();
     }
 
-    edit(e,item){        
-        this.Cb_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.nuoc.data.items);
+    edit(e, item){
+        this.qt_bbaoModal.current.show(item, this.props.cbcnv.data.items);
         e.preventDefault();
     }
 
     delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
-            isConfirm && this.props.deleteCb_nngoai(item._id);
+            isConfirm && this.props.deleteQt_bbao(item._id);
         });
         e.preventDefault();
     }
+    
 
-    render() {
-        let table = null;
-        if (this.props.cb_nngoai && this.props.cb_nngoai.page && this.props.cb_nngoai.page.list && this.props.cb_nngoai.page.list.length > 0) {
+    render() {                   
+        let table = null;              
+        if (this.props.qt_bbao && this.props.qt_bbao.page && this.props.qt_bbao.page.list && this.props.qt_bbao.page.list.length > 0) {
             table = (
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Họ và tên</th>
-                            <th style={{ width: '60%' }}>Nước</th>
-                            <th style={{ width: 'auto' }}>Ngày đi</th>
-                            <th style={{ width: 'auto' }}>Ngày về</th>
-                            <th style={{ width: 'auto' }}>Thời gian</th>
-                            <th style={{ width: 'auto' }}>Mục đích</th>
-                            <th style={{ width: 'auto' }}>Gia hạn</th>
-                            <th style={{ width: 'auto' }}>Số công văn</th>
-                            <th style={{ width: 'auto' }}>Ngày công văn</th>
-                            <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>MSNV</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Bài báo</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên tạp chí</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Năm</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.cb_nngoai.page.list.map((item, index) => (
-                            <tr key={index}>         
+                        {this.props.qt_bbao.page.list.map((item, index) => (
+                            <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten + ' ' : '')}</a>
-                                </td> 
-                                <td>{item.Nuoc}</td>      
-                                <td>{item.Ngaydi}</td>
-                                <td>{item.Ngayve}</td>                            
-                                <td>{item.Thoigian}</td>
-                                <td>{item.Mucdich}</td>
-                                <td>{item.Giahan}</td>    
-                                <td>{item.SoCVan}</td>
-                                <td>{item.NgayCVan}</td>                     
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
+                                </td>       
+                                <td>{item.STT}</td>
+                                <td>{item.BAI_BAO}</td>
+                                <td>{item.TEN_TCHI}</td>
+                                <td>{item.NAM}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
@@ -79,44 +71,45 @@ class Cb_nngoaiPage extends React.Component {
                                 </td>
                             </tr>
                         ))}
+                        
                     </tbody>
                 </table>
             );
         } else {
-            table = <p>Chưa có cán bộ nước ngoài nào!</p>;
+            table = <p>Chưa có quản trị bài báo nào!</p>;
         }
 
-        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.cb_nngoai && this.props.cb_nngoai.page ?
-            this.props.cb_nngoai.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
+        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.qt_bbao && this.props.qt_bbao.page ?
+            this.props.qt_bbao.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
         return (
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Cán bộ nước ngoài</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin quản trị bài báo</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Cán bộ nước ngoài</li>
+                        <li className='breadcrumb-item'>Quản trị bài báo</li>
                     </ul>
                 </div>
 
                 <div className='row tile'>{table}</div>
-                <Pagination name='adminCb_nngoai'
+                <Pagination name='adminQt_bbao'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
-                    getPage={this.props.getCb_nngoaiInPage} />
+                    getPage={this.props.getQt_bbaoInPage} />
 
                 <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
                     <i className='fa fa-lg fa-plus' />
                 </button>
 
-                <Cb_nngoaiModal ref={this.Cb_nngoaiModal} createCb_nngoai={this.props.createCb_nngoai} updateCb_nngoai={this.props.updateCb_nngoai} />    
+                <Qt_bbaoModal ref={this.qt_bbaoModal} createQt_bbao={this.props.createQt_bbao} updateQt_bbao={this.props.updateQt_bbao} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ cb_nngoai: state.cb_nngoai, cbcnv: state.cbcnv, nuoc: state.nuoc });
-const mapActionsToProps = { getCb_nngoaiInPage,createCb_nngoai ,getCb_nngoai, updateCb_nngoai, deleteCb_nngoai, getAllCbcnv, getAllNuoc };
-export default connect(mapStateToProps, mapActionsToProps)(Cb_nngoaiPage);
+const mapStateToProps = state => ({ qt_bbao: state.qt_bbao, cbcnv: state.cbcnv});
+const mapActionsToProps = { getQt_bbaoInPage, createQt_bbao, updateQt_bbao, deleteQt_bbao, getAllQt_bbao, getAllCbcnv};
+export default connect(mapStateToProps, mapActionsToProps)(Qt_bbaoPage);

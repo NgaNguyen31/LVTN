@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/dantoc/all', app.role.isAdmin, (req, res) => {
         app.model.dantoc.getAll((error, dantoc) => {
-            if (error) res.send(error);
-            else res.send(dantoc);
+            if (error) res.send({error});
+            else res.send({dantoc});
         })
     })
 

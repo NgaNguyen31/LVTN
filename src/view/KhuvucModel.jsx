@@ -59,8 +59,6 @@ export default class KhuvucModal extends React.Component {
                 TEN_KVUC: this.state.text.TEN_KVUC, 
                 MS_CHAU,          
             };    
-            console.log(changes);
-                        
         if (!changes.TEN_KVUC) {
             T.notify('Tên khu vưc đang trống!', 'danger');
             $('#TEN_KVUC').focus();

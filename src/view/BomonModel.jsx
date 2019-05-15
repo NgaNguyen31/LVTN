@@ -23,10 +23,6 @@ export default class BomonModal extends React.Component {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
                     : (state.text = {}) && (state.text[field] = e.target.value)
-                case 'number':
-                    state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
-                    
             }
 
             this.setState(state);
@@ -40,8 +36,7 @@ export default class BomonModal extends React.Component {
         }, 250));
     }
 
-    show(item, khoa) {      
-        
+    show(item, khoa) {              
         const { _id, TEN_BM, TEN_TIENG_ANH, MS_KHOA, NAM_THANH_LAP, GHI_CHU } = item ?
             item : { _id: null, TEN_BM: '', TEN_TIENG_ANH: '', MS_KHOA: '', NAM_THANH_LAP: '', GHI_CHU: '' };
         $('#TEN_BM').val(TEN_BM);
@@ -62,7 +57,7 @@ export default class BomonModal extends React.Component {
                 TEN_BM: this.state.text.TEN_BM,
                 TEN_TIENG_ANH: this.state.text.TEN_TIENG_ANH,
                 MS_KHOA,
-                NAM_THANH_LAP: this.state.number.NAM_THANH_LAP,
+                NAM_THANH_LAP: this.state.text.NAM_THANH_LAP,
                 GHI_CHU: this.state.text.GHI_CHU,
             };            
         if (!changes.TEN_BM) {
@@ -70,7 +65,7 @@ export default class BomonModal extends React.Component {
             $('#TEN_BM').focus();
         } else if (!changes.TEN_TIENG_ANH) {
             T.notify('Tên tiếng anh đang trống!', 'danger');
-            $('#TEN_TIEN_ANH').focus();
+            $('#TEN_TIENG_ANH').focus();
         } else if (!changes.MS_KHOA) {
             T.notify('Mã số khoa đang trống!', 'danger');
             $('#MS_KHOA').focus();
@@ -90,6 +85,8 @@ export default class BomonModal extends React.Component {
     }
 
     render() {
+        const khoa = this.state && this.state.khoa && this.state.khoa.khoa ? this.state.khoa.khoa:[];
+        
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -111,11 +108,11 @@ export default class BomonModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Mã số khoa</label>
-                                <Dropdown ref={this.khoa} number='' items={this.state.khoa.map(e => Object.assign({}, e, {text: e.TEN_KHOA}))} />
+                                <Dropdown ref={this.khoa} number='' items={khoa.map(e => Object.assign({}, e, {text: e.TEN_KHOA}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Năm thành lập</label>
-                                <input className='form-control' id='NAM_THANH_LAP' type='number' placeholder='Năm thành lập' onChange={this.handleInput('number', 'NAM_THANH_LAP')} value={this.state.number.NAM_THANH_LAP}/>
+                                <input className='form-control' id='NAM_THANH_LAP' type='text' placeholder='Năm thành lập' onChange={this.handleInput('text', 'NAM_THANH_LAP')} value={this.state.text.NAM_THANH_LAP}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Ghi chú</label>

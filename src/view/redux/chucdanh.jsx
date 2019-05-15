@@ -59,7 +59,7 @@ export function getAllChucdanh(done) {
                 console.error('GET: ' + url + '. ' + data.error);
             } else {
                 if (done) done(data);
-                dispatch({ type: GET_ALL, items: data.items});
+                dispatch({ type: GET_ALL, items: data});
             }
         }, error => T.notify('Lấy danh sách bị lỗi!', 'danger'));
     }

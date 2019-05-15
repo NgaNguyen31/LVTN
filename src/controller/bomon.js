@@ -11,7 +11,7 @@ module.exports = app => {
     app.get('/admin/bomon/all', app.role.isAdmin, (req, res) => {
         app.model.bomon.getAll((error, bomon) => {
             if (error) res.send(error);
-            else res.send(bomon);
+            else res.send({bomon});
         })
     })
 

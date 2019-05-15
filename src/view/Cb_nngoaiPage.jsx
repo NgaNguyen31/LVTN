@@ -59,9 +59,9 @@ class Cb_nngoaiPage extends React.Component {
                         {this.props.cb_nngoai.page.list.map((item, index) => (
                             <tr key={index}>         
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten.reduce((pre, value) => pre + ' ' +  value.HO + ' ' + value.TEN, '') + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten.HO + item.Hovaten.TEN : '')}</a>
                                 </td> 
-                                <td>{item.Nuoc.reduce((pre, value) => pre + ' ' + value.TEN_NUOC, ' ')}</td>      
+                                <td>{item.Nuoc.TEN_NUOC}</td>      
                                 <td>{item.Ngaydi}</td>
                                 <td>{item.Ngayve}</td>                            
                                 <td>{item.Thoigian}</td>

@@ -6,11 +6,11 @@ module.exports = app => {
     });
 
     app.get('/admin/tongiao/all', app.role.isAdmin, (req, res) => {
-        app.model.tongiao.getAll((error, result) => {
+        app.model.tongiao.getAll((error, tongiao) => {
             if (error) {
-                res.send(error);
+                res.send({error});
             }
-            else res.send(result);        
+            else res.send({tongiao});        
         });
     });
 

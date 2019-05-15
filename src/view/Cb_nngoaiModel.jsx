@@ -1,6 +1,6 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
-import Cb_nngoaiPage from './Cb_nngoaiPage.jsx'
+import Cb_nngoaiPage from './Cb_nngoaiPage.jsx';
 
 export default class Cb_nngoaiModal extends React.Component {
     constructor(props) {
@@ -36,7 +36,7 @@ export default class Cb_nngoaiModal extends React.Component {
         }, 250));
     }
 
-    show(item, cbcnv, nuoc ) {        
+    show(item, cbcnv, nuoc ) {      
         const { _id, Hovaten, Nuoc, Ngaydi, Ngayve, Thoigian, Mucdich, Giahan, SoCVan, NgayCVan } = item ?
             item : { _id: null, Hovaten: '', Nuoc: '', Ngaydi: '', Ngayve: '', Thoigian:'', Mucdich: '', Giahan: '', SoCVan: '', NgayCVan: '' };
         $('#Hovaten').val(Hovaten);
@@ -57,9 +57,9 @@ export default class Cb_nngoaiModal extends React.Component {
         const nuoc = this.nuoc.current.getSelectedItem(),
             cbcnv = this.cbcnv.current.getSelectedItem(),
             Nuoc = nuoc? nuoc._id : null,
-            Cbcnv = cbcnv? cbcnv._id: null,
+            Hovaten = cbcnv? cbcnv._id: null,
             changes = {
-                Cbcnv,
+                Hovaten,
                 Nuoc,
                 Ngaydi: this.state.text.Ngaydi,
                 Ngayve: this.state.text.Ngayve,
@@ -72,7 +72,7 @@ export default class Cb_nngoaiModal extends React.Component {
         if (this.state.text == '') {
             T.notify('Bạn chưa điền thông tin!', 'danger');
             $('#Hovaten').focus();
-        } else if (!changes.Cbcnv) {
+        } else if (!changes.Hovaten) {
             T.notify('Họ và tên đang trống!', 'danger');
             $('#Hovaten').focus();            
         } else if (!changes.Nuoc) {
@@ -104,7 +104,10 @@ export default class Cb_nngoaiModal extends React.Component {
         }
     }
 
-    render() {
+    render() {        
+        const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv ? this.state.cbcnv.cbcnv : [];
+        const nuoc = this.state && this.state.nuoc && this.state.nuoc.nuoc ? this.state.nuoc.nuoc : [];
+
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -118,11 +121,11 @@ export default class Cb_nngoaiModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='Hovaten'>Họ và tên</label>
-                                <Dropdown ref={this.cbcnv} number='' items={this.state.cbcnv.map(e => Object.assign({}, e, {text: e.TEN}))} />
+                                <Dropdown ref={this.cbcnv} number='' items={cbcnv.map(e => Object.assign({}, e, {text: e.HO + ' ' + e.TEN}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Nuoc'>Nước</label>
-                                <Dropdown ref={this.nuoc} number='' items={this.state.nuoc.map(e => Object.assign({}, e, {text: e.TEN_NUOC}))} />
+                                <Dropdown ref={this.nuoc} number='' items={nuoc.map(e => Object.assign({}, e, {text: e.TEN_NUOC}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Ngaydi'>Ngày đi</label>

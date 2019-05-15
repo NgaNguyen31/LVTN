@@ -10,8 +10,8 @@ module.exports = app => {
 
     app.get('/admin/khuvuc/all', app.role.isAdmin, (req, res) => {
         app.model.khuvuc.getAll((error, khuvuc) => {
-            if (error) res.send(error);
-            else res.send(khuvuc);
+            if (error) res.send({error});
+            else res.send({khuvuc});
         })
     })
 

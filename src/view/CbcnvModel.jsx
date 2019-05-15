@@ -5,7 +5,7 @@ import CbcnvPage from './CbcnvPage.jsx';
 export default class CbcnvModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', boolean :'', nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [], dantoc: [], tongiao: [], benhvien: []}
+        this.state = {text: '', number: '', date: '', boolean :'', nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -55,6 +55,7 @@ export default class CbcnvModal extends React.Component {
     }
 
     show(item, nghi_ctac, loai, pctn_nghe_2018, chucdanh, trinhdo, ngach, chucvu, bomon, dantoc, tongiao, benhvien) {
+
         const { _id, NGHI,
         TAM_NGUNG,
         IS_NNGOAI,
@@ -508,19 +509,17 @@ export default class CbcnvModal extends React.Component {
             tongiao = this.tongiao.current.getSelectedItem(),
             benhvien = this.benhvien.current.getSelectedItem(),
        
-            NGHI = nghi_ctac ? nghi_ctac._id: null,
-            LOAI = loai ? loai._id : null,
-            SHCC = pctn_nghe_2018? pctn_nghe_2018._id : null,
-            CHUC_DANH = chucdanh ? chucdanh._id : null,
-            TRINH_DO = trinhdo ? trinhdo._id : null,
-            NGACH = ngach ? ngach._id : null,
-            MS_CVU = chucvu ? chucvu._id : null,
-            //NUOC_NGOAI = nuocngoai ? nuocngoai._id : null,
-            MS_BM = bomon ? bomon._id : null,
-            //NGOAI_NGU = ngoaingu ? ngoaingu._id : null,
-            DANTOC = dantoc ? dantoc._id : null,
-            TON_GIAO = tongiao ? tongiao._id : null,
-            MA_BV = benhvien ? benhvien._id : null,
+            NGHI = nghi_ctac ? nghi_ctac._id: [],
+            LOAI = loai ? loai._id : [],
+            SHCC = pctn_nghe_2018? pctn_nghe_2018._id : [],
+            CHUC_DANH = chucdanh ? chucdanh._id : [],
+            TRINH_DO = trinhdo ? trinhdo._id : [],
+            NGACH = ngach ? ngach._id : [],
+            MS_CVU = chucvu ? chucvu._id : [],
+            MS_BM = bomon ? bomon._id : [],
+            DANTOC = dantoc ? dantoc._id : [],
+            TON_GIAO = tongiao ? tongiao._id : [],
+            MA_BV = benhvien ? benhvien._id : [],
         changes = {
             NGHI,
             TAM_NGUNG: this.state.number.TAM_NGUNG,
@@ -664,25 +663,25 @@ export default class CbcnvModal extends React.Component {
             DIEN_GIAI_HD: this.state.number.DIEN_GIAI_HD,
 
         };
-        if (this.state.text == '' && this.state.number == '' && this.state.boolean == '' && this.state.date == '') {
-            T.notify('Bạn phải điền thông tin!', 'danger');
-            $('#NGHI').focus();
-        } else if (!change.LOAI) {
+        if (!changes.LOAI) {
             T.notify('Loại đang trống', 'danger');
             $('#LOAI').focus();
-        } else if (!change.SHCC) {
+        } else if (!changes.SHCC) {
             T.notify('SHCC đang trống', 'danger');
             $('#SHCC').focus();
-        } else if (!change.HO) {
+        } else if (!changes.MS_NV) {
+            T.notify('MSNV đang trống', 'danger');
+            $('#MS_NV').focus();
+        } else if (!changes.HO) {
             T.notify('Họ đang trống', 'danger');
             $('#HO').focus();
-        } else if (!change.TEN) {
+        } else if (!changes.TEN) {
             T.notify('Tên đang trống', 'danger');
             $('#TEN').focus();
-        } else if (!change.PHAI) {
+        } else if (!changes.PHAI) {
             T.notify('Phái đang trống', 'danger');
             $('#PHAI').focus();
-        } else if (!change.NGAY_SINH) {
+        } else if (!changes.NGAY_SINH) {
             T.notify('Ngày sinh đang trống', 'danger');
             $('#NGAY_SINH').focus();
         } else if (this.state._id) {
@@ -697,6 +696,18 @@ export default class CbcnvModal extends React.Component {
     }
 
     render() {
+               
+        const nghi_ctac = this.state && this.state.nghi_ctac && this.state.nghi_ctac.nghi_ctac ? this.state.nghi_ctac.nghi_ctac : [];
+        const loai = this.state && this.state.loai && this.state.loai.loai ? this.state.loai.loai : [];
+        const pctn_nghe_2018 = this.state && this.state.pctn_nghe_2018 && this.state.pctn_nghe_2018.pctn_nghe_2018 ? this.state.pctn_nghe_2018.pctn_nghe_2018 : [];
+        const chucdanh = this.state && this.state.chucdanh && this.state.chucdanh.chucdanh ? this.state.chucdanh.chucdanh : [];
+        const trinhdo = this.state && this.state.trinhdo && this.state.trinhdo.trinhdo ? this.state.trinhdo.trinhdo : [];
+        const ngach = this.state && this.state.ngach && this.state.ngach.ngach ? this.state.ngach.ngach : [];
+        const chucvu = this.state && this.state.chucvu && this.state.chucvu.chucvu ? this.state.chucvu.chucvu : [];
+        const benhvien = this.state && this.state.benhvien && this.state.benhvien.benhvien ? this.state.benhvien.benhvien : [];
+        const bomon = this.state && this.state.bomon && this.state.bomon.bomon ? this.state.bomon.bomon : [];
+        const dantoc = this.state && this.state.dantoc && this.state.dantoc.dantoc ? this.state.dantoc.dantoc : [];
+        const tongiao = this.state && this.state.tongiao && this.state.tongiao.tongiao ? this.state.tongiao.tongiao : [];
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -710,7 +721,7 @@ export default class CbcnvModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='NGHI'>Nghỉ công tác</label>
-                                <Dropdown ref={this.nghi_ctac} number='' items={this.state.nghi_ctac.map(e => Object.assign({}, e, {text: e.NGHI}))} />
+                                <Dropdown ref={this.nghi_ctac} number='' items={nghi_ctac.map(e => Object.assign({}, e, {text: e.Dien_giai}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TAM_NGUNG'>Tạm ngưng</label>
@@ -726,11 +737,11 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='LOAI'>Loại</label>
-                                <Dropdown ref={this.loai} number='' items={this.state.loai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
+                                <Dropdown ref={this.loai} number='' items={loai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='SHCC'>SHCC</label>
-                                <Dropdown ref={this.pctn_nghe_2018} number='' items={this.state.pctn_nghe_2018.map(e => Object.assign({}, e, {number: e.SHCC}))} />
+                                <Dropdown ref={this.pctn_nghe_2018} number='' items={pctn_nghe_2018.map(e => Object.assign({}, e, {text: e.SHCC}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MS_NV</label>
@@ -804,15 +815,15 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CHUC_DANH'>Chức danh</label>
-                                <Dropdown ref={this.chucdanh} number='' items={this.state.chucdanh.map(e => Object.assign({}, e, {text: e.chuc_danh}))} />
+                                <Dropdown ref={this.chucdanh} number='' items={chucdanh.map(e => Object.assign({}, e, {text: e.chuc_danh}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TRINH_DO'>Trình độ</label>
-                                <Dropdown ref={this.trinhdo} number='' items={this.state.trinhdo.map(e => Object.assign({}, e, {text: e.trinh_do}))} />
+                                <Dropdown ref={this.trinhdo} number='' items={trinhdo.map(e => Object.assign({}, e, {text: e.trinh_do}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGACH'>Ngạch</label>
-                                <Dropdown ref={this.ngach} number='' items={this.state.ngach.map(e => Object.assign({}, e, {number: e.NGACH}))} />
+                                <Dropdown ref={this.ngach} number='' items={ngach.map(e => Object.assign({}, e, {text: e.NGACH}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGACHMOI'>Ngạch mới</label>
@@ -892,7 +903,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_CVU'>Chức vụ</label>
-                                <Dropdown ref={this.chucvu} number='' items={this.state.chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
+                                <Dropdown ref={this.chucvu} number='' items={chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TEN_CV'>Tên CV</label>
@@ -944,7 +955,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_BM'>MS BM</label>
-                                <Dropdown ref={this.bomon} number='' items={this.state.bomon.map(e => Object.assign({}, e, {text: e.TEN_BM}))} />
+                                <Dropdown ref={this.bomon} number='' items={bomon.map(e => Object.assign({}, e, {text: e.TEN_BM}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TDO_LLCT'>TDO LLCT</label>
@@ -1116,11 +1127,11 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='DANTOC'>Dân tộc</label>
-                                <Dropdown ref={this.dantoc} number='' items={this.state.dantoc.map(e => Object.assign({}, e, {number: e.Dan_toc}))} />
+                                <Dropdown ref={this.dantoc} number='' items={dantoc.map(e => Object.assign({}, e, {text: e.Dan_toc}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TON_GIAO'>Tôn giáo</label>
-                                <Dropdown ref={this.tongiao} number='' items={this.state.tongiao.map(e => Object.assign({}, e, {number: e.Dien_giai}))} />
+                                <Dropdown ref={this.tongiao} number='' items={tongiao.map(e => Object.assign({}, e, {text: e.TON_GIAO}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CHA_TEN'>Cha tên</label>
@@ -1196,7 +1207,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MA_BV'>Mã BV</label>
-                                <Dropdown ref={this.benhvien} number='' items={this.state.benhvien.map(e => Object.assign({}, e, {number: e.Noi_kham}))} />
+                                <Dropdown ref={this.benhvien} number='' items={benhvien.map(e => Object.assign({}, e, {text: e.Noi_kham}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MASO_BHXH'>Mã số BHXH</label>

@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/ngach/all', app.role.isAdmin, (req, res) => {
         app.model.ngach.getAll((error, ngach) => {
-            if (error) res.send(error);
-            else res.send(ngach);
+            if (error) res.send({error});
+            else res.send({ngach});
         })
     })
 

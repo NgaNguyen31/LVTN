@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/nghi_ctac/all', app.role.isAdmin, (req, res) => {
         app.model.nghi_ctac.getAll((error, nghi_ctac) => {
-            if (error) res.send(error);
-            else res.send(nghi_ctac);
+            if (error) res.send({error});
+            else res.send({nghi_ctac});
         })
     })
 

@@ -7,7 +7,7 @@ module.exports = app => {
         NOI_SINH: String,
         NGAY_VAO: Date,
         NGAY_NGHI: Date,
-        TRINH_DO: [{ type: app.db.Schema.ObjectId, ref: 'trinhdo' }],
+        TRINH_DO: { type: app.db.Schema.ObjectId, ref: 'trinhdo' },
         DON_VI: String,
         DIA_CHI: String,
         GHI_CHU: String

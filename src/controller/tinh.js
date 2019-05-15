@@ -6,11 +6,11 @@ module.exports = app => {
     });
 
     app.get('/admin/tinh/all', app.role.isAdmin, (req, res) => {
-        app.model.tinh.getAll((error, result) => {
+        app.model.tinh.getAll((error, tinh) => {
             if (error) {
-                res.send(error);
+                res.send({error});
             }
-            else res.send(result);        
+            else res.send({tinh});        
         });
     });
 

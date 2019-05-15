@@ -9,11 +9,11 @@ module.exports = app => {
     });
 
     app.get('/admin/trinhdo/all', app.role.isAdmin, (req, res) => {
-        app.model.trinhdo.getAll((error, result) => {
+        app.model.trinhdo.getAll((error, trinhdo) => {
             if (error) {
-                res.send(error);
+                res.send({error});
             }
-            else res.send(result);        
+            else res.send({trinhdo});        
         });
     });
 

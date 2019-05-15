@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/loai/all', app.role.isAdmin, (req, res) => {
         app.model.loai.getAll((error, loai) => {
-            if (error) res.send(error);
-            else res.send(loai);
+            if (error) res.send({error});
+            else res.send({loai});
         })
     })
 

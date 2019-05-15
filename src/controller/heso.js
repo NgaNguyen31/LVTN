@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/heso/all', app.role.isAdmin, (req, res) => {
         app.model.heso.getAll((error, heso) => {
-            if (error) res.send(error);
-            else res.send(heso);
+            if (error) res.send({error});
+            else res.send({heso});
         })
     })
 

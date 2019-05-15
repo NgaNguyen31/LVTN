@@ -1,19 +1,17 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        MS_NV: { type: app.db.Schema.ObjectId, 
-                ref: 'cbcnv',
-                index: {
-                    unique: true,
-                    dropDups: true
-                }
-                },
-        MS_BM: [{ type: app.db.Schema.ObjectId, ref: 'bomon' }],
-        MS_CVU: [{ type: app.db.Schema.ObjectId, ref: 'chucvu' }],      
-        NGAY_CVU: Date
+        MS_NV: { type: app.db.Schema.ObjectId, ref: 'cbcnv'},
+        MS_BM: { type: app.db.Schema.ObjectId, ref: 'bomon' },
+        MS_CVU: { type: app.db.Schema.ObjectId, ref: 'chucvu' },      
+        NGAY_CVU: Date,
+        GHICHU: String,
+        Xoa: Boolean
+    }, {
+        unique: true
     });
     const model = app.db.model('kiemnhiem',schema);
 
-    app.model.KIEM_NHIEM = {
+    app.model.kiemnhiem = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {

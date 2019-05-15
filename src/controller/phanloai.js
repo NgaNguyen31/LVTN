@@ -6,10 +6,10 @@ module.exports = app => {
     });
 
     app.get('/admin/phanloai/all', app.role.isAdmin, (req, res) => {
-        app.model.phanloai.getAll((error, result) =>{
+        app.model.phanloai.getAll((error, phanloai) =>{
             if(error)
-                res.send(error);
-            else res.send(result);
+                res.send({error});
+            else res.send({phanloai});
         });
     });
 

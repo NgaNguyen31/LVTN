@@ -7,7 +7,7 @@ module.exports = app => {
         '/admin/contact', '/admin/contact/read/:contactId', '/admin/chau', '/admin/tinh',
         '/admin/benhvien', '/admin/bomon', '/admin/cb_nngoai', '/admin/cbcnv_hd_dv_tu_tra', '/admin/cbcnv_hd_khoa', '/admin/cbcnv',
         '/admin/chinhsach', '/admin/chucdanh', '/admin/chucvu', '/admin/cv_klgd', '/admin/dantoc', '/admin/dk_klgd', 
-        '/admin/heso', '/admin/khoa', '/admin/khoi_luong_gd_cao_hoc', '/admin/khuvuc', '/admin/kiemnhiem', '/admin/kihieu_tang_giam_bhxh', 
+        '/admin/heso', '/admin/khoa', '/admin/khoi_luong_gd_caohoc', '/admin/khuvuc', '/admin/kiemnhiem', '/admin/kihieu_tang_giam_bhxh', 
         '/admin/loai', '/admin/mucdich', '/admin/ngach', '/admin/nghi_ctac', '/admin/ngoaingu', '/admin/nuoc',
         '/admin/nuocngoai', '/admin/pctn_nghe_2018', '/admin/phanloai', '/admin/qt_bbao', '/admin/qt_boiduong', '/admin/qt_cac_con', 
         '/admin/qt_ctac', '/admin/qt_cvu', '/admin/qt_dtai', '/admin/qt_dtao', '/admin/qt_gtrinh', '/admin/qt_khen', '/admin/qt_ky_luat',

@@ -28,7 +28,7 @@ export default class UserModal extends React.Component {
         $('#userLastname').val(lastname);
         $('#userEmail').val(email);
         $('#userPhoneNumber').val(phoneNumber);
-        $('#userActive').prop('checked', active);
+        $('#userActive').prop('checked', true);
         this.role.current.setText(role);
 
         this.setState({ _id, image });

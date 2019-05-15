@@ -1,16 +1,9 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        MSNV: {
-            type: app.db.Schema.ObjectId,
-            ref: 'cbcnv',
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        },
+        MSNV: {type: app.db.Schema.ObjectId, ref: 'cbcnv'},
         HO: String,
         TEN: String,
-        Hocvi_hocham: String,
+        Hocvi_hocham: {type: app.db.Schema.ObjectId, ref: 'trinhdo'},
         Mon_giangday: String,
         Day_khoa: [{ type: app.db.Schema.ObjectId, ref: 'khoa' }],
         Nganh_day: String,
@@ -22,6 +15,8 @@ module.exports = app =>{
         Tong_st_quidoi:  Number,
         Tong_cong: Number,
         Ghi_chu: String
+    },{
+        unique: true
     });
     const model = app.db.model('khoi_luong_gd_caohoc',schema);
 
@@ -39,7 +34,7 @@ module.exports = app =>{
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).populate(['MSNV', 'Day_khoa']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['MSNV', 'Day_khoa', 'Hocvi_hocham']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });

@@ -50,7 +50,7 @@ class KhuvucPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_KVUC ? item.TEN_KVUC + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.MS_CHAU.reduce((pre, value) => pre + ' ' + value.tenchau, ' ')}</td>
+                                <td>{item.MS_CHAU}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

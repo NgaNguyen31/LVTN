@@ -1,6 +1,6 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
+        MS_NV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         STT: Number,
         TU_THANG: Number,
         TU_NAM: Number,
@@ -10,7 +10,7 @@ module.exports = app => {
         NOI_BOI_DUONG: String,
         HINH_THUC: String,
         CHUNG_CHI: String,
-        NOP_CC: Boolean,
+        NOP_CC: String,
         GHI_CHU: String
     });
     const model = app.db.model('qt_boiduong', schema);

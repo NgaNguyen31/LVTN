@@ -7,7 +7,7 @@ module.exports = app => {
 
     app.get('/admin/pctn_nghe_2018/all', app.role.isAdmin, (req, res) => {
         app.model.pctn_nghe_2018.getAll((error, pctn_nghe_2018) => {
-            if (error) res.send(error);
+            if (error) res.send({error});
             else res.send({pctn_nghe_2018});
         })
     })

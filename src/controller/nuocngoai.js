@@ -7,14 +7,34 @@ module.exports = app => {
             res.send({ error, page });
         });
     });
+
+    app.get('/admin/nuocngoai/all', app.role.isAdmin, (req, res) => {
+        app.model.nuocngoai.getAll((error, nuocngoai) => {
+            if (error) res.send({error});
+            else res.send({nuocngoai});
+        })
+    })
+
     app.delete('/admin/nuocngoai', app.role.isAdmin, (req, res) => app.model.nuocngoai.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/app/nuocngoai', (req, res) => app.model.nuocngoai.create(req.body.nuocngoai, (error, item) => {
-        if (item) {
-            app.io.emit('Đã thêm thành công', item);
-            //TODO: send email
-        }
+    app.post('/admin/nuocngoai', app.role.isAdmin, (req, res) => {                
+        app.model.nuocngoai.create(req.body.nuocngoai, (error, nuocngoai) => {            
+            res.send({ error, nuocngoai })
+        });
+    });
 
-        res.send({ error, item });
-    }));
+    app.put('/admin/nuocngoai', app.role.isAdmin, (req, res) => {
+        let data = req.body.changes,
+            changes = {};
+        if (data.TEN_NUOC && data.TEN_NUOC != '' ) changes.TEN_NUOC = data.TEN_NUOC;        
+        if (data.MS_KVUC) changes.MS_KVUC = data.MS_KVUC;       
+              
+        app.model.nuocngoai.update(req.body._id, changes, (error, nuocngoai) => {
+            if (error) {
+                res.send({ error });
+            } else {
+                res.send({ error, nuocngoai });
+            }
+        })
+    });
 }

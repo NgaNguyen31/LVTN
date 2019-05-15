@@ -16,7 +16,7 @@ class ChucdanhPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 4);
+            T.selectMenu(10, 1);
             this.props.getChucdanhInPage();
         });
         this.props.getAllPhanloai();

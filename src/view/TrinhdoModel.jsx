@@ -78,6 +78,7 @@ export default class TrinhdoModal extends React.Component {
     }
 
     render() {
+        const phanloai = this.state && this.state.phanloai && this.state.phanloai.phanloai ? this.state.phanloai.phanloai : [];
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -99,7 +100,7 @@ export default class TrinhdoModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Ngaydi'>ORD</label>
-                                <Dropdown ref={this.phanloai} number='' items={this.state.phanloai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
+                                <Dropdown ref={this.phanloai} number='' items={phanloai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
                             </div>
                         </div>
                         <div className='modal-footer'>

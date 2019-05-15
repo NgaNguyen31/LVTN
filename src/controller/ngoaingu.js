@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/ngoaingu/all', app.role.isAdmin, (req, res) => {
         app.model.ngoaingu.getAll((error, ngoaingu) => {
-            if (error) res.send(error);
-            else res.send(ngoaingu);
+            if (error) res.send({error});
+            else res.send({ngoaingu});
         })
     })
 

@@ -13,14 +13,14 @@ module.exports = app => {
             if (error) {
                 res.send(error);
             }
-            else res.send(cb_nngoai);
+            else res.send({cb_nngoai});
         })
     })
 
     app.delete('/admin/cb_nngoai', app.role.isAdmin, (req, res) => app.model.cb_nngoai.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/admin/cb_nngoai', app.role.isAdmin, (req, res) => {        
-        app.model.cb_nngoai.create(req.body.cb_nngoai, (error, cb_nngoai) => {
+    app.post('/admin/cb_nngoai', app.role.isAdmin, (req, res) => {       
+        app.model.cb_nngoai.create(req.body.cb_nngoai, (error, cb_nngoai) => {  
             res.send({ error, cb_nngoai })
         });
     });
@@ -28,7 +28,7 @@ module.exports = app => {
     app.put('/admin/cb_nngoai', app.role.isAdmin, (req, res) => {
         let data = req.body.changes,
             changes = {};
-        if (data.hovaten && data.hovaten != '') changes.hovaten = data.hovaten;
+        if (data.Hovaten && data.Hovaten != '') changes.Hovaten = data.Hovaten;
         if (data.Nuoc && data.Nuoc != '') changes.Nuoc = data.Nuoc;
         if (data.Ngaydi) changes.Ngaydi = data.Ngaydi;
         if (data.Ngayve && data.Ngayve != '') changes.Ngayve = data.Ngayve;

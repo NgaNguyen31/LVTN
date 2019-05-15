@@ -103,6 +103,8 @@ export function createCbcnv(cbcnv, done) {
     return dispatch => {
         const url = '/admin/cbcnv';
         T.post(url, { cbcnv }, data => {
+            console.log('redux', data);
+            
             if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);

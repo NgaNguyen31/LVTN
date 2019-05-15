@@ -11,19 +11,18 @@ module.exports = app => {
     app.get('/admin/cbcnv/all', app.role.isAdmin, (req, res) => {
         app.model.cbcnv.getAll((error, cbcnv) => {
             if (error) {
-                res.send(error);
+                res.send({error});
             }
-            else res.send(cbcnv);
+            else res.send({cbcnv});
         })
     })
     app.delete('/admin/cbcnv', app.role.isAdmin, (req, res) => app.model.cbcnv.delete(req.body._id, error => res.send({ error })));
 
-    app.post('/admin/cbcnv', (req, res) => {
+    app.post('/admin/cbcnv', (req, res) => {        
         app.model.cbcnv.create(req.body.cbcnv, (error, item) => {
             res.send({ error, item });
         })
     });
-
     app.put('/admin/cbcnv', app.role.isAdmin, (req, res) => {
         let data = req.body.changes;
             changes = {};

@@ -16,13 +16,13 @@ class BomonPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 3);
+            T.selectMenu(10, 0);
             this.props.getBomonInPage();
         });
         this.props.getAllKhoa();
     }
 
-    edit(e, item){
+    edit(e, item){        
         this.bomonModal.current.show(item, this.props.khoa.data.items);
         e.preventDefault();
     }

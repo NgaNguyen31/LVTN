@@ -1,18 +1,11 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NUOC : [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
-        TEN_NUOC: {
-            type: String,
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        },
-        MS_KVUC: [{ type: app.db.Schema.ObjectId, ref: 'khuvuc' }]
-    });
+        TEN_NUOC: String,
+        MS_KVUC: { type: app.db.Schema.ObjectId, ref: 'khuvuc' }
+    }, {unique: true});
     const model = app.db.model('nuocngoai', schema);
 
-    app.model.NUOC_NGOAI = {
+    app.model.nuocngoai = {
         create: (data, done) => model.create(data,done),
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
@@ -26,7 +19,7 @@ module.exports = app => {
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).populate(['MS_NUOC', 'MS_KVUC']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['MS_KVUC']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });

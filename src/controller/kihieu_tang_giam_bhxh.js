@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/kihieu_tang_giam_bhxh/all', app.role.isAdmin, (req, res) => {
         app.model.kihieu_tang_giam_bhxh.getAll((error, kihieu_tang_giam_bhxh) => {
-            if (error) res.send(error);
-            else res.send(kihieu_tang_giam_bhxh);
+            if (error) res.send({error});
+            else res.send({kihieu_tang_giam_bhxh});
         })
     })
 

@@ -19,7 +19,7 @@ import CbcnvModal from './CbcnvModel.jsx';
 class CbcnvPage extends React.Component {
     constructor(props) {
         super(props);
-        this.cbcnvModal = React.createRef();
+        this.CbcnvModal = React.createRef();
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
     }
@@ -42,8 +42,9 @@ class CbcnvPage extends React.Component {
         this.props.getAllBenhvien();
     }
 
-    edit(e, item){
-        this.cbcnvModal.current.show(item, 
+    edit(e, item){        
+        
+        this.CbcnvModal.current.show(item, 
             this.props.nghi_ctac.data.items, 
             this.props.loai.data.items, 
             this.props.pctn_nghe_2018.data.items, 
@@ -54,8 +55,8 @@ class CbcnvPage extends React.Component {
             this.props.bomon.data.items, 
             this.props.dantoc.data.items, 
             this.props.tongiao.data.items, 
-            this.props.benhvien.data.items);
-        console.log(this.props.nghi_ctac.data.items);
+            this.props.benhvien.data.items
+            );
         
         e.preventDefault();
     }
@@ -173,7 +174,7 @@ class CbcnvPage extends React.Component {
                             <th style={{ width: 'auto' }}>Nơi ĐKHK</th>
                             <th style={{ width: 'auto' }}>ĐC hiện tại</th>
                             <th style={{ width: 'auto' }}>Điện thoại</th>
-                            <th style={{ width: 'auto' }}>email</th>
+                            <th style={{ width: 'auto' }}>Email</th>
                             <th style={{ width: 'auto' }}>Nguyên quán</th>
                             <th style={{ width: 'auto' }}>Số CMND</th>
                             <th style={{ width: 'auto' }}>Nơi ngày cấp</th>
@@ -184,6 +185,7 @@ class CbcnvPage extends React.Component {
                             <th style={{ width: 'auto' }}>Cha nghề nghiệp</th>
                             <th style={{ width: 'auto' }}>Cha công tác</th>
                             <th style={{ width: 'auto' }}>Mẹ tên</th>
+                            <th style={{ width: 'auto' }}>Mẹ năm sinh</th>
                             <th style={{ width: 'auto' }}>Mẹ nghề nghiệp</th>
                             <th style={{ width: 'auto' }}>Mẹ công tác</th>
                             <th style={{ width: 'auto' }}>VC tên</th>
@@ -222,14 +224,14 @@ class CbcnvPage extends React.Component {
                     <tbody>
                         {this.props.cbcnv.page.list.map((item, index) => (
                             <tr key={index}>     
-                                <td>{item.NGHI.reduce((pre, value) => pre + ' ' +  value.Dien_giai, ' ')}</td>
+                                <td>{item.NGHI? item.NGHI.Dien_giai: ''}</td>
                                 <td>{item.TAM_NGUNG}</td>          
                                 <td>{item.IS_NNGOAI}</td>
                                 <td>{item.IN_NUOC}</td>
-                                <td>{item.LOAI.reduce((pre, value) => pre + ' ' +  value.Dien_giai, ' ')}</td>
-                                <td>{item.SHCC.reduce((pre,value) => pre + ' ' + value.SHCC, ' ')}</td>                                                  
+                                <td>{item.LOAI ? item.LOAI.Dien_giai : ''}</td>
+                                <td>{item.SHCC ? item.SHCC.SHCC : ''}</td>                                                  
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.reduce((pre, value) => pre + ' ' +  value.HO + ' ' + value.TEN, '') + ' ' : ' ')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV : ' ')}</a>
                                 </td>                          
                                 <td>{item.MS_NV_CU}</td>                          
                                 <td>{item.HO}</td>                          
@@ -247,9 +249,9 @@ class CbcnvPage extends React.Component {
                                 <td>{item.GIAY_TT_RA_TRUONG}</td>                          
                                 <td>{item.So_BHXH_LD}</td>                          
                                 <td>{item.THU_BHXH}</td>                          
-                                <td>{item.CHUC_DANH.reduce((pre, value) => pre + ' ' +  value.ten_day_du, ' ')}</td>
-                                <td>{item.TRINH_DO.reduce((pre, value) => pre + ' ' +  value.Ten_day_du, ' ')}</td>
-                                <td>{item.NGACH.reduce((pre, value) => pre + ' ' +  value.TEN_NGACH, ' ')}</td>
+                                <td>{item.CHUC_DANH ? item.CHUC_DANH.ten_day_du : ''}</td>
+                                <td>{item.TRINH_DO ? item.TRINH_DO.Ten_day_du : ''}</td>
+                                <td>{item.NGACH ? item.NGACH.TEN_NGACH : ''}</td>
                                 <td>{item.NGACHMOI}</td>                          
                                 <td>{item.BAC_LG}</td>                          
                                 <td>{item.HESO_LG}</td>                          
@@ -269,7 +271,7 @@ class CbcnvPage extends React.Component {
                                 <td>{item.CHUC_VU_BCH_DOAN_TN}</td>                          
                                 <td>{item.PC_DOC_HAI}</td>                          
                                 <td>{item.MOI_TRUONG_DOC_HAI}</td>               
-                                <td>{item.MS_CVU.reduce((pre, value) => pre + ' ' + value.CHUC_VU, ' ')}</td>                          
+                                <td>{item.MS_CVU ? item.MS_CVU.CHUC_VU : ''}</td>                          
                                 <td>{item.TEN_CV}</td>                          
                                 <td>{item.PCCV}</td>                          
                                 <td>{item.NGAY_PCCV}</td>                          
@@ -282,7 +284,7 @@ class CbcnvPage extends React.Component {
                                 <td>{item.NGAYTIEPNHAN_KOLUONG}</td>                          
                                 <td>{item.PHUC_LOI}</td>                          
                                 <td>{item.GHI_CHU_IN}</td>                          
-                                <td>{item.MS_BM.reduce((pre, value) => pre + ' ' + value.TEN_BM, ' ')}</td>                          
+                                <td>{item.MS_BM ? item.MS_BM.TEN_BM : ''}</td>                          
                                 <td>{item.TDO_LLCT}</td>                          
                                 <td>{item.TIN_HOC}</td>                          
                                 <td>{item.NGOAI_NGU}</td>                          
@@ -325,8 +327,8 @@ class CbcnvPage extends React.Component {
                                 <td>{item.NGUYEN_QUAN}</td>
                                 <td>{item.SO_CMND}</td>
                                 <td>{item.NOI_NGAYCAP}</td>
-                                <td>{item.DANTOC.reduce((pre,value) => pre + ' ' + value.Dan_toc, ' ')}</td>
-                                <td>{item.TON_GIAO.reduce((pre, value) => pre + ' ' + value.TON_GIAO, ' ')}</td>
+                                <td>{item.DANTOC ? item.DANTOC.Dan_toc : ''}</td>
+                                <td>{item.TON_GIAO ? item.TON_GIAO.TON_GIAO : ''}</td>
                                 <td>{item.CHA_TEN}</td>
                                 <td>{item.CHA_NAM_SINH}</td>
                                 <td>{item.CHA_NNGHIEP}</td>
@@ -345,7 +347,7 @@ class CbcnvPage extends React.Component {
                                 <td>{item.MA_TINH_BV}</td>
                                 <td>{item.QUOC_TICH}</td>
                                 <td>{item.TRA_THE_BHYT}</td>
-                                <td>{item.MA_BV.reduce((pre, value) => pre + ' ' + value.Noi_kham , ' ')}</td>
+                                <td>{item.MA_BV ? item.MA_BV.Noi_kham : ''}</td>
                                 <td>{item.MASO_BHXH}</td>
                                 <td>{item.GHI_CHU_NOP_SO_BHXH}</td>
                                 <td>{item.SO_BHXH}</td>

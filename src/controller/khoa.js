@@ -8,11 +8,11 @@ module.exports = app => {
         });
     });
     app.get('/admin/khoa/all', app.role.isAdmin, (req, res) => {
-        app.model.khoa.getAll((error, result) => {
+        app.model.khoa.getAll((error, khoa) => {
             if (error) {
                 res.send({ error });
             } else {                
-                res.send(result);
+                res.send({khoa});
             }
         })
     })

@@ -1,56 +1,79 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getKhuvucInPage, createKhuvuc, updateKhuvuc, deleteKhuvuc, getAllKhuvuc } from './redux/khuvuc.jsx';
+import { getKiemnhiemInPage, createKiemnhiem, updateKiemnhiem, deleteKiemnhiem, getAllKiemnhiem } from './redux/kiemnhiem.jsx';
+import {getAllCbcnv} from './redux/cbcnv.jsx';
+import {getAllBomon} from './redux/bomon.jsx';
+import {getAllChucvu} from './redux/chucvu.jsx';
 import { Link } from 'react-router-dom';
-import KhuvucModal from './KhuvucModel.jsx';
+import KiemnhiemModal from './KiemnhiemModel.jsx';
 import Pagination from './Pagination.jsx';
 
-class KhuvucPage extends React.Component {
+class KiemnhiemPage extends React.Component {
     constructor(props) {
         super(props);
-        this.khuvucModal = React.createRef();
+        this.kiemnhiemModal = React.createRef();
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
+        this.changeActive = this.changeActive.bind(this);
     }
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 12);
-            this.props.getKhuvucInPage();
+            T.selectMenu(10, 4);
+            this.props.getKiemnhiemInPage();
         });
+        this.props.getAllCbcnv();
+        this.props.getAllBomon();
+        this.props.getAllChucvu();
     }
 
     edit(e, item){
-        this.khuvucModal.current.show(item);
+        this.kiemnhiemModal.current.show(item, this.props.cbcnv.data.items, this.props.bomon.data.items, this.props.chucvu.data.items);
         e.preventDefault();
     }
 
     delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
-            isConfirm && this.props.deleteKhuvuc(item._id);
+            isConfirm && this.props.deleteKiemnhiem(item._id);
         });
         e.preventDefault();
+    }
+    
+    changeActive(item, index) {
+        this.props.updateKiemnhiem(item._id, { active: !item.Xoa });
     }
 
     render() {                   
         let table = null;              
-        if (this.props.khuvuc && this.props.khuvuc.page && this.props.khuvuc.page.list && this.props.khuvuc.page.list.length > 0) {
+        if (this.props.kiemnhiem && this.props.kiemnhiem.page && this.props.kiemnhiem.page.list && this.props.kiemnhiem.page.list.length > 0) {
             table = (
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '50%', textAlign: 'center' }}>Tên khu vực</th>
-                            <th style={{ width: '50%', textAlign: 'center' }}>Mã số châu</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>MSNV</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>MSBM</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>MSCVụ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày chức vụ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Xóa</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {this.props.khuvuc.page.list.map((item, index) => (
+                        {this.props.kiemnhiem.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_KVUC ? item.TEN_KVUC + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.MS_CHAU.reduce((pre,value) => pre + ' ' + value.tenchau, ' ')}</td>
+                                <td>{item.MS_BM.TEN_BM}</td>
+                                <td>{item.MS_CVU.CHUC_VU}</td>
+                                <td>{item.NGAY_CVU}</td>
+                                <td>{item.GHICHU}</td>
+                                <td className='toggle' style={{ textAlign: 'center' }} >
+                                    <label>
+                                        <input type='checkbox' checked={item.Xoa} onChange={() => this.changeActive(item, index)} /><span className='button-indecator' />
+                                    </label>
+                                </td>   
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
@@ -66,40 +89,40 @@ class KhuvucPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có khu vực nào!</p>;
+            table = <p>Chưa có kiểm nhiệm nào!</p>;
         }
 
-        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.khuvuc && this.props.khuvuc.page ?
-            this.props.khuvuc.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
+        const { pageNumber, pageSize, pageTotal, totalItem } = this.props.kiemnhiem && this.props.kiemnhiem.page ?
+            this.props.kiemnhiem.page : { pageNumber: 1, pageSize: 50, pageTotal: 1, totalItem: 0 };
         return (
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin khu vực</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin kiểm nhiệm</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Khu vực</li>
+                        <li className='breadcrumb-item'>Kiểm nhiệm</li>
                     </ul>
                 </div>
 
                 <div className='row tile'>{table}</div>
-                <Pagination name='adminKhuvuc'
+                <Pagination name='adminKiemnhiem'
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
-                    getPage={this.props.getKhuvucInPage} />
+                    getPage={this.props.getKiemnhiemInPage} />
 
                 <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
                     <i className='fa fa-lg fa-plus' />
                 </button>
 
-                <KhuvucModal ref={this.khuvucModal} createKhuvuc={this.props.createKhuvuc} updateKhuvuc={this.props.updateKhuvuc} />    
+                <KiemnhiemModal ref={this.kiemnhiemModal} createKiemnhiem={this.props.createKiemnhiem} updateKiemnhiem={this.props.updateKiemnhiem} />    
             </main>
         );
     }
 }
 
-const mapStateToProps = state => ({ khuvuc: state.khuvuc});
-const mapActionsToProps = { getKhuvucInPage, createKhuvuc, updateKhuvuc, deleteKhuvuc, getAllKhuvuc };
-export default connect(mapStateToProps, mapActionsToProps)(KhuvucPage);
+const mapStateToProps = state => ({ kiemnhiem: state.kiemnhiem, cbcnv: state.cbcnv, bomon: state.bomon, chucvu: state.chucvu});
+const mapActionsToProps = { getKiemnhiemInPage, createKiemnhiem, updateKiemnhiem, deleteKiemnhiem, getAllKiemnhiem, getAllCbcnv, getAllBomon, getAllChucvu };
+export default connect(mapStateToProps, mapActionsToProps)(KiemnhiemPage);

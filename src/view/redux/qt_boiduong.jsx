@@ -102,7 +102,7 @@ export function getQt_boiduong(qt_boiduongId, done) {
 export function createQt_boiduong(qt_boiduong, done) {
     return dispatch => {
         const url = '/admin/qt_boiduong';
-        T.post(url, { qt_boiduong }, data => {
+        T.post(url, { qt_boiduong }, data => {            
             if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);

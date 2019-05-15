@@ -7,8 +7,8 @@ module.exports = app => {
 
     app.get('/admin/cv_klgd/all', app.role.isAdmin, (req, res) => {
         app.model.cv_klgd.getAll((error, cv_klgd) => {
-            if (error) res.send(error);
-            else res.send(cv_klgd);
+            if (error) res.send({error});
+            else res.send({cv_klgd});
         })
     })
 
