@@ -1,11 +1,11 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
-import Qt_cac_conPage from './Qt_cac_conPage.jsx';
+import Qt_nnguPage from './Qt_nnguPage.jsx';
 
-export default class Qt_cac_conModal extends React.Component {
+export default class Qt_nnguModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: []};
+        this.state = {text: '', number: '', cbcnv: [], ngoaingu: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,6 +13,7 @@ export default class Qt_cac_conModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
+        this.ngoaingu = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -39,48 +40,40 @@ export default class Qt_cac_conModal extends React.Component {
         }, 250));
     }
 
-    show(item, cbcnv) {      
+    show(item, cbcnv, ngoaingu) {      
         
-        const { _id, MS_NV, STT, TEN, NAM_SINH, CVU, CTAC} = item ?
-            item : { _id: null, MS_NV: '', STT: '', TEN: '', NAM_SINH: '', CVU: '', CTAC: ''};
+        const { _id, MS_NV, N_NGU, TRINH_DO, GHI_CHU} = item ?
+            item : { _id: null, MS_NV: '', N_NGU: '', TRINH_DO: '', GHI_CHU: ''};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
-        $('#TEN').val(TEN);
-        $('#NAM_SINH').val(NAM_SINH);
-        $('#CVU').val(CVU);
-        $('#CTAC').val(CTAC);
+        $('#N_NGU').val(N_NGU);
+        $('#TRINH_DO').val(TRINH_DO);
+        $('#GHI_CHU').val(GHI_CHU);
 
-        this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
+        this.setState({ _id, cbcnv: cbcnv? cbcnv: [], ngoaingu: ngoaingu? ngoaingu: []});
 
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(), 
+        const cbcnv = this.cbcnv.current.getSelectedItem(),  
+        ngoaingu = this.ngoaingu.current.getSelectedItem(),          
             MS_NV = cbcnv? cbcnv : [],
+            N_NGU = ngoaingu? ngoaingu : [],
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
-                TEN: this.state.text.TEN, 
-                NAM_SINH: this.state.number.NAM_SINH, 
-                CVU: this.state.text.CVU,
-                CTAC: this.state.text.CTAC,                                 };    
+                N_NGU, 
+                TRINH_DO: this.state.text.TRINH_DO, 
+                GHI_CHU: this.state.text.GHI_CHU,                             };    
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (!changes.STT) {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
-        } else if (!changes.TEN) {
-            T.notify('Tên đang trống!', 'danger');
-            $('#TEN').focus();
         } else if (this.state._id) {
-            this.props.updateQt_cac_con(this.state._id, changes, data => {
+            this.props.updateQt_nngu(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
             });
         } else {            
-            this.props.createQt_cac_con(changes, data => {                    
+            this.props.createQt_nngu(changes, data => {                    
                 $(this.modal.current).modal('hide');
                 
             });
@@ -89,12 +82,13 @@ export default class Qt_cac_conModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
+        const ngoaingu =  this.state && this.state.ngoaingu && this.state.ngoaingu.ngoaingu? this.state.ngoaingu.ngoaingu : [];
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin quản trị các con</h5>
+                            <h5 className='modal-title'>Thông tin quản trị ngoại ngữ</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
@@ -105,24 +99,16 @@ export default class Qt_cac_conModal extends React.Component {
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='STT'>STT</label>
-                                <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
+                                <label htmlFor='N_NGU'>Ngoại ngữ</label>
+                                <Dropdown ref={this.ngoaingu} text='' items={ngoaingu.map(e => Object.assign({}, e, {text: e.N_NGU}))} />
                             </div> 
                             <div className='form-group'>
-                                <label htmlFor='TEN'>Tên</label>
-                                <input className='form-control' id='TEN' type='text' placeholder='' onChange={this.handleInput('text', 'TEN')} value={this.state.text.TEN}/>
+                                <label htmlFor='TRINH_DO'>Trình độ</label>
+                                <input className='form-control' id='TRINH_DO' type='text' placeholder='' onChange={this.handleInput('text', 'TRINH_DO')} value={this.state.text.TRINH_DO}/>
                             </div> 
                             <div className='form-group'>
-                                <label htmlFor='NAM_SINH'>Năm sinh</label>
-                                <input className='form-control' id='NAM_SINH' type='number' placeholder='' onChange={this.handleInput('number', 'NAM_SINH')} value={this.state.number.NAM_SINH}/>
-                            </div> 
-                            <div className='form-group'>
-                                <label htmlFor='CVU'>Chức vụ</label>
-                                <input className='form-control' id='CVU' type='text' placeholder='' onChange={this.handleInput('text', 'CVU')} value={this.state.text.CVU}/>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor='CTAC'>Công tác</label>
-                                <input className='form-control' id='CTAC' type='text' placeholder='' onChange={this.handleInput('text', 'CTAC')} value={this.state.text.CTAC}/>
+                                <label htmlFor='GHI_CHU'>Ghi chú</label>
+                                <input className='form-control' id='GHI_CHU' type='text' placeholder='' onChange={this.handleInput('text', 'GHI_CHU')} value={this.state.text.GHI_CHU}/>
                             </div> 
                         </div>
                         <div className='modal-footer'>

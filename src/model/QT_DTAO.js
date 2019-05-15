@@ -1,6 +1,6 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
+        MS_NV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         STT: Number,
         TU_THANG: Number,
         TU_NAM: Number,
@@ -12,10 +12,10 @@ module.exports = app => {
         QUOC_GIA: String,
         HINH_THUC: String,
         LOAI_TN: String,
-        NAM: String,
-        CO_NOP_BANG: Boolean,        
+        NAM: Number,
+        CO_NOP_BANG: String,        
         GHI_CHU: String
-    });
+    },{unique: true});
     const model = app.db.model('qt_dtao', schema);
 
     app.model.qt_dtao = {

@@ -11,7 +11,7 @@ module.exports = app => {
         SO_QD: String,
         NGAY_QD:Date,
         FIELD1: String
-    });
+    }, {unique: true});
     const model = app.db.model('qt_ky_luat', schema);
 
     app.model.qt_ky_luat = {

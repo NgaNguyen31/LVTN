@@ -1,17 +1,17 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
+        MS_NV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         STT: Number,
         TU_THANG: Number,
         TU_NAM: Number,
         DEN_THANG: Number,
         DEN_NAM: Number,
-        CHUC_VU: [{ type: app.db.Schema.ObjectId, ref: 'chucvu' }],
+        CHUC_VU: { type: app.db.Schema.ObjectId, ref: 'chucvu' },
         NOI_CONG_TAC: String,
         BO_MON_CT: String,
         CONG_VIEC: String,
         GHI_CHU: String
-    });
+    },{unique: true});
     const model = app.db.model('qt_ctac', schema);
 
     app.model.qt_ctac = {

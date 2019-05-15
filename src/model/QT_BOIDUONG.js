@@ -12,7 +12,7 @@ module.exports = app => {
         CHUNG_CHI: String,
         NOP_CC: String,
         GHI_CHU: String
-    });
+    },{unique: true});
     const model = app.db.model('qt_boiduong', schema);
 
     app.model.qt_boiduong = {

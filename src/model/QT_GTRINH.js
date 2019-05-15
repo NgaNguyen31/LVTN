@@ -1,11 +1,11 @@
 module.exports = app => {
     const schema = app.db.Schema ({
-        MS_NV : [{ type: app.db.Schema.ObjectId, ref: 'cbcnv' }],
+        MS_NV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         STT: Number,
         G_Trinh: String,
         NamXB: Number,
         NhaXB: String        
-    });
+    }, {unique: true});
     const model = app.db.model('qt_gtrinh', schema);
 
     app.model.qt_gtrinh = {

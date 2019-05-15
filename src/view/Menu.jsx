@@ -178,47 +178,47 @@ class Menu extends React.Component {
                         <ul className='treeview-menu'>
                         <li>
                                 <Link className='treeview-item' to='/admin/qt_bbao'>
-                                    <i className='icon fa fa-circle-o' />Quản trị bài báo
+                                    <i className='icon fa fa-circle-o' />Bài báo
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_boiduong'>
-                                    <i className='icon fa fa-circle-o' />Quản trị bồi dưỡng
+                                    <i className='icon fa fa-circle-o' />Bồi dưỡng
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_cac_con'>
-                                    <i className='icon fa fa-circle-o' />Quản trị các con
+                                    <i className='icon fa fa-circle-o' />Các con
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_ctac'>
-                                    <i className='icon fa fa-circle-o' />Quản trị công tác
+                                    <i className='icon fa fa-circle-o' />Công tác
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_cvu'>
-                                    <i className='icon fa fa-circle-o' />Quản trị chức vụ
+                                    <i className='icon fa fa-circle-o' />Chức vụ
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_dtai'>
-                                    <i className='icon fa fa-circle-o' />Quản trị đề tài
+                                    <i className='icon fa fa-circle-o' />Đề tài
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_dtao'>
-                                    <i className='icon fa fa-circle-o' />Quản trị đào tạo
+                                    <i className='icon fa fa-circle-o' />Đào tạo
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_gtrinh'>
-                                    <i className='icon fa fa-circle-o' />Quản trị giáo trình
+                                    <i className='icon fa fa-circle-o' />Giáo trình
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/qt_khen'>
-                                    <i className='icon fa fa-circle-o' />Quản trị khen
+                                    <i className='icon fa fa-circle-o' />Khen
                                 </Link>
                             </li>
                             <li>

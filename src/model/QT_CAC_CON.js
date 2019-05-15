@@ -6,7 +6,7 @@ module.exports = app => {
         NAM_SINH: Number,
         CVU: String,
         CTAC: String
-    });
+    },{unique: true});
     const model = app.db.model('qt_cac_con', schema);
 
     app.model.qt_cac_con = {

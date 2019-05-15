@@ -106,7 +106,7 @@ export function createQt_cac_con(qt_cac_con, done) {
             if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
-            } else {
+            } else {    
                 T.notify('Tạo thành công!', 'info');
                 dispatch(getQt_cac_conInPage());
             }

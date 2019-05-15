@@ -5,7 +5,7 @@ module.exports = app => {
         BAI_BAO: String,
         TEN_TCHI: String,
         NAM: Number
-    });
+    },{unique: true});
     const model = app.db.model('qt_bbao', schema);
 
     app.model.qt_bbao = {

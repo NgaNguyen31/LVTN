@@ -8,7 +8,7 @@ module.exports = app => {
         LY_DO: String,
         DANH_HIEU: String,
         GHI_CHU: String    
-    });
+    }, {unique: true});
     const model = app.db.model('qt_khen', schema);
 
     app.model.qt_khen = {

@@ -1,8 +1,8 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
-import Qt_cac_conPage from './Qt_cac_conPage.jsx';
+import Qt_gtrinhPage from './Qt_gtrinhPage.jsx';
 
-export default class Qt_cac_conModal extends React.Component {
+export default class Qt_gtrinhModal extends React.Component {
     constructor(props) {
         super(props);
         this.state = {text: '', number: '', cbcnv: []};
@@ -41,14 +41,13 @@ export default class Qt_cac_conModal extends React.Component {
 
     show(item, cbcnv) {      
         
-        const { _id, MS_NV, STT, TEN, NAM_SINH, CVU, CTAC} = item ?
-            item : { _id: null, MS_NV: '', STT: '', TEN: '', NAM_SINH: '', CVU: '', CTAC: ''};
+        const { _id, MS_NV, STT, G_Trinh, NamXB, NhaXB} = item ?
+            item : { _id: null, MS_NV: '', STT: '', G_Trinh: '', NamXB: '', NhaXB: ''};
         $('#MS_NV').val(MS_NV);
         $('#STT').val(STT);
-        $('#TEN').val(TEN);
-        $('#NAM_SINH').val(NAM_SINH);
-        $('#CVU').val(CVU);
-        $('#CTAC').val(CTAC);
+        $('#G_Trinh').val(G_Trinh);
+        $('#NamXB').val(NamXB);
+        $('#NhaXB').val(NhaXB);
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
@@ -57,30 +56,26 @@ export default class Qt_cac_conModal extends React.Component {
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(), 
+        const cbcnv = this.cbcnv.current.getSelectedItem(),            
             MS_NV = cbcnv? cbcnv : [],
              changes = {
                 MS_NV,
                 STT: this.state.number.STT, 
-                TEN: this.state.text.TEN, 
-                NAM_SINH: this.state.number.NAM_SINH, 
-                CVU: this.state.text.CVU,
-                CTAC: this.state.text.CTAC,                                 };    
+                G_Trinh: this.state.text.G_Trinh, 
+                NamXB: this.state.number.NamXB, 
+                NhaXB: this.state.text.NhaXB,                                 };    
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
         } else if (!changes.STT) {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
-        } else if (!changes.TEN) {
-            T.notify('Tên đang trống!', 'danger');
-            $('#TEN').focus();
         } else if (this.state._id) {
-            this.props.updateQt_cac_con(this.state._id, changes, data => {
+            this.props.updateQt_gtrinh(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
             });
         } else {            
-            this.props.createQt_cac_con(changes, data => {                    
+            this.props.createQt_gtrinh(changes, data => {                    
                 $(this.modal.current).modal('hide');
                 
             });
@@ -94,7 +89,7 @@ export default class Qt_cac_conModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin quản trị các con</h5>
+                            <h5 className='modal-title'>Thông tin quản trị giáo trình</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
@@ -109,20 +104,16 @@ export default class Qt_cac_conModal extends React.Component {
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
                             </div> 
                             <div className='form-group'>
-                                <label htmlFor='TEN'>Tên</label>
-                                <input className='form-control' id='TEN' type='text' placeholder='' onChange={this.handleInput('text', 'TEN')} value={this.state.text.TEN}/>
+                                <label htmlFor='G_Trinh'>Giáo trình</label>
+                                <input className='form-control' id='G_Trinh' type='text' placeholder='' onChange={this.handleInput('text', 'G_Trinh')} value={this.state.text.G_Trinh}/>
                             </div> 
                             <div className='form-group'>
-                                <label htmlFor='NAM_SINH'>Năm sinh</label>
-                                <input className='form-control' id='NAM_SINH' type='number' placeholder='' onChange={this.handleInput('number', 'NAM_SINH')} value={this.state.number.NAM_SINH}/>
+                                <label htmlFor='NamXB'>Năm XB</label>
+                                <input className='form-control' id='NamXB' type='number' placeholder='' onChange={this.handleInput('number', 'NamXB')} value={this.state.number.NamXB}/>
                             </div> 
                             <div className='form-group'>
-                                <label htmlFor='CVU'>Chức vụ</label>
-                                <input className='form-control' id='CVU' type='text' placeholder='' onChange={this.handleInput('text', 'CVU')} value={this.state.text.CVU}/>
-                            </div>
-                            <div className='form-group'>
-                                <label htmlFor='CTAC'>Công tác</label>
-                                <input className='form-control' id='CTAC' type='text' placeholder='' onChange={this.handleInput('text', 'CTAC')} value={this.state.text.CTAC}/>
+                                <label htmlFor='NhaXB'>Nhà XB</label>
+                                <input className='form-control' id='NhaXB' type='text' placeholder='' onChange={this.handleInput('text', 'NhaXB')} value={this.state.text.NhaXB}/>
                             </div> 
                         </div>
                         <div className='modal-footer'>
