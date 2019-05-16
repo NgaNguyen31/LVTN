@@ -15,7 +15,7 @@ class ChinhsachPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 0);
+            T.selectMenu(11, 1);
             this.props.getChinhsachInPage();
         });
     }

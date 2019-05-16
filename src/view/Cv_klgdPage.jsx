@@ -15,7 +15,7 @@ class Cv_klgdPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 6);
+            T.selectMenu(11, 3);
             this.props.getCv_klgdInPage();
         });
     }

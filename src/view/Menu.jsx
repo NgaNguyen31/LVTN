@@ -305,7 +305,47 @@ class Menu extends React.Component {
                             <i className='treeview-indicator fa fa-angle-right' />
                         </a>
                         <ul className='treeview-menu'>
-                        <li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/benhvien'>
+                                    <i className='icon fa fa-circle-o' />Bệnh viện
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/chinhsach'>
+                                    <i className='icon fa fa-circle-o' />Chính sách
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/chucvu'>
+                                    <i className='icon fa fa-circle-o' />Chức vụ
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/cv_klgd'>
+                                    <i className='icon fa fa-circle-o' />Công việc khối lượng giảng dạy
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/dantoc'>
+                                    <i className='icon fa fa-circle-o' />Dân tộc
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/heso'>
+                                    <i className='icon fa fa-circle-o' />Hệ số
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/khoa'>
+                                    <i className='icon fa fa-circle-o' />Khoa
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/khuvuc'>
+                                    <i className='icon fa fa-circle-o' />Khu vực
+                                </Link>
+                            </li>
+                            <li>
                                 <Link className='treeview-item' to='/admin/kihieu_tang_giam_bhxh'>
                                     <i className='icon fa fa-circle-o' />Kí hiệu tăng giảm bảo hiểm xã hội
                                 </Link>
@@ -330,46 +370,6 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Nghỉ công tác
                                 </Link>
                             </li>
-                        <li>
-                                <Link className='treeview-item' to='/admin/heso'>
-                                    <i className='icon fa fa-circle-o' />Hệ số
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/khoa'>
-                                    <i className='icon fa fa-circle-o' />Khoa
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/khuvuc'>
-                                    <i className='icon fa fa-circle-o' />Khu vực
-                                </Link>
-                            </li>
-                        <li>
-                                <Link className='treeview-item' to='/admin/chucvu'>
-                                    <i className='icon fa fa-circle-o' />Chức vụ
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/cv_klgd'>
-                                    <i className='icon fa fa-circle-o' />Công việc khối lượng giảng dạy
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/dantoc'>
-                                    <i className='icon fa fa-circle-o' />Dân tộc
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/chinhsach'>
-                                    <i className='icon fa fa-circle-o' />Chính sách
-                                </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/benhvien'>
-                                    <i className='icon fa fa-circle-o' />Bệnh viện
-                                </Link>
-                            </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/ngoaingu'>
                                     <i className='icon fa fa-circle-o' />Ngoại ngữ
@@ -379,7 +379,7 @@ class Menu extends React.Component {
                                 <Link className='treeview-item' to='/admin/nuoc'>
                                     <i className='icon fa fa-circle-o' />Nước
                                 </Link>
-                            </li>                            
+                            </li>                                                        
                             <li>
                                 <Link className='treeview-item' to='/admin/phanloai'>
                                     <i className='icon fa fa-circle-o' />Phân loại
