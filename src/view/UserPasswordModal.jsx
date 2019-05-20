@@ -52,24 +52,24 @@ export default class UserPasswordModal extends React.Component {
                 <form className='modal-dialog' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Change password of user</h5>
+                            <h5 className='modal-title'>Đổi mật khẩu</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='userPassword1'>New password</label>
-                                <input className='form-control' id='userPassword1' type='password' placeholder='New password' />
+                                <label htmlFor='userPassword1'>Mật khẩu mới</label>
+                                <input className='form-control' id='userPassword1' type='password' placeholder='Mật khẩu mới' />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='userPassword2'>Retype password</label>
-                                <input className='form-control' id='userPassword2' type='password' placeholder='Retype password' />
+                                <label htmlFor='userPassword2'>Nhập lại mật khẩu</label>
+                                <input className='form-control' id='userPassword2' type='password' placeholder='Nhập lại mật khẩu' />
                             </div>
                         </div>
                         <div className='modal-footer'>
-                            <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                            <button type='submit' className='btn btn-primary' ref={this.btnSave} onClick={this.save}>Save</button>
+                            <button type='button' className='btn btn-secondary' data-dismiss='modal'>Đóng</button>
+                            <button type='button' className='btn btn-primary' ref={this.btnSave} onClick={this.save}>Lưu</button>
                         </div>
                     </div>
                 </form>

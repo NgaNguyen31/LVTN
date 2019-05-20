@@ -15,7 +15,7 @@ const getCookiePageName = (cookieName) => {
 
 let T = {
     PropTypes,
-    roles: ['admin', 'editor', 'user'],
+    roles: ['admin'],
     chaus: ['Châu Á', 'Châu Âu', 'Châu Mỹ', 'Châu Phi', 'Châu Úc'],
     phais: ['Nam', 'Nữ'],
     nopccs: ['Chưa', 'Rồi'],

@@ -52,12 +52,12 @@ class Menu extends React.Component {
                         </Link>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <Link className='app-menu__item' to='/admin/settings'>
                             <i className='app-menu__icon fa fa-cog' />
                             <span className='app-menu__label'>Cài đặt</span>
                         </Link>
-                    </li>
+                    </li> */}
                     <li>
                         <Link className='app-menu__item' to='/admin/user'>
                             <i className='app-menu__icon fa fa-user' />
@@ -65,20 +65,20 @@ class Menu extends React.Component {
                         </Link>
                     </li>
 
-                    <li>
+                    {/* <li>
                         <Link className='app-menu__item' to='/admin/email'>
                             <i className='app-menu__icon fa fa-envelope' />
                             <span className='app-menu__label'>Email</span>
                         </Link>
-                    </li>
-                    <li>
+                    </li> */}
+                    {/* <li>
                         <Link className='app-menu__item' to='/admin/contact'>
                             <i className='app-menu__icon fa fa-send' />
                             <span className='app-menu__label'>Liên hệ</span>
                         </Link>
-                    </li>
+                    </li> */}
 
-                    <li className='treeview'>
+                    {/* <li className='treeview'>
                         <a className='app-menu__item' href='#' data-toggle='treeview'>
                             <i className='app-menu__icon fa fa-file' />
                             <span className='app-menu__label'>Tin tức</span>
@@ -96,8 +96,8 @@ class Menu extends React.Component {
                                 </Link>
                             </li>
                         </ul>
-                    </li>
-                    <li className='treeview'>
+                    </li> */}
+                    {/* <li className='treeview'>
                         <a className='app-menu__item' href='#' data-toggle='treeview'>
                             <i className='app-menu__icon fa fa-star' />
                             <span className='app-menu__label'>Sự kiện</span>
@@ -115,8 +115,8 @@ class Menu extends React.Component {
                                 </Link>
                             </li>
                         </ul>
-                    </li>
-                    <li className='treeview'>
+                    </li> */}
+                    {/* <li className='treeview'>
                         <a className='app-menu__item' href='#' data-toggle='treeview'>
                             <i className='app-menu__icon fa fa-pagelines' />
                             <span className='app-menu__label'>Công việc</span>
@@ -134,7 +134,7 @@ class Menu extends React.Component {
                                 </Link>
                             </li>
                         </ul>
-                    </li>
+                    </li> */}
                     <li className='treeview'>
                         <a className='app-menu__item' href='#' data-toggle='treeview'>
                             <i className='app-menu__icon fa fa-pagelines' />

@@ -55,7 +55,7 @@ class Header extends React.Component {
                 <Link className='app-header__logo' to='/admin'>IU App</Link>
                 <a className='app-sidebar__toggle' href='#' data-toggle='sidebar' aria-label='Hide Sidebar' />
                 <ul className='app-nav'>
-                    <li className='dropdown'>
+                    {/* <li className='dropdown'>
                         <a className='app-nav__item' href='#' data-toggle='dropdown' aria-label='Show notifications'>
                             <i className='fa fa-bell-o fa-lg' />
                         </a>
@@ -68,7 +68,7 @@ class Header extends React.Component {
                                 <Link to='/admin/contact'>Đến trang Liên hệ</Link>
                             </li>
                         </ul>
-                    </li>
+                    </li> */}
                     <li className='dropdown'>
                         <a className='app-nav__item' href='#' data-toggle='dropdown' aria-label='Open Profile Menu'>
                             <i className='fa fa-user fa-lg' />

@@ -44,8 +44,8 @@ class ContactPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '60%' }}>Subject</th>
-                            <th style={{ width: '40%' }}>Name & Email</th>
+                            <th style={{ width: '60%' }}>Chủ đề</th>
+                            <th style={{ width: '40%' }}>Tên & Email</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>

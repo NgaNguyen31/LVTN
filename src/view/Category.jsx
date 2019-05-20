@@ -62,8 +62,8 @@ class CategoryModal extends React.Component {
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='catName'>Name</label>
-                                <input className='form-control' id='catName' type='text' placeholder='Name' />
+                                <label htmlFor='catName'>Tên</label>
+                                <input className='form-control' id='catName' type='text' placeholder='Tên' />
                             </div>
                             <div className='form-group'>
                                 <label>Avatar</label>
@@ -138,7 +138,7 @@ class Category extends React.Component {
                 <table className='table table-hover table-bordered'>
                     <thead>
                         <tr>
-                            <th style={{ width: '80%' }}>Name</th>
+                            <th style={{ width: '80%' }}>Tên</th>
                             <th style={{ width: '20%', textAlign: 'center' }} nowrap='true'>Avatar</th>
                             <th style={{ width: 'auto' }}>Active</th>
                             <th style={{ width: 'auto', textAlign: 'center' }} nowrap='true'>Action</th>

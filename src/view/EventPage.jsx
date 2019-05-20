@@ -47,7 +47,7 @@ class EventPage extends React.Component {
                 <table className='table table-hover table-bordered'>
                     <thead>
                         <tr>
-                            <th style={{ width: '80%' }}>Title</th>
+                            <th style={{ width: '80%' }}>Chủ đề</th>
                             <th style={{ width: '20%', textAlign: 'center' }}>Avatar</th>
                             <th style={{ width: 'auto' }} nowrap='true'>Active</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
@@ -89,7 +89,7 @@ class EventPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>No event!</p>;
+            table = <p>Không có sự kiện nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.event && this.props.event.page ?
@@ -98,14 +98,14 @@ class EventPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa-star' /> Event List</h1>
+                        <h1><i className='fa fa-star' /> Danh sách sự kiện</h1>
                         <p></p>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Event List</li>
+                        <li className='breadcrumb-item'>Danh sách event</li>
                     </ul>
                 </div>
 

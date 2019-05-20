@@ -12,14 +12,14 @@ export default class EventCategoryPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa-star' /> Event Category</h1>
+                        <h1><i className='fa fa-star' /> Thể loại sự kiện</h1>
                         <p></p>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Event Category</li>
+                        <li className='breadcrumb-item'>Thể loại sự kiện</li>
                     </ul>
                 </div>
                 <Category type='event' uploadType='eventCategoryImage' />

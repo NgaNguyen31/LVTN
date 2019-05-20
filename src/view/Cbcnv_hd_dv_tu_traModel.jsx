@@ -164,8 +164,8 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                             </div>
                         </div>
                         <div className='modal-footer'>
-                            <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                            <button type='button' className='btn btn-primary' ref={this.btnSave} onClick={this.save}>Save</button>
+                            <button type='button' className='btn btn-secondary' data-dismiss='modal'>Đóng</button>
+                            <button type='button' className='btn btn-primary' ref={this.btnSave} onClick={this.save}>Lưu</button>
                         </div>
                     </div>
                 </div>

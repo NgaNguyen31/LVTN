@@ -36,13 +36,13 @@ class ProfilePage extends React.Component {
             email = $(this.email.current).val().trim(),
             phoneNumber = $(this.phoneNumber.current).val().trim();
         if (firstname == '') {
-            T.notify('Your firstname is empty!', 'danger');
+            T.notify('Trường tên đang trông!', 'danger');
             $(this.firstname.current).focus();
         } else if (lastname == '') {
-            T.notify('Your lastname is empty!', 'danger');
+            T.notify('Trường họ và tên đệm đang trống!', 'danger');
             $(this.lastname.current).focus();
         } else if (email == '') {
-            T.notify('Your email is empty!', 'danger');
+            T.notify('Email đang trống!', 'danger');
             $(this.email.current).focus();
         } else {
             this.props.updateProfile({ firstname, lastname, email, phoneNumber });
@@ -57,27 +57,27 @@ class ProfilePage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa-user' /> Profile</h1>
+                        <h1><i className='fa fa-user' /> Thông tin cá nhân</h1>
                         <p></p>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Profile</li>
+                        <li className='breadcrumb-item'>Thông tin cá nhân</li>
                     </ul>
                 </div>
                 <div className='row'>
                     <div className='col-md-6'>
                         <div className='tile'>
-                            <h3 className='tile-title'>Common information</h3>
+                            <h3 className='tile-title'>Thông tin chung</h3>
                             <div className='tile-body'>
                                 <div className='form-group'>
-                                    <label className='control-label'>Firstname</label>
+                                    <label className='control-label'>Tên</label>
                                     <input className='form-control' type='text' placeholder='Firstname' ref={this.firstname} defaultValue={firstname} />
                                 </div>
                                 <div className='form-group'>
-                                    <label className='control-label'>Lastname</label>
+                                    <label className='control-label'>Họ và tên đệm</label>
                                     <input className='form-control' type='text' placeholder='Lastname' ref={this.lastname} defaultValue={lastname} />
                                 </div>
                                 <div className='form-group'>
@@ -85,12 +85,12 @@ class ProfilePage extends React.Component {
                                     <input className='form-control' type='email' placeholder='Email' ref={this.email} defaultValue={email} />
                                 </div>
                                 <div className='form-group'>
-                                    <label className='control-label'>Phone number</label>
+                                    <label className='control-label'>Số điện thoại</label>
                                     <input className='form-control' type='text' placeholder='Phone number' ref={this.phoneNumber} defaultValue={phoneNumber} />
                                 </div>
                             </div>
                             <div className='tile-footer' style={{ textAlign: 'right' }}>
-                                <button className='btn btn-primary' type='button' onClick={this.saveProfile}>Save</button>
+                                <button className='btn btn-primary' type='button' onClick={this.saveProfile}>Lưu</button>
                             </div>
                         </div>
                     </div>

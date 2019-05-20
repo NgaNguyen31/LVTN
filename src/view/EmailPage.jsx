@@ -88,7 +88,7 @@ export default class EmailPage extends React.Component {
                         <div className='tile'>
                             <ul className='nav nav-tabs'>
                                 <li className='nav-item'>
-                                    <a className='nav-link active' data-toggle='tab' href='#emailContact'>Contact email</a>
+                                    <a className='nav-link active' data-toggle='tab' href='#emailContact'>Email liên hệ</a>
                                 </li>
                             </ul>
                             <div className='tab-content' style={{ marginTop: '12px' }}>

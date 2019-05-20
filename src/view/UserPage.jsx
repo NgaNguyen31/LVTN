@@ -62,11 +62,11 @@ class UserPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%', textAlign: 'center' }}>Name</th>
+                            <th style={{ width: '40%', textAlign: 'center' }}>Họ tên</th>
                             <th style={{ width: '60%', textAlign: 'center' }}>Email</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Avatar</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Role</th>
-                            <th style={{ width: 'auto' }} nowrap='true'>Active</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ảnh đại diện</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Vai trò</th>
+                            <th style={{ width: 'auto' }} nowrap='true'>Trạng thái</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -105,7 +105,7 @@ class UserPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>No user!</p>;
+            table = <p>Không có người dùng!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.user ?
@@ -114,14 +114,14 @@ class UserPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa-user' /> User</h1>
+                        <h1><i className='fa fa-user' /> Người dùng</h1>
                         <p></p>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>User</li>
+                        <li className='breadcrumb-item'>Người dùng</li>
                     </ul>
                 </div>
 

@@ -23,7 +23,7 @@ export default class UserModal extends React.Component {
 
     show(item) {
         const { _id, firstname, lastname, email, phoneNumber, role, active, image } = item ?
-            item : { _id: null, firstname: '', lastname: '', email: '', phoneNumber: '', role: 'user', active: false, image: '' };
+            item : { _id: null, firstname: '', lastname: '', email: '', phoneNumber: '', role: 'admin', active: false, image: '' };
         $('#userFirstname').val(firstname);
         $('#userLastname').val(lastname);
         $('#userEmail').val(email);
@@ -32,7 +32,7 @@ export default class UserModal extends React.Component {
         this.role.current.setText(role);
 
         this.setState({ _id, image });
-        this.imageBox.current.setData('user:' + (_id ? _id : 'new'));
+        this.imageBox.current.setData('admin:' + (_id ? _id : 'new'));
 
         $(this.modal.current).modal('show');
     }
@@ -76,31 +76,31 @@ export default class UserModal extends React.Component {
                 <form className='modal-dialog modal-lg' role='document' onSubmit={this.save}>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>User Information</h5>
+                            <h5 className='modal-title'>Thông tin người dùng</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='userFirstname'>Firstname</label>
-                                <input className='form-control' id='userFirstname' type='text' placeholder='Firstname' />
+                                <label htmlFor='userFirstname'>Tên</label>
+                                <input className='form-control' id='userFirstname' type='text' placeholder='Tên' />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='userLastname'>Lastname</label>
-                                <input className='form-control' id='userLastname' type='text' placeholder='Lastname' />
+                                <label htmlFor='userLastname'>Họ và tên đệm</label>
+                                <input className='form-control' id='userLastname' type='text' placeholder='Họ và tên đệm' />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='userEmail'>Email</label>
                                 <input className='form-control' id='userEmail' type='email' placeholder='Email' />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='userPhoneNumber'>Phone number</label>
-                                <input className='form-control' id='userPhoneNumber' type='text' placeholder='Phone number' />
+                                <label htmlFor='userPhoneNumber'>Số điện thoại</label>
+                                <input className='form-control' id='userPhoneNumber' type='text' placeholder='Số điện thoại' />
                             </div>
                             <div className='row'>
                                 <div className='col-md-6 col-12' style={{ display: 'inline-flex' }}>
-                                    <label>Role: </label>&nbsp;&nbsp;
+                                    <label>Vai trò: </label>&nbsp;&nbsp;
                                     <Dropdown ref={this.role} text='' items={T.roles} />
                                 </div>
                                 <div className='col-md-6 col-12' style={{ display: 'inline-flex' }}>
@@ -118,8 +118,8 @@ export default class UserModal extends React.Component {
                             </div>
                         </div>
                         <div className='modal-footer'>
-                            <button type='button' className='btn btn-secondary' data-dismiss='modal'>Close</button>
-                            <button type='button' className='btn btn-primary' ref={this.btnSave} onClick={this.save}>Save</button>
+                            <button type='button' className='btn btn-secondary' data-dismiss='modal'>Đóng</button>
+                            <button type='button' className='btn btn-primary' ref={this.btnSave} onClick={this.save}>Lưu</button>
                         </div>
                     </div>
                 </form>
