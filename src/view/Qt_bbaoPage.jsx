@@ -17,7 +17,7 @@ class Qt_bbaoPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 0);
+            T.selectMenu(3, 0);
             this.props.getQt_bbaoInPage();
         });
         this.props.getAllCbcnv();
@@ -43,11 +43,11 @@ class Qt_bbaoPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '20%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Bài báo</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên tạp chí</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>Năm</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: '10%', textAlign: 'center' }}>STT</th> */}
+                            <th style={{ width: '40%', textAlign: 'center' }}>Bài báo</th>
+                            <th style={{ width: '35%', textAlign: 'center' }}>Tên tạp chí</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -57,7 +57,7 @@ class Qt_bbaoPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td> */}
                                 <td>{item.BAI_BAO}</td>
                                 <td>{item.TEN_TCHI}</td>
                                 <td>{item.NAM}</td>

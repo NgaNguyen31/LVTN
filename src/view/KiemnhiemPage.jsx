@@ -19,7 +19,7 @@ class KiemnhiemPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 4);
+            T.selectMenu(4, 4);
             this.props.getKiemnhiemInPage();
         });
         this.props.getAllCbcnv();
@@ -50,12 +50,12 @@ class KiemnhiemPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MSBM</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MSCVụ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày chức vụ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Xóa</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>MSBM</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>MSCVụ</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Ngày chức vụ</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Xóa</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -68,7 +68,7 @@ class KiemnhiemPage extends React.Component {
                                 <td>{item.MS_BM.TEN_BM}</td>
                                 <td>{item.MS_CVU.CHUC_VU}</td>
                                 <td>{item.NGAY_CVU}</td>
-                                <td>{item.GHICHU}</td>
+                                {/* <td>{item.GHICHU}</td> */}
                                 <td className='toggle' style={{ textAlign: 'center' }} >
                                     <label>
                                         <input type='checkbox' checked={item.Xoa} onChange={() => this.changeActive(item, index)} /><span className='button-indecator' />

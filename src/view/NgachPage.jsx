@@ -15,7 +15,7 @@ class NgachPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(11, 11);
+            T.selectMenu(5, 11);
             this.props.getNgachInPage();
         });
     }

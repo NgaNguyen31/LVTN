@@ -19,7 +19,7 @@ class Qt_cvuPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 4);
+            T.selectMenu(3, 4);
             this.props.getQt_cvuInPage();
         });
         this.props.getAllCbcnv();

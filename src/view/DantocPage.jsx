@@ -15,7 +15,7 @@ class DantocPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(11, 4);
+            T.selectMenu(5, 4);
             this.props.getDantocInPage();
         });
     }

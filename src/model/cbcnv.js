@@ -2,8 +2,8 @@ module.exports = app =>{
     const schema = app.db.Schema({
         NGHI: { type: app.db.Schema.ObjectId, ref: 'nghi_ctac' },
         TAM_NGUNG: Number,
-        IS_NNGOAI: Boolean,
-        IN_NUOC: Boolean,
+        IS_NNGOAI: String,
+        IN_NUOC: String,
         LOAI: { type: app.db.Schema.ObjectId, ref: 'loai' },
         SHCC: { type: app.db.Schema.ObjectId, ref: 'pctn_nghe_2018' },
         MS_NV: String,

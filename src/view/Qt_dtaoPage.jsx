@@ -17,7 +17,7 @@ class Qt_dtaoPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 6);
+            T.selectMenu(3, 6);
             this.props.getQt_dtaoInPage();
         });
         this.props.getAllCbcnv();

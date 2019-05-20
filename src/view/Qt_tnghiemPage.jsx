@@ -17,7 +17,7 @@ class Qt_tnghiemPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 13);
+            T.selectMenu(3, 13);
             this.props.getQt_tnghiemInPage();
         });
         this.props.getAllCbcnv();

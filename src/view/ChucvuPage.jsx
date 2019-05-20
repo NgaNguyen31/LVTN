@@ -15,7 +15,7 @@ class ChucvuPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(11, 2);
+            T.selectMenu(5, 2);
             this.props.getChucvuInPage();
         });
     }

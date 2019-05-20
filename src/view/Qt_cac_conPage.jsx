@@ -17,7 +17,7 @@ class Qt_cac_conPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 2);
+            T.selectMenu(3, 2);
             this.props.getQt_cac_conInPage();
         });
         this.props.getAllCbcnv();
@@ -43,12 +43,12 @@ class Qt_cac_conPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '20%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên </th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Năm sinh</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>Chức vụ</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>Công tác</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: '20%', textAlign: 'center' }}>STT</th> */}
+                            <th style={{ width: '25%', textAlign: 'center' }}>Tên </th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Năm sinh</th>
+                            <th style={{ width: '25%', textAlign: 'center' }}>Chức vụ</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Công tác</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -58,7 +58,7 @@ class Qt_cac_conPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td> */}
                                 <td>{item.TEN}</td>
                                 <td>{item.NAM_SINH}</td>
                                 <td>{item.CVU}</td>

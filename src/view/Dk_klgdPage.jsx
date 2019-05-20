@@ -18,7 +18,7 @@ class Dk_klgdPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 2);
+            T.selectMenu(4, 2);
             this.props.getDk_klgdInPage();
         });
         this.props.getAllBomon();
@@ -45,20 +45,20 @@ class Dk_klgdPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên bộ môn</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên công việc</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tự đăng kí</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nhóm lớp</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Số sinh viên</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Số tiết thực</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Số tiết quy đổi</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th> */}
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên bộ môn</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên công việc</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Tự đăng kí</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Nhóm lớp</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Số sinh viên</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Số tiết thực</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Số tiết quy đổi</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ ngày</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến ngày</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -68,19 +68,19 @@ class Dk_klgdPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>   
-                                <td>{item.STT}</td>  
+                                {/* <td>{item.STT}</td>  
                                 <td>{item.HO}</td>                         
-                                <td>{item.TEN}</td>  
+                                <td>{item.TEN}</td>   */}
                                 <td>{item.MS_BM.TEN_BM}</td>  
                                 <td>{item.MS_CV.TEN_CV}</td>  
-                                <td>{item.TU_DK}</td>  
+                                {/* <td>{item.TU_DK}</td>   */}
                                 <td>{item.NHOMLOP}</td>  
                                 <td>{item.SO_SV}</td>  
                                 <td>{item.SO_TIET_THUC}</td>  
-                                <td>{item.SO_TIET_QUY_DOI}</td>  
+                                {/* <td>{item.SO_TIET_QUY_DOI}</td>  
                                 <td>{item.TU_NGAY}</td>  
                                 <td>{item.DEN_NGAY}</td> 
-                                <td>{item.GHI_CHU}</td>  
+                                <td>{item.GHI_CHU}</td>   */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

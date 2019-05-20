@@ -17,7 +17,7 @@ class Qt_boiduongPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 1);
+            T.selectMenu(3, 1);
             this.props.getQt_boiduongInPage();
         });
         this.props.getAllCbcnv();
@@ -43,18 +43,18 @@ class Qt_boiduongPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ tháng</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến tháng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nội dung bồi dưỡng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nơi bồi dưỡng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Hình thức</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Chứng chỉ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nộp chứng chỉ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th> */}
+                            <th style={{ width: '35%', textAlign: 'center' }}>Nội dung bồi dưỡng</th>
+                            <th style={{ width: '25%', textAlign: 'center' }}>Nơi bồi dưỡng</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Hình thức</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Chứng chỉ</th>
+                            <th style={{ width: '5%', textAlign: 'center' }}>Nộp chứng chỉ</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -64,17 +64,17 @@ class Qt_boiduongPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td>
                                 <td>{item.TU_THANG}</td>
                                 <td>{item.TU_NAM}</td>
                                 <td>{item.DEN_THANG}</td>
-                                <td>{item.DEN_NAM}</td>
+                                <td>{item.DEN_NAM}</td> */}
                                 <td>{item.NOI_DUNG_BD}</td>
                                 <td>{item.NOI_BOI_DUONG}</td>
                                 <td>{item.HINH_THUC}</td>
                                 <td>{item.CHUNG_CHI}</td>
                                 <td>{item.NOP_CC}</td>
-                                <td>{item.GHI_CHU}</td>
+                                {/* <td>{item.GHI_CHU}</td> */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

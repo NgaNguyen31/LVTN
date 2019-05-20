@@ -19,6 +19,7 @@ let T = {
     chaus: ['Châu Á', 'Châu Âu', 'Châu Mỹ', 'Châu Phi', 'Châu Úc'],
     phais: ['Nam', 'Nữ'],
     nopccs: ['Chưa', 'Rồi'],
+    iss: ['Đúng', 'Không'],
     defaultPageSize: 50,
     defaultUserPageSize: 21,
     newsFeedPageSize: 3,

@@ -17,7 +17,7 @@ class Qt_khenPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 8);
+            T.selectMenu(3, 8);
             this.props.getQt_khenInPage();
         });
         this.props.getAllCbcnv();

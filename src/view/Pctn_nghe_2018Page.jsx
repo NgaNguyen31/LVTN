@@ -19,7 +19,7 @@ class Pctn_nghe_2018Page extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(8, 5);
+            T.selectMenu(2, 5);
             this.props.getPctn_nghe_2018InPage();
         });
     }
@@ -43,16 +43,16 @@ class Pctn_nghe_2018Page extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>SHCC</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày sinh</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MS CDNN</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày PCTN cũ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>PT PCTN cũ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày PCTN mới</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>PT PCTN mới</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Đơn vị</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>SHCC</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Họ</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Tên</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Ngày sinh</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>MS CDNN</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ngày PCTN cũ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>PT PCTN cũ</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Ngày PCTN mới</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>PT PCTN mới</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Đơn vị</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -68,8 +68,8 @@ class Pctn_nghe_2018Page extends React.Component {
                                 <td>{item.TEN}</td>                    
                                 <td>{item.NGAY_SINH}</td>                 
                                 <td>{item.MS_CDNN}</td>                    
-                                <td>{item.NGAY_PCTN_OLD}</td>                    
-                                <td>{item.PT_PCTN_OLD}</td>                    
+                                {/* <td>{item.NGAY_PCTN_OLD}</td>                    
+                                <td>{item.PT_PCTN_OLD}</td>                     */}
                                 <td>{item.NGAY_PCTN_NEW}</td>                    
                                 <td>{item.PT_PCTN_NEW}</td>                    
                                 <td>{item.DON_VI}</td>                    

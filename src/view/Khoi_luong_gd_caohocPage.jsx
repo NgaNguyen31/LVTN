@@ -18,7 +18,7 @@ class Khoi_luong_gd_caohocPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(10, 3);
+            T.selectMenu(4, 3);
             this.props.getKhoi_luong_gd_caohocInPage();
         });
         this.props.getAllCbcnv();
@@ -47,21 +47,21 @@ class Khoi_luong_gd_caohocPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                        <th style={{ width: 'auto', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Học vị học hàm</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Môn giảng dạy</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Dạy khoa</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngành dạy</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Đơn vị</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>ST dạy LT thực tế</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>ST dạy TH</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>ST qui đổi giảng dạy</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Số lương tiểu luận</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tổng ST qui đổi</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tổng cộng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
+                        <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th> */}
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Học vị học hàm</th> */}
+                            <th style={{ width: '20%', textAlign: 'center' }}>Môn giảng dạy</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Dạy khoa</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Ngành dạy</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Đơn vị</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>ST dạy LT thực tế</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>ST dạy TH</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>ST qui đổi giảng dạy</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Số lượng tiểu luận</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Tổng ST qui đổi</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Tổng cộng</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -71,20 +71,20 @@ class Khoi_luong_gd_caohocPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MSNV ? item.MSNV.MS_NV + ' ' : '')}</a>
                                 </td>     
-                                <td>{item.HO}</td>
-                                <td>{item.TEN}</td>
-                                <td>{item.Hocvi_hocham.trinh_do}</td>
+                                {/* <td>{item.HO}</td>
+                                <td>{item.TEN}</td> */}
+                                {/* <td>{item.Hocvi_hocham.trinh_do}</td> */}
                                 <td>{item.Mon_giangday}</td>
                                 <td>{item.Day_khoa.reduce((pre, value) => pre + ' ' +  value.TEN_KHOA, ' ')}</td>
                                 <td>{item.Nganh_day}</td>
-                                <td>{item.Don_vi}</td>
+                                {/* <td>{item.Don_vi}</td> */}
                                 <td>{item.St_day_LT_thucte}</td>
                                 <td>{item.St_day_TH}</td>
-                                <td>{item.St_qui_doi_giangday}</td>
+                                {/* <td>{item.St_qui_doi_giangday}</td> */}
                                 <td>{item.Slg_tieu_luan}</td>
-                                <td>{item.Tong_st_quidoi}</td>
+                                {/* <td>{item.Tong_st_quidoi}</td> */}
                                 <td>{item.Tong_cong}</td>
-                                <td>{item.Ghi_chu}</td>
+                                {/* <td>{item.Ghi_chu}</td> */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

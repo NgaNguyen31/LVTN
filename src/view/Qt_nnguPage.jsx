@@ -18,7 +18,7 @@ class Qt_nnguPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 12);
+            T.selectMenu(3, 12);
             this.props.getQt_nnguInPage();
         });
         this.props.getAllCbcnv();

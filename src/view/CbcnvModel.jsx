@@ -5,7 +5,7 @@ import CbcnvPage from './CbcnvPage.jsx';
 export default class CbcnvModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', boolean :'', nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: []}
+        this.state = {text: '', number: '', date: '', boolean :'', is: [] , nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -23,6 +23,7 @@ export default class CbcnvModal extends React.Component {
         this.dantoc = React.createRef();
         this.tongiao = React.createRef();
         this.benhvien = React.createRef();
+        this.is = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -508,6 +509,7 @@ export default class CbcnvModal extends React.Component {
             dantoc = this.dantoc.current.getSelectedItem(),
             tongiao = this.tongiao.current.getSelectedItem(),
             benhvien = this.benhvien.current.getSelectedItem(),
+            is = this.is.current.getSelectedItem(),
        
             NGHI = nghi_ctac ? nghi_ctac._id: [],
             LOAI = loai ? loai._id : [],
@@ -520,11 +522,13 @@ export default class CbcnvModal extends React.Component {
             DANTOC = dantoc ? dantoc._id : [],
             TON_GIAO = tongiao ? tongiao._id : [],
             MA_BV = benhvien ? benhvien._id : [],
+            IN_NUOC = is? is : [],
+            IS_NNGOAI = is? is : [],
         changes = {
             NGHI,
-            TAM_NGUNG: this.state.number.TAM_NGUNG,
-            IS_NNGOAI: this.state.boolean.IS_NNGOAI,
-            IN_NUOC: this.state.boolean.IN_NUOC,
+            TAM_NGUNG: this.state.text.TAM_NGUNG,
+            IS_NNGOAI,
+            IN_NUOC,
             LOAI,
             SHCC,
             MS_NV: this.state.text.MS_NV,
@@ -663,7 +667,10 @@ export default class CbcnvModal extends React.Component {
             DIEN_GIAI_HD: this.state.number.DIEN_GIAI_HD,
 
         };
-        if (!changes.LOAI) {
+        if (changes.IN_NUOC == 'Đúng' && changes.IS_NNGOAI == 'Đúng'){
+            T.notify('Không thể chọn cả 2 trong nước và đang ở nước ngoài', 'danger');
+            $('#IN_NUOC').focus();
+        } else if (!changes.LOAI) {
             T.notify('Loại đang trống', 'danger');
             $('#LOAI').focus();
         } else if (!changes.SHCC) {
@@ -708,6 +715,7 @@ export default class CbcnvModal extends React.Component {
         const bomon = this.state && this.state.bomon && this.state.bomon.bomon ? this.state.bomon.bomon : [];
         const dantoc = this.state && this.state.dantoc && this.state.dantoc.dantoc ? this.state.dantoc.dantoc : [];
         const tongiao = this.state && this.state.tongiao && this.state.tongiao.tongiao ? this.state.tongiao.tongiao : [];
+        
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -729,11 +737,11 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='IS_NNGOAI'>Người nước ngoài</label>
-                                <input className='form-control' id='IS_NNGOAI' type='boolean' placeholder='' onChange={this.handleInput('boolean', 'IS_NNGOAI')} value={this.state.boolean.IS_NNGOAI}/>
+                                <Dropdown ref={this.is} text='' items={T.iss} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='IN_NUOC'>Trong nước</label>
-                                <input className='form-control' id='IN_NUOC' type='boolean' placeholder='' onChange={this.handleInput('boolean', 'IN_NUOC')} value={this.state.boolean.IN_NUOC}/>
+                                <Dropdown ref={this.is} text='' items={T.iss} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='LOAI'>Loại</label>
@@ -760,7 +768,7 @@ export default class CbcnvModal extends React.Component {
                                 <input className='form-control' id='TEN' type='text' placeholder='Tên' onChange={this.handleInput('text', 'TEN')} value={this.state.text.TEN}/>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='PHAI'>Phái</label>
+                                <label htmlFor='PHAI'>Giới tính</label>
                                 <input className='form-control' id='PHAI' type='text' placeholder='Phái' onChange={this.handleInput('text', 'PHAI')} value={this.state.text.PHAI}/>
                             </div>
                             <div className='form-group'>

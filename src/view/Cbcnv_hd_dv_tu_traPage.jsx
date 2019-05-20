@@ -17,7 +17,7 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(8, 1);
+            T.selectMenu(2, 1);
             this.props.getCbcnv_hd_dv_tu_traInPage();
         });
         this.props.getAllTrinhdo();
@@ -43,17 +43,17 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MSNV</th>
-                            <th style={{ width: 'auto' }}>Họ</th>
+                            <th style={{ width: '10%', textAlign: 'center'  }}>MSNV</th>
+                            {/* <th style={{ width: 'auto' }}>Họ</th>
                             <th style={{ width: 'auto' }}>Tên</th>
                             <th style={{ width: 'auto' }}>Ngày sinh</th>
-                            <th style={{ width: 'auto' }}>Nơi sinh</th>
-                            <th style={{ width: 'auto' }}>Ngày vào</th>
-                            <th style={{ width: 'auto' }}>Ngày nghỉ</th>
-                            <th style={{ width: 'auto' }}>Trình độ</th>
-                            <th style={{ width: 'auto' }}>Đơn vị</th>
-                            <th style={{ width: 'auto' }}>Địa chỉ</th>
-                            <th style={{ width: 'auto' }}>Ghi chú</th>
+                            <th style={{ width: 'auto' }}>Nơi sinh</th> */}
+                            <th style={{ width: '20%', textAlign: 'center'  }}>Ngày vào</th>
+                            {/* <th style={{ width: 'auto' }}>Ngày nghỉ</th> */}
+                            <th style={{ width: '10%', textAlign: 'center'  }}>Trình độ</th>
+                            <th style={{ width: '20%', textAlign: 'center'  }}>Đơn vị</th>
+                            <th style={{ width: '40%', textAlign: 'center'  }}>Địa chỉ</th>
+                            {/* <th style={{ width: 'auto' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>
@@ -63,16 +63,16 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MSNV ? item.MSNV.MS_NV + ' ' : '')}</a>
                                 </td> 
-                                <td>{item.HO}</td>      
+                                {/* <td>{item.HO}</td>      
                                 <td>{item.TEN}</td>
                                 <td>{item.NGAY_SINH}</td>                            
-                                <td>{item.NOI_SINH}</td>
+                                <td>{item.NOI_SINH}</td> */}
                                 <td>{item.NGAY_VAO}</td>
-                                <td>{item.NGAY_NGHI}</td>    
+                                {/* <td>{item.NGAY_NGHI}</td>     */}
                                 <td>{item.TRINH_DO.Ten_day_du}</td>
                                 <td>{item.DON_VI}</td>                     
                                 <td>{item.DIA_CHI}</td>                     
-                                <td>{item.GHI_CHU}</td>                     
+                                {/* <td>{item.GHI_CHU}</td>                      */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

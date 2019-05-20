@@ -17,7 +17,7 @@ class Cb_nngoaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(8, 0);
+            T.selectMenu(2, 0);
             this.props.getCb_nngoaiInPage();
         });
         this.props.getAllNuoc();
@@ -43,15 +43,15 @@ class Cb_nngoaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>Họ và tên</th>
-                            <th style={{ width: '60%' }}>Nước</th>
-                            <th style={{ width: 'auto' }}>Ngày đi</th>
-                            <th style={{ width: 'auto' }}>Ngày về</th>
-                            <th style={{ width: 'auto' }}>Thời gian</th>
-                            <th style={{ width: 'auto' }}>Mục đích</th>
-                            <th style={{ width: 'auto' }}>Gia hạn</th>
-                            <th style={{ width: 'auto' }}>Số công văn</th>
-                            <th style={{ width: 'auto' }}>Ngày công văn</th>
+                            <th style={{ width: '20%', textAlign: 'center'  }}>Họ và tên</th>
+                            <th style={{ width: '10%', textAlign: 'center'  }}>Nước</th>
+                            {/* <th style={{ width: 'auto' }}>Ngày đi</th>
+                            <th style={{ width: 'auto' }}>Ngày về</th> */}
+                            <th style={{ width: 'auto', textAlign: 'center'  }}>Thời gian</th>
+                            <th style={{ width: 'auto', textAlign: 'center'  }}>Mục đích</th>
+                            <th style={{ width: 'auto', textAlign: 'center'  }}>Gia hạn</th>
+                            <th style={{ width: 'auto', textAlign: 'center'  }}>Số công văn</th>
+                            <th style={{ width: 'auto', textAlign: 'center'  }}>Ngày công văn</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>
@@ -59,11 +59,11 @@ class Cb_nngoaiPage extends React.Component {
                         {this.props.cb_nngoai.page.list.map((item, index) => (
                             <tr key={index}>         
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten.HO + item.Hovaten.TEN : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten.HO + ' ' + item.Hovaten.TEN : '')}</a>
                                 </td> 
                                 <td>{item.Nuoc.TEN_NUOC}</td>      
-                                <td>{item.Ngaydi}</td>
-                                <td>{item.Ngayve}</td>                            
+                                {/* <td>{item.Ngaydi}</td>
+                                <td>{item.Ngayve}</td>                             */}
                                 <td>{item.Thoigian}</td>
                                 <td>{item.Mucdich}</td>
                                 <td>{item.Giahan}</td>    

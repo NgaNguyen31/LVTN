@@ -18,7 +18,7 @@ class Qt_ctacPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 3);
+            T.selectMenu(3, 3);
             this.props.getQt_ctacInPage();
         });
         this.props.getAllCbcnv();
@@ -45,17 +45,17 @@ class Qt_ctacPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ tháng</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến tháng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Chức vụ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nơi công tác</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Bộ môn công tác</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Công việc</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Chức vụ</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Nơi công tác</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Bộ môn công tác</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Công việc</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -65,16 +65,16 @@ class Qt_ctacPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td>
                                 <td>{item.TU_THANG}</td>
                                 <td>{item.TU_NAM}</td>
                                 <td>{item.DEN_THANG}</td>
-                                <td>{item.DEN_NAM}</td>
+                                <td>{item.DEN_NAM}</td> */}
                                 <td>{item.CHUC_VU.CHUC_VU}</td>
                                 <td>{item.NOI_CONG_TAC}</td>
                                 <td>{item.BO_MON_CT}</td>
                                 <td>{item.CONG_VIEC}</td>
-                                <td>{item.GHI_CHU}</td>
+                                {/* <td>{item.GHI_CHU}</td> */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

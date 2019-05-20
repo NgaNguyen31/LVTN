@@ -17,7 +17,7 @@ class Cbcnv_hd_khoaPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(8, 2);
+            T.selectMenu(2, 2);
             this.props.getCbcnv_hd_khoaInPage();
         });
         this.props.getAllBomon();
@@ -46,16 +46,16 @@ class Cbcnv_hd_khoaPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '40%' }}>MSBM</th>
-                            <th style={{ width: 'auto' }}>Họ</th>
-                            <th style={{ width: 'auto' }}>Tên</th>
-                            <th style={{ width: 'auto' }}>Phái</th>
-                            <th style={{ width: 'auto' }}>Năm sinh</th>
-                            <th style={{ width: 'auto' }}>Thẻ BHYT</th>
+                            <th style={{ width: '10%', textAlign: 'center'  }}>MSBM</th>
+                            <th style={{ width: '25%', textAlign: 'center'  }}>Họ</th>
+                            <th style={{ width: '15%', textAlign: 'center'  }}>Tên</th>
+                            <th style={{ width: '15%', textAlign: 'center'  }}>Giới tính</th>
+                            <th style={{ width: '20%', textAlign: 'center'  }}>Năm sinh</th>
+                            {/* <th style={{ width: 'auto' }}>Thẻ BHYT</th>
                             <th style={{ width: 'auto' }}>Nơi khám</th>
                             <th style={{ width: 'auto' }}>LCB</th>
-                            <th style={{ width: 'auto' }}>PC</th>
-                            <th style={{ width: 'auto' }}>Xóa</th>
+                            <th style={{ width: 'auto' }}>PC</th> */}
+                            <th style={{ width: '15%', textAlign: 'center'  }}>Xóa</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>
@@ -69,10 +69,10 @@ class Cbcnv_hd_khoaPage extends React.Component {
                                 <td>{item.TEN}</td>
                                 <td>{item.PHAI}</td>                            
                                 <td>{item.NAM_SINH}</td>
-                                <td>{item.The_BHYT}</td>
+                                {/* <td>{item.The_BHYT}</td>
                                 <td>{item.Noi_kham}</td>    
                                 <td>{item.LCB}</td>
-                                <td>{item.PC}</td>                     
+                                <td>{item.PC}</td>                      */}
                                 <td className='toggle' style={{ textAlign: 'center' }} >
                                     <label>
                                         <input type='checkbox' checked={item.Xoa} onChange={() => this.changeActive(item, index)} /><span className='button-indecator' />

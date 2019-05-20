@@ -17,7 +17,7 @@ class Qt_gtrinhPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 7);
+            T.selectMenu(3, 7);
             this.props.getQt_gtrinhInPage();
         });
         this.props.getAllCbcnv();
@@ -43,11 +43,11 @@ class Qt_gtrinhPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '20%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Giáo trình</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Năm XB</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>Nhà XB</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: '20%', textAlign: 'center' }}>STT</th> */}
+                            <th style={{ width: '50%', textAlign: 'center' }}>Giáo trình</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Năm XB</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Nhà XB</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -57,7 +57,7 @@ class Qt_gtrinhPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td> */}
                                 <td>{item.G_Trinh}</td>
                                 <td>{item.NamXB}</td>
                                 <td>{item.NhaXB}</td>

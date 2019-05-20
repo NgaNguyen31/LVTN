@@ -18,7 +18,7 @@ class Qt_nngoaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 10);
+            T.selectMenu(3, 10);
             this.props.getQt_nngoaiInPage();
         });
         this.props.getAllCbcnv();

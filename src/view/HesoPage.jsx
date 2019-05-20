@@ -15,7 +15,7 @@ class HesoPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(11, 5);
+            T.selectMenu(5, 5);
             this.props.getHesoInPage();
         });
     }

@@ -17,7 +17,7 @@ class Qt_ky_luatPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 9);
+            T.selectMenu(3, 9);
             this.props.getQt_ky_luatInPage();
         });
         this.props.getAllCbcnv();

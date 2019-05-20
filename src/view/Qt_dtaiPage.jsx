@@ -17,7 +17,7 @@ class Qt_dtaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(9, 5);
+            T.selectMenu(3, 5);
             this.props.getQt_dtaiInPage();
         });
         this.props.getAllCbcnv();
@@ -43,13 +43,13 @@ class Qt_dtaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '20%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Đề tài</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Chủ nhiệm đề tài</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Cấp</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày kết thúc</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>Năm</th>
+                            <th style={{ width: '10%%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: '20%', textAlign: 'center' }}>STT</th> */}
+                            <th style={{ width: '30%', textAlign: 'center' }}>Đề tài</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Chủ nhiệm đề tài</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Cấp</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Ngày kết thúc</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -59,7 +59,7 @@ class Qt_dtaiPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td> */}
                                 <td>{item.DE_TAI}</td>
                                 <td>{item.CHU_NHIEM_DE_TAI}</td>
                                 <td>{item.CAP}</td>
