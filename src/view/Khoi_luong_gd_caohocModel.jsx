@@ -131,6 +131,24 @@ export default class Khoi_luong_gd_caohocModal extends React.Component {
         } else  if (!changes.Ghi_chu) {
             T.notify('Ghi chú đang trống!', 'danger');
             $('#Ghi_chu').focus();                 
+        } else if (changes.St_day_LT_thucte < 0) {
+            T.notify('ST dạy LT thực tế không được là số âm', 'danger');
+            $('#St_day_LT_thucte').focus();
+        } else if (changes.St_day_TH < 0) {
+            T.notify('ST dạy TH không được là số âm', 'danger');
+            $('#St_day_TH').focus();
+        } else if (changes.St_qui_doi_giangday < 0) {
+            T.notify('ST qui đổi giảng dạy không được là số âm', 'danger');
+            $('#St_qui_doi_giangday').focus();
+        } else if (changes.Tong_st_quidoi < 0) {
+            T.notify('Tổng ST qui đổi không được là số âm', 'danger');
+            $('#Tong_st_quidoi').focus();
+        } else if (changes.Tong_cong < 0) {
+            T.notify('Tổng cộng không được là số âm', 'danger');
+            $('#Tong_cong').focus();
+        } else if (changes.Slg_tieu_luan < 0) {
+            T.notify('Số lượng tiểu luận không được là số âm', 'danger');
+            $('#Slg_tieu_luan').focus();
         } else if (this.state._id) {
             this.props.updateKhoi_luong_gd_caohoc(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

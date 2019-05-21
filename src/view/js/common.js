@@ -20,6 +20,7 @@ let T = {
     phais: ['Nam', 'Nữ'],
     nopccs: ['Chưa', 'Rồi'],
     iss: ['Đúng', 'Không'],
+    giahans: ['Có', 'Không'],
     defaultPageSize: 50,
     defaultUserPageSize: 21,
     newsFeedPageSize: 3,

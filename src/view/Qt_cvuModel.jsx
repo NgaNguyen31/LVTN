@@ -97,6 +97,12 @@ export default class Qt_cvuModal extends React.Component {
         } else if (!changes.STT) {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.STT < 0) {
+            T.notify('STT không được là số âm', 'danger');
+            $('#STT').focus();
+        } else if (changes.HE_SO_PCCV < 0) {
+            T.notify('Hệ số PCCV không được là số âm', 'danger');
+            $('#HE_SO_PCCV').focus();
         } else if (this.state._id) {
             this.props.updateQt_cvu(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

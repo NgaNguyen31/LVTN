@@ -56,6 +56,9 @@ export default class TinhModal extends React.Component {
         } else if (!changes.MS_VUNG) {
             T.notify('Mã số vùng đang trống!', 'danger');
             $('#MS_VUNG').focus();
+        } else if (changes.MS_VUNG < 0) {
+            T.notify('MS vùng không được là số âm', 'danger');
+            $('#MS_VUNG').focus();
         } else if (this.state._id) {
             this.props.updateTinh(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -85,7 +88,7 @@ export default class TinhModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenTinh'>Mã số vùng</label>
-                                <input className='form-control' id='MS_VUNG' type='text' placeholder='Mã số vùng' onChange={this.handleInput('text', 'MS_VUNG')} value={this.state.text.MS_VUNG}/>
+                                <input className='form-control' id='MS_VUNG' type='number' placeholder='Mã số vùng' onChange={this.handleInput('text', 'MS_VUNG')} value={this.state.text.MS_VUNG}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

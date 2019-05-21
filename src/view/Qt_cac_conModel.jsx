@@ -75,6 +75,9 @@ export default class Qt_cac_conModal extends React.Component {
         } else if (!changes.TEN) {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();
+        } else if (changes.STT < 0) {
+            T.notify('STT không được là số âm', 'danger');
+            $('#STT').focus();
         } else if (this.state._id) {
             this.props.updateQt_cac_con(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

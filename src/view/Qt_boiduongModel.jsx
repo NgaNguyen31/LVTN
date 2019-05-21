@@ -93,6 +93,9 @@ export default class Qt_boiduongModal extends React.Component {
         } else if (!changes.NOI_BOI_DUONG) {
             T.notify('Nơi bồi dưỡng đang trống!', 'danger');
             $('#NOI_BOI_DUONG').focus();
+        } else if (changes.STT < 0) {
+            T.notify('STT không được là số âm', 'danger');
+            $('#STT').focus();
         } else if (this.state._id) {
             this.props.updateQt_boiduong(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

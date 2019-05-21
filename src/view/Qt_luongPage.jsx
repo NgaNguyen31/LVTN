@@ -44,20 +44,20 @@ class Qt_luongPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '30%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: '30%', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: '30%', textAlign: 'center' }}>STT</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>QĐ lương</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày hưởng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Mốc năng lượng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngạch</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Hệ số</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Bậc</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>% vượt khủng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Lương khoản chính</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tỷ lệ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú lương</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú khác</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th> */}
+                            <th style={{ width: '30%', textAlign: 'center' }}>Ngày hưởng</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Mốc năng lượng</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Ngạch</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Hệ số</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Bậc</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>% vượt khủng</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Lương khoản chính</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Tỷ lệ</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú lương</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú khác</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -67,19 +67,19 @@ class Qt_luongPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td>
                                 <td>{item.QD_luong}</td>
-                                <td>{item.Ngay_QD}</td>
+                                <td>{item.Ngay_QD}</td> */}
                                 <td>{item.Ngay_huong}</td>
-                                <td>{item.Moc_nang_luong}</td>
+                                {/* <td>{item.Moc_nang_luong}</td> */}
                                 <td>{item.Ngach.NGACH}</td>
                                 <td>{item.Heso}</td>
                                 <td>{item.Bac}</td>
                                 <td>{item.PT_Vuot_Khung}</td>
                                 <td>{item.LG_Khoan_Chinh}</td>
                                 <td>{item.Ty_le}</td>
-                                <td>{item.GHI_CHU_LUONG}</td>
-                                <td>{item.GHI_CHU_KHAC}</td>
+                                {/* <td>{item.GHI_CHU_LUONG}</td>
+                                <td>{item.GHI_CHU_KHAC}</td> */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

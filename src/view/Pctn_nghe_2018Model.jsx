@@ -68,7 +68,7 @@ export default class Pctn_nghe_2018Modal extends React.Component {
             NGAY_PCTN_NEW: this.state.date.NGAY_PCTN_NEW,
             PT_PCTN_NEW: this.state.number.PT_PCTN_NEW,
             DON_VI: this.state.text.DON_VI,
-        };
+        };        
         
         if (this.state.text == '')  {
             T.notify('Bạn phải điền dữ liệu!', 'danger');
@@ -103,6 +103,15 @@ export default class Pctn_nghe_2018Modal extends React.Component {
         } else if (!changes.DON_VI) {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#DON_VI').focus();
+        } else if (changes.SHCC < 0) {
+            T.notify('SHCC không được là số âm', 'danger');
+            $('#SHCC').focus();
+        } else if (changes.PT_PCTN_OLD < 0) {
+            T.notify('Phần trăm PCTN cũ không được là số âm', 'danger');
+            $('#PT_PCTN_OLD').focus();
+        } else if (changes.PT_PCTN_NEW < 0) {
+            T.notify('Phần trăm PCTN mới không được là số âm', 'danger');
+            $('#PT_PCTN_NEW').focus();
         } else if (this.state._id) {
             this.props.updatePctn_nghe_2018(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

@@ -5,7 +5,7 @@ import Cb_nngoaiPage from './Cb_nngoaiPage.jsx';
 export default class Cb_nngoaiModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', nuoc: [], cbcnv: []}
+        this.state = {text: '', nuoc: [], cbcnv: [], giahan: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -14,6 +14,7 @@ export default class Cb_nngoaiModal extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.nuoc = React.createRef();
         this.cbcnv = React.createRef();
+        this.giahan = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -56,8 +57,10 @@ export default class Cb_nngoaiModal extends React.Component {
         e.preventDefault();
         const nuoc = this.nuoc.current.getSelectedItem(),
             cbcnv = this.cbcnv.current.getSelectedItem(),
+            giahan = this.giahan.current.getSelectedItem(),
             Nuoc = nuoc? nuoc._id : null,
             Hovaten = cbcnv? cbcnv._id: null,
+            Giahan = giahan ? giahan : [],
             changes = {
                 Hovaten,
                 Nuoc,
@@ -65,7 +68,7 @@ export default class Cb_nngoaiModal extends React.Component {
                 Ngayve: this.state.text.Ngayve,
                 Thoigian: this.state.text.Thoigian,
                 Mucdich: this.state.text.Mucdich,
-                Giahan: this.state.text.Giahan,
+                Giahan,
                 SoCVan: this.state.text.SoCVan,
                 NgayCVan: this.state.text.NgayCVan,
         };
@@ -81,6 +84,9 @@ export default class Cb_nngoaiModal extends React.Component {
         } else if (!changes.Thoigian) {
             T.notify('Thời gian đang trống!', 'danger');
             $('#Thoigian').focus();            
+        } else if (changes.Thoigian < 0) {
+            T.notify('Thời gian Không được là số âm!', 'danger');
+            $('#Thoigian').focus();            
         } else if (!changes.Mucdich) {
             T.notify('Mục đích đang trống!', 'danger');
             $('#Mucdich').focus();            
@@ -89,6 +95,9 @@ export default class Cb_nngoaiModal extends React.Component {
             $('#Giahan').focus();            
         } else if (!changes.SoCVan) {
             T.notify('Số công văn đang trống!', 'danger');
+            $('#SoCVan').focus();            
+        } else if (changes.SoCVan < 0 ) {
+            T.notify('Số công văn không được âm!', 'danger');
             $('#SoCVan').focus();            
         } else if (!changes.NgayCVan) {
             T.notify('Ngày công văn đang trống!', 'danger');
@@ -145,7 +154,7 @@ export default class Cb_nngoaiModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="Giahan">Gia hạn</label>
-                                <input className='form-control' id='Giahan' type='number' placeholder='Gia hạn' onChange={this.handleInput('text', 'Giahan')} value={this.state.text.Giahan}/>
+                                <Dropdown ref={this.giahan} number='' items={T.giahans} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="SoCVan">Số công văn</label>

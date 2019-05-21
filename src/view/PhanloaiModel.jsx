@@ -56,6 +56,9 @@ export default class PhanloaiModal extends React.Component {
         } else if (!changes.LOAI) {
             T.notify('Loại đang trống!', 'danger');
             $('#LOAI').focus();
+        } else if (changes.ORD < 0) {
+            T.notify('ORD không được là số âm', 'danger');
+            $('#ORD').focus();
         } else if (this.state._id) {
             this.props.updatePhanloai(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

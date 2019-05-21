@@ -18,7 +18,7 @@ class Qt_nngoaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(3, 10);
+            T.selectMenu(3, 11);
             this.props.getQt_nngoaiInPage();
         });
         this.props.getAllCbcnv();
@@ -46,28 +46,28 @@ class Qt_nngoaiPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '30%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Số QĐ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Đơn vị</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày đi</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày về</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày vè thực</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th> */}
+                            <th style={{ width: '25%', textAlign: 'center' }}>Đơn vị</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ngày đi</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày về</th> */}
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ngày về thực</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Số QĐ tiếp nhận</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ tiếp nhận</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Mục đích</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nội dung</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ tiếp nhận</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Mục đích</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Nội dung</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngành học</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Gia hạn</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nước đến</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nơi đến</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Chi phí</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Gia hạn</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Nước đến</th>
+                            <th style={{ width: '25%', textAlign: 'center' }}>Nơi đến</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Chi phí</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Hoàn trả KP BHXH</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày nhập</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>BHXH</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>BHXH</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -77,27 +77,27 @@ class Qt_nngoaiPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.HO}</td>
+                                {/* <td>{item.HO}</td>
                                 <td>{item.TEN}</td>
                                 <td>{item.SO_QUYET_DINH}</td>
-                                <td>{item.NGAY_QDINH}</td>
+                                <td>{item.NGAY_QDINH}</td> */}
                                 <td>{item.DON_VI}</td>
-                                <td>{item.NGAY_DI}</td>
-                                <td>{item.NGAY_VE}</td>
-                                <td>{item.NGAY_VE_THUC}</td>
+                                {/* <td>{item.NGAY_DI}</td>
+                                <td>{item.NGAY_VE}</td> */}
+                                {/* <td>{item.NGAY_VE_THUC}</td>
                                 <td>{item.SO_QD_TIEP_NHAN}</td>
-                                <td>{item.NGAY_QD_TIEP_NHAN}</td>
+                                <td>{item.NGAY_QD_TIEP_NHAN}</td> */}
                                 <td>{item.MUC_DICH.MUC_DICH}</td>
-                                <td>{item.NOI_DUNG}</td>
+                                {/* <td>{item.NOI_DUNG}</td>
                                 <td>{item.NGANH_HOC}</td>
-                                <td>{item.GIA_HAN}</td>
+                                <td>{item.GIA_HAN}</td> */}
                                 <td>{item.NUOC_DEN.reduce((pre, value) => pre + ' ' +  value.TEN_NUOC, ' ')}</td>
                                 <td>{item.NOI_DEN}</td>
                                 <td>{item.CHI_PHI}</td>
-                                <td>{item.GHI_CHU}</td>
+                                {/* <td>{item.GHI_CHU}</td>
                                 <td>{item.HOAN_TRA_KP_BHXH}</td>
                                 <td>{item.NGAY_NHAP}</td>
-                                <td>{item.BHXH}</td>
+                                <td>{item.BHXH}</td> */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

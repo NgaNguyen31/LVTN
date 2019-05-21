@@ -56,6 +56,12 @@ export default class HesoModal extends React.Component {
         } else if (!changes.TL) {
             T.notify('TL đang trống!', 'danger');
             $('#TL').focus();
+        } else if (changes.MLTT < 0) {
+            T.notify('MLTT không được là số âm', 'danger');
+            $('#MLTT').focus();
+        } else if (changes.TL < 0) {
+            T.notify('TL không được là số âm', 'danger');
+            $('#TL').focus();
         } else if (this.state._id) {
             this.props.updateHeso(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

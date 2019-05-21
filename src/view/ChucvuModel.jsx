@@ -60,6 +60,9 @@ export default class ChucvuModal extends React.Component {
         } else if (!changes.CHUC_VU) {
             T.notify('Chức vụ đang trống!', 'danger');
             $('#CHUC_VU').focus();
+        } else if (changes.PC_CVU < 0) {
+            T.notify('Phân cấp chức vụ không được là số âm', 'danger');
+            $('#PC_CVU').focus();
         } else if (this.state._id) {
             this.props.updateChucvu(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

@@ -66,6 +66,9 @@ export default class Qt_tnghiemModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
+        } else if (changes.STT < 0) {
+            T.notify('STT không được là số âm', 'danger');
+            $('#STT').focus();
         } else if (this.state._id) {
             this.props.updateQt_tnghiem(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

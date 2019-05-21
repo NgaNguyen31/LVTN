@@ -43,10 +43,10 @@ class Qt_tnghiemPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '30%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: '30%', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Bài TN</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Năm</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '55%', textAlign: 'center' }}>Bài TN</th>
+                            <th style={{ width: '25%', textAlign: 'center' }}>Năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>

@@ -99,6 +99,18 @@ export default class Dk_klgdModal extends React.Component {
         } else if (!changes.MS_CV) {
             T.notify('MS_CV đang trống!', 'danger');
             $('#MS_CV').focus();
+        } else if (changes.STT < 0) {
+            T.notify('STT không được là số âm', 'danger');
+            $('#STT').focus();
+        } else if (changes.SO_SV < 0) {
+            T.notify('Số SV không được là số âm', 'danger');
+            $('#SO_SV').focus();
+        } else if (changes.SO_TIET_THUC < 0) {
+            T.notify('Số tiết thực không được là số âm', 'danger');
+            $('#SO_TIET_THUC').focus();
+        } else if (changes.SO_TIET_QUY_DOI < 0) {
+            T.notify('Số tiết quy đổi không được là số âm', 'danger');
+            $('#SO_TIET_QUY_DOI').focus();
         } else if (this.state._id) {
             this.props.updateDk_klgd(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

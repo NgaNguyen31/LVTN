@@ -92,6 +92,24 @@ export default class Qt_luongModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
+        } else if (changes.STT < 0) {
+            T.notify('STT không được là số âm', 'danger');
+            $('#STT').focus();
+        } else if (changes.Heso < 0) {
+            T.notify('Hệ số không được là số âm', 'danger');
+            $('#Heso').focus();
+        } else if (changes.Bac < 0) {
+            T.notify('Bậc không được là số âm', 'danger');
+            $('#Bac').focus();
+        } else if (changes.PT_Vuot_Khung < 0) {
+            T.notify('Phần trăm vượt khung không được là số âm', 'danger');
+            $('#PT_Vuot_Khung').focus();
+        } else if (changes.LG_Khoan_Chinh < 0) {
+            T.notify('Lương khoảng chính không được là số âm', 'danger');
+            $('#LG_Khoan_Chinh').focus();
+        } else if (changes.Ty_le < 0) {
+            T.notify('Tỷ lệ không được là số âm', 'danger');
+            $('#Ty_le').focus();
         } else if (this.state._id) {
             this.props.updateQt_luong(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

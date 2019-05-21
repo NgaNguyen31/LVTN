@@ -43,21 +43,21 @@ class Qt_dtaoPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ tháng</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến tháng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Cấp đào tạo</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Chuyên ngành</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Nơi đào tạo</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Quốc gia</th>                            
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th> */}
+                            <th style={{ width: '20%', textAlign: 'center' }}>Cấp đào tạo</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Chuyên ngành</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Nơi đào tạo</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Quốc gia</th>                            
                             <th style={{ width: 'auto', textAlign: 'center' }}>Hình thức</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Loại TN</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Năm</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Có nộp bằng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Loại TN</th> */}
+                            <th style={{ width: '20%', textAlign: 'center' }}>Năm</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Có nộp bằng</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -67,20 +67,20 @@ class Qt_dtaoPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
+                                {/* <td>{item.STT}</td>
                                 <td>{item.TU_THANG}</td>
                                 <td>{item.TU_NAM}</td>
                                 <td>{item.DEN_THANG}</td>
-                                <td>{item.DEN_NAM}</td>
+                                <td>{item.DEN_NAM}</td> */}
                                 <td>{item.cap_dt}</td>
                                 <td>{item.CHUYEN_NGANH}</td>
                                 <td>{item.NOI_DT}</td>
-                                <td>{item.QUOC_GIA}</td>                                
+                                {/* <td>{item.QUOC_GIA}</td>                                
                                 <td>{item.HINH_THUC}</td>
-                                <td>{item.LOAI_TN}</td>
+                                <td>{item.LOAI_TN}</td> */}
                                 <td>{item.NAM}</td>
-                                <td>{item.CO_NOP_BANG}</td>
-                                <td>{item.GHI_CHU}</td>
+                                {/* <td>{item.CO_NOP_BANG}</td>
+                                <td>{item.GHI_CHU}</td> */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

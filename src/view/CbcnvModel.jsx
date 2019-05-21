@@ -5,7 +5,7 @@ import CbcnvPage from './CbcnvPage.jsx';
 export default class CbcnvModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', boolean :'', is: [] , nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: []}
+        this.state = {text: '', number: '', date: '', boolean :'', is: [] , nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: [], nopcc: [], giahan: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -24,6 +24,8 @@ export default class CbcnvModal extends React.Component {
         this.tongiao = React.createRef();
         this.benhvien = React.createRef();
         this.is = React.createRef();
+        this.nopcc = React.createRef();
+        this.giahan = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -509,6 +511,8 @@ export default class CbcnvModal extends React.Component {
             dantoc = this.dantoc.current.getSelectedItem(),
             tongiao = this.tongiao.current.getSelectedItem(),
             benhvien = this.benhvien.current.getSelectedItem(),
+            nopcc = this.nopcc.current.getSelectedItem(),
+            giahan = this.giahan.current.getSelectedItem(),
             is = this.is.current.getSelectedItem(),
        
             NGHI = nghi_ctac ? nghi_ctac._id: [],
@@ -524,6 +528,13 @@ export default class CbcnvModal extends React.Component {
             MA_BV = benhvien ? benhvien._id : [],
             IN_NUOC = is? is : [],
             IS_NNGOAI = is? is : [],
+            DANG_VIEN = nopcc ? nopcc : [],
+            DOAN_VIEN = nopcc ? nopcc : [],
+            NO_PC = nopcc ? nopcc : [],
+            NO_DONG_BHXH = nopcc ? nopcc : [],
+            NO_BHXH = nopcc ? nopcc : [],
+            TANG = giahan ? giahan : [],
+            GIAM = giahan ? giahan : [],
         changes = {
             NGHI,
             TAM_NGUNG: this.state.text.TAM_NGUNG,
@@ -612,10 +623,10 @@ export default class CbcnvModal extends React.Component {
             SO_THE: this.state.number.SO_THE,
             NGAY_DANG_DB: this.state.date.NGAY_DANG_DB,
             NOI_DANG_DB: this.state.text.NOI_DANG_DB,
-            DANG_VIEN: this.state.number.DANG_VIEN,
+            DANG_VIEN,
             NGAY_DANG_CT: this.state.date.NGAY_DANG_CT,
             NOI_DANG_CT: this.state.text.NOI_DANG_CT,
-            DOAN_VIEN: this.state.text.DOAN_VIEN,
+            DOAN_VIEN,
             NGAY_DOAN: this.state.date.NGAY_DOAN,
             NOI_DOAN: this.state.text.NOI_DOAN,
             NOI_DKHK: this.state.text.NOI_DKHK,
@@ -649,15 +660,15 @@ export default class CbcnvModal extends React.Component {
             MASO_BHXH: this.state.text.MASO_BHXH,
             GHI_CHU_NOP_SO_BHXH: this.state.text.GHI_CHU_NOP_SO_BHXH,
             SO_BHXH: this.state.text.SO_BHXH,
-            NO_PC: this.state.boolean.NO_PC,
-            NO_DONG_BHXH: this.state.boolean.NO_DONG_BHXH,
+            NO_PC,
+            NO_DONG_BHXH,
             GHICHU_BHXH: this.state.text.GHICHU_BHXH,
-            NO_BHXH: this.state.boolean.NO_BHXH,
+            NO_BHXH,
             GHICHU_KY_HIEU: this.state.text.GHICHU_KY_HIEU,
             HIEULUC_GD_HD: this.state.date.HIEULUC_GD_HD,
-            TANG: this.state.text.TANG,
+            TANG,
             KH_TANG: this.state.text.KH_TANG,
-            GIAM: this.state.text.GIAM,
+            GIAM,
             KH_GIAM: this.state.text.KH_GIAM,
             SO_QH_HD: this.state.text.SO_QH_HD,
             NGAY_KY_QH_HD: this.state.date.NGAY_KY_QH_HD,
@@ -691,6 +702,66 @@ export default class CbcnvModal extends React.Component {
         } else if (!changes.NGAY_SINH) {
             T.notify('Ngày sinh đang trống', 'danger');
             $('#NGAY_SINH').focus();
+        } else if (changes.BAC_LG < 0) {
+            T.notify('Bậc lương không được là số âm', 'danger');
+            $('#BAC_LG').focus();
+        } else if (changes.HESO_LG < 0) {
+            T.notify('Hệ số lương không được là số âm', 'danger');
+            $('#HESO_LG').focus();
+        } else if (changes.VUOT_KHUNG < 0) {
+            T.notify('Vượt khung không được là số âm', 'danger');
+            $('#VUOT_KHUNG').focus();
+        } else if (changes.PCTN_CU < 0) {
+            T.notify('PCTN cũ không được là số âm', 'danger');
+            $('#PCTN_CU').focus();
+        } else if (changes.PCTN_NEW < 0) {
+            T.notify('PCTN mới không được là số âm', 'danger');
+            $('#PCTN_NEW').focus();
+        } else if (changes.TYLE_PCUD < 0) {
+            T.notify('Tỷ lệ PCUD không được là số âm', 'danger');
+            $('#TYLE_PCUD').focus();
+        } else if (changes.PC_DOC_HAI < 0) {
+            T.notify('PC độc hại không được là số âm', 'danger');
+            $('#PC_DOC_HAI').focus();
+        } else if (changes.PCCV < 0) {
+            T.notify('PCCV không được là số âm', 'danger');
+            $('#PCCV').focus();
+        } else if (changes.GS < 0) {
+            T.notify('GS không được là số âm', 'danger');
+            $('#GS').focus();
+        } else if (changes.PGS < 0) {
+            T.notify('PGS không được là số âm', 'danger');
+            $('#PGS').focus();
+        } else if (changes.GVC < 0) {
+            T.notify('GVC không được là số âm', 'danger');
+            $('#GVC').focus();
+        } else if (changes.GV < 0) {
+            T.notify('GV không được là số âm', 'danger');
+            $('#GV').focus();
+        } else if (changes.GVTH < 0) {
+            T.notify('GVTH không được là số âm', 'danger');
+            $('#GVTH').focus();
+        } else if (changes.TG < 0) {
+            T.notify('TG không được là số âm', 'danger');
+            $('#TG').focus();
+        } else if (changes.NVC < 0) {
+            T.notify('NVC không được là số âm', 'danger');
+            $('#NVC').focus();
+        } else if (changes.CVC < 0) {
+            T.notify('CVC không được là số âm', 'danger');
+            $('#CVC').focus();
+        } else if (changes.SO_THE < 0) {
+            T.notify('Số thẻ không được là số âm', 'danger');
+            $('#SO_THE').focus();
+        } else if (changes.LOAI_GIAY_TO < 0) {
+            T.notify('Loại giấy tờ không được là số âm', 'danger');
+            $('#LOAI_GIAY_TO').focus();
+        } else if (changes.MA_TINH_BV < 0) {
+            T.notify('Mã tỉnh BV không được là số âm', 'danger');
+            $('#MA_TINH_BV').focus();
+        } else if (changes.DIEN_GIAI_HD < 0) {
+            T.notify('Diễn giải HĐ không được là số âm', 'danger');
+            $('#DIEN_GIAI_HD').focus();
         } else if (this.state._id) {
             this.props.updateCbcnv(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -835,7 +906,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGACHMOI'>Ngạch mới</label>
-                                <input className='form-control' id='NGACHMOI' type='number' placeholder='Ngạch mới' onChange={this.handleInput('text', 'NGACHMOI')} value={this.state.text.NGACHMOI}/>
+                                <input className='form-control' id='NGACHMOI' type='text' placeholder='Ngạch mới' onChange={this.handleInput('text', 'NGACHMOI')} value={this.state.text.NGACHMOI}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='BAC_LG'>Bậc lương</label>
@@ -1083,7 +1154,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='DANG_VIEN'>Đảng viên</label>
-                                <input className='form-control' id='DANG_VIEN' type='number' placeholder='' onChange={this.handleInput('number', 'DANG_VIEN')} value={this.state.number.DANG_VIEN}/>
+                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGAY_DANG_CT'>Ngày đăng CT</label>
@@ -1095,7 +1166,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='DOAN_VIEN'>Đoàn viên</label>
-                                <input className='form-control' id='DOAN_VIEN' type='text' placeholder='Đoàn viên' onChange={this.handleInput('text', 'DOAN_VIEN')} value={this.state.text.DOAN_VIEN}/>
+                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGAY_DOAN'>Ngày đoàn</label>
@@ -1231,11 +1302,11 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NO_PC'>Nợ PC</label>
-                                <input className='form-control' id='NO_PC' type='boolean' placeholder='Nợ PC' onChange={this.handleInput('boolean', 'NO_PC')} value={this.state.boolean.NO_PC}/>
+                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NO_DONG_BHXH'>Nợ đóng BHXH</label>
-                                <input className='form-control' id='NO_DONG_BHXH' type='boolean' placeholder='Nợ đóng BHXH' onChange={this.handleInput('boolean', 'CD')} value={this.state.boolean.NO_DONG_BHXH}/>
+                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='GHICHU_BHXH'>Ghi chú BHXH</label>
@@ -1243,7 +1314,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NO_BHXH'>Nợ BHXH</label>
-                                <input className='form-control' id='NO_BHXH' type='boolean' placeholder='Nợ BHXH' onChange={this.handleInput('boolean', 'NO_BHXH')} value={this.state.boolean.NO_BHXH}/>
+                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='GHICHU_KY_HIEU'>Ghi chú ký hiệu</label>
@@ -1255,7 +1326,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TANG'>Tăng</label>
-                                <input className='form-control' id='TANG' type='text' placeholder='Tăng' onChange={this.handleInput('text', 'TANG')} value={this.state.text.TANG}/>
+                                <Dropdown ref={this.giahan} number='' items={T.giahans} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='KH_TANG'>KH tăng</label>
@@ -1263,7 +1334,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='GIAM'>Giảm</label>
-                                <input className='form-control' id='GIAM' type='text' placeholder='Giảm' onChange={this.handleInput('text', 'GIAM')} value={this.state.text.GIAM}/>
+                                <Dropdown ref={this.giahan} number='' items={T.giahans} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='KH_GIAM'>KH giảm</label>

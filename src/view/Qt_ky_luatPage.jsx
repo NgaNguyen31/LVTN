@@ -43,17 +43,17 @@ class Qt_ky_luatPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '20%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tháng</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Năm</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Hình thức</th>
+                            <th style={{ width: '10%%', textAlign: 'center' }}>MSNV</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Tháng</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>Năm</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Hình thức</th>
                             <th style={{ width: '20%', textAlign: 'center' }}>Cấp kỷ luật</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Lý do</th>                            
-                            <th style={{ width: '20%', textAlign: 'center' }}>Ghi chú</th>
+                            <th style={{ width: '40%', textAlign: 'center' }}>Lý do</th>                            
+                            {/* <th style={{ width: '20%', textAlign: 'center' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Số QĐ</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Field 1</th>
+                            <th style={{ width: 'auto', textAlign: 'center' }}>Field 1</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -63,16 +63,16 @@ class Qt_ky_luatPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.STT}</td>
-                                <td>{item.THANG}</td>
+                                {/* <td>{item.STT}</td>
+                                <td>{item.THANG}</td> */}
                                 <td>{item.NAM}</td>
                                 <td>{item.HINH_THUC}</td>
                                 <td>{item.CAP_KL}</td>
                                 <td>{item.LY_DO}</td>
-                                <td>{item.GHI_CHU}</td>
+                                {/* <td>{item.GHI_CHU}</td>
                                 <td>{item.SO_QD}</td>
                                 <td>{item.NGAY_QD}</td>
-                                <td>{item.FIELD1}</td>
+                                <td>{item.FIELD1}</td> */}
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

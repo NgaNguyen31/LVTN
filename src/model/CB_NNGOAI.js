@@ -6,7 +6,7 @@ module.exports = app =>{
         Ngayve: Date,
         Thoigian: Number,
         Mucdich: String,
-        Giahan: Number,
+        Giahan: String,
         SoCVan: Number,
         NgayCVan: Date
     },
