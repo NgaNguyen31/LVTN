@@ -27,8 +27,8 @@ export default class Qt_luongModal extends React.Component {
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
                 case 'date':
-                state.date ? (state.date[field] = e.target.value) 
-                : (state.date = {}) && (state.date[field] = e.target.value)
+                    state.date ? (state.date[field] = e.target.value) 
+                    : (state.date = {}) && (state.date[field] = e.target.value)
 
             }
 

@@ -5,7 +5,7 @@ import Qt_ctacPage from './Qt_ctacPage.jsx';
 export default class Qt_ctacModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: [], chucvu: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], chucvu: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -26,7 +26,10 @@ export default class Qt_ctacModal extends React.Component {
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
-                    
+                case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
+                      
             }
 
             this.setState(state);
@@ -42,13 +45,13 @@ export default class Qt_ctacModal extends React.Component {
 
     show(item, cbcnv, chucvu) {      
         
-        const { _id, MS_NV, STT, TU_THANG, TU_NAM, DEN_THANG, DEN_NAM, CHUC_VU, NOI_CONG_TAC, BO_MON_CT, CONG_VIEC, GHI_CHU} = item ?
+        const { _id, MS_NV, STT, TU_NAM, DEN_NAM, CHUC_VU, NOI_CONG_TAC, BO_MON_CT, CONG_VIEC, GHI_CHU} = item ?
             item : { _id: null, MS_NV: '', STT: '', TU_THANG: '', TU_NAM: '', DEN_THANG: '', DEN_NAM: '', CHUC_VU: '', NOI_CONG_TAC: '', BO_MON_CT: '', CONG_VIEC: '', GHI_CHU: ''};
         $('#MS_NV').val(MS_NV);
         $('#STT').val(STT);
-        $('#TU_THANG').val(TU_THANG);
+        // $('#TU_THANG').val(TU_THANG);
         $('#TU_NAM').val(TU_NAM);
-        $('#DEN_THANG').val(DEN_THANG);
+        // $('#DEN_THANG').val(DEN_THANG);
         $('#DEN_NAM').val(DEN_NAM);
         $('#CHUC_VU').val(CHUC_VU);
         $('#NOI_CONG_TAC').val(NOI_CONG_TAC);
@@ -69,10 +72,10 @@ export default class Qt_ctacModal extends React.Component {
              changes = {
                 MS_NV,
                 STT: this.state.number.STT, 
-                TU_THANG: this.state.number.TU_THANG,  
-                TU_NAM: this.state.number.TU_NAM,  
-                DEN_THANG: this.state.number.DEN_THANG,  
-                DEN_NAM: this.state.number.DEN_NAM,  
+                // TU_THANG: this.state.number.TU_THANG,  
+                TU_NAM: this.state.date.TU_NAM,  
+                // DEN_THANG: this.state.number.DEN_THANG,  
+                DEN_NAM: this.state.date.DEN_NAM,  
                 CHUC_VU, 
                 NOI_CONG_TAC: this.state.text.NOI_CONG_TAC, 
                 BO_MON_CT: this.state.text.BO_MON_CT,      
@@ -122,21 +125,21 @@ export default class Qt_ctacModal extends React.Component {
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
                             </div> 
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='TU_THANG'>Từ tháng</label>
                                 <input className='form-control' id='TU_THANG' type='number' placeholder='' onChange={this.handleInput('number', 'TU_THANG')} value={this.state.number.TU_THANG}/>
-                            </div> 
+                            </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='TU_NAM'>Từ năm</label>
-                                <input className='form-control' id='TU_NAM' type='number' placeholder='' onChange={this.handleInput('number', 'TU_NAM')} value={this.state.number.TU_NAM}/>
+                                <input className='form-control' id='TU_NAM' type='date' placeholder='' onChange={this.handleInput('date', 'TU_NAM')} value={this.state.date.TU_NAM}/>
                             </div> 
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='DEN_THANG'>Đến tháng</label>
                                 <input className='form-control' id='DEN_THANG' type='number' placeholder='' onChange={this.handleInput('number', 'DEN_THANG')} value={this.state.number.DEN_THANG}/>
-                            </div> 
+                            </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='DEN_NAM'>Đến năm</label>
-                                <input className='form-control' id='DEN_NAM' type='number' placeholder='' onChange={this.handleInput('number', 'DEN_NAM')} value={this.state.number.DEN_NAM}/>
+                                <input className='form-control' id='DEN_NAM' type='date' placeholder='' onChange={this.handleInput('date', 'DEN_NAM')} value={this.state.date.DEN_NAM}/>
                             </div>                             
                             <div className='form-group'>
                                 <label htmlFor='CHUC_VU'>Chức vụ</label>

@@ -3,7 +3,7 @@ module.exports = app => {
         MS_NV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         STT: Number,
         BAI_TN: String,
-        NAM: Number,
+        NAM: Date,
     }, {unique: true});
     const model = app.db.model('qt_tnghiem', schema);
 

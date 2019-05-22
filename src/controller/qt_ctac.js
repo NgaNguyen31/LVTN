@@ -28,9 +28,9 @@ module.exports = app => {
             changes = {};
             if (data.MS_NV) changes.MS_NV = data.MS_NV;
             if (data.STT && data.STT != '' ) changes.STT = data.STT;        
-            if (data.TU_THANG && data.TU_THANG != '' ) changes.TU_THANG = data.TU_THANG;        
+            //if (data.TU_THANG && data.TU_THANG != '' ) changes.TU_THANG = data.TU_THANG;        
             if (data.TU_NAM && data.TU_NAM != '' ) changes.TU_NAM = data.TU_NAM;        
-            if (data.DEN_THANG && data.DEN_THANG != '' ) changes.DEN_THANG = data.DEN_THANG;         
+            //if (data.DEN_THANG && data.DEN_THANG != '' ) changes.DEN_THANG = data.DEN_THANG;         
             if (data.DEN_NAM && data.DEN_NAM != '' ) changes.DEN_NAM = data.DEN_NAM;        
             if (data.CHUC_VU) changes.CHUC_VU = data.CHUC_VU;
             if (data.NOI_CONG_TAC && data.NOI_CONG_TAC != '' ) changes.NOI_CONG_TAC = data.NOI_CONG_TAC;        

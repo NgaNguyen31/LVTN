@@ -5,7 +5,7 @@ import Qt_gtrinhPage from './Qt_gtrinhPage.jsx';
 export default class Qt_gtrinhModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -25,7 +25,10 @@ export default class Qt_gtrinhModal extends React.Component {
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
-                    
+               case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
+                       
             }
 
             this.setState(state);
@@ -62,7 +65,7 @@ export default class Qt_gtrinhModal extends React.Component {
                 MS_NV,
                 STT: this.state.number.STT, 
                 G_Trinh: this.state.text.G_Trinh, 
-                NamXB: this.state.number.NamXB, 
+                NamXB: this.state.date.NamXB, 
                 NhaXB: this.state.text.NhaXB,                                 };    
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
@@ -112,7 +115,7 @@ export default class Qt_gtrinhModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NamXB'>Năm XB</label>
-                                <input className='form-control' id='NamXB' type='number' placeholder='' onChange={this.handleInput('number', 'NamXB')} value={this.state.number.NamXB}/>
+                                <input className='form-control' id='NamXB' type='date' placeholder='' onChange={this.handleInput('date', 'NamXB')} value={this.state.date.NamXB}/>
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NhaXB'>Nhà XB</label>

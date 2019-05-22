@@ -3,7 +3,7 @@ module.exports = app => {
         MS_NV : { type: app.db.Schema.ObjectId, ref: 'cbcnv' },
         STT: Number,
         TEN: String,
-        NAM_SINH: Number,
+        NAM_SINH: Date,
         CVU: String,
         CTAC: String
     },{unique: true});

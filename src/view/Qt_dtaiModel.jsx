@@ -69,7 +69,7 @@ export default class Qt_dtaiModal extends React.Component {
                 CHU_NHIEM_DE_TAI: this.state.text.CHU_NHIEM_DE_TAI, 
                 CAP: this.state.text.CAP, 
                 NGAY_KETTHUC: this.state.date.NGAY_KETTHUC,
-                NAM: this.state.number.NAM,
+                NAM: this.state.date.NAM,
             };    
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
@@ -131,7 +131,7 @@ export default class Qt_dtaiModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NAM'>Năm</label>
-                                <input className='form-control' id='NAM' type='number' placeholder='' onChange={this.handleInput('number', 'NAM')} value={this.state.number.NAM}/>
+                                <input className='form-control' id='NAM' type='date' placeholder='' onChange={this.handleInput('date', 'NAM')} value={this.state.date.NAM}/>
                             </div> 
                         </div>
                         <div className='modal-footer'>

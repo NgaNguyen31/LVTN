@@ -4,7 +4,7 @@ module.exports = app => {
         STT: Number,
         BAI_BAO: String,
         TEN_TCHI: String,
-        NAM: Number
+        NAM: Date
     },{unique: true});
     const model = app.db.model('qt_bbao', schema);
 

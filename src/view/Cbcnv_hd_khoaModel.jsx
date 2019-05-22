@@ -5,7 +5,7 @@ import Cbcnv_hd_khoaPage from './Cbcnv_hd_khoaPage.jsx';
 export default class Cbcnv_hd_khoaModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', trinhdo: [], bomon: []}
+        this.state = {text: '', date: '', trinhdo: [], bomon: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -23,6 +23,9 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
                     : (state.text = {}) && (state.text[field] = e.target.value)
+                case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
             }
 
             this.setState(state);
@@ -65,7 +68,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                 HO: this.state.text.HO,
                 TEN: this.state.text.TEN,
                 PHAI,                
-                NAM_SINH: this.state.text.NAM_SINH,
+                NAM_SINH: this.state.date.NAM_SINH,
                 The_BHYT: this.state.text.The_BHYT,
                 Noi_kham: this.state.text.Noi_kham,       
                 LCB: this.state.text.LCB,
@@ -127,7 +130,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="NAM_SINH">Năm sinh</label>
-                                <input className='form-control' id='NAM_SINH' type='text' placeholder='' onChange={this.handleInput('text', 'NAM_SINH')} value={this.state.text.NAM_SINH}/>
+                                <input className='form-control' id='NAM_SINH' type='date' placeholder='' onChange={this.handleInput('date', 'NAM_SINH')} value={this.state.date.NAM_SINH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="The_BHYT">The_BHYT</label>

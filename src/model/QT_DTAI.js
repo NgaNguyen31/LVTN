@@ -6,7 +6,7 @@ module.exports = app => {
         CHU_NHIEM_DE_TAI: String,
         CAP: String,
         NGAY_KETTHUC: Date,
-        NAM: Number
+        NAM: Date
     },{unique: true});
     const model = app.db.model('qt_dtai', schema);
 

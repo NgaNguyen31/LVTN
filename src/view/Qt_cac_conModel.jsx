@@ -5,7 +5,7 @@ import Qt_cac_conPage from './Qt_cac_conPage.jsx';
 export default class Qt_cac_conModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -25,7 +25,10 @@ export default class Qt_cac_conModal extends React.Component {
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
-                    
+            case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
+                          
             }
 
             this.setState(state);
@@ -63,7 +66,7 @@ export default class Qt_cac_conModal extends React.Component {
                 MS_NV,
                 STT: this.state.number.STT, 
                 TEN: this.state.text.TEN, 
-                NAM_SINH: this.state.number.NAM_SINH, 
+                NAM_SINH: this.state.date.NAM_SINH, 
                 CVU: this.state.text.CVU,
                 CTAC: this.state.text.CTAC,                                 };    
         if (!changes.MS_NV) {
@@ -117,7 +120,7 @@ export default class Qt_cac_conModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NAM_SINH'>Năm sinh</label>
-                                <input className='form-control' id='NAM_SINH' type='number' placeholder='' onChange={this.handleInput('number', 'NAM_SINH')} value={this.state.number.NAM_SINH}/>
+                                <input className='form-control' id='NAM_SINH' type='date' placeholder='' onChange={this.handleInput('date', 'NAM_SINH')} value={this.state.date.NAM_SINH}/>
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='CVU'>Chức vụ</label>

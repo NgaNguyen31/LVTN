@@ -5,7 +5,7 @@ import BomonPage from './BomonPage.jsx';
 export default class BomonModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', khoa: []};
+        this.state = {text: '', number: '', date: '', khoa: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -23,6 +23,9 @@ export default class BomonModal extends React.Component {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
                     : (state.text = {}) && (state.text[field] = e.target.value)
+                case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
             }
 
             this.setState(state);
@@ -57,7 +60,7 @@ export default class BomonModal extends React.Component {
                 TEN_BM: this.state.text.TEN_BM,
                 TEN_TIENG_ANH: this.state.text.TEN_TIENG_ANH,
                 MS_KHOA,
-                NAM_THANH_LAP: this.state.text.NAM_THANH_LAP,
+                NAM_THANH_LAP: this.state.date.NAM_THANH_LAP,
                 GHI_CHU: this.state.text.GHI_CHU,
             };            
         if (!changes.TEN_BM) {
@@ -112,7 +115,7 @@ export default class BomonModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Năm thành lập</label>
-                                <input className='form-control' id='NAM_THANH_LAP' type='text' placeholder='Năm thành lập' onChange={this.handleInput('text', 'NAM_THANH_LAP')} value={this.state.text.NAM_THANH_LAP}/>
+                                <input className='form-control' id='NAM_THANH_LAP' type='date' placeholder='Năm thành lập' onChange={this.handleInput('date', 'NAM_THANH_LAP')} value={this.state.date.NAM_THANH_LAP}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Ghi chú</label>

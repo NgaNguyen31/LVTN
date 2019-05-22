@@ -28,7 +28,7 @@ module.exports = app => {
             changes = {};
         if (data.MS_NV) changes.MS_NV = data.MS_NV;
         if (data.STT && data.STT != '' ) changes.STT = data.STT;        
-        if (data.THANG && data.THANG != '' ) changes.THANG = data.THANG;        
+        // if (data.THANG && data.THANG != '' ) changes.THANG = data.THANG;        
         if (data.NAM && data.NAM != '' ) changes.NAM = data.NAM;        
         if (data.HINH_THUC && data.HINH_THUC != '' ) changes.HINH_THUC = data.HINH_THUC;        
         if (data.CAP_KL && data.CAP_KL != '' ) changes.CAP_KL = data.CAP_KL;     

@@ -639,15 +639,15 @@ export default class CbcnvModal extends React.Component {
             DANTOC,
             TON_GIAO,
             CHA_TEN: this.state.text.CHA_TEN,
-            CHA_NAM_SINH: this.state.number.CHA_NAM_SINH,
+            CHA_NAM_SINH: this.state.date.CHA_NAM_SINH,
             CHA_NNGHIEP: this.state.text.CHA_NNGHIEP,
             CHA_CONGTAC: this.state.text.CHA_CONGTAC,
             ME_TEN: this.state.text.ME_TEN,
-            ME_NAM_SINH: this.state.number.ME_NAM_SINH,
+            ME_NAM_SINH: this.state.date.ME_NAM_SINH,
             ME_NNGHIEP: this.state.text.ME_NNGHIEP,
             ME_CONGTAC: this.state.text.ME_CONGTAC,
             VC_TEN: this.state.text.VC_TEN,
-            VC_NAMSINH: this.state.number.VC_NAMSINH,
+            VC_NAMSINH: this.state.date.VC_NAMSINH,
             VC_NNGHIEP: this.state.text.VC_NNGHIEP,
             VC_CONGTAC: this.state.text.VC_CONGTAC,
             SO_SO_HK: this.state.text.SO_SO_HK,
@@ -1218,7 +1218,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CHA_NAM_SINH'>Cha năm sinh</label>
-                                <input className='form-control' id='CHA_NAM_SINH' type='number' placeholder='Cha năm sinh' onChange={this.handleInput('number', 'CHA_NAM_SINH')} value={this.state.number.CHA_NAM_SINH}/>
+                                <input className='form-control' id='CHA_NAM_SINH' type='date' placeholder='Cha năm sinh' onChange={this.handleInput('date', 'CHA_NAM_SINH')} value={this.state.date.CHA_NAM_SINH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CHA_NNGHIEP'>Cha nghề nghiệp</label>
@@ -1234,7 +1234,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='ME_NAM_SINH'>Mẹ năm sinh</label>
-                                <input className='form-control' id='ME_NAM_SINH' type='number' placeholder='Mẹ năm sinh' onChange={this.handleInput('number', 'ME_NAM_SINH')} value={this.state.number.ME_NAM_SINH}/>
+                                <input className='form-control' id='ME_NAM_SINH' type='date' placeholder='Mẹ năm sinh' onChange={this.handleInput('date', 'ME_NAM_SINH')} value={this.state.date.ME_NAM_SINH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='ME_NNGHIEP'>Mẹ nghề nghiệp</label>
@@ -1250,7 +1250,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='VC_NAMSINH'>Vợ chồng năm sinh</label>
-                                <input className='form-control' id='VC_NAMSINH' type='number' placeholder='Vợ chồng năm sinh' onChange={this.handleInput('number', 'VC_NAMSINH')} value={this.state.number.VC_NAMSINH}/>
+                                <input className='form-control' id='VC_NAMSINH' type='date' placeholder='Vợ chồng năm sinh' onChange={this.handleInput('date', 'VC_NAMSINH')} value={this.state.date.VC_NAMSINH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='VC_NNGHIEP'>Vợ chồng nghề nghiệp</label>

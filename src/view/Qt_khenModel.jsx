@@ -5,7 +5,7 @@ import Qt_khenPage from './Qt_khenPage.jsx';
 export default class Qt_khenModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -25,7 +25,10 @@ export default class Qt_khenModal extends React.Component {
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
-                    
+                case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
+                          
             }
 
             this.setState(state);
@@ -64,7 +67,7 @@ export default class Qt_khenModal extends React.Component {
              changes = {
                 MS_NV,
                 STT: this.state.number.STT, 
-                NAM: this.state.number.NAM,
+                NAM: this.state.date.NAM,
                 HINH_THUC: this.state.text.HINH_THUC, 
                 CAP_KHEN: this.state.text.CAP_KHEN, 
                 LY_DO: this.state.text.LY_DO,    
@@ -115,7 +118,7 @@ export default class Qt_khenModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NAM'>Năm</label>
-                                <input className='form-control' id='NAM' type='number' placeholder='' onChange={this.handleInput('number', 'NAM')} value={this.state.number.NAM}/>
+                                <input className='form-control' id='NAM' type='date' placeholder='' onChange={this.handleInput('date', 'NAM')} value={this.state.date.NAM}/>
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='HINH_THUC'>Hình thức</label>

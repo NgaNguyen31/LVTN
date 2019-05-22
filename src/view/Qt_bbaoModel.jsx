@@ -5,7 +5,7 @@ import Qt_bbaoPage from './Qt_bbaoPage.jsx';
 export default class Qt_bbaoModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -25,6 +25,9 @@ export default class Qt_bbaoModal extends React.Component {
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
+                case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
                     
             }
 
@@ -63,7 +66,8 @@ export default class Qt_bbaoModal extends React.Component {
                 STT: this.state.number.STT, 
                 BAI_BAO: this.state.text.BAI_BAO, 
                 TEN_TCHI: this.state.text.TEN_TCHI, 
-                NAM: this.state.number.NAM,                                 };    
+                NAM: this.state.date.NAM,                                 
+            };    
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
@@ -116,7 +120,7 @@ export default class Qt_bbaoModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NAM'>Năm</label>
-                                <input className='form-control' id='NAM' type='number' placeholder='' onChange={this.handleInput('number', 'NAM')} value={this.state.number.NAM}/>
+                                <input className='form-control' id='NAM' type='date' placeholder='' onChange={this.handleInput('date', 'NAM')} value={this.state.date.NAM}/>
                             </div> 
                         </div>
                         <div className='modal-footer'>

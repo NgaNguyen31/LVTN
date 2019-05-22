@@ -26,8 +26,8 @@ export default class Qt_ky_luatModal extends React.Component {
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
                 case 'date':
-                state.date ? (state.date[field] = e.target.value) 
-                : (state.date = {}) && (state.date[field] = e.target.value)
+                    state.date ? (state.date[field] = e.target.value) 
+                    : (state.date = {}) && (state.date[field] = e.target.value)
             }
 
             this.setState(state);
@@ -43,11 +43,11 @@ export default class Qt_ky_luatModal extends React.Component {
 
     show(item, cbcnv) {      
         
-        const { _id, MS_NV, STT, THANG, NAM, HINH_THUC, CAP_KL, LY_DO, GHI_CHU, SO_QD, NGAY_QD, FIELD1} = item ?
-            item : { _id: null, MS_NV: '', STT: '', THANG: '', NAM: '', HINH_THUC: '', CAP_KL: '', LY_DO: '', GHI_CHU: '', SO_QD: '', NGAY_QD: '', FIELD1: ''};
+        const { _id, MS_NV, STT, NAM, HINH_THUC, CAP_KL, LY_DO, GHI_CHU, SO_QD, NGAY_QD, FIELD1} = item ?
+            item : { _id: null, MS_NV: '', STT: '', NAM: '', HINH_THUC: '', CAP_KL: '', LY_DO: '', GHI_CHU: '', SO_QD: '', NGAY_QD: '', FIELD1: ''};
         $('#MS_NV').val(MS_NV);
         $('#STT').val(STT);
-        $('#THANG').val(THANG);
+        // $('#THANG').val(THANG);
         $('#NAM').val(NAM);
         $('#HINH_THUC').val(HINH_THUC);
         $('#CAP_KL').val(CAP_KL);
@@ -69,8 +69,8 @@ export default class Qt_ky_luatModal extends React.Component {
              changes = {
                 MS_NV,
                 STT: this.state.number.STT, 
-                THANG: this.state.number.THANG,
-                NAM: this.state.number.NAM,
+                // THANG: this.state.number.THANG,
+                NAM: this.state.date.NAM,
                 HINH_THUC: this.state.text.HINH_THUC, 
                 CAP_KL: this.state.text.CAP_KL, 
                 LY_DO: this.state.text.LY_DO,    
@@ -121,13 +121,13 @@ export default class Qt_ky_luatModal extends React.Component {
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
                             </div> 
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='THANG'>Tháng</label>
                                 <input className='form-control' id='THANG' type='number' placeholder='' onChange={this.handleInput('number', 'THANG')} value={this.state.number.THANG}/>
-                            </div> 
+                            </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='NAM'>Năm</label>
-                                <input className='form-control' id='NAM' type='number' placeholder='' onChange={this.handleInput('number', 'NAM')} value={this.state.number.NAM}/>
+                                <input className='form-control' id='NAM' type='date' placeholder='' onChange={this.handleInput('date', 'NAM')} value={this.state.date.NAM}/>
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='HINH_THUC'>Hình thức</label>

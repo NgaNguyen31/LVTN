@@ -5,7 +5,7 @@ import Qt_tnghiemPage from './Qt_tnghiemPage.jsx';
 export default class Qt_tnghiemModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -25,7 +25,10 @@ export default class Qt_tnghiemModal extends React.Component {
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
-                    
+                case 'date':
+                    state.date ? (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value)
+                      
             }
 
             this.setState(state);
@@ -61,7 +64,7 @@ export default class Qt_tnghiemModal extends React.Component {
                 MS_NV,
                 STT: this.state.number.STT, 
                 BAI_TN: this.state.text.BAI_TN, 
-                NAM: this.state.number.NAM,
+                NAM: this.state.date.NAM,
             };    
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
@@ -108,7 +111,7 @@ export default class Qt_tnghiemModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NAM'>Năm</label>
-                                <input className='form-control' id='NAM' type='number' placeholder='' onChange={this.handleInput('number', 'NAM')} value={this.state.number.NAM}/>
+                                <input className='form-control' id='NAM' type='date' placeholder='' onChange={this.handleInput('date', 'NAM')} value={this.state.date.NAM}/>
                             </div> 
                         </div>
                         <div className='modal-footer'>

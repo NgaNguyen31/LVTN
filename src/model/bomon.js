@@ -15,7 +15,7 @@ module.exports = app => {
             }
         },
         MS_KHOA: [{ type: app.db.Schema.ObjectId, ref: 'khoa' }],
-        NAM_THANH_LAP: Number,
+        NAM_THANH_LAP: Date,
         GHI_CHU: String
     });
     const model = app.db.model('bomon',schema);
