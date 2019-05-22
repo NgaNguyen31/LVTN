@@ -80,16 +80,16 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         } else if (!changes.MSNV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MSNV').focus(); 
-        } else if (!changes.HO) {
+        } else if (changes.HO == '') {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();  
-        } else if (!changes.TEN) {
+        } else if (changes.TEN == '') {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();             
-        } else if (!changes.NGAY_SINH) {
+        } else if (changes.NGAY_SINH == '') {
             T.notify('Ngày sinh đang trống!', 'danger');
             $('#NGAY_SINH').focus();  
-        } else if (!changes.DON_VI) {
+        } else if (changes.DON_VI == '') {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#DON_VI').focus();            
         } else if (this.state._id) {

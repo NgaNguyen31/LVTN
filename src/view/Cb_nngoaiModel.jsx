@@ -81,7 +81,7 @@ export default class Cb_nngoaiModal extends React.Component {
         } else if (!changes.Nuoc) {
             T.notify('Nước đang trống!', 'danger');
             $('#Nuoc').focus();            
-        } else if (!changes.Thoigian) {
+        } else if (changes.Thoigian == '') {
             T.notify('Thời gian đang trống!', 'danger');
             $('#Thoigian').focus();            
         } else if (changes.Thoigian < 0) {

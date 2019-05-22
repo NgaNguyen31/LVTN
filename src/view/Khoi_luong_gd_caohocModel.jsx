@@ -95,40 +95,40 @@ export default class Khoi_luong_gd_caohocModal extends React.Component {
         if (!changes.MSNV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MSNV').focus();            
-        } else if (!changes.HO) {
+        } else if (changes.HO == '') {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();            
-        } else if (!changes.TEN) {
+        } else if (changes.TEN == '') {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();            
         } else if (!changes.Hocvi_hocham) {
             T.notify('Học vị học hàm đang trống!', 'danger');
             $('#Hocvi_hocham').focus();            
-        } else if (!changes.Mon_giangday) {
+        } else if (changes.Mon_giangday == '') {
             T.notify('Môn giảng dạy đang trống!', 'danger');
             $('#Mon_giangday').focus();            
         } else if (!changes.Day_khoa) {
             T.notify('Dạy khoa đang trống!', 'danger');
             $('#Day_khoa').focus();            
-        } else if (!changes.Nganh_day) {
+        } else if (changes.Nganh_day == '') {
             T.notify('Ngành dạy đang trống!', 'danger');
             $('#Nganh_day').focus();            
-        } else if (!changes.Don_vi) {
+        } else if (changes.Don_vi == '') {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#Don_vi').focus();                 
-        } else  if (!changes.St_day_LT_thucte) {
+        } else if (changes.St_day_LT_thucte == '') {
             T.notify('Số tiết dạy lý thuyết thực tế đang trống!', 'danger');
             $('#St_day_LT_thucte').focus();                 
-        } else  if (!changes.St_qui_doi_giangday) {
+        } else if (changes.St_qui_doi_giangday == '') {
             T.notify('Số tiết qui đổi giảng dạy đang trống!', 'danger');
             $('#St_qui_doi_giangday').focus();                 
-        } else  if (!changes.Tong_st_quidoi) {
+        } else if (changes.Tong_st_quidoi == '') {
             T.notify('Tổng số tiết qui đổi đang trống!', 'danger');
             $('#Tong_st_quidoi').focus();                 
-        } else  if (!changes.Tong_cong) {
+        } else if (changes.Tong_cong == '') {
             T.notify('Tổng cộng đang trống!', 'danger');
             $('#Tong_cong').focus();                 
-        } else  if (!changes.Ghi_chu) {
+        } else if (changes.Ghi_chu == '') {
             T.notify('Ghi chú đang trống!', 'danger');
             $('#Ghi_chu').focus();                 
         } else if (changes.St_day_LT_thucte < 0) {

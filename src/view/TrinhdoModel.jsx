@@ -57,13 +57,13 @@ export default class TrinhdoModal extends React.Component {
         if (this.state.text == '') {
             T.notify('Bạn chưa điền thông tin!', 'danger');
             $('#Hovaten').focus();
-        } else if (!changes.trinh_do) {
+        } else if (changes.trinh_do == '') {
             T.notify('Trình độ đang trống!', 'danger');
             $('#trinh_do').focus();            
-        } else if (!changes.Ten_day_du) {
+        } else if (changes.Ten_day_du == '') {
             T.notify('Tên đầy đủ đang trống!', 'danger');
             $('#Ten_day_du').focus();            
-        } else if (!changes.ord) {
+        } else if (changes.ord == '') {
             T.notify('Ord đang trống!', 'danger');
             $('#ord').focus();                 
         } else if (this.state._id) {

@@ -58,7 +58,7 @@ export default class NuocngoaiModal extends React.Component {
              changes = {
                 TEN_NUOC: this.state.text.TEN_NUOC, 
                 MS_KVUC,                                    };    
-        if (!changes.TEN_NUOC) {
+        if (changes.TEN_NUOC == '') {
             T.notify('Tên nước đang trống!', 'danger');
             $('#TEN_NUOC').focus();
         } else if (!changes.MS_KVUC) {

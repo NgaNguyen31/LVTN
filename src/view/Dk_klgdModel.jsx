@@ -84,13 +84,13 @@ export default class Dk_klgdModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MS_NV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (!changes.STT) {
+        } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
-        } else if (!changes.HO) {
+        } else if (changes.HO == '') {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();
-        } else if (!changes.TEN) {
+        } else if (changes.TEN == '') {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();
         } else if (!changes.MS_BM) {

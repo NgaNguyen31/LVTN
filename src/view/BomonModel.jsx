@@ -63,16 +63,16 @@ export default class BomonModal extends React.Component {
                 NAM_THANH_LAP: this.state.date.NAM_THANH_LAP,
                 GHI_CHU: this.state.text.GHI_CHU,
             };            
-        if (!changes.TEN_BM) {
+        if (changes.TEN_BM == '') {
             T.notify('Tên bộ môn đang trống!', 'danger');
             $('#TEN_BM').focus();
-        } else if (!changes.TEN_TIENG_ANH) {
+        } else if (changes.TEN_TIENG_ANH == '') {
             T.notify('Tên tiếng anh đang trống!', 'danger');
             $('#TEN_TIENG_ANH').focus();
         } else if (!changes.MS_KHOA) {
             T.notify('Mã số khoa đang trống!', 'danger');
             $('#MS_KHOA').focus();
-        } else if (!changes.NAM_THANH_LAP) {
+        } else if (changes.NAM_THANH_LAP == '') {
             T.notify('Năm thành lập đang trống!', 'danger');
             $('#NAM_THANH_LAP').focus();
         } else if (this.state._id) {

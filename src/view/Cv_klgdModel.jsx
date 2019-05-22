@@ -47,7 +47,7 @@ export default class Cv_klgdModal extends React.Component {
             TEN_CV: this.state.text.TEN_CV,
             GHI_CHU: this.state.text.GHI_CHU
         };
-        if (!changes.TEN_CV) {
+        if (changes.TEN_CV == '') {
             T.notify('Tên công việc khối lượng giảng dạy đang trống!', 'danger');
             $('#TEN_CV').focus();
         } else if (this.state._id) {

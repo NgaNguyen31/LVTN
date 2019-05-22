@@ -71,7 +71,7 @@ export default class Qt_bbaoModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (!changes.STT) {
+        } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
         } else if (changes.STT < 0) {

@@ -78,13 +78,13 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
         if (!changes.MSBM) {
             T.notify('MSBM đang trống!', 'danger');
             $('#MSBM').focus(); 
-        } else if (!changes.HO) {
+        } else if (changes.HO == '') {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();  
-        } else if (!changes.TEN) {  
+        } else if (changes.TEN == '') {  
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();             
-        } else if (!changes.NAM_SINH) {
+        } else if (changes.NAM_SINH == '') {
             T.notify('Năm sinh đang trống!', 'danger');
             $('#NAM_SINH').focus();            
         } else if (this.state._id) {

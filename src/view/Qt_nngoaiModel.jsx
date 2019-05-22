@@ -123,16 +123,16 @@ export default class Qt_nngoaiModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (!changes.HO) {
+        } else if (changes.HO == '') {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();
-        } else if (!changes.TEN) {
+        } else if (changes.TEN == '') {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();
-        } else if (!changes.MUC_DICH) {
+        } else if (changes.MUC_DICH == '') {
             T.notify('Mục đích đang trống!', 'danger');
             $('#MUC_DICH').focus();
-        } else if (!changes.NUOC_DEN) {
+        } else if (changes.NUOC_DEN == '') {
             T.notify('Nước đến đang trống!', 'danger');
             $('#NUOC_DEN').focus();
         } else if (this.state._id) {

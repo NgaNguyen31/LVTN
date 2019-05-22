@@ -60,10 +60,10 @@ export default class ChucdanhModal extends React.Component {
                 ten_day_du: this.state.text.ten_day_du,
                 ord,
             };            
-        if (!changes.chuc_danh) {
+        if (changes.chuc_danh == '') {
             T.notify('Chức danh đang trống!', 'danger');
             $('#chuc_danh').focus();
-        } else if (!changes.ten_day_du) {
+        } else if (changes.ten_day_du == '') {
             T.notify('Tên đầy đủ đang trống!', 'danger');
             $('#ten_day_du').focus();
         } else if (!changes.ord) {

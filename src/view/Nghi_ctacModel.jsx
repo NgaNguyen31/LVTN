@@ -50,10 +50,10 @@ export default class Nghi_ctacModal extends React.Component {
         if (this.state.text =='') {
             T.notify('Bạn phải điền giá trị!', 'danger');
             $('#NGHI').focus();
-        }else if (!changes.NGHI) {
+        }else if (changes.NGHI == '') {
             T.notify('Loại nghỉ công tác đang trống!', 'danger');
             $('#NGHI').focus();
-        } else if (!changes.Dien_giai) {
+        } else if (changes.Dien_giai == '') {
             T.notify('Diễn giải đang trống!', 'danger');
             $('#Dien_giai').focus();
         } else if (this.state._id) {

@@ -5,7 +5,7 @@ import CbcnvPage from './CbcnvPage.jsx';
 export default class CbcnvModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', boolean :'', is: [] , nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: [], nopcc: [], giahan: []}
+        this.state = {text: '', number: '', date: '', boolean :'', is: [] , nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: [], nopcc: [], giahan: [], phai: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -26,6 +26,7 @@ export default class CbcnvModal extends React.Component {
         this.is = React.createRef();
         this.nopcc = React.createRef();
         this.giahan = React.createRef();
+        this.phai = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -513,6 +514,7 @@ export default class CbcnvModal extends React.Component {
             benhvien = this.benhvien.current.getSelectedItem(),
             nopcc = this.nopcc.current.getSelectedItem(),
             giahan = this.giahan.current.getSelectedItem(),
+            phai = this.phai.current.getSelectedItem(),
             is = this.is.current.getSelectedItem(),
        
             NGHI = nghi_ctac ? nghi_ctac._id: [],
@@ -535,6 +537,7 @@ export default class CbcnvModal extends React.Component {
             NO_BHXH = nopcc ? nopcc : [],
             TANG = giahan ? giahan : [],
             GIAM = giahan ? giahan : [],
+            PHAI = phai ? phai : [],
         changes = {
             NGHI,
             TAM_NGUNG: this.state.text.TAM_NGUNG,
@@ -546,7 +549,7 @@ export default class CbcnvModal extends React.Component {
             MS_NV_CU: this.state.text.MS_NV_CU,
             HO: this.state.text.HO,
             TEN: this.state.text.TEN,
-            PHAI: this.state.text.PHAI,
+            PHAI,
             NGAY_SINH: this.state.date.NGAY_SINH,
             XA_PHUONG_NOISINH: this.state.text.XA_PHUONG_NOISINH,
             QUAN_HUYEN_NOISINH: this.state.text.QUAN_HUYEN_NOISINH,
@@ -687,19 +690,19 @@ export default class CbcnvModal extends React.Component {
         } else if (!changes.SHCC) {
             T.notify('SHCC đang trống', 'danger');
             $('#SHCC').focus();
-        } else if (!changes.MS_NV) {
+        } else if (changes.MS_NV == '') {
             T.notify('MSNV đang trống', 'danger');
             $('#MS_NV').focus();
-        } else if (!changes.HO) {
+        } else if (changes.HO == '') {
             T.notify('Họ đang trống', 'danger');
             $('#HO').focus();
-        } else if (!changes.TEN) {
+        } else if (changes.TEN == '') {
             T.notify('Tên đang trống', 'danger');
             $('#TEN').focus();
         } else if (!changes.PHAI) {
             T.notify('Phái đang trống', 'danger');
             $('#PHAI').focus();
-        } else if (!changes.NGAY_SINH) {
+        } else if (changes.NGAY_SINH == '') {
             T.notify('Ngày sinh đang trống', 'danger');
             $('#NGAY_SINH').focus();
         } else if (changes.BAC_LG < 0) {
@@ -840,7 +843,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='PHAI'>Giới tính</label>
-                                <input className='form-control' id='PHAI' type='text' placeholder='Phái' onChange={this.handleInput('text', 'PHAI')} value={this.state.text.PHAI}/>
+                                <Dropdown ref={this.phai} number='' items={T.phais} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGAY_SINH'>Ngày sinh</label>

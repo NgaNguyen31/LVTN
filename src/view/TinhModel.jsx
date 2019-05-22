@@ -50,10 +50,10 @@ export default class TinhModal extends React.Component {
         if (this.state.text == '')  {
             T.notify('Bạn phải điền dữ liệu!', 'danger');
             $('#TEN_Tinh').focus();
-        } else if (!changes.TEN_TINH) {
+        } else if (changes.TEN_TINH == '') {
             T.notify('Tên tỉnh đang trống!', 'danger');
             $('#TEN_TINH').focus();
-        } else if (!changes.MS_VUNG) {
+        } else if (changes.MS_VUNG == '') {
             T.notify('Mã số vùng đang trống!', 'danger');
             $('#MS_VUNG').focus();
         } else if (changes.MS_VUNG < 0) {

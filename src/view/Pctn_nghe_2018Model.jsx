@@ -73,34 +73,34 @@ export default class Pctn_nghe_2018Modal extends React.Component {
         if (this.state.text == '')  {
             T.notify('Bạn phải điền dữ liệu!', 'danger');
             $('#TEN_KHOA').focus();
-        } else if (!changes.SHCC) {
+        } else if (changes.SHCC == '') {
             T.notify('SHCC đang trống!', 'danger');
             $('#SHCC').focus();
-        } else if (!changes.HO) {
+        } else if (changes.HO == '') {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();
-        } else if (!changes.TEN ) {
+        } else if (changes.TEN == '' ) {
             T.notify('TEN đang trống!', 'danger');
             $('#TEN').focus();
-        } else if (!changes.NGAY_SINH) {
+        } else if (changes.NGAY_SINH == '') {
             T.notify('Ngày sinh đang trống!', 'danger');
             $('#NGAY_SINH').focus();
-        } else if (!changes.MS_CDNN ) {
+        } else if (changes.MS_CDNN == '' ) {
             T.notify('MS CDNN đang trống!', 'danger');
             $('#MS_CDNN').focus();
-        } else if (!changes.NGAY_PCTN_OLD) {
+        } else if (changes.NGAY_PCTN_OLD == '') {
             T.notify('Ngày PCTN cũ đang trống!', 'danger');
             $('#NGAY_PCTN_OLD').focus();
-        } else if (!changes.PT_PCTN_OLD) {
+        } else if (changes.PT_PCTN_OLD == '') {
             T.notify('Phần trăm PCTN cũ đang trống!', 'danger');
             $('#PT_PCTN_OLD').focus();
-        } else if (!changes.NGAY_PCTN_NEW) {
+        } else if (changes.NGAY_PCTN_NEW == '') {
             T.notify('Ngày PCTN mới đang trống!', 'danger');
             $('#NGAY_PCTN_NEW').focus();
-        } else if (!changes.PT_PCTN_NEW) {
+        } else if (changes.PT_PCTN_NEW == '') {
             T.notify('Phần trăm PCTN mới đang trống!', 'danger');
             $('#PT_PCTN_NEW').focus();
-        } else if (!changes.DON_VI) {
+        } else if (changes.DON_VI == '') {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#DON_VI').focus();
         } else if (changes.SHCC < 0) {

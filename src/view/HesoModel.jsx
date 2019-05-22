@@ -50,10 +50,10 @@ export default class HesoModal extends React.Component {
         if (this.state.text =='') {
             T.notify('Bạn phải điền giá trị!', 'danger');
             $('#MLTT').focus();
-        }else if (!changes.MLTT) {
+        }else if (changes.MLTT == '') {
             T.notify('MLTT đang trống!', 'danger');
             $('#MLTT').focus();
-        } else if (!changes.TL) {
+        } else if (changes.TL == '') {
             T.notify('TL đang trống!', 'danger');
             $('#TL').focus();
         } else if (changes.MLTT < 0) {

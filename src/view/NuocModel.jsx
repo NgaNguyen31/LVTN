@@ -49,10 +49,10 @@ export default class NuocModal extends React.Component {
         if (this.state.text =='') {
             T.notify('Bạn phải điền giá trị!', 'danger');
             $('#NGHI').focus();
-        } else if (!changes.MS_NUOC) {
+        } else if (changes.MS_NUOC == '') {
             T.notify('Mã số nước đang trống!', 'danger');
             $('#MS_NUOC').focus();
-        } else if (!changes.TEN_NUOC) {
+        } else if (changes.TEN_NUOC == '') {
             T.notify('Tên nước đang trống!', 'danger');
             $('#MS_NUOC').focus();
         } else if (this.state._id) {

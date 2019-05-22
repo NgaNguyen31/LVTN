@@ -50,10 +50,10 @@ export default class NgachModal extends React.Component {
         if (this.state.text =='') {
             T.notify('Bạn phải điền giá trị!', 'danger');
             $('#NGACH').focus();
-        } else if (!changes.NGACH) {
+        } else if (changes.NGACH == '') {
             T.notify('Ngạch đang trống!', 'danger');
             $('#NGACH').focus();
-        } else if (!changes.TEN_NGACH) {
+        } else if (changes.TEN_NGACH == '') {
             T.notify('Tên ngạch đang trống!', 'danger');
             $('#TEN_NGACH').focus();
         } else if (this.state._id) {

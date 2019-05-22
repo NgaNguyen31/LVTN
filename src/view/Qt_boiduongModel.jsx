@@ -87,13 +87,13 @@ export default class Qt_boiduongModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (!changes.STT) {
+        } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
-        } else if (!changes.NOI_DUNG_BD) {
+        } else if (changes.NOI_DUNG_BD == '') {
             T.notify('Nội dung bồi dưỡng đang trống!', 'danger');
             $('#NOI_DUNG_BD').focus();
-        } else if (!changes.NOI_BOI_DUONG) {
+        } else if (changes.NOI_BOI_DUONG == '') {
             T.notify('Nơi bồi dưỡng đang trống!', 'danger');
             $('#NOI_BOI_DUONG').focus();
         } else if (changes.STT < 0) {

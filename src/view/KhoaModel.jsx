@@ -52,7 +52,7 @@ export default class KhoaModal extends React.Component {
         if (this.state.text == '')  {
             T.notify('Bạn phải điền dữ liệu!', 'danger');
             $('#TEN_KHOA').focus();
-        } else if (!changes.TEN_KHOA) {
+        } else if (changes.TEN_KHOA == '') {
             T.notify('Tên khoa đang trống!', 'danger');
             $('#TEN_KHOA').focus();
         } else if (this.state._id) {

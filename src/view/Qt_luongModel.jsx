@@ -92,6 +92,9 @@ export default class Qt_luongModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
+        } else if (changes.STT == '') {
+            T.notify('STT đang trống!', 'danger');
+            $('#STT').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

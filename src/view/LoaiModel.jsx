@@ -50,10 +50,10 @@ export default class LoaiModal extends React.Component {
         if (this.state.text == '')  {
             T.notify('Bạn phải điền dữ liệu!', 'danger');
             $('#LOAI').focus();
-        } else if (!changes.LOAI) {
+        } else if (changes.LOAI == '') {
             T.notify('Tên loại đang trống!', 'danger');
             $('#LOAI').focus();
-        } else if (!changes.Dien_giai) {
+        } else if (changes.Dien_giai == '') {
             T.notify('Diễn giải đang trống!', 'danger');
             $('#Dien_giai').focus();
         } else if (this.state._id) {
