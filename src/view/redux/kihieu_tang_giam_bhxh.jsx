@@ -103,7 +103,9 @@ export function createKihieu_tang_giam_bhxh(kihieu_tang_giam_bhxh, done) {
     return dispatch => {
         const url = '/admin/kihieu_tang_giam_bhxh';
         T.post(url, { kihieu_tang_giam_bhxh }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Kí hiệu này đã được tạo!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateKihieu_tang_giam_bhxh(_id, changes, done) {
     return dispatch => {
         const url = '/admin/kihieu_tang_giam_bhxh';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Kí hiệu này đã được tạo!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

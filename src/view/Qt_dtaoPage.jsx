@@ -78,7 +78,7 @@ class Qt_dtaoPage extends React.Component {
                                 {/* <td>{item.QUOC_GIA}</td>                                
                                 <td>{item.HINH_THUC}</td>
                                 <td>{item.LOAI_TN}</td> */}
-                                <td>{item.NAM}</td>
+                                <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.CO_NOP_BANG}</td>
                                 <td>{item.GHI_CHU}</td> */}
                                 <td className='btn-group'>

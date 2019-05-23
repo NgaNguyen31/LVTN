@@ -3,11 +3,28 @@ module.exports = app => {
         trinh_do: String,
         Ten_day_du: String,
         ord: [{type: app.db.Schema.ObjectId, ref: 'phanloai'}],
-    }, {unique: true});
+    });
     const model = app.db.model('trinhdo', schema);
 
     app.model.trinhdo = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    trinh_do: data.trinh_do
+                }, {
+                    Ten_day_du: data.Ten_day_du
+                }, {
+                    ord: data.ord
+                }
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+        },
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -28,7 +45,25 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({}, done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        trinh_do: changes.trinh_do
+                    }, {
+                        Ten_day_du: data.Ten_day_du
+                    }, {
+                        ord: data.ord
+                    }
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

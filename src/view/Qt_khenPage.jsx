@@ -61,7 +61,7 @@ class Qt_khenPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
                                 {/* <td>{item.STT}</td> */}
-                                <td>{item.NAM}</td>
+                                <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 <td>{item.HINH_THUC}</td>
                                 <td>{item.CAP_KHEN}</td>
                                 {/* <td>{item.LY_DO}</td> */}

@@ -15,7 +15,21 @@ module.exports = app => {
     const model = app.db.model('cbcnv_hd_dv_tu_tra',schema);
 
     app.model.cbcnv_hd_dv_tu_tra = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => {
+            model.find({
+                $or : [
+                    {
+                        MSNV: data.MSNV                        
+                    }                    
+                ]
+            }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.create(data,done)
+                }
+            })},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -36,7 +50,21 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+            $or : [
+                {
+                    MSNV: changes.MSNV                        
+                }                    
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+            }
+        })},
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

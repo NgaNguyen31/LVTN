@@ -103,7 +103,9 @@ export function createNgach(ngach, done) {
     return dispatch => {
         const url = '/admin/ngach';
         T.post(url, { ngach }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Ngạch đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateNgach(_id, changes, done) {
     return dispatch => {
         const url = '/admin/ngach';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Ngạch này đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

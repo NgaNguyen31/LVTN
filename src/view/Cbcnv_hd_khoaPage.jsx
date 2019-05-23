@@ -68,7 +68,7 @@ class Cbcnv_hd_khoaPage extends React.Component {
                                 <td>{item.HO}</td>      
                                 <td>{item.TEN}</td>
                                 <td>{item.PHAI}</td>                            
-                                <td>{item.NAM_SINH}</td>
+                                <td>{T.dateToText(item.NAM_SINH,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.The_BHYT}</td>
                                 <td>{item.Noi_kham}</td>    
                                 <td>{item.LCB}</td>

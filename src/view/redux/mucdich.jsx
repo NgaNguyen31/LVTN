@@ -103,7 +103,9 @@ export function createMucdich(mucdich, done) {
     return dispatch => {
         const url = '/admin/mucdich';
         T.post(url, { mucdich }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Mục đích này đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateMucdich(_id, changes, done) {
     return dispatch => {
         const url = '/admin/mucdich';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Mục đích này đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

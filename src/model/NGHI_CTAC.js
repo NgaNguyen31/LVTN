@@ -2,11 +2,26 @@ module.exports = app => {
     const schema = app.db.Schema ({
         NGHI : String,
         Dien_giai : String    
-    }, {unique: true});
+    });
     const model = app.db.model('nghi_ctac', schema);
 
     app.model.nghi_ctac = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    NGHI: data.NGHI                                     
+                }, {
+                    Dien_giai: data.Dien_giai   
+                }       
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -27,7 +42,24 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        NGHI: changes.NGHI
+                    },
+                    { 
+                        Dien_giai: changes.Dien_giai
+                    }
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

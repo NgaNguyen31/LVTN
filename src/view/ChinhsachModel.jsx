@@ -28,13 +28,14 @@ export default class ChinhsachModal extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#TEN_CS').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#MS_CS').focus());
         }, 250));
     }
 
     show(item) {
-        const { _id, TEN_CS } = item ?
-            item : { _id: null, TEN_CS: '' };
+        const { _id, MS_CS, TEN_CS } = item ?
+            item : { _id: null, MS_CS: '', TEN_CS: '' };
+        $('#MS_CS').val(MS_CS);
         $('#TEN_CS').val(TEN_CS);
         this.setState({ _id});
         $(this.modal.current).modal('show');
@@ -43,9 +44,16 @@ export default class ChinhsachModal extends React.Component {
     save(e) {
         e.preventDefault();
         const changes = {
+            MS_CS: this.state.text.MS_CS,
             TEN_CS: this.state.text.TEN_CS,
         };
         if (this.state.text == '') {
+            T.notify('Tên chính sách đang trống!', 'danger');
+            $('#TEN_CS').focus();
+        } else if (changes.MS_CS == '') {
+            T.notify('MS chính sách đang trống!', 'danger');
+            $('#MS_CS').focus();
+        } else if (changes.TEN_CS == '') {
             T.notify('Tên chính sách đang trống!', 'danger');
             $('#TEN_CS').focus();
         } else if (this.state._id) {
@@ -71,6 +79,10 @@ export default class ChinhsachModal extends React.Component {
                             </button>
                         </div>
                         <div className='modal-body'>
+                            <div className='form-group'>
+                                <label htmlFor='MS_CS'>Mã chính sách</label>
+                                <input className='form-control' id='MS_CS' type='text' placeholder='Mã chính sách' onChange={this.handleInput('text', 'MS_CS')} value={this.state.text.MS_CS}/>
+                            </div>
                             <div className='form-group'>
                                 <label htmlFor='TEN_CS'>Tên chính sách</label>
                                 <input className='form-control' id='Tenchinhsach' type='text' placeholder='Tên chính sách' onChange={this.handleInput('text', 'TEN_CS')} value={this.state.text.TEN_CS}/>

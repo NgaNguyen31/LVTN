@@ -60,7 +60,7 @@ class Qt_cac_conPage extends React.Component {
                                 </td>       
                                 {/* <td>{item.STT}</td> */}
                                 <td>{item.TEN}</td>
-                                <td>{item.NAM_SINH}</td>
+                                <td>{T.dateToText(item.NAM_SINH,'dd/mm/yyyy')}</td>
                                 <td>{item.CVU}</td>
                                 <td>{item.CTAC}</td>
                                 <td className='btn-group'>

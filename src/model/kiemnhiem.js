@@ -6,13 +6,26 @@ module.exports = app =>{
         NGAY_CVU: Date,
         GHICHU: String,
         Xoa: Boolean
-    }, {
-        unique: true
     });
     const model = app.db.model('kiemnhiem',schema);
 
     app.model.kiemnhiem = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MS_NV: data.MS_NV,
+                    MS_BM: data.MS_BM, 
+                    MS_CVU: data.MS_CVU                    
+                }       
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -33,7 +46,23 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NV: changes.MS_NV,
+                        MS_BM: changes.MS_BM, 
+                        MS_CVU: changes.MS_CVU
+                    }         
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },             
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

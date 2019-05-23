@@ -103,7 +103,9 @@ export function createKhuvuc(khuvuc, done) {
     return dispatch => {
         const url = '/admin/khuvuc';
         T.post(url, { khuvuc }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khu vực này đã được tạo!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateKhuvuc(_id, changes, done) {
     return dispatch => {
         const url = '/admin/khuvuc';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khu vực này đã được tạo!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

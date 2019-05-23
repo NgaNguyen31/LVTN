@@ -103,7 +103,9 @@ export function createQt_boiduong(qt_boiduong, done) {
     return dispatch => {
         const url = '/admin/qt_boiduong';
         T.post(url, { qt_boiduong }, data => {            
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã được bồi dưỡng nội dung này!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateQt_boiduong(_id, changes, done) {
     return dispatch => {
         const url = '/admin/qt_boiduong';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã được bồi dưỡng nội dung này!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

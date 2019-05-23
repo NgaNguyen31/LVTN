@@ -103,7 +103,9 @@ export function createQt_dtai(qt_dtai, done) {
     return dispatch => {
         const url = '/admin/qt_dtai';
         T.post(url, { qt_dtai }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Trùng đề tài!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateQt_dtai(_id, changes, done) {
     return dispatch => {
         const url = '/admin/qt_dtai';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Trùng đề tài!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

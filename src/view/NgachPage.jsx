@@ -48,7 +48,7 @@ class NgachPage extends React.Component {
                         {this.props.ngach.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.NGACH ? item.NGACH + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.NGACH ? ('00000' + item.NGACH).slice(-5) + ' ' : '')}</a>
                                 </td>        
                                 <td>{item.TEN_NGACH}</td>                    
                                 <td className='btn-group'>

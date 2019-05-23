@@ -106,10 +106,12 @@ export function createKhoa(khoa, done) {
     return dispatch => {
         const url = '/admin/khoa';
         T.post(url, { khoa }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khoa này đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
-            } else {
+            } else{
                 T.notify('Tạo thành công', 'info');
                 dispatch(getKhoaInPage());
             }
@@ -122,7 +124,9 @@ export function updateKhoa(_id, changes, done) {
     return dispatch => {
         const url = '/admin/khoa';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khoa đã tồn tại!', 'danger');                
+            } else if (data.error) {                
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

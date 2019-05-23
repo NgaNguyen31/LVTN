@@ -60,13 +60,13 @@ class Pctn_nghe_2018Page extends React.Component {
                         {this.props.pctn_nghe_2018.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.SHCC ? item.SHCC + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.SHCC ? ('000000' + item.SHCC).slice(-6) + ' ' : '')}</a>
                                 </td>   
                                 {console.log(typeof item.NGAY_SINH)
                                 }     
                                 <td>{item.HO}</td>                    
                                 <td>{item.TEN}</td>                    
-                                <td>{item.NGAY_SINH}</td>                 
+                                <td>{T.dateToText(item.NGAY_SINH,'dd/mm/yyyy')}</td>                 
                                 <td>{item.MS_CDNN}</td>                    
                                 {/* <td>{item.NGAY_PCTN_OLD}</td>                    
                                 <td>{item.PT_PCTN_OLD}</td>                     */}

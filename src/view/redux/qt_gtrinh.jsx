@@ -103,7 +103,9 @@ export function createQt_gtrinh(qt_gtrinh, done) {
     return dispatch => {
         const url = '/admin/qt_gtrinh';
         T.post(url, { qt_gtrinh }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Giáo trình này cán bộ đã nộp rồi!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateQt_gtrinh(_id, changes, done) {
     return dispatch => {
         const url = '/admin/qt_gtrinh';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Giáo trình này cán bộ đã nộp rồi!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

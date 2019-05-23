@@ -5,11 +5,25 @@ module.exports = app => {
         BAI_BAO: String,
         TEN_TCHI: String,
         NAM: Date
-    },{unique: true});
+    });
     const model = app.db.model('qt_bbao', schema);
 
     app.model.qt_bbao = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MS_NV: data.MS_NV,
+                    BAI_BAO: data.BAI_BAO 
+                }
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -30,7 +44,22 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NV: changes.MS_NV,
+                        BAI_BAO: changes.BAI_BAO
+                    }
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

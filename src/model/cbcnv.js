@@ -6,7 +6,13 @@ module.exports = app =>{
         IN_NUOC: String,
         LOAI: { type: app.db.Schema.ObjectId, ref: 'loai' },
         SHCC: { type: app.db.Schema.ObjectId, ref: 'pctn_nghe_2018' },
-        MS_NV: String,
+        MS_NV: {
+            type: String,
+            index: {
+                unique: true,
+                dropDups: true
+            }
+        },
         MS_NV_CU: String,
         HO: String,
         TEN: String,
@@ -141,12 +147,25 @@ module.exports = app =>{
         DONG_BHXH: String,
         HL_DEN_NGAY: Date,
         DIEN_GIAI_HD: Number
-    },
-    {unique: true});
+    });
     const model = app.db.model('cbcnv',schema);
 
     app.model.cbcnv = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NV: data.MS_NV                        
+                    }                    
+                ]
+            }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.create(data,done)
+                }
+            })},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -167,7 +186,21 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) =>  {
+            model.find({
+            $or : [
+                {
+                    MS_NV: changes.MS_NV                        
+                }                    
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+            }
+        })},
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

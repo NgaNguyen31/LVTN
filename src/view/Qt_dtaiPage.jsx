@@ -64,7 +64,7 @@ class Qt_dtaiPage extends React.Component {
                                 <td>{item.CHU_NHIEM_DE_TAI}</td>
                                 <td>{item.CAP}</td>
                                 <td>{item.NGAY_KETTHUC}</td>
-                                <td>{item.NAM}</td>
+                                <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

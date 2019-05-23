@@ -103,7 +103,9 @@ export function createKhoi_luong_gd_caohoc(khoi_luong_gd_caohoc, done) {
     return dispatch => {
         const url = '/admin/khoi_luong_gd_caohoc';
         T.post(url, { khoi_luong_gd_caohoc }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khoa này đã được tạo!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateKhoi_luong_gd_caohoc(_id, changes, done) {
     return dispatch => {
         const url = '/admin/khoi_luong_gd_caohoc';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khoa này đã được tạo!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

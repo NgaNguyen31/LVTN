@@ -41,10 +41,10 @@ class BomonPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '30%', textAlign: 'center' }}>Tên bộ môn</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Tên bộ môn</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Tên tiếng anh</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Tên khoa</th>
-                            <th style={{ width: '10%', textAlign: 'center' }}>Năm thành lập</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Năm thành lập</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -56,7 +56,7 @@ class BomonPage extends React.Component {
                                 </td> 
                                 <td>{item.TEN_TIENG_ANH}</td>          
                                 <td>{item.MS_KHOA.reduce((pre, value) => pre + ' ' +  value.TEN_KHOA, ' ')}</td>
-                                <td>{item.NAM_THANH_LAP}</td>
+                                <td>{T.dateToText(item.NAM_THANH_LAP,'dd/mm/yyyy')}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

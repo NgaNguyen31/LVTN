@@ -103,7 +103,9 @@ export function createQt_nngu(qt_nngu, done) {
     return dispatch => {
         const url = '/admin/qt_nngu';
         T.post(url, { qt_nngu }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateQt_nngu(_id, changes, done) {
     return dispatch => {
         const url = '/admin/qt_nngu';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

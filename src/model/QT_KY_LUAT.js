@@ -10,11 +10,21 @@ module.exports = app => {
         SO_QD: String,
         NGAY_QD:Date,
         FIELD1: String
-    }, {unique: true});
+    });
     const model = app.db.model('qt_ky_luat', schema);
 
     app.model.qt_ky_luat = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => {
+            model.findOne(data, (error, item) => {
+                if (error) {
+                    if (done) done(error);
+                } else if (item) {
+                    if (done) done('Exist', item);
+                } else {
+                    model.create(data,done);
+                }
+            })
+        },
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -35,7 +45,16 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {model.findOne(changes, (error, item) => {
+            if (error) {
+                if (done) done(error);
+            } else if (item) {
+                if (done) done('Exist', item);
+            } else {
+                model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+            }
+        })            
+    },
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

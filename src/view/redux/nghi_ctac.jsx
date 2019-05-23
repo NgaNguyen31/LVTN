@@ -104,7 +104,9 @@ export function createNghi_ctac(nghi_ctac, done) {
     return dispatch => {
         const url = '/admin/nghi_ctac';
         T.post(url, { nghi_ctac }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Lý do nghỉ đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -120,7 +122,9 @@ export function updateNghi_ctac(_id, changes, done) {
     return dispatch => {
         const url = '/admin/nghi_ctac';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Lý do nghỉ đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

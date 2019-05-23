@@ -103,7 +103,9 @@ export function createCbcnv_hd_khoa(cbcnv_hd_khoa, done) {
     return dispatch => {
         const url = '/admin/cbcnv_hd_khoa';
         T.post(url, { cbcnv_hd_khoa }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateCbcnv_hd_khoa(_id, changes, done) {
     return dispatch => {
         const url = '/admin/cbcnv_hd_khoa';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

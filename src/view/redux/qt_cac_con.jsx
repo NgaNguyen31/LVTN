@@ -103,7 +103,9 @@ export function createQt_cac_con(qt_cac_con, done) {
     return dispatch => {
         const url = '/admin/qt_cac_con';
         T.post(url, { qt_cac_con }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('MSNV và Tên đã bị trùng!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {    
@@ -119,7 +121,9 @@ export function updateQt_cac_con(_id, changes, done) {
     return dispatch => {
         const url = '/admin/qt_cac_con';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('MSNV và Tên đã bị trùng!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

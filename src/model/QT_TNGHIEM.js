@@ -4,11 +4,25 @@ module.exports = app => {
         STT: Number,
         BAI_TN: String,
         NAM: Date,
-    }, {unique: true});
+    });
     const model = app.db.model('qt_tnghiem', schema);
 
     app.model.qt_tnghiem = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MS_NV: data.MS_NV,
+                    BAI_TN: data.BAI_TN
+                }
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+        },
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -29,7 +43,22 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NV: changes.MS_NV,
+                        BAI_TN: changes.BAI_TN
+                    }
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

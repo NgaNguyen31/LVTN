@@ -1,17 +1,21 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        Dan_toc: {
-            type: String,
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        }
+        Dan_toc: String
     });
     const model = app.db.model('dantoc',schema);
 
     app.model.dantoc = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => {
+            model.findOne(data, (error, item) => {
+                if (error) {
+                    if (done) done(error);
+                } else if (item) {
+                    if (done) done('Exist', item);
+                } else {
+                    model.create(data,done);
+                }
+            })
+        },
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -32,7 +36,16 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {model.findOne(changes, (error, item) => {
+            if (error) {
+                if (done) done(error);
+            } else if (item) {
+                if (done) done('Exist', item);
+            } else {
+                model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+            }
+        })            
+    },
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

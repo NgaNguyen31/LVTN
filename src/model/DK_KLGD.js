@@ -14,11 +14,26 @@ module.exports = app =>{
         TU_NGAY: Date,
         DEN_NGAY: Date,
         GHI_CHU: String
-    }, {unique: true});
+    });
     const model = app.db.model('dk_klgd',schema);
 
     app.model.dk_klgd = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MS_NV: data.MS_NV,
+                    MS_BM: data.MS_BM, 
+                    MS_CV: data.MS_CV                    
+                }       
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -39,7 +54,23 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NV: changes.MS_NV,
+                        MS_BM: changes.MS_BM, 
+                        MS_CV: changes.MS_CV
+                    }         
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },                    
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

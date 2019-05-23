@@ -60,7 +60,7 @@ class Qt_bbaoPage extends React.Component {
                                 {/* <td>{item.STT}</td> */}
                                 <td>{item.BAI_BAO}</td>
                                 <td>{item.TEN_TCHI}</td>
-                                <td>{item.NAM}</td>
+                                <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

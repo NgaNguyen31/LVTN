@@ -1,18 +1,25 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        TEN_CV: {
-            type: String,
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        },
+        TEN_CV: String,
         GHI_CHU: String
     });
     const model = app.db.model('cv_klgd',schema);
 
     app.model.cv_klgd = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    TEN_CV: data.TEN_CV                     
+                }       
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -33,7 +40,21 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        TEN_CV: changes.TEN_CV
+                    }         
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },                    
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

@@ -103,7 +103,9 @@ export function createChucvu(chucvu, done) {
     return dispatch => {
         const url = '/admin/chucvu';
         T.post(url, { chucvu }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Chức vụ này đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateChucvu(_id, changes, done) {
     return dispatch => {
         const url = '/admin/chucvu';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Chức vụ đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

@@ -6,11 +6,25 @@ module.exports = app => {
         NAM_SINH: Date,
         CVU: String,
         CTAC: String
-    },{unique: true});
+    });
     const model = app.db.model('qt_cac_con', schema);
 
     app.model.qt_cac_con = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MS_NV: data.MS_NV,
+                    TEN: data.TEN 
+                }
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -31,7 +45,22 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NV: changes.MS_NV,
+                        TEN: changes.TEN
+                    }
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

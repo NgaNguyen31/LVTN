@@ -105,7 +105,9 @@ export function createPctn_nghe_2018(pctn_nghe_2018, done) {
     return dispatch => {
         const url = '/admin/pctn_nghe_2018';
         T.post(url, { pctn_nghe_2018 }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('SHCC đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -121,7 +123,9 @@ export function updatePctn_nghe_2018(_id, changes, done) {
     return dispatch => {
         const url = '/admin/pctn_nghe_2018';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('SHCC đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

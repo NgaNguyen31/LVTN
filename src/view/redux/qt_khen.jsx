@@ -103,7 +103,9 @@ export function createQt_khen(qt_khen, done) {
     return dispatch => {
         const url = '/admin/qt_khen';
         T.post(url, { qt_khen }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khen thưởng đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateQt_khen(_id, changes, done) {
     return dispatch => {
         const url = '/admin/qt_khen';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Khen thưởng đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

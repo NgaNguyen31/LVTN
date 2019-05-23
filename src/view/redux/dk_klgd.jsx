@@ -103,7 +103,9 @@ export function createDk_klgd(dk_klgd, done) {
     return dispatch => {
         const url = '/admin/dk_klgd';
         T.post(url, { dk_klgd }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã đăng kí!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateDk_klgd(_id, changes, done) {
     return dispatch => {
         const url = '/admin/dk_klgd';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã đăng kí!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

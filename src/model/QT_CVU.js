@@ -14,11 +14,25 @@ module.exports = app => {
         NGAY_QD_THOI_CV: Date,
         MS_BOMON: { type: app.db.Schema.ObjectId, ref: 'bomon' },
         GHI_CHU: String
-    },{unique: true});
+    });
     const model = app.db.model('qt_cvu', schema);
 
     app.model.qt_cvu = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MS_NV: data.MS_NV,
+                    MA_CV: data.MA_CV 
+                }
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -39,7 +53,22 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({}).sort({ _id: -1}).exec({done}),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NV: changes.MS_NV,
+                        MA_CV: changes.MA_CV
+                    }
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

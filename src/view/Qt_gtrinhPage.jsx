@@ -59,7 +59,7 @@ class Qt_gtrinhPage extends React.Component {
                                 </td>       
                                 {/* <td>{item.STT}</td> */}
                                 <td>{item.G_Trinh}</td>
-                                <td>{item.NamXB}</td>
+                                <td>{T.dateToText(item.NamXB,'dd/mm/yyyy')}</td>
                                 <td>{item.NhaXB}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>

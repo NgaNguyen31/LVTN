@@ -21,6 +21,7 @@ module.exports = app => {
     app.put('/admin/chinhsach', app.role.isAdmin, (req, res) => {
         let data = req.body.changes,
             changes = {};
+        if (data.MS_CS && data.MS_CS != '') changes.MS_CS = data.MS_CS;
         if (data.TEN_CS && data.TEN_CS != '') changes.TEN_CS = data.TEN_CS;
 
         app.model.chinhsach.update(req.body._id, changes, (error, chinhsach) => {

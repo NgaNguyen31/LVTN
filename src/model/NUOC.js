@@ -2,12 +2,26 @@ module.exports = app => {
     const schema = app.db.Schema ({
         MS_NUOC: String,
         TEN_NUOC: String 
-    },
-    {unique: true});
+    });
     const model = app.db.model('nuoc', schema);
 
     app.model.nuoc = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MS_NUOC: data.MS_NUOC                                     
+                }, {
+                    TEN_NUOC: data.TEN_NUOC   
+                }       
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -28,7 +42,24 @@ module.exports = app => {
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MS_NUOC: changes.MS_NUOC
+                    },
+                    { 
+                        TEN_NUOC: changes.TEN_NUOC
+                    }
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

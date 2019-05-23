@@ -103,7 +103,9 @@ export function createTinh(tinh, done) {
     return dispatch => {
         const url = '/admin/tinh';
         T.post(url, { tinh }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateTinh(_id, changes, done) {
     return dispatch => {
         const url = '/admin/tinh';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

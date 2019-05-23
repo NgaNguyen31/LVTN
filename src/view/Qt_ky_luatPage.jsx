@@ -65,7 +65,7 @@ class Qt_ky_luatPage extends React.Component {
                                 </td>       
                                 {/* <td>{item.STT}</td>
                                 <td>{item.THANG}</td> */}
-                                <td>{item.NAM}</td>
+                                <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 <td>{item.HINH_THUC}</td>
                                 <td>{item.CAP_KL}</td>
                                 <td>{item.LY_DO}</td>

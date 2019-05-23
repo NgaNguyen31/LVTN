@@ -3,7 +3,7 @@ import React from 'react';
 export default class NgachModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''}
+        this.state = {text: '', number: ''}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -19,6 +19,9 @@ export default class NgachModal extends React.Component {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
                     : (state.text = {}) && (state.text[field] = e.target.value)
+                case 'number':
+                    state.number ? (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value)
             }
 
             this.setState(state);
@@ -43,8 +46,43 @@ export default class NgachModal extends React.Component {
 
     save(e) {
         e.preventDefault();
+        // const A = Array.from(this.state.number.NGACH);
+        // const B = [0,0,0,0,0];
+        // const C = A.length;
+        // const D = 0;
+        // switch (C) {
+        //     case 1:
+        //         B[4] = A[0];
+        //         break;
+        //     case 2:
+        //         B[5] = A[1];
+        //         B[4] = A[0];
+        //         break;
+        //     case 3:
+        //         B[5] = A[2];
+        //         B[4] = A[1];
+        //         B[3] = A[0];
+        //         break;
+        //     case 4:
+        //         B[5] = A[3];
+        //         B[4] = A[2];
+        //         B[3] = A[1];
+        //         B[2] = A[0];
+        //         break;
+        //     case 5:
+        //         B[5] = A[4];
+        //         B[4] = A[3];
+        //         B[3] = A[2];
+        //         B[2] = A[1];
+        //         B[1] = A[0];
+        //         break;
+        
+        //     default:
+        //         break;
+        // }
+        // console.log(D);
         const changes = {
-            NGACH: this.state.text.NGACH,
+            NGACH: this.state.number.NGACH,
             TEN_NGACH: this.state.text.TEN_NGACH,
         };
         if (this.state.text =='') {
@@ -81,7 +119,7 @@ export default class NgachModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='tenngach'>Ngạch</label>
-                                <input className='form-control' id='Tenngach' type='number' placeholder='Ngạch' onChange={this.handleInput('text', 'NGACH')} value={this.state.text.NGACH}/>
+                                <input className='form-control' id='Tenngach' type='number' placeholder='Ngạch' onChange={this.handleInput('number', 'NGACH')} value={this.state.number.NGACH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='diengiai'>Tên ngạch</label>

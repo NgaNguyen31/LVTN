@@ -15,13 +15,25 @@ module.exports = app =>{
         Tong_st_quidoi:  Number,
         Tong_cong: Number,
         Ghi_chu: String
-    },{
-        unique: true
     });
     const model = app.db.model('khoi_luong_gd_caohoc',schema);
 
     app.model.khoi_luong_gd_caohoc = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => { model.find({
+            $or : [
+                {
+                    MSNV: data.MSNV,
+                    Mon_giangday: data.Mon_giangday                
+                }       
+            ]
+            }, (error, items) => {
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.create(data,done)
+            }})         
+},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -42,7 +54,22 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        MSNV: changes.MSNV,
+                        Mon_giangday: changes.Mon_giangday
+                    }         
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },             
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

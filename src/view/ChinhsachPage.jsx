@@ -39,7 +39,8 @@ class ChinhsachPage extends React.Component {
                 <table className='table table-hover table-bordered' ref={this.table}>
                     <thead>
                         <tr>
-                            <th style={{ width: '100%', textAlign: 'center' }}>Tên chính sách</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Mã chính sách</th>
+                            <th style={{ width: '70%', textAlign: 'center' }}>Tên chính sách</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -47,8 +48,9 @@ class ChinhsachPage extends React.Component {
                         {this.props.chinhsach.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_CS ? item.TEN_CS + ' ' : '')}</a>
-                                </td>                            
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_CS ? item.MS_CS + ' ' : '')}</a>
+                                </td>       
+                                <td>{item.TEN_CS}</td>                     
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

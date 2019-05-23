@@ -9,12 +9,32 @@ module.exports = app =>{
         Giahan: String,
         SoCVan: Number,
         NgayCVan: Date
-    },
-    { unique: true });
+    });
     const model = app.db.model('cb_nngoai',schema);
 
     app.model.cb_nngoai = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => {
+            model.find({
+                $or : [
+                    {
+                        Hovaten: data.Hovaten                        
+                    }
+                    , {      
+                        Nuoc: data.Nuoc
+                    }, {
+                        Ngaydi: data.Ngaydi
+                    }, {
+                        Ngayve: data.Ngayve
+                    }
+                ]
+            }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.create(data,done)
+                }
+            })},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -35,7 +55,31 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        Hovaten: changes.Hovaten                        
+                    }
+                    , {      
+                        Nuoc: changes.Nuoc
+                    }, {
+                        Ngaydi: changes.Ngaydi
+                    }, {
+                        Ngayve: changes.Ngayve
+                    }
+                ]
+            }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, (error, item) => {
+                        console.log(error, item);
+                        done(error, item);
+                    })
+                }
+            })},
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

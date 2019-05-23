@@ -1,25 +1,29 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        chuc_danh: {
-            type: String,
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        },
-        ten_day_du: {
-            type: String,
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        },
+        chuc_danh: String,
+        ten_day_du: String,
         ord: [{ type: app.db.Schema.ObjectId, ref: 'phanloai' }],
     });
     const model = app.db.model('chucdanh',schema);
 
     app.model.chucdanh = {
-        create: (data, done) => model.create(data,done),
+        create: (data, done) => {
+            model.find({
+                $or : [
+                    {
+                        chuc_danh: data.chuc_danh                       
+                    }, {
+                        ten_day_du: data.ten_day_du                       
+                    }              
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.create(data,done)
+                }})         
+    },
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -40,7 +44,23 @@ module.exports = app =>{
         }),
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
-        update: (_id, changes, done) => model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done),
+        update: (_id, changes, done) => {
+            model.find({
+                $or : [
+                    {
+                        chuc_danh: changes.chuc_danh                       
+                    }, {
+                        ten_day_du: changes.ten_day_du                       
+                    }              
+                ]
+                }, (error, items) => {
+                if (items.length > 0) {
+                    if (done) done('Exist', items);
+                }
+                else{
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+    },                    
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

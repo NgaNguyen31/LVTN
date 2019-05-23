@@ -103,7 +103,9 @@ export function createQt_dtao(qt_dtao, done) {
     return dispatch => {
         const url = '/admin/qt_dtao';
         T.post(url, { qt_dtao }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã được đào tạo cấp này!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateQt_dtao(_id, changes, done) {
     return dispatch => {
         const url = '/admin/qt_dtao';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Cán bộ đã được đào tạo cấp này!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

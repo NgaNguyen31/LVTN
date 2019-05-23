@@ -103,7 +103,9 @@ export function createCv_klgd(cv_klgd, done) {
     return dispatch => {
         const url = '/admin/cv_klgd';
         T.post(url, { cv_klgd }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Tên CV này đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
@@ -119,7 +121,9 @@ export function updateCv_klgd(_id, changes, done) {
     return dispatch => {
         const url = '/admin/cv_klgd';
         T.put(url, { _id, changes }, data => {
-            if (data.error) {
+            if (data.error == 'Exist') {
+                T.notify('Tên CV này đã tồn tại!', 'danger');                
+            } else if (data.error) {
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
