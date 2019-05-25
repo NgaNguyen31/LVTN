@@ -18,7 +18,8 @@ module.exports = app => {
     app.delete('/admin/cbcnv_hd_dv_tu_tra', app.role.isAdmin, (req, res) => app.model.cbcnv_hd_dv_tu_tra.delete(req.body._id, error => res.send({ error })));
 
     app.post('/admin/cbcnv_hd_dv_tu_tra', app.role.isAdmin, (req, res) => {        
-        app.model.cbcnv_hd_dv_tu_tra.create(req.body.cbcnv_hd_dv_tu_tra, (error, cbcnv_hd_dv_tu_tra) => {
+        app.model.cbcnv_hd_dv_tu_tra.create(req.body.cbcnv_hd_dv_tu_tra, (error, cbcnv_hd_dv_tu_tra) => {          
+            
             res.send({ error, cbcnv_hd_dv_tu_tra })
         });
     });

@@ -80,8 +80,8 @@ class AdminPage extends React.Component {
     }
 
     render() {
-        const { numberOfUser, numberOfNews, numberOfEvent, numberOfJob, todayViews, allViews } = this.props.system ?
-            this.props.system : { numberOfUser: 0, numberOfNews: 0, numberOfEvent: 0, numberOfJob: 0, todayViews: 0, allViews: 0 };
+        const { numberOfUser,numberOfCb_nngoai, numberOfNews, numberOfEvent, numberOfJob, todayViews, allViews } = this.props.system ?
+            this.props.system : { numberOfUser: 0,numberOfCb_nngoai: 0, numberOfNews: 0, numberOfEvent: 0, numberOfJob: 0, todayViews: 0, allViews: 0 };
         return (
             <main className='app-content'>
                 <div className='app-title'>
@@ -98,9 +98,12 @@ class AdminPage extends React.Component {
 
                 <div className='row'>
                     <div className='col-md-6 col-lg-3'>
-                        <DashboardIcon type='primary' icon='fa-users' title='User' value={numberOfUser} />
+                        <DashboardIcon type='primary' icon='fa-users' title='Người dùng' value={numberOfUser} />
                     </div>
                     <div className='col-md-6 col-lg-3'>
+                        <DashboardIcon type='info' icon='fa-file' title='CB NNgoài' value={numberOfCb_nngoai} />
+                    </div>
+                    {/* <div className='col-md-6 col-lg-3'>
                         <DashboardIcon type='info' icon='fa-file' title='News' value={numberOfNews} />
                     </div>
                     <div className='col-md-6 col-lg-3'>
@@ -108,7 +111,7 @@ class AdminPage extends React.Component {
                     </div>
                     <div className='col-md-6 col-lg-3'>
                         <DashboardIcon type='warning' icon='fa-pagelines' title='Job' value={numberOfJob} />
-                    </div>
+                    </div> */}
                 </div>
             </main>
         );

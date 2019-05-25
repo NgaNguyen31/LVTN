@@ -106,6 +106,8 @@ export function createCbcnv_hd_khoa(cbcnv_hd_khoa, done) {
             if (data.error == 'Exist') {
                 T.notify('Cán bộ đã tồn tại!', 'danger');                
             } else if (data.error) {
+                console.log(data.error);
+                
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {

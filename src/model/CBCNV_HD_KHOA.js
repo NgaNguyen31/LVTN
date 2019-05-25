@@ -5,7 +5,7 @@ module.exports = app => {
         TEN: String,
         PHAI: String,
         NAM_SINH: Date,
-        The_BHYT: Number,
+        The_BHYT: String,
         Noi_kham: String,
         LCB: String,
         PC: String,

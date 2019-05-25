@@ -47,11 +47,11 @@ class Cb_nngoaiPage extends React.Component {
                             <th style={{ width: '10%', textAlign: 'center'  }}>Nước</th>
                             {/* <th style={{ width: 'auto' }}>Ngày đi</th>
                             <th style={{ width: 'auto' }}>Ngày về</th> */}
-                            <th style={{ width: 'auto', textAlign: 'center'  }}>Thời gian</th>
-                            <th style={{ width: 'auto', textAlign: 'center'  }}>Mục đích</th>
-                            <th style={{ width: 'auto', textAlign: 'center'  }}>Gia hạn</th>
-                            <th style={{ width: 'auto', textAlign: 'center'  }}>Số công văn</th>
-                            <th style={{ width: 'auto', textAlign: 'center'  }}>Ngày công văn</th>
+                            <th style={{ width: '10%', textAlign: 'center'  }}>Thời gian</th>
+                            <th style={{ width: '30%', textAlign: 'center'  }}>Mục đích</th>
+                            <th style={{ width: '10%', textAlign: 'center'  }}>Gia hạn</th>
+                            <th style={{ width: '10%', textAlign: 'center'  }}>Số công văn</th>
+                            <th style={{ width: '10%', textAlign: 'center'  }}>Ngày công văn</th>
                             <th style={{ width: 'auto', textAlign: 'center', whiteSpace: 'nowrap' }}>Action</th>
                         </tr>
                     </thead>
@@ -64,11 +64,11 @@ class Cb_nngoaiPage extends React.Component {
                                 <td>{item.Nuoc.TEN_NUOC}</td>      
                                 {/* <td>{item.Ngaydi}</td>
                                 <td>{item.Ngayve}</td>                             */}
-                                <td>{item.Thoigian}</td>
+                                <td>{T.dateToText(item.Thoigian,'dd/mm/yyyy')}</td>
                                 <td>{item.Mucdich}</td>
                                 <td>{item.Giahan}</td>    
                                 <td>{item.SoCVan}</td>
-                                <td>{item.NgayCVan}</td>                     
+                                <td>{T.dateToText(item.NgayCVan,'dd/mm/yyyy')}</td>                     
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
