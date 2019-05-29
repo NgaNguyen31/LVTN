@@ -110,7 +110,7 @@ export default class BomonModal extends React.Component {
                                 <input className='form-control' id='TEN_TIENG_ANH' type='text' placeholder='Tên tiếng anh' onChange={this.handleInput('text', 'TEN_TIENG_ANH')} value={this.state.text.TEN_TIENG_ANH}/>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='tenbomon'>Mã số khoa</label>
+                                <label htmlFor='tenbomon'>Tên khoa</label>
                                 <Dropdown ref={this.khoa} number='' items={khoa.map(e => Object.assign({}, e, {text: e.TEN_KHOA}))} />
                             </div>
                             <div className='form-group'>

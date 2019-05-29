@@ -67,7 +67,7 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
                                 <td>{item.TEN}</td>
                                 <td>{item.NGAY_SINH}</td>                            
                                 <td>{item.NOI_SINH}</td> */}
-                                <td>{item.NGAY_VAO}</td>
+                                <td>{T.dateToText(item.NGAY_VAO,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.NGAY_NGHI}</td>     */}
                                 <td>{item.TRINH_DO.Ten_day_du}</td>
                                 <td>{item.DON_VI}</td>                     

@@ -15,7 +15,7 @@ class KhuvucPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5, 7);
+            T.selectMenu(5, 6);
             this.props.getKhuvucInPage();
         });
     }

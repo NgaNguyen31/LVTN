@@ -64,7 +64,7 @@ class Cb_nngoaiPage extends React.Component {
                                 <td>{item.Nuoc.TEN_NUOC}</td>      
                                 {/* <td>{item.Ngaydi}</td>
                                 <td>{item.Ngayve}</td>                             */}
-                                <td>{T.dateToText(item.Thoigian,'dd/mm/yyyy')}</td>
+                                <td>{item.Thoigian}</td>
                                 <td>{item.Mucdich}</td>
                                 <td>{item.Giahan}</td>    
                                 <td>{item.SoCVan}</td>

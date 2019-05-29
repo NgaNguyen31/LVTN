@@ -44,7 +44,7 @@ class NuocngoaiPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '50%', textAlign: 'center' }}>Tên nước</th>
-                            <th style={{ width: '50%', textAlign: 'center' }}>MSKV</th>
+                            <th style={{ width: '50%', textAlign: 'center' }}>Tên KV</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>

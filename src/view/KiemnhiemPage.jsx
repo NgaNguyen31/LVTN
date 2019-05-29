@@ -51,8 +51,8 @@ class KiemnhiemPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            <th style={{ width: '30%', textAlign: 'center' }}>MSBM</th>
-                            <th style={{ width: '30%', textAlign: 'center' }}>MSCVụ</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên BM</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên CVụ</th>
                             <th style={{ width: '20%', textAlign: 'center' }}>Ngày chức vụ</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: '10%', textAlign: 'center' }}>Xóa</th>
@@ -89,7 +89,7 @@ class KiemnhiemPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có kiểm nhiệm nào!</p>;
+            table = <p>Chưa có kiêm nhiệm nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.kiemnhiem && this.props.kiemnhiem.page ?
@@ -98,13 +98,13 @@ class KiemnhiemPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin kiểm nhiệm</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin kiêm nhiệm</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Kiểm nhiệm</li>
+                        <li className='breadcrumb-item'>Kiêm nhiệm</li>
                     </ul>
                 </div>
 

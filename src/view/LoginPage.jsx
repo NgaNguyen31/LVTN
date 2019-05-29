@@ -30,7 +30,7 @@ class LoginPage extends React.Component {
         e.preventDefault();
         const data = { email: $('#loginEmail').val(), password: $('#loginPassword').val() };
         this.props.login(data, response => {
-            this.setState({ loginError: response.error ? 'Invalid email or password!' : '' })
+            this.setState({ loginError: response.error ? 'Email hoặc mật khẩu không đúng!' : '' })
         });
     }
 
@@ -46,20 +46,20 @@ class LoginPage extends React.Component {
                 <div className='login-box'>
                     <form className='login-form' onSubmit={this.onLogin}>
                         <h3 className='login-head'>
-                            <i className='fa fa-lg fa-fw fa-user' />LOGIN
+                            <i className='fa fa-lg fa-fw fa-user' />Đăng nhập
                         </h3>
                         <div className='form-group'>
                             <label className='control-label'>Email</label>
                             <input className='form-control' type='text' placeholder='Email' id='loginEmail' autoFocus />
                         </div>
                         <div className='form-group'>
-                            <label className='control-label'>Password</label>
+                            <label className='control-label'>Mật khẩu</label>
                             <input className='form-control' type='password' placeholder='Password' id='loginPassword' />
                         </div>
                         <div className='form-group btn-container'>
                             <p style={{ color: 'red' }}>{this.state.loginError}</p>
                             <button className='btn btn-primary btn-block'>
-                                <i className='fa fa-sign-in fa-lg fa-fw' />LOGIN
+                                <i className='fa fa-sign-in fa-lg fa-fw' />Đăng nhập
                             </button>
                         </div>
                     </form>

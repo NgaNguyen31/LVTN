@@ -826,12 +826,12 @@ export default class CbcnvModal extends React.Component {
                                 <Dropdown ref={this.pctn_nghe_2018} number='' items={pctn_nghe_2018.map(e => Object.assign({}, e, {text: e.SHCC}))} />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='MS_NV'>MS_NV</label>
-                                <input className='form-control' id='MS_NV' type='text' placeholder='MS_NV' onChange={this.handleInput('text', 'MS_NV')} value={this.state.text.MS_NV}/>
+                                <label htmlFor='MS_NV'>MS NV</label>
+                                <input className='form-control' id='MS_NV' type='text' placeholder='MS NV' onChange={this.handleInput('text', 'MS_NV')} value={this.state.text.MS_NV}/>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='MS_NV_CU'>MS_NV_CU</label>
-                                <input className='form-control' id='MS_NV_CU' type='text' placeholder='MS_NV_CU' onChange={this.handleInput('text', 'MS_NV_CU')} value={this.state.text.MS_NV_CU}/>
+                                <label htmlFor='MS_NV_CU'>MS NV cũ</label>
+                                <input className='form-control' id='MS_NV_CU' type='text' placeholder='MS NV cũ' onChange={this.handleInput('text', 'MS_NV_CU')} value={this.state.text.MS_NV_CU}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='HO'>Họ</label>

@@ -94,7 +94,7 @@ export default class NuocngoaiModal extends React.Component {
                                 <input className='form-control' id='TEN_NUOC' type='text' placeholder='' onChange={this.handleInput('text', 'TEN_NUOC')} value={this.state.text.TEN_NUOC}/>
                             </div>                        
                             <div className='form-group'>
-                                <label htmlFor='MS_KVUC'>MSKV</label>
+                                <label htmlFor='MS_KVUC'>Tên KV</label>
                                 <Dropdown ref={this.khuvuc} text='' items={khuvuc.map(e => Object.assign({}, e, {text: e.TEN_KVUC}))} />
                             </div>
                         </div>

@@ -51,7 +51,7 @@ class Qt_cvuPage extends React.Component {
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>QĐ bổ nhiệm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ bổ nhiệm</th> */}
-                            <th style={{ width: '25%%', textAlign: 'center' }}>Mã chức vụ</th>
+                            <th style={{ width: '20%%', textAlign: 'center' }}>Mã chức vụ</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Chức vụ</th> */}
                             <th style={{ width: '20%', textAlign: 'center' }}>Hệ số PCCV</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Ngày bổ nhiệm</th>
@@ -59,7 +59,7 @@ class Qt_cvuPage extends React.Component {
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày thôi chức vụ</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>QĐ thôi chức vụ</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ thôi chức vụ</th> */}
-                            <th style={{ width: '15%', textAlign: 'center' }}>MSBM</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>MSBM</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>

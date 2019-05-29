@@ -104,7 +104,7 @@ export default class UserModal extends React.Component {
                                     <Dropdown ref={this.role} text='' items={T.roles} />
                                 </div>
                                 <div className='col-md-6 col-12' style={{ display: 'inline-flex' }}>
-                                    <label htmlFor='userActive'>Active: </label>&nbsp;&nbsp;
+                                    <label htmlFor='userActive'>Trạng thái: </label>&nbsp;&nbsp;
                                     <div className='toggle'>
                                         <label>
                                             <input type='checkbox' id='userActive' onChange={() => { }} /><span className='button-indecator' />
@@ -113,7 +113,7 @@ export default class UserModal extends React.Component {
                                 </div>
                             </div>
                             <div className='form-group' style={{ display: this.state._id ? 'block' : 'none' }}>
-                                <label>Avatar</label>
+                                <label>Ảnh đại diện</label>
                                 <ImageBox ref={this.imageBox} postUrl='/admin/upload' uploadType='UserImage' userData='user' image={this.state.image} />
                             </div>
                         </div>

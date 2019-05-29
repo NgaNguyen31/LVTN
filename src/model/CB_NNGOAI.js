@@ -65,12 +65,15 @@ module.exports = app =>{
                         Nuoc: changes.Nuoc
                     }, {
                         Ngaydi: changes.Ngaydi
-                    }, {
+                    }, {    
                         Ngayve: changes.Ngayve
                     }
                 ]
             }, (error, items) => {
-                if (items.length > 0) {
+                if (items.length > 0 && items != _id) {
+                    console.log(items._id);
+                    console.log(_id);
+                    
                     if (done) done('Exist', items);
                 }
                 else{

@@ -70,7 +70,7 @@ class Qt_luongPage extends React.Component {
                                 {/* <td>{item.STT}</td>
                                 <td>{item.QD_luong}</td>
                                 <td>{item.Ngay_QD}</td> */}
-                                <td>{item.Ngay_huong}</td>
+                                <td>{T.dateToText(item.Ngay_huong,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.Moc_nang_luong}</td> */}
                                 <td>{item.Ngach.NGACH}</td>
                                 <td>{item.Heso}</td>

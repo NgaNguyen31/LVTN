@@ -149,7 +149,7 @@ class Menu extends React.Component {
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/cbcnv_hd_dv_tu_tra'>
-                                    <i className='icon fa fa-circle-o' />Cán bộ công nhân viên hoạt động tự trả
+                                    <i className='icon fa fa-circle-o' />Cán bộ công nhân viên hoạt động dịch vụ tự trả
                                 </Link>
                             </li>
                             <li>
@@ -330,11 +330,11 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Dân tộc
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/heso'>
                                     <i className='icon fa fa-circle-o' />Hệ số
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className='treeview-item' to='/admin/khoa'>
                                     <i className='icon fa fa-circle-o' />Khoa

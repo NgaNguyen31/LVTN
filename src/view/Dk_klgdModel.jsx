@@ -154,11 +154,11 @@ export default class Dk_klgdModal extends React.Component {
                                 <input className='form-control' id='TEN' type='text' placeholder='' onChange={this.handleInput('text', 'TEN')} value={this.state.text.TEN}/>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='MS_BM'>MS BM</label>
+                                <label htmlFor='MS_BM'>Tên BM</label>
                                 <Dropdown ref={this.bomon} number='' items={bomon.map(e => Object.assign({}, e, {text: e.TEN_BM}))} />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='MS_CV'>MS CV</label>
+                                <label htmlFor='MS_CV'>Tên CV</label>
                                 <Dropdown ref={this.cv_klgd} number='' items={cv_klgd.map(e => Object.assign({}, e, {text: e.TEN_CV}))} />
                             </div>
                             <div className='form-group'>

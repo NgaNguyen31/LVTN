@@ -100,7 +100,7 @@ export default class KiemnhiemModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin kiểm nhiệm</h5>
+                            <h5 className='modal-title'>Thông tin kiêm nhiệm</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
@@ -111,11 +111,11 @@ export default class KiemnhiemModal extends React.Component {
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='MS_BM'>MSBM</label>
+                                <label htmlFor='MS_BM'>Tên BM</label>
                                 <Dropdown ref={this.bomon} text='' items={bomon.map(e => Object.assign({}, e, {text: e.TEN_BM}))} />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='MS_CVU'>MSCVụ</label>
+                                <label htmlFor='MS_CVU'>Tên CVụ</label>
                                 <Dropdown ref={this.chucvu} text='' items={chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
                             </div>
                             <div className='form-group'>

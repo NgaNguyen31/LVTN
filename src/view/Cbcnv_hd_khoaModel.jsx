@@ -133,7 +133,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                                 <input className='form-control' id='NAM_SINH' type='date' placeholder='' onChange={this.handleInput('date', 'NAM_SINH')} value={this.state.date.NAM_SINH}/>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor="The_BHYT">The_BHYT</label>
+                                <label htmlFor="The_BHYT">Thẻ BHYT</label>
                                 <input className='form-control' id='The_BHYT' type='text' placeholder='' onChange={this.handleInput('text', 'The_BHYT')} value={this.state.text.The_BHYT}/>
                             </div>
                             <div className='form-group'>
