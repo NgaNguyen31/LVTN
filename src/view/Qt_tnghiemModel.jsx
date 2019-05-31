@@ -60,12 +60,15 @@ export default class Qt_tnghiemModal extends React.Component {
         e.preventDefault();
         const cbcnv = this.cbcnv.current.getSelectedItem(),         
             MS_NV = cbcnv? cbcnv : [],
+            abc = this.state.text.BAI_TN,
+            BAI_TN = abc ? abc.toLowerCase() : '',
              changes = {
                 MS_NV,
                 STT: this.state.number.STT, 
-                BAI_TN: this.state.text.BAI_TN, 
+                BAI_TN,
                 NAM: this.state.date.NAM,
-            };    
+            };   
+            
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();

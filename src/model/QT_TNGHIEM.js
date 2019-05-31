@@ -11,7 +11,6 @@ module.exports = app => {
         create: (data, done) => { model.find({
             $or : [
                 {
-                    MS_NV: data.MS_NV,
                     BAI_TN: data.BAI_TN
                 }
             ]
@@ -47,7 +46,6 @@ module.exports = app => {
             model.find({
                 $or : [
                     {
-                        MS_NV: changes.MS_NV,
                         BAI_TN: changes.BAI_TN
                     }
                 ]
@@ -63,7 +61,7 @@ module.exports = app => {
             if (error) {
                 done(error);
             } else if (item == null) {
-                done('Invalid Id!');
+                done('Id không tồn tại!');
             } else {
                 item.remove(done);
             }

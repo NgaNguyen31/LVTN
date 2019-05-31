@@ -12,7 +12,7 @@ class Qt_tnghiemPage extends React.Component {
         this.qt_tnghiemModal = React.createRef();
         this.delete = this.delete.bind(this);
         this.edit = this.edit.bind(this);
-        
+        this.jsUcfirst = this.jsUcfirst.bind(this);
     }
 
     componentDidMount() {
@@ -35,6 +35,10 @@ class Qt_tnghiemPage extends React.Component {
         e.preventDefault();
     }
     
+     jsUcfirst(string) 
+    {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
 
     render() {                   
         let table = null;              
@@ -57,7 +61,7 @@ class Qt_tnghiemPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
                                 <td>{item.STT}</td>
-                                <td>{item.BAI_TN}</td>
+                                <td>{this.jsUcfirst(item.BAI_TN)}</td>
                                 <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
