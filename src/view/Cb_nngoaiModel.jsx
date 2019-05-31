@@ -5,14 +5,14 @@ import Cb_nngoaiPage from './Cb_nngoaiPage.jsx';
 export default class Cb_nngoaiModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', nuoc: [], cbcnv: [], giahan: []}
+        this.state = {text: '', nuocngoai: [], cbcnv: [], giahan: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
         this.modal = React.createRef();
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
-        this.nuoc = React.createRef();
+        this.nuocngoai = React.createRef();
         this.cbcnv = React.createRef();
         this.giahan = React.createRef();
     }
@@ -37,7 +37,7 @@ export default class Cb_nngoaiModal extends React.Component {
         }, 250));
     }
 
-    show(item, cbcnv, nuoc ) {      
+    show(item, cbcnv, nuocngoai ) {      
         const { _id, Hovaten, Nuoc, Ngaydi, Ngayve, Thoigian, Mucdich, Giahan, SoCVan, NgayCVan } = item ?
             item : { _id: null, Hovaten: '', Nuoc: '', Ngaydi: '', Ngayve: '', Thoigian:'', Mucdich: '', Giahan: '', SoCVan: '', NgayCVan: '' };
         $('#Hovaten').val(Hovaten);
@@ -49,16 +49,16 @@ export default class Cb_nngoaiModal extends React.Component {
         $('#Giahan').val(Giahan);
         $('#SoCVan').val(SoCVan);
         $('#NgayCVan').val(NgayCVan);
-        this.setState({ _id, nuoc: nuoc? nuoc: [], cbcnv: cbcnv? cbcnv: []});
+        this.setState({ _id, nuocngoai: nuocngoai? nuocngoai: [], cbcnv: cbcnv? cbcnv: []});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const nuoc = this.nuoc.current.getSelectedItem(),
+        const nuocngoai = this.nuocngoai.current.getSelectedItem(),
             cbcnv = this.cbcnv.current.getSelectedItem(),
             giahan = this.giahan.current.getSelectedItem(),
-            Nuoc = nuoc? nuoc._id : null,
+            Nuoc = nuocngoai? nuocngoai._id : null,
             Hovaten = cbcnv? cbcnv._id: null,
             Giahan = giahan ? giahan : [],
             changes = {
@@ -115,7 +115,7 @@ export default class Cb_nngoaiModal extends React.Component {
 
     render() {        
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv ? this.state.cbcnv.cbcnv : [];
-        const nuoc = this.state && this.state.nuoc && this.state.nuoc.nuoc ? this.state.nuoc.nuoc : [];
+        const nuocngoai = this.state && this.state.nuocngoai && this.state.nuocngoai.nuocngoai ? this.state.nuocngoai.nuocngoai : [];
 
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
@@ -134,7 +134,7 @@ export default class Cb_nngoaiModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Nuoc'>Nước</label>
-                                <Dropdown ref={this.nuoc} number='' items={nuoc.map(e => Object.assign({}, e, {text: e.TEN_NUOC}))} />
+                                <Dropdown ref={this.nuocngoai} number='' items={nuocngoai.map(e => Object.assign({}, e, {text: e.TEN_NUOC}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Ngaydi'>Ngày đi</label>

@@ -5,14 +5,14 @@ import ChucdanhPage from './ChucdanhPage.jsx';
 export default class ChucdanhModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', phanloai: [] };
+        this.state = {text: '', number: '', trinhdo: [] };
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
         this.modal = React.createRef();
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
-        this.phanloai = React.createRef();        
+        this.trinhdo = React.createRef();        
     }
 
     handleInput(type, field, args) {
@@ -39,22 +39,22 @@ export default class ChucdanhModal extends React.Component {
         }, 250));
     }
 
-    show(item, phanloai) {    
+    show(item, trinhdo) {    
         
         const { _id, chuc_danh, ten_day_du, ord } = item ?
             item : { _id: null, chuc_danh: '', ten_day_du: '', ord: ''};
         $('#chuc_danh').val(chuc_danh);
         $('#ten_day_du').val(ten_day_du);
         $('#ord').val(ord);
-        this.setState({ _id, phanloai: phanloai? phanloai: []});
+        this.setState({ _id, trinhdo: trinhdo? trinhdo: []});
 
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const phanloai = this.phanloai.current.getSelectedItem(),
-        ord = phanloai? phanloai._id: null,
+        const trinhdo = this.trinhdo.current.getSelectedItem(),
+        ord = trinhdo? trinhdo._id: null,
              changes = {
                 chuc_danh: this.state.text.chuc_danh,
                 ten_day_du: this.state.text.ten_day_du,
@@ -82,7 +82,7 @@ export default class ChucdanhModal extends React.Component {
     }
 
     render() {  
-        const phanloai = this.state && this.state.phanloai && this.state.phanloai.phanloai? this.state.phanloai.phanloai : [];      
+        const trinhdo = this.state && this.state.trinhdo && this.state.trinhdo.trinhdo? this.state.trinhdo.trinhdo : [];      
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -104,7 +104,7 @@ export default class ChucdanhModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='ord'>ORD</label>
-                                <Dropdown ref={this.phanloai} number='' items={phanloai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
+                                <Dropdown ref={this.trinhdo} number='' items={trinhdo.map(e => Object.assign({}, e, {text: e.ord}))} />
                             </div>
                         </div>
                         <div className='modal-footer'>

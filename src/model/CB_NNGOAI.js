@@ -1,7 +1,7 @@
 module.exports = app =>{
     const schema = app.db.Schema({
         Hovaten: {type: app.db.Schema.ObjectId, ref: 'cbcnv'},
-        Nuoc: {type: app.db.Schema.ObjectId, ref: 'nuoc'},
+        Nuoc: {type: app.db.Schema.ObjectId, ref: 'nuocngoai'},
         Ngaydi: Date,
         Ngayve: Date,
         Thoigian: Number,
@@ -17,14 +17,10 @@ module.exports = app =>{
             model.find({
                 $or : [
                     {
-                        Hovaten: data.Hovaten                        
-                    }
-                    , {      
-                        Nuoc: data.Nuoc
-                    }, {
-                        Ngaydi: data.Ngaydi
-                    }, {
-                        Ngayve: data.Ngayve
+                        Hovaten: data.Hovaten   ,
+                        Nuoc: data.Nuoc   ,
+                        Ngaydi: data.Ngaydi  ,
+                        Ngayve: data.Ngayve                
                     }
                 ]
             }, (error, items) => {
@@ -59,14 +55,10 @@ module.exports = app =>{
             model.find({
                 $or : [
                     {
-                        Hovaten: changes.Hovaten                        
-                    }
-                    , {      
-                        Nuoc: changes.Nuoc
-                    }, {
-                        Ngaydi: changes.Ngaydi
-                    }, {    
-                        Ngayve: changes.Ngayve
+                        Hovaten: changes.Hovaten,  
+                        Nuoc: changes.Nuoc, 
+                        Ngaydi: changes.Ngaydi,
+                        Ngayve: changes.Ngayve                     
                     }
                 ]
             }, (error, items) => {

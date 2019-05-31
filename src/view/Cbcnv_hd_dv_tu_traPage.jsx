@@ -1,7 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getCbcnv_hd_dv_tu_traInPage, createCbcnv_hd_dv_tu_tra, getCbcnv_hd_dv_tu_tra, updateCbcnv_hd_dv_tu_tra, deleteCbcnv_hd_dv_tu_tra } from './redux/cbcnv_hd_dv_tu_tra.jsx';
-import {getAllCbcnv} from './redux/cbcnv.jsx';
 import {getAllTrinhdo} from './redux/trinhdo.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination.jsx';
@@ -21,11 +20,10 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
             this.props.getCbcnv_hd_dv_tu_traInPage();
         });
         this.props.getAllTrinhdo();
-        this.props.getAllCbcnv();
     }
 
     edit(e,item){        
-        this.Cbcnv_hd_dv_tu_traModal.current.show(item, this.props.cbcnv.data.items, this.props.trinhdo.data.items);
+        this.Cbcnv_hd_dv_tu_traModal.current.show(item, this.props.trinhdo.data.items);
         e.preventDefault();
     }
 
@@ -61,7 +59,7 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
                         {this.props.cbcnv_hd_dv_tu_tra.page.list.map((item, index) => (
                             <tr key={index}>         
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MSNV ? item.MSNV.MS_NV + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MSNV? item.MSNV : '')}</a>
                                 </td> 
                                 {/* <td>{item.HO}</td>      
                                 <td>{item.TEN}</td>
@@ -69,7 +67,7 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
                                 <td>{item.NOI_SINH}</td> */}
                                 <td>{T.dateToText(item.NGAY_VAO,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.NGAY_NGHI}</td>     */}
-                                <td>{item.TRINH_DO.Ten_day_du}</td>
+                                <td>{item.TRINH_DO? item.TRINH_DO.Ten_day_du : ''}</td>
                                 <td>{item.DON_VI}</td>                     
                                 <td>{item.DIA_CHI}</td>                     
                                 {/* <td>{item.GHI_CHU}</td>                      */}
@@ -87,7 +85,7 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có cán bộ nước ngoài nào!</p>;
+            table = <p>Chưa có cán bộ nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.cbcnv_hd_dv_tu_tra && this.props.cbcnv_hd_dv_tu_tra.page ?
@@ -96,13 +94,13 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin CBCNV hoạt động dịch vụ tự trả</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin CBCNV hợp đồng đơn vị tự trả</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>CBCNV hoạt động dịch vụ tự trả</li>
+                        <li className='breadcrumb-item'>CBCNV hợp đồng đơn vị tự trả</li>
                     </ul>
                 </div>
 
@@ -121,7 +119,7 @@ class Cbcnv_hd_dv_tu_traPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ cbcnv_hd_dv_tu_tra: state.cbcnv_hd_dv_tu_tra, cbcnv: state.cbcnv, trinhdo: state.trinhdo });
-const mapActionsToProps = { getCbcnv_hd_dv_tu_traInPage,createCbcnv_hd_dv_tu_tra ,getCbcnv_hd_dv_tu_tra, updateCbcnv_hd_dv_tu_tra, deleteCbcnv_hd_dv_tu_tra, getAllCbcnv, getAllTrinhdo };
+const mapStateToProps = state => ({ cbcnv_hd_dv_tu_tra: state.cbcnv_hd_dv_tu_tra, trinhdo: state.trinhdo });
+const mapActionsToProps = { getCbcnv_hd_dv_tu_traInPage,createCbcnv_hd_dv_tu_tra ,getCbcnv_hd_dv_tu_tra, updateCbcnv_hd_dv_tu_tra, deleteCbcnv_hd_dv_tu_tra, getAllTrinhdo };
 export default connect(mapStateToProps, mapActionsToProps)(Cbcnv_hd_dv_tu_traPage);
 

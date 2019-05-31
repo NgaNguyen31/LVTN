@@ -72,6 +72,9 @@ export default class Qt_tnghiemModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.BAI_TN == '') {
+            T.notify('Bài TN đang trống!', 'danger');
+            $('#BAI_TN').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

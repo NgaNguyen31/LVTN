@@ -5,7 +5,7 @@ import Cbcnv_hd_dv_tu_traPage from './Cbcnv_hd_dv_tu_traPage.jsx';
 export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', trinhdo: [], cbcnv: []}
+        this.state = {text: '', trinhdo: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,7 +13,6 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.trinhdo = React.createRef();
-        this.cbcnv = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -23,6 +22,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
                     : (state.text = {}) && (state.text[field] = e.target.value)
+                    
             }
 
             this.setState(state);
@@ -36,7 +36,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         }, 250));
     }
 
-    show(item, cbcnv, trinhdo ) {      
+    show(item, trinhdo ) {      
         const { _id, MSNV, HO, TEN, NGAY_SINH, NOI_SINH, NGAY_VAO, NGAY_NGHI, TRINH_DO, DON_VI, DIA_CHI, GHI_CHU } = item ?
             item : { _id: null, MSNV: '', HO: '', TEN: '', NGAY_SINH: '', NOI_SINH:'', NGAY_VAO: '', NGAY_NGHI: '', TRINH_DO: '', DON_VI: '', DIA_CHI: '', GHI_CHU: '' };
         $('#MSNV').val(MSNV);
@@ -51,18 +51,16 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         $('#DIA_CHI').val(DIA_CHI);
         $('#GHI_CHU').val(GHI_CHU);
         
-        this.setState({ _id, trinhdo: trinhdo? trinhdo: [], cbcnv: cbcnv? cbcnv: []});
+        this.setState({ _id, trinhdo: trinhdo? trinhdo: []});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
         const trinhdo = this.trinhdo.current.getSelectedItem(),
-            cbcnv = this.cbcnv.current.getSelectedItem(),
             TRINH_DO = trinhdo? trinhdo._id : null,
-            MSNV = cbcnv? cbcnv._id: null,
             changes = {
-                MSNV,
+                MSNV: this.state.text.MSNV,
                 HO: this.state.text.HO,
                 TEN: this.state.text.TEN,
                 NGAY_SINH: this.state.text.NGAY_SINH,                
@@ -77,7 +75,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         if (this.state.text == '') {
             T.notify('Bạn chưa điền thông tin!', 'danger');
             $('#MSNV').focus();
-        } else if (!changes.MSNV) {
+        } else if (changes.MSNV == '') {
             T.notify('MSNV đang trống!', 'danger');
             $('#MSNV').focus(); 
         } else if (changes.HO == '') {
@@ -92,6 +90,9 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         } else if (changes.DON_VI == '') {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#DON_VI').focus();            
+        } else if (changes.TRINH_DO == '') {
+            T.notify('Trình độ đang trống!', 'danger');
+            $('#TRINH_DO').focus();            
         } else if (this.state._id) {
             this.props.updateCbcnv_hd_dv_tu_tra(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -103,8 +104,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         }
     }
 
-    render() {        
-        const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv ? this.state.cbcnv.cbcnv : [];
+    render() {                
         const trinhdo = this.state && this.state.trinhdo && this.state.trinhdo.trinhdo ? this.state.trinhdo.trinhdo : [];
 
         return (
@@ -112,7 +112,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin CBCNV hoạt động dịch vụ tự trả</h5>
+                            <h5 className='modal-title'>Thông tin CBCNV hợp đồng đơn vị tự trả</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>
@@ -120,7 +120,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='MSNV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} number='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <input className='form-control' id='MSNV' type='number' onChange={this.handleInput('text', 'MSNV')} value={this.state.text.MSNV}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='HO'>Họ</label>

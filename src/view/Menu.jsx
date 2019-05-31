@@ -290,12 +290,7 @@ class Menu extends React.Component {
                                 <Link className='treeview-item' to='/admin/nuocngoai'>
                                     <i className='icon fa fa-circle-o' />Nước ngoài
                                 </Link>
-                            </li>
-                            <li>
-                                <Link className='treeview-item' to='/admin/trinhdo'>
-                                    <i className='icon fa fa-circle-o' />Trình độ
-                                </Link>
-                            </li>
+                            </li>                          
                         </ul>
                     </li>
                     <li className='treeview'>
@@ -310,11 +305,11 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Bệnh viện
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/chinhsach'>
                                     <i className='icon fa fa-circle-o' />Chính sách
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className='treeview-item' to='/admin/chucvu'>
                                     <i className='icon fa fa-circle-o' />Chức vụ
@@ -345,11 +340,11 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Khu vực
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/kihieu_tang_giam_bhxh'>
                                     <i className='icon fa fa-circle-o' />Kí hiệu tăng giảm bảo hiểm xã hội
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className='treeview-item' to='/admin/loai'>
                                     <i className='icon fa fa-circle-o' />Loại
@@ -375,16 +370,16 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Ngoại ngữ
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/nuoc'>
                                     <i className='icon fa fa-circle-o' />Nước
                                 </Link>
-                            </li>                                                        
-                            <li>
+                            </li>                                                         */}
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/phanloai'>
                                     <i className='icon fa fa-circle-o' />Phân loại
                                 </Link>
-                            </li>                            
+                            </li>                             */}
                             <li>
                                 <Link className='treeview-item' to='/admin/tinh'>
                                     <i className='icon fa fa-circle-o' />Tỉnh
@@ -393,6 +388,11 @@ class Menu extends React.Component {
                             <li>
                                 <Link className='treeview-item' to='/admin/tongiao'>
                                     <i className='icon fa fa-circle-o' />Tôn giáo
+                                </Link>
+                            </li>
+                            <li>
+                                <Link className='treeview-item' to='/admin/trinhdo'>
+                                    <i className='icon fa fa-circle-o' />Trình độ
                                 </Link>
                             </li>
                             </ul>

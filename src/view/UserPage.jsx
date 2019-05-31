@@ -49,7 +49,7 @@ class UserPage extends React.Component {
     }
 
     delete(e, item) {
-        T.confirm('Delete user', 'Are you sure you want to delete this user?', true, isConfirm => {
+        T.confirm('Xóa người dùng', 'Bạn có chắc chắn muốn xóa người dùng này chứ?', true, isConfirm => {
             isConfirm && this.props.deleteUser(item._id);
         });
         e.preventDefault();

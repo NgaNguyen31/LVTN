@@ -16,14 +16,14 @@ class TrinhdoPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 6);
+            T.selectMenu(5, 13);
             this.props.getTrinhdoInPage();
         });
         this.props.getAllPhanloai();
     }
 
     edit(e, item) {                
-        this.TrinhdoModal.current.show(item, this.props.phanloai.data.items);
+        this.TrinhdoModal.current.show(item);
         e.preventDefault();
     }
 
@@ -54,7 +54,7 @@ class TrinhdoPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.trinh_do ? item.trinh_do + ' ' : '')}</a>
                                 </td>     
                                 <td>{item.Ten_day_du}</td>                
-                                <td>{item.ord.reduce((pre, value) => pre + ' ' + value.LOAI, '')}</td>
+                                <td>{item.ord}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />

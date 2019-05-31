@@ -231,7 +231,7 @@ class CbcnvPage extends React.Component {
                                 <td>{item.LOAI ? item.LOAI.Dien_giai : ''}</td>
                                 <td>{item.SHCC ? item.SHCC.SHCC : ''}</td>                                                  
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV : ' ')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? ('0000' + item.MS_NV).slice(-4) : ' ')}</a>
                                 </td>                          
                                 {/* <td>{item.MS_NV_CU}</td>                          
                                 <td>{item.HO}</td>                          

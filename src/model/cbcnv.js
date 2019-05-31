@@ -6,13 +6,7 @@ module.exports = app =>{
         IN_NUOC: String,
         LOAI: { type: app.db.Schema.ObjectId, ref: 'loai' },
         SHCC: { type: app.db.Schema.ObjectId, ref: 'pctn_nghe_2018' },
-        MS_NV: {
-            type: String,
-            index: {
-                unique: true,
-                dropDups: true
-            }
-        },
+        MS_NV: String,
         MS_NV_CU: String,
         HO: String,
         TEN: String,

@@ -5,14 +5,13 @@ import TrinhdoPage from './TrinhdoPage.jsx';
 export default class TrinhdoModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', phanloai: []}
+        this.state = {text: ''}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
         this.modal = React.createRef();
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
-        this.phanloai = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -35,24 +34,22 @@ export default class TrinhdoModal extends React.Component {
         }, 250));
     }
 
-    show(item, phanloai) {        
+    show(item) {        
         const { _id, trinh_do, Ten_day_du, ord } = item ?
             item : { _id: null, trinh_do: '', Ten_day_du: '', ord: ''};
         $('#trinh_do').val(trinh_do);
         $('#Ten_day_du').val(Ten_day_du);
         $('#ord').val(ord);
-        this.setState({ _id, phanloai: phanloai? phanloai: []});
+        this.setState({ _id});
         $(this.modal.current).modal('show');
     }
 
     save(e) {        
         e.preventDefault();
-        const phanloai = this.phanloai.current.getSelectedItem(),
-            ord = phanloai? phanloai._id: null,
-            changes = {
+        const changes = {
                 trinh_do: this.state.text.trinh_do,
                 Ten_day_du: this.state.text.Ten_day_du,
-                ord,
+                ord: this.state.text.ord,
         };        
         if (this.state.text == '') {
             T.notify('Bạn chưa điền thông tin!', 'danger');
@@ -78,7 +75,6 @@ export default class TrinhdoModal extends React.Component {
     }
 
     render() {
-        const phanloai = this.state && this.state.phanloai && this.state.phanloai.phanloai ? this.state.phanloai.phanloai : [];
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -100,7 +96,7 @@ export default class TrinhdoModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Ngaydi'>ORD</label>
-                                <Dropdown ref={this.phanloai} number='' items={phanloai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
+                                <input className='form-control' id='ORD' type='number' onChange={this.handleInput('text', 'ord')} value={this.state.text.ord}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

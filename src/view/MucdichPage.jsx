@@ -15,7 +15,7 @@ class MucdichPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5, 9);
+            T.selectMenu(5, 7);
             this.props.getMucdichInPage();
         });
     }

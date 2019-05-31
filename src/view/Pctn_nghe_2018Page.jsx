@@ -70,7 +70,7 @@ class Pctn_nghe_2018Page extends React.Component {
                                 <td>{item.MS_CDNN}</td>                    
                                 {/* <td>{item.NGAY_PCTN_OLD}</td>                    
                                 <td>{item.PT_PCTN_OLD}</td>                     */}
-                                <td>{item.NGAY_PCTN_NEW}</td>                    
+                                <td>{T.dateToText(item.NGAY_PCTN_NEW,'dd/mm/yyyy')}</td>                    
                                 <td>{item.PT_PCTN_NEW}</td>                    
                                 <td>{item.DON_VI}</td>                    
                                 <td className='btn-group'>

@@ -106,7 +106,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                 <div className='modal-dialog modal-lg' role='document'>
                     <div className='modal-content'>
                         <div className='modal-header'>
-                            <h5 className='modal-title'>Thông tin CBCNV hoạt động khoa</h5>
+                            <h5 className='modal-title'>Thông tin CBCNV hợp đồng khoa</h5>
                             <button type='button' className='close' data-dismiss='modal' aria-label='Close'>
                                 <span aria-hidden='true'>&times;</span>
                             </button>

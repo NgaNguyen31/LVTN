@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { getChucdanhInPage, createChucdanh, updateChucdanh, deleteChucdanh, getAllChucdanh } from './redux/chucdanh.jsx';
-import {getAllPhanloai} from './redux/phanloai.jsx';
+import {getAllTrinhdo} from './redux/trinhdo.jsx';
 import { Link } from 'react-router-dom';
 import ChucdanhModal from './ChucdanhModel.jsx';
 import Pagination from './Pagination.jsx';
@@ -19,11 +19,11 @@ class ChucdanhPage extends React.Component {
             T.selectMenu(4, 1);
             this.props.getChucdanhInPage();
         });
-        this.props.getAllPhanloai();
+        this.props.getAllTrinhdo();
     }
 
     edit(e, item){
-        this.chucdanhModal.current.show(item, this.props.phanloai.data.items);
+        this.chucdanhModal.current.show(item, this.props.trinhdo.data.items);
         e.preventDefault();
     }
 
@@ -54,7 +54,7 @@ class ChucdanhPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.chuc_danh ? item.chuc_danh + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.ten_day_du}</td>          
-                                <td>{item.ord.reduce((pre, value) => pre + ' ' + value.LOAI, ' ')}</td>
+                                <td>{item.ord.reduce((pre, value) => pre + ' ' + value.ord, ' ')}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-envelope-open-o' />
@@ -104,6 +104,6 @@ class ChucdanhPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ chucdanh: state.chucdanh, phanloai: state.phanloai});
-const mapActionsToProps = { getChucdanhInPage, createChucdanh, updateChucdanh, deleteChucdanh, getAllChucdanh, getAllPhanloai };
+const mapStateToProps = state => ({ chucdanh: state.chucdanh, trinhdo: state.trinhdo});
+const mapActionsToProps = { getChucdanhInPage, createChucdanh, updateChucdanh, deleteChucdanh, getAllChucdanh, getAllTrinhdo };
 export default connect(mapStateToProps, mapActionsToProps)(ChucdanhPage);

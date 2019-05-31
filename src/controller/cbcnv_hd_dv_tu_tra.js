@@ -27,7 +27,7 @@ module.exports = app => {
     app.put('/admin/cbcnv_hd_dv_tu_tra', app.role.isAdmin, (req, res) => {
         let data = req.body.changes,
             changes = {};
-        if (data.MSNV) changes.MSNV = data.MSNV;
+        if (data.MSNV && data.MSNV != '') changes.MSNV = data.MSNV;
         if (data.HO && data.HO != '') changes.HO = data.HO;
         if (data.TEN && data.TEN != '') changes.TEN = data.TEN;
         if (data.NGAY_SINH && data.NGAY_SINH != '') changes.NGAY_SINH = data.NGAY_SINH;

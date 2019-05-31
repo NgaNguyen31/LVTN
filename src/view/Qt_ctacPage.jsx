@@ -22,11 +22,10 @@ class Qt_ctacPage extends React.Component {
             this.props.getQt_ctacInPage();
         });
         this.props.getAllCbcnv();
-        this.props.getAllChucvu();
     }
 
     edit(e, item){
-        this.qt_ctacModal.current.show(item, this.props.cbcnv.data.items, this.props.chucvu.data.items);
+        this.qt_ctacModal.current.show(item, this.props.cbcnv.data.items);
         e.preventDefault();
     }
 
@@ -70,7 +69,7 @@ class Qt_ctacPage extends React.Component {
                                 <td>{item.TU_NAM}</td>
                                 <td>{item.DEN_THANG}</td>
                                 <td>{item.DEN_NAM}</td> */}
-                                <td>{item.CHUC_VU.CHUC_VU}</td>
+                                <td>{item.CHUC_VU}</td>
                                 <td>{item.NOI_CONG_TAC}</td>
                                 <td>{item.BO_MON_CT}</td>
                                 <td>{item.CONG_VIEC}</td>
@@ -124,6 +123,6 @@ class Qt_ctacPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ qt_ctac: state.qt_ctac, cbcnv: state.cbcnv, chucvu: state.chucvu});
-const mapActionsToProps = { getQt_ctacInPage, createQt_ctac, updateQt_ctac, deleteQt_ctac, getAllQt_ctac, getAllCbcnv, getAllChucvu};
+const mapStateToProps = state => ({ qt_ctac: state.qt_ctac, cbcnv: state.cbcnv});
+const mapActionsToProps = { getQt_ctacInPage, createQt_ctac, updateQt_ctac, deleteQt_ctac, getAllQt_ctac, getAllCbcnv};
 export default connect(mapStateToProps, mapActionsToProps)(Qt_ctacPage);

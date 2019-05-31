@@ -92,7 +92,7 @@ class Cbcnv_hd_khoaPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có cbcnv hoạt động khoa nào!</p>;
+            table = <p>Chưa có cbcnv nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.cbcnv_hd_khoa && this.props.cbcnv_hd_khoa.page ?
@@ -101,13 +101,13 @@ class Cbcnv_hd_khoaPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Cbcnv hoạt động khoa</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin Cbcnv hợp đồng khoa</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>Cbcnv hoạt động khoa</li>
+                        <li className='breadcrumb-item'>Cbcnv hợp đồng khoa</li>
                     </ul>
                 </div>
 

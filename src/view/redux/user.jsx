@@ -99,14 +99,14 @@ export function createUser(user, done) {
         const url = '/admin/user';
         T.post(url, { user }, data => {
             if (data.error) {
-                T.notify('Error when created user!', 'danger');
+                T.notify('Có lỗi khi tạo!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {
-                T.notify('Create user successfully!', 'info');
+                T.notify('Tạo thành công!', 'info');
                 dispatch(getUserInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when created user!', 'danger'));
+        }, error => T.notify('Có lỗi khi tạo!', 'danger'));
     }
 }
 
@@ -115,14 +115,14 @@ export function updateUser(_id, changes, done) {
         const url = '/admin/user';
         T.put(url, { _id, changes }, data => {
             if (data.error) {
-                T.notify('Error when updated user!', 'danger');
+                T.notify('Có lỗi khi cập nhật!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update user successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
                 dispatch(getUserInPage());
             }
             done && done(data);
-        }, error => T.notify('Error when updated user!', 'danger'));
+        }, error => T.notify('Có lỗi khi cập nhật!', 'danger'));
     }
 }
 
@@ -154,13 +154,13 @@ export function userUpdateProfile(changes, done) {
         const url = '/user/profile';
         T.put(url, { changes }, data => {
             if (data.error) {
-                T.notify('Error when update profile!', 'danger');
+                T.notify('Có lỗi khi cập nhật thông  tin!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Update profile successfully!', 'info');
+                T.notify('Cập nhật thành công!', 'info');
             }
             done && done(data);
-        }, error => T.notify('Error when update profile!', 'danger'));
+        }, error => T.notify('Có lỗi khi cập nhật thông tin!', 'danger'));
     }
 }
 
@@ -172,9 +172,9 @@ export function userUpdatePassword(currentPassword, newPassword, done) {
                 T.notify(data.error, 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {
-                T.notify('Change password successfully!', 'info');
+                T.notify('Thay đổi mật khẩu thành công!', 'info');
             }
             done && done(data);
-        }, error => T.notify('Error when you change password!', 'danger'));
+        }, error => T.notify('Có lỗi xảy ra khi thay đổi mật khẩu!', 'danger'));
     }
 }

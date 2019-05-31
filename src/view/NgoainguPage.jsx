@@ -15,7 +15,7 @@ class NgoainguPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5, 12);
+            T.selectMenu(5, 10);
             this.props.getNgoainguInPage();
         });
     }

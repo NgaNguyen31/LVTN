@@ -15,7 +15,7 @@ module.exports = app => {
         NOI_DUNG: String,
         NGANH_HOC: String,
         GIA_HAN: String,
-        NUOC_DEN: [{ type: app.db.Schema.ObjectId, ref: 'nuoc' }],
+        NUOC_DEN: [{ type: app.db.Schema.ObjectId, ref: 'nuocngoai' }],
         NOI_DEN: String,
         CHI_PHI:String,
         GHI_CHU: String,

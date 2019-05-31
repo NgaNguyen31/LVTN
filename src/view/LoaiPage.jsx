@@ -15,7 +15,7 @@ class LoaiPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5,8);
+            T.selectMenu(5,6);
             this.props.getLoaiInPage();
         });
     }

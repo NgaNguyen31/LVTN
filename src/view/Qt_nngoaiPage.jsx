@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { getQt_nngoaiInPage, createQt_nngoai, updateQt_nngoai, deleteQt_nngoai, getAllQt_nngoai } from './redux/qt_nngoai.jsx';
 import {getAllCbcnv} from './redux/cbcnv.jsx';
 import {getAllMucdich} from './redux/mucdich.jsx';
-import {getAllNuoc} from './redux/nuoc.jsx';
+import {getAllNuocngoai} from './redux/nuocngoai.jsx';
 import { Link } from 'react-router-dom';
 import Qt_nngoaiModal from './Qt_nngoaiModel.jsx';
 import Pagination from './Pagination.jsx';
@@ -23,11 +23,11 @@ class Qt_nngoaiPage extends React.Component {
         });
         this.props.getAllCbcnv();
         this.props.getAllMucdich();
-        this.props.getAllNuoc();
+        this.props.getAllNuocngoai();
     }
 
     edit(e, item){
-        this.qt_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.mucdich.data.items, this.props.nuoc.data.items);
+        this.qt_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.mucdich.data.items, this.props.nuocngoai.data.items);
         e.preventDefault();
     }
 
@@ -147,6 +147,6 @@ class Qt_nngoaiPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ qt_nngoai: state.qt_nngoai, cbcnv: state.cbcnv, mucdich: state.mucdich, nuoc: state.nuoc});
-const mapActionsToProps = { getQt_nngoaiInPage, createQt_nngoai, updateQt_nngoai, deleteQt_nngoai, getAllQt_nngoai, getAllCbcnv, getAllMucdich, getAllNuoc};
+const mapStateToProps = state => ({ qt_nngoai: state.qt_nngoai, cbcnv: state.cbcnv, mucdich: state.mucdich, nuocngoai: state.nuocngoai});
+const mapActionsToProps = { getQt_nngoaiInPage, createQt_nngoai, updateQt_nngoai, deleteQt_nngoai, getAllQt_nngoai, getAllCbcnv, getAllMucdich, getAllNuocngoai};
 export default connect(mapStateToProps, mapActionsToProps)(Qt_nngoaiPage);

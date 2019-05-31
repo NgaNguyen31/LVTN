@@ -67,7 +67,7 @@ class KiemnhiemPage extends React.Component {
                                 </td>       
                                 <td>{item.MS_BM.TEN_BM}</td>
                                 <td>{item.MS_CVU.CHUC_VU}</td>
-                                <td>{item.NGAY_CVU}</td>
+                                <td>{T.dateToText(item.NGAY_CVU,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.GHICHU}</td> */}
                                 <td className='toggle' style={{ textAlign: 'center' }} >
                                     <label>

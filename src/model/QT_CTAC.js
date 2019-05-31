@@ -4,7 +4,7 @@ module.exports = app => {
         STT: Number,
         TU_NAM: Date,
         DEN_NAM: Date,
-        CHUC_VU: { type: app.db.Schema.ObjectId, ref: 'chucvu' },
+        CHUC_VU: String,
         NOI_CONG_TAC: String,
         BO_MON_CT: String,
         CONG_VIEC: String,
@@ -36,7 +36,7 @@ module.exports = app => {
                 result.pageNumber = pageNumber === -1 ? result.pageTotal : Math.min(pageNumber, result.pageTotal);
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
-                model.find(condition).sort({ _id: 1 }).populate(['MS_NV', 'CHUC_VU']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                model.find(condition).sort({ _id: 1 }).populate(['MS_NV']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
                     result.list = list;
                     done(error, result);
                 });

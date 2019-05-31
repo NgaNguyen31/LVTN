@@ -9,7 +9,7 @@ module.exports = app => {
         GHI_CHU: String,
         SO_QD: String,
         NGAY_QD:Date,
-        FIELD1: String
+        GHI_CHU_KHAC: String
     });
     const model = app.db.model('qt_ky_luat', schema);
 

@@ -76,7 +76,7 @@ class Qt_cvuPage extends React.Component {
                                 <td>{item.MA_CV? item.MA_CV.CHUC_VU: ''}</td>
                                 {/* <td>{item.CHUC_VU}</td> */}
                                 <td>{item.HE_SO_PCCV}</td>
-                                <td>{item.NGAY_BO_NHIEM}</td>
+                                <td>{T.dateToText(item.NGAY_BO_NHIEM,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.GHI_CHU_BHXH}</td>
                                 <td>{item.NGAY_THOICV}</td>
                                 <td>{item.QD_THOI_CVU}</td>

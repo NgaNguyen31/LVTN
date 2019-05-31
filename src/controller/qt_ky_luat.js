@@ -36,7 +36,7 @@ module.exports = app => {
         if (data.GHI_CHU && data.GHI_CHU != '' ) changes.GHI_CHU = data.GHI_CHU;         
         if (data.SO_QD && data.SO_QD != '' ) changes.SO_QD = data.SO_QD;        
         if (data.NGAY_QD && data.NGAY_QD != '' ) changes.NGAY_QD = data.NGAY_QD;         
-        if (data.FIELD1 && data.FIELD1 != '' ) changes.FIELD1 = data.FIELD1;           
+        if (data.GHI_CHU_KHAC && data.GHI_CHU_KHAC != '' ) changes.GHI_CHU_KHAC = data.GHI_CHU_KHAC;           
 
         app.model.qt_ky_luat.update(req.body._id, changes, (error, qt_ky_luat) => {
             if (error) {

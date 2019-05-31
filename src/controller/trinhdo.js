@@ -30,7 +30,7 @@ module.exports = app => {
             changes = {};
             if (data.trinh_do && data.trinh_do != '') changes.trinh_do = data.trinh_do;
             if (data.Ten_day_du && data.Ten_day_du != '') changes.Ten_day_du = data.Ten_day_du;
-            if (data.ord) changes.ord = data.ord;
+            if (data.ord && data.ord != '') changes.ord = data.ord;
 
         app.model.trinhdo.update(req.body._id, changes, (error, trinhdo) =>{
         if (error) {

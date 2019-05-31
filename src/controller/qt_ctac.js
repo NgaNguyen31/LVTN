@@ -32,7 +32,7 @@ module.exports = app => {
             if (data.TU_NAM && data.TU_NAM != '' ) changes.TU_NAM = data.TU_NAM;        
             //if (data.DEN_THANG && data.DEN_THANG != '' ) changes.DEN_THANG = data.DEN_THANG;         
             if (data.DEN_NAM && data.DEN_NAM != '' ) changes.DEN_NAM = data.DEN_NAM;        
-            if (data.CHUC_VU) changes.CHUC_VU = data.CHUC_VU;
+            if (data.CHUC_VU && data.CHUC_VU != '' ) changes.CHUC_VU = data.CHUC_VU;
             if (data.NOI_CONG_TAC && data.NOI_CONG_TAC != '' ) changes.NOI_CONG_TAC = data.NOI_CONG_TAC;        
             if (data.BO_MON_CT && data.BO_MON_CT != '' ) changes.BO_MON_CT = data.BO_MON_CT;
             if (data.CONG_VIEC && data.CONG_VIEC != '' ) changes.CONG_VIEC = data.CONG_VIEC;        

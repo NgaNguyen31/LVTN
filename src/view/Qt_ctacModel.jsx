@@ -5,7 +5,7 @@ import Qt_ctacPage from './Qt_ctacPage.jsx';
 export default class Qt_ctacModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: [], chucvu: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], };
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,7 +13,6 @@ export default class Qt_ctacModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
-        this.chucvu = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -58,7 +57,7 @@ export default class Qt_ctacModal extends React.Component {
         $('#BO_MON_CT').val(BO_MON_CT);
         $('#CONG_VIEC').val(CONG_VIEC);
         $('#GHI_CHU').val(GHI_CHU);
-        this.setState({ _id, cbcnv: cbcnv? cbcnv: [], chucvu: chucvu? chucvu: []});
+        this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
         $(this.modal.current).modal('show');
     }
@@ -66,9 +65,7 @@ export default class Qt_ctacModal extends React.Component {
     save(e) {
         e.preventDefault();
         const cbcnv = this.cbcnv.current.getSelectedItem(), 
-            chucvu = this.chucvu.current.getSelectedItem(),
             MS_NV = cbcnv? cbcnv : [],
-            CHUC_VU = chucvu? chucvu : [],
              changes = {
                 MS_NV,
                 STT: this.state.number.STT, 
@@ -76,7 +73,7 @@ export default class Qt_ctacModal extends React.Component {
                 TU_NAM: this.state.date.TU_NAM,  
                 // DEN_THANG: this.state.number.DEN_THANG,  
                 DEN_NAM: this.state.date.DEN_NAM,  
-                CHUC_VU, 
+                CHUC_VU: this.state.text.CHUC_VU, 
                 NOI_CONG_TAC: this.state.text.NOI_CONG_TAC, 
                 BO_MON_CT: this.state.text.BO_MON_CT,      
                 CONG_VIEC: this.state.text.CONG_VIEC,    
@@ -143,7 +140,7 @@ export default class Qt_ctacModal extends React.Component {
                             </div>                             
                             <div className='form-group'>
                                 <label htmlFor='CHUC_VU'>Chức vụ</label>
-                                <Dropdown ref={this.chucvu} text='' items={chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
+                                <input className='form-control' id='CHUC_VU' type='text' placeholder='' onChange={this.handleInput('text', 'CHUC_VU')} value={this.state.text.CHUC_VU}/>
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NOI_CONG_TAC'>Nơi công tác</label>

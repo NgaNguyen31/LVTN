@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getCb_nngoaiInPage, createCb_nngoai, getCb_nngoai, updateCb_nngoai, deleteCb_nngoai } from './redux/cb_nngoai.jsx'
 import {getAllCbcnv} from './redux/cbcnv.jsx';
-import {getAllNuoc} from './redux/nuoc.jsx';
+import {getAllNuocngoai} from './redux/nuocngoai.jsx';
 import { Link } from 'react-router-dom';
 import Pagination from './Pagination.jsx';
 import Cb_nngoaiModal from './Cb_nngoaiModel.jsx';
@@ -20,12 +20,12 @@ class Cb_nngoaiPage extends React.Component {
             T.selectMenu(2, 0);
             this.props.getCb_nngoaiInPage();
         });
-        this.props.getAllNuoc();
+        this.props.getAllNuocngoai();
         this.props.getAllCbcnv();
     }
 
     edit(e,item){        
-        this.Cb_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.nuoc.data.items);
+        this.Cb_nngoaiModal.current.show(item, this.props.cbcnv.data.items, this.props.nuocngoai.data.items);
         e.preventDefault();
     }
 
@@ -61,7 +61,7 @@ class Cb_nngoaiPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.Hovaten ? item.Hovaten.HO + ' ' + item.Hovaten.TEN : '')}</a>
                                 </td> 
-                                <td>{item.Nuoc.TEN_NUOC}</td>      
+                                <td>{item.Nuoc ? item.Nuoc.TEN_NUOC : ' '}</td>      
                                 {/* <td>{item.Ngaydi}</td>
                                 <td>{item.Ngayve}</td>                             */}
                                 <td>{item.Thoigian}</td>
@@ -117,6 +117,6 @@ class Cb_nngoaiPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ cb_nngoai: state.cb_nngoai, cbcnv: state.cbcnv, nuoc: state.nuoc });
-const mapActionsToProps = { getCb_nngoaiInPage,createCb_nngoai ,getCb_nngoai, updateCb_nngoai, deleteCb_nngoai, getAllCbcnv, getAllNuoc };
+const mapStateToProps = state => ({ cb_nngoai: state.cb_nngoai, cbcnv: state.cbcnv, nuocngoai: state.nuocngoai });
+const mapActionsToProps = { getCb_nngoaiInPage,createCb_nngoai ,getCb_nngoai, updateCb_nngoai, deleteCb_nngoai, getAllCbcnv, getAllNuocngoai };
 export default connect(mapStateToProps, mapActionsToProps)(Cb_nngoaiPage);
