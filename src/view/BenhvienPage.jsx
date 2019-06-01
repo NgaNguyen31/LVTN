@@ -15,7 +15,7 @@ class BenhvienPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5, 0);
+            T.selectMenu(4, 0);
             this.props.getBenhvienInPage();
         });
     }

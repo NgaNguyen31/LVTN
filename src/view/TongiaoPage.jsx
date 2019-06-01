@@ -15,7 +15,7 @@ class TongiaoPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5, 12);
+            T.selectMenu(4, 15);
             this.props.getTongiaoInPage();
         });
     }

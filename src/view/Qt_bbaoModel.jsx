@@ -74,6 +74,15 @@ export default class Qt_bbaoModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.BAI_BAO == '') {
+            T.notify('Bài báo đang trống!', 'danger');
+            $('#BAI_BAO').focus();
+        } else if (changes.TEN_TCHI == '') {
+            T.notify('Tên tạp chí đang trống!', 'danger');
+            $('#TEN_TCHI').focus();
+        } else if (changes.NAM == '') {
+            T.notify('Năm đang trống!', 'danger');
+            $('#NAM').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

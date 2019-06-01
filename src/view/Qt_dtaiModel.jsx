@@ -77,6 +77,12 @@ export default class Qt_dtaiModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.DE_TAI == '') {
+            T.notify('Đề tài đang trống!', 'danger');
+            $('#DE_TAI').focus();
+        } else if (changes.CHU_NHIEM_DE_TAI == '') {
+            T.notify('Chủ nhiệm đề tài đang trống!', 'danger');
+            $('#CHU_NHIEM_DE_TAI').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

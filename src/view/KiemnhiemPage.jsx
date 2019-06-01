@@ -19,7 +19,7 @@ class KiemnhiemPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 4);
+            T.selectMenu(2, 6);
             this.props.getKiemnhiemInPage();
         });
         this.props.getAllCbcnv();

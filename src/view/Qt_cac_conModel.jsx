@@ -78,6 +78,12 @@ export default class Qt_cac_conModal extends React.Component {
         } else if (changes.TEN == '') {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();
+        } else if (changes.CVU == '') {
+            T.notify('Chức vụ đang trống!', 'danger');
+            $('#CVU').focus();
+        } else if (changes.CTAC == '') {
+            T.notify('Công tác đang trống!', 'danger');
+            $('#CTAC').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

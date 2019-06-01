@@ -68,6 +68,12 @@ export default class Qt_nnguModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
+        } else if (changes.N_NGU == '') {
+            T.notify('Ngoại ngữ đang trống!', 'danger');
+            $('#N_NGU').focus();
+        } else if (changes.TRINH_DO == '') {
+            T.notify('Trình độ đang trống!', 'danger');
+            $('#TRINH_DO').focus();
         } else if (this.state._id) {
             this.props.updateQt_nngu(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

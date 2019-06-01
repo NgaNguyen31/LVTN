@@ -96,6 +96,18 @@ export default class Qt_dtaoModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.CHUYEN_NGANH == '') {
+            T.notify('Chuyên ngành đang trống!', 'danger');
+            $('#CHUYEN_NGANH').focus();
+        } else if (changes.NOI_DT == '') {
+            T.notify('Nơi đào tạo đang trống!', 'danger');
+            $('#NOI_DT').focus();
+        } else if (changes.QUOC_GIA == '') {
+            T.notify('Quốc gia đang trống!', 'danger');
+            $('#QUOC_GIA').focus();
+        } else if (changes.CO_NOP_BANG == '') {
+            T.notify('Có nộp bằng đang trống!', 'danger');
+            $('#CO_NOP_BANG').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

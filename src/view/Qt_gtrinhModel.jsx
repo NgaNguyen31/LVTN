@@ -73,6 +73,12 @@ export default class Qt_gtrinhModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.G_Trinh == '') {
+            T.notify('Giáo trình đang trống!', 'danger');
+            $('#G_Trinh').focus();
+        } else if (changes.NamXB == '') {
+            T.notify('Năm XB đang trống!', 'danger');
+            $('#NamXB').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

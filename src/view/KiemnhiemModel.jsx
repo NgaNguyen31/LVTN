@@ -79,6 +79,9 @@ export default class KiemnhiemModal extends React.Component {
         } else if (!changes.MS_BM) {
             T.notify('MSBM đang trống!', 'danger');
             $('#MS_BM').focus();
+        } else if (!changes.MS_CVU) {
+            T.notify('MS CVụ đang trống!', 'danger');
+            $('#MS_CVU').focus();
         } else if (this.state._id) {
             this.props.updateKiemnhiem(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

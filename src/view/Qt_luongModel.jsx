@@ -95,6 +95,18 @@ export default class Qt_luongModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.Ngach == '') {
+            T.notify('Ngạch đang trống!', 'danger');
+            $('#Ngach').focus();
+        } else if (changes.Heso == '') {
+            T.notify('Hệ số đang trống!', 'danger');
+            $('#Heso').focus();
+        } else if (changes.Bac == '') {
+            T.notify('Bậc đang trống!', 'danger');
+            $('#Bac').focus();
+        } else if (changes.LG_Khoan_Chinh == '') {
+            T.notify('Lương khoản chính đang trống!', 'danger');
+            $('#LG_Khoan_Chinh').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

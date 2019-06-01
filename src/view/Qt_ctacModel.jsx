@@ -85,6 +85,12 @@ export default class Qt_ctacModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.NOI_CONG_TAC == '') {
+            T.notify('Nơi công tác đang trống!', 'danger');
+            $('#NOI_CONG_TAC').focus();
+        } else if (changes.BO_MON_CT == '') {
+            T.notify('Bộ môn công tác đang trống!', 'danger');
+            $('#BO_MON_CT').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

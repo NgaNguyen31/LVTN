@@ -705,6 +705,24 @@ export default class CbcnvModal extends React.Component {
         } else if (changes.NGAY_SINH == '') {
             T.notify('Ngày sinh đang trống', 'danger');
             $('#NGAY_SINH').focus();
+        } else if (changes.NOI_DKHK == '') {
+            T.notify('Nơi ĐKHK đang trống', 'danger');
+            $('#NOI_DKHK').focus();
+        } else if (changes.DC_HIENTAI == '') {
+            T.notify('Địa chỉ hiện tại đang trống', 'danger');
+            $('#DC_HIENTAI').focus();
+        } else if (changes.DIEN_THOAI == '') {
+            T.notify('Điện thoại đang trống', 'danger');
+            $('#DIEN_THOAI').focus();
+        } else if (changes.EMAIL == '') {
+            T.notify('Email đang trống', 'danger');
+            $('#EMAIL').focus();
+        } else if (changes.NGUYEN_QUAN == '') {
+            T.notify('Nguyên quán đang trống', 'danger');
+            $('#NGUYEN_QUAN').focus();
+        } else if (changes.SO_CMND == '') {
+            T.notify('Số CMND đang trống', 'danger');
+            $('#SO_CMND').focus();
         } else if (changes.BAC_LG < 0) {
             T.notify('Bậc lương không được là số âm', 'danger');
             $('#BAC_LG').focus();

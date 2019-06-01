@@ -41,7 +41,7 @@ class LoginPage extends React.Component {
             </section>,
             <section key={1} className='login-content'>
                 <div className='logo'>
-                    <h1>IU APP</h1>
+                    <h1>BK APP</h1>
                 </div>
                 <div className='login-box'>
                     <form className='login-form' onSubmit={this.onLogin}>

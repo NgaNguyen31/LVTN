@@ -16,7 +16,7 @@ class BomonPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 0);
+            T.selectMenu(4, 1);
             this.props.getBomonInPage();
         });
         this.props.getAllKhoa();

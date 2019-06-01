@@ -16,7 +16,7 @@ class TrinhdoPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5, 13);
+            T.selectMenu(4, 16);
             this.props.getTrinhdoInPage();
         });
         this.props.getAllPhanloai();

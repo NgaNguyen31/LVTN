@@ -129,12 +129,33 @@ export default class Qt_nngoaiModal extends React.Component {
         } else if (changes.TEN == '') {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();
+        } else if (changes.DON_VI == '') {
+            T.notify('Đơn vị đang trống!', 'danger');
+            $('#DON_VI').focus();
+        } else if (changes.NGAY_DI == '') {
+            T.notify('Ngày đi đang trống!', 'danger');
+            $('#NGAY_DI').focus();
+        } else if (changes.NGAY_VE_THUC == '') {
+            T.notify('Ngày về thực đang trống!', 'danger');
+            $('#NGAY_VE_THUC').focus();
         } else if (changes.MUC_DICH == '') {
             T.notify('Mục đích đang trống!', 'danger');
             $('#MUC_DICH').focus();
+        } else if (changes.NGANH_HOC == '') {
+            T.notify('Ngành học đang trống!', 'danger');
+            $('#NGANH_HOC').focus();
         } else if (changes.NUOC_DEN == '') {
             T.notify('Nước đến đang trống!', 'danger');
             $('#NUOC_DEN').focus();
+        } else if (changes.GIA_HAN == '') {
+            T.notify('Gia hạn đang trống!', 'danger');
+            $('#GIA_HAN').focus();
+        } else if (changes.NOI_DEN == '') {
+            T.notify('Nơi đến đang trống!', 'danger');
+            $('#NOI_DEN').focus();
+        } else if (changes.CHI_PHI == '') {
+            T.notify('Chi phí đang trống!', 'danger');
+            $('#CHI_PHI').focus();
         } else if (this.state._id) {
             this.props.updateQt_nngoai(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

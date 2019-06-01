@@ -18,7 +18,7 @@ class Khoi_luong_gd_caohocPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 3);
+            T.selectMenu(2, 5);
             this.props.getKhoi_luong_gd_caohocInPage();
         });
         this.props.getAllCbcnv();

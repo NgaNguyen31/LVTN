@@ -97,6 +97,9 @@ export default class Qt_cvuModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.MA_CV == '') {
+            T.notify('Mã chức vụ đang trống!', 'danger');
+            $('#MA_CV').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

@@ -15,7 +15,7 @@ class TinhPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(5, 15);
+            T.selectMenu(4, 14);
             this.props.getTinhInPage();
         });
     }

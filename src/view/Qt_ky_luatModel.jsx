@@ -85,6 +85,18 @@ export default class Qt_ky_luatModal extends React.Component {
         } else if (changes.STT == '') {
             T.notify('STT đang trống!', 'danger');
             $('#STT').focus();
+        } else if (changes.NAM == '') {
+            T.notify('Năm đang trống!', 'danger');
+            $('#NAM').focus();
+        } else if (changes.LY_DO == '') {
+            T.notify('Lý do đang trống!', 'danger');
+            $('#LY_DO').focus();
+        } else if (changes.SO_QD == '') {
+            T.notify('SỐ QĐ đang trống!', 'danger');
+            $('#SO_QD').focus();
+        } else if (changes.NGAY_QD == '') {
+            T.notify('Ngày QĐ đang trống!', 'danger');
+            $('#NGAY_QD').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();
@@ -154,7 +166,7 @@ export default class Qt_ky_luatModal extends React.Component {
                                 <input className='form-control' id='NGAY_QD' type='date' placeholder='' onChange={this.handleInput('date', 'NGAY_QD')} value={this.state.date.NGAY_QD}/>
                             </div> 
                             <div className='form-group'>
-                                <label htmlFor='FIELD1'>Field 1</label>
+                                <label htmlFor='FIELD1'>Ghi chú khác</label>
                                 <input className='form-control' id='FIELD1' type='text' placeholder='' onChange={this.handleInput('text', 'FIELD1')} value={this.state.text.FIELD1}/>
                             </div> 
                         </div>

@@ -18,7 +18,7 @@ class Dk_klgdPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 2);
+            T.selectMenu(2, 4);
             this.props.getDk_klgdInPage();
         });
         this.props.getAllBomon();

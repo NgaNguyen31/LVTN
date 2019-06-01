@@ -96,6 +96,9 @@ export default class Qt_boiduongModal extends React.Component {
         } else if (changes.NOI_BOI_DUONG == '') {
             T.notify('Nơi bồi dưỡng đang trống!', 'danger');
             $('#NOI_BOI_DUONG').focus();
+        } else if (changes.NOP_CC == '') {
+            T.notify('Nộp chứng chỉ đang trống!', 'danger');
+            $('#NOP_CC').focus();
         } else if (changes.STT < 0) {
             T.notify('STT không được là số âm', 'danger');
             $('#STT').focus();

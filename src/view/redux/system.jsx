@@ -63,9 +63,9 @@ export function login(data, done) {
 
 export function logout(config) {
     if (config == undefined) config = {};
-    if (config.title == undefined) config.title = 'Logout';
-    if (config.message == undefined) config.message = 'Are you sure you want to logout?';
-    if (config.errorMessage == undefined) config.errorMessage = 'Error when logout!';
+    if (config.title == undefined) config.title = 'Đăng xuất';
+    if (config.message == undefined) config.message = 'Ban có muốn đăng xuất?';
+    if (config.errorMessage == undefined) config.errorMessage = 'Lỗi khi đăng xuất!';
 
     return dispatch => {
         T.confirm(config.title, config.message, true, isConfirm => {
