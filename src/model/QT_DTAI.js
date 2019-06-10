@@ -15,7 +15,9 @@ module.exports = app => {
             $or : [
                 {
                     MS_NV: data.MS_NV,
-                    CAP: data.CAP 
+                    CAP: data.CAP, 
+                    DE_TAI: data.DE_TAI,
+                    CHU_NHIEM_DE_TAI: data.CHU_NHIEM_DE_TAI
                 }
             ]
             }, (error, items) => {
@@ -51,7 +53,9 @@ module.exports = app => {
                 $or : [
                     {
                         MS_NV: changes.MS_NV,
-                        CAP: changes.CAP
+                        CAP: changes.CAP, 
+                        DE_TAI: data.DE_TAI,
+                        CHU_NHIEM_DE_TAI: data.CHU_NHIEM_DE_TAI
                     }
                 ]
                 }, (error, items) => {

@@ -80,6 +80,9 @@ export default class Qt_dtaiModal extends React.Component {
         } else if (changes.DE_TAI == '') {
             T.notify('Đề tài đang trống!', 'danger');
             $('#DE_TAI').focus();
+        } else if (changes.CAP == '') {
+            T.notify('Cấp đang trống!', 'danger');
+            $('#CAP').focus();
         } else if (changes.CHU_NHIEM_DE_TAI == '') {
             T.notify('Chủ nhiệm đề tài đang trống!', 'danger');
             $('#CHU_NHIEM_DE_TAI').focus();

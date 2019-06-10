@@ -153,3 +153,19 @@ export function deleteCbcnv(_id) {
 export function changeCbcnv(cbcnv) {
     return { type: UPDATE_CBCNV, item: cbcnv };
 }
+
+export function getcountCbcnv(done) {
+    return dispatch => {
+        const url = '/admin/cbcnv/count';
+        T.get(url, data => {
+            if (data.error) {
+                T.notify('Thông tin bị lỗi!', 'danger');
+                console.error('GET: ' + url + '. ' + data.error);
+            } else {                
+                if (done) done(data.count);
+            }
+        }, error => {
+            console.error('GET: ' + url + '. ' + error);
+        });
+    }
+}

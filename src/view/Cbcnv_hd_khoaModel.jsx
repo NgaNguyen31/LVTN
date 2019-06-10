@@ -75,7 +75,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                 PC: this.state.text.PC,
                 Xoa: $('#Xoa').prop('checked'),
         };
-        if (!changes.MSBM) {
+        if (changes.MSBM == '') {
             T.notify('MSBM đang trống!', 'danger');
             $('#MSBM').focus(); 
         } else if (changes.HO == '') {
@@ -125,7 +125,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                                 <input className='form-control' id='TEN' type='text' onChange={this.handleInput('text', 'TEN')} value={this.state.text.TEN}/>
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='PHAI'>Phái</label>
+                                <label htmlFor='PHAI'>Giới tính</label>
                                 <Dropdown ref={this.phai} items = {T.phais}/>
                             </div>
                             <div className='form-group'>

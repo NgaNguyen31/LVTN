@@ -33,8 +33,10 @@ export default class BenhvienModal extends React.Component {
     }
 
     show(item) {
+        console.log(item);
+        
         const { _id, Noi_kham } = item ?
-            item : { _id: null, Noi_kham: '' };
+            item : { _id: null, Noi_kham: null };
         $('#Noi_kham').val(Noi_kham);
         this.setState({ _id});
         $(this.modal.current).modal('show');
@@ -45,7 +47,7 @@ export default class BenhvienModal extends React.Component {
         const changes = {
             Noi_kham: this.state.text.Noi_kham,
         };
-        if (this.state.text == '') {
+        if (changes.Noi_kham == '') {
             T.notify('Tên bệnh viện đang trống!', 'danger');
             $('#Noi_kham').focus();
         } else if (this.state._id) {
@@ -73,7 +75,7 @@ export default class BenhvienModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='Noi_kham'>Tên bệnh viện</label>
-                                <input className='form-control' id='Tenbenhvien' type='text' placeholder='Tên bệnh viện' onChange={this.handleInput('text', 'Noi_kham')} value={this.state.text.Noi_kham}/>
+                                <input className='form-control' id='Noi_kham' type='text' placeholder='Tên bệnh viện' onChange={this.handleInput('text', 'Noi_kham')} value={this.state.text.Noi_kham}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

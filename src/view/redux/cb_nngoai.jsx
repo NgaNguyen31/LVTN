@@ -91,7 +91,6 @@ export function getCb_nngoai(cb_nngoaiId, done) {
             } else {
                 
                 if (done) done(data.items);
-                dispatch({ type: GET_CB_NNGOAI, items: data.items });
             }
         }, error => {
             console.error('GET: ' + url + '. ' + error);
@@ -152,4 +151,20 @@ export function deleteCb_nngoai(_id) {
 
 export function changeCb_nngoai(cb_nngoai) {
     return { type: UPDATE_CB_NNGOAI, item: cb_nngoai };
+}
+
+export function getcountCb_nngoai(done) {
+    return dispatch => {
+        const url = '/admin/cb_nngoai/count';
+        T.get(url, data => {
+            if (data.error) {
+                T.notify('Thông tin bị lỗi!', 'danger');
+                console.error('GET: ' + url + '. ' + data.error);
+            } else {                
+                if (done) done(data.count);
+            }
+        }, error => {
+            console.error('GET: ' + url + '. ' + error);
+        });
+    }
 }

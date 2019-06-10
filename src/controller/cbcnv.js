@@ -23,6 +23,13 @@ module.exports = app => {
             res.send({ error, item });
         })
     });
+
+    app.get('/admin/cbcnv/count', app.role.isAdmin, (req, res) => {
+        app.model.cbcnv.count((error, count) => {
+            res.send({error, count});
+        })
+    });
+
     app.put('/admin/cbcnv', app.role.isAdmin, (req, res) => {
         let data = req.body.changes;
             changes = {};

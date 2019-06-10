@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
+import Select from 'react-select';
 import BomonPage from './BomonPage.jsx';
 
 export default class BomonModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', khoa: []};
+        this.state = {text: '', number: '', date: '', khoa: [], selectedOption: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,7 +14,7 @@ export default class BomonModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.khoa = React.createRef();
-        
+        this.selectedOption = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -22,14 +23,20 @@ export default class BomonModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;
+                case 'tenkhoa':
+                    state.selectedOption = e;
             }
 
             this.setState(state);
-            e.preventDefault();
+            
         }
     }
 
@@ -39,23 +46,23 @@ export default class BomonModal extends React.Component {
         }, 250));
     }
 
-    show(item, khoa) {              
+    show(item, khoa) {                      
         const { _id, TEN_BM, TEN_TIENG_ANH, MS_KHOA, NAM_THANH_LAP, GHI_CHU } = item ?
-            item : { _id: null, TEN_BM: '', TEN_TIENG_ANH: '', MS_KHOA: '', NAM_THANH_LAP: '', GHI_CHU: '' };
+            item : { _id: null, TEN_BM: null, TEN_TIENG_ANH: null, MS_KHOA: null, NAM_THANH_LAP: null, GHI_CHU: null };
         $('#TEN_BM').val(TEN_BM);
         $('#TEN_TIENG_ANH').val(TEN_TIENG_ANH);
         $('#MS_KHOA').val(MS_KHOA);
-        $('#NAM_THANH_LAP').val(NAM_THANH_LAP);
+        NAM_THANH_LAP ? $('#NAM_THANH_LAP').val(T.dateToText(NAM_THANH_LAP,'yyyy-mm-dd')) : null ;
         $('#GHI_CHU').val(GHI_CHU);
-        this.setState({ _id, khoa: khoa? khoa: []});
-
+        this.setState({ _id, khoa: khoa? khoa: []});        
+        MS_KHOA ? MS_KHOA.TEN_KHOA : [];
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const khoa = this.khoa.current.getSelectedItem(),
-        MS_KHOA = khoa? khoa._id: null,
+        const khoa = this.state.selectedOption.map(ele => ele.value._id),
+        MS_KHOA = khoa,
              changes = {
                 TEN_BM: this.state.text.TEN_BM,
                 TEN_TIENG_ANH: this.state.text.TEN_TIENG_ANH,
@@ -69,7 +76,7 @@ export default class BomonModal extends React.Component {
         } else if (changes.TEN_TIENG_ANH == '') {
             T.notify('Tên tiếng anh đang trống!', 'danger');
             $('#TEN_TIENG_ANH').focus();
-        } else if (!changes.MS_KHOA) {
+        } else if (changes.MS_KHOA == '') {
             T.notify('Mã số khoa đang trống!', 'danger');
             $('#MS_KHOA').focus();
         } else if (changes.NAM_THANH_LAP == '') {
@@ -88,8 +95,11 @@ export default class BomonModal extends React.Component {
     }
 
     render() {
-        const khoa = this.state && this.state.khoa && this.state.khoa.khoa ? this.state.khoa.khoa:[];
+        console.log(this.state, this.props);
+        const khoa = this.state && this.state.khoa ? this.state.khoa:[];
+        console.log(khoa);
         
+        const selectedOption = this.state.selectedOption;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -111,7 +121,13 @@ export default class BomonModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Tên khoa</label>
-                                <Dropdown ref={this.khoa} number='' items={khoa.map(e => Object.assign({}, e, {text: e.TEN_KHOA}))} />
+                                <Select
+                                isMulti
+                                value = {selectedOption}
+                                onChange =  {this.handleInput('tenkhoa')}
+                                options = {khoa.map(e => Object.assign({}, {label: e.TEN_KHOA, value: e}))}
+                                />
+                                {/* <Dropdown ref={this.khoa} number='' items={khoa.map(e => Object.assign({}, e, {text: e.TEN_KHOA}))} /> */}
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Năm thành lập</label>

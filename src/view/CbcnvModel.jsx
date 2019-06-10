@@ -1323,11 +1323,11 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NO_PC'>Nợ PC</label>
-                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
+                                <Dropdown ref={this.nopcc} number='' items={T.giahans} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NO_DONG_BHXH'>Nợ đóng BHXH</label>
-                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
+                                <Dropdown ref={this.nopcc} number='' items={T.giahans} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='GHICHU_BHXH'>Ghi chú BHXH</label>
@@ -1335,7 +1335,7 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NO_BHXH'>Nợ BHXH</label>
-                                <Dropdown ref={this.nopcc} number='' items={T.nopccs} />
+                                <Dropdown ref={this.nopcc} number='' items={T.giahans} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='GHICHU_KY_HIEU'>Ghi chú ký hiệu</label>

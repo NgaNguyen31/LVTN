@@ -17,6 +17,12 @@ module.exports = app => {
         })
     })
 
+    app.get('/admin/cb_ngoai/count', app.role.isAdmin, (req, res) => {
+        app.model.cb_nngoai.count((error, count) => {
+            res.send({error, count});
+        })
+    })
+
     app.delete('/admin/cb_nngoai', app.role.isAdmin, (req, res) => app.model.cb_nngoai.delete(req.body._id, error => res.send({ error })));
 
     app.post('/admin/cb_nngoai', app.role.isAdmin, (req, res) => {       

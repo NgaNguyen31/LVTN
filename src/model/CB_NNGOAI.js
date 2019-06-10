@@ -62,11 +62,17 @@ module.exports = app =>{
                     }
                 ]
             }, (error, items) => {
-                if (items.length > 0 && items != _id) {
-                    console.log(items._id);
+                if (items.length > 0) {
+                    const afterFilter = items.filter(e => e._id == _id);
+                    console.log(items);
                     console.log(_id);
-                    
-                    if (done) done('Exist', items);
+                    if (afterFilter.length > 0)
+                        done && done('Exist', items);
+                    else 
+                        model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, (error, item) => {
+                            console.log(error, item);
+                            done(error, item);
+                        });
                 }
                 else{
                     model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, (error, item) => {
@@ -84,5 +90,10 @@ module.exports = app =>{
                 item.remove(done);
             }
         }),
+
+        count: (done) => model.find({}, (error, item) => {
+            if(item) done(null, item.length);
+            else done(null, 0);
+        })
     };
 };

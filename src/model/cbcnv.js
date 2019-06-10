@@ -204,5 +204,10 @@ module.exports = app =>{
                 item.remove(done);
             }
         }),
+
+        count: (done) => model.find({}, (error,item) =>{
+            if(item) done(null, item.length);
+            else done(null, 0);
+        })
     };
 };

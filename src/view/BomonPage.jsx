@@ -23,7 +23,7 @@ class BomonPage extends React.Component {
     }
 
     edit(e, item){        
-        this.bomonModal.current.show(item, this.props.khoa.data.items);
+        this.bomonModal.current.show(item, this.props.khoa.data.items.khoa);
         e.preventDefault();
     }
 
@@ -34,7 +34,8 @@ class BomonPage extends React.Component {
         e.preventDefault();
     }
 
-    render() {           
+    render() {        
+        console.log("page", this.props);
         let table = null;              
         if (this.props.bomon && this.props.bomon.page && this.props.bomon.page.list && this.props.bomon.page.list.length > 0) {
             table = (

@@ -1,11 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import CountUp from './js/countUp';
+import Highcharts from 'highcharts';
+import {getcountCbcnv} from './redux/cbcnv.jsx';
+import {getcountCb_nngoai} from './redux/cb_nngoai.jsx';
+import {Pie} from 'react-chartjs-2';
 
 class DashboardIcon extends React.Component {
     constructor(props) {
         super(props);
         this.valueElement = React.createRef();
+        this.state = {cb_nngoai:0, cbcnv:0};
     }
 
     componentDidMount() {
@@ -13,6 +18,8 @@ class DashboardIcon extends React.Component {
             const endValue = this.props.value ? parseInt(this.props.value) : 0;
             new CountUp(this.valueElement.current, 0, endValue, 0, 2, { separator: '.', decimal: ',' }).start();
         }, 100);
+        // this.props.getcountCb_nngoai(cb_nngoai => this.setState(cb_nngoai));
+        // this.props.getcountCbcnv(cbcnv => this.setState(cbcnv));
     }
 
     render() {
@@ -22,8 +29,9 @@ class DashboardIcon extends React.Component {
                 <div className='info'>
                     <h4>{this.props.title}</h4>
                     <p style={{ fontWeight: 'bold' }} ref={this.valueElement} />
-                </div>
+                </div>                
             </div>
+            
         );
     }
 }
@@ -80,6 +88,28 @@ class AdminPage extends React.Component {
     }
 
     render() {
+        console.log(this.props);
+        const data = {
+            labels: [
+                'ABC',
+                'DEF',
+                'XYZ'
+            ],
+            datasets: [{
+                data: [300, 50, 100],
+                backgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+                ],
+                hoverBackgroundColor: [
+                '#FF6384',
+                '#36A2EB',
+                '#FFCE56'
+                ]
+            }]
+        };    
+        
         const { numberOfUser,numberOfCb_nngoai, numberOfNews, numberOfEvent, numberOfJob, todayViews, allViews } = this.props.system ?
             this.props.system : { numberOfUser: 0,numberOfCb_nngoai: 0, numberOfNews: 0, numberOfEvent: 0, numberOfJob: 0, todayViews: 0, allViews: 0 };
         return (
@@ -103,6 +133,13 @@ class AdminPage extends React.Component {
                     <div className='col-md-6 col-lg-3'>
                         <DashboardIcon type='info' icon='fa-file' title='CB NNgoài' value={numberOfCb_nngoai} />
                     </div>
+
+                    <div className='col-12'>
+                        <Pie data={data}/>
+                    </div>
+                    {/* <div id="atmospheric-composition">
+                
+                    </div> */}
                     {/* <div className='col-md-6 col-lg-3'>
                         <DashboardIcon type='info' icon='fa-file' title='News' value={numberOfNews} />
                     </div>
@@ -118,6 +155,6 @@ class AdminPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ system: state.system });
+const mapStateToProps = state => ({ system: state.system, cbcnv: state.cbcnv, cb_nngoai: state.cb_nngoai });
 const mapActionsToProps = {};
 export default connect(mapStateToProps, mapActionsToProps)(AdminPage);

@@ -38,19 +38,19 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
 
     show(item, trinhdo ) {      
         const { _id, MSNV, HO, TEN, NGAY_SINH, NOI_SINH, NGAY_VAO, NGAY_NGHI, TRINH_DO, DON_VI, DIA_CHI, GHI_CHU } = item ?
-            item : { _id: null, MSNV: '', HO: '', TEN: '', NGAY_SINH: '', NOI_SINH:'', NGAY_VAO: '', NGAY_NGHI: '', TRINH_DO: '', DON_VI: '', DIA_CHI: '', GHI_CHU: '' };
+            item : { _id: null, MSNV: null, HO: null, TEN: null, NGAY_SINH: null, NOI_SINH:null, NGAY_VAO: null, NGAY_NGHI: null, TRINH_DO: null, DON_VI: null, DIA_CHI: null, GHI_CHU: null };
         $('#MSNV').val(MSNV);
         $('#HO').val(HO);
         $('#TEN').val(TEN);
-        $('#NGAY_SINH').val(NGAY_SINH);
+        NGAY_SINH ? $('#NGAY_SINH').val(T.dateToText(NGAY_SINH,'yyyy-mm-dd')) : null ;
         $('#NOI_SINH').val(NOI_SINH);
-        $('#NGAY_VAO').val(NGAY_VAO);
-        $('#NGAY_NGHI').val(NGAY_NGHI);
+        NGAY_VAO ? $('#NGAY_VAO').val(T.dateToText(NGAY_VAO,'yyyy-mm-dd')) : null ;
+        NGAY_NGHI ? $('#NGAY_NGHI').val(T.dateToText(NGAY_NGHI,'yyyy-mm-dd')) : null ;
         $('#TRINH_DO').val(TRINH_DO);
         $('#DON_VI').val(DON_VI);
         $('#DIA_CHI').val(DIA_CHI);
         $('#GHI_CHU').val(GHI_CHU);
-        
+        TRINH_DO ? this.trinhdo.current.setText(Object.assign({}, TRINH_DO, {text: TRINH_DO.Ten_day_du})) : null;
         this.setState({ _id, trinhdo: trinhdo? trinhdo: []});
         $(this.modal.current).modal('show');
     }
@@ -72,10 +72,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                 DIA_CHI: this.state.text.DIA_CHI,
                 GHI_CHU: this.state.text.GHI_CHU,
         };
-        if (this.state.text == '') {
-            T.notify('Bạn chưa điền thông tin!', 'danger');
-            $('#MSNV').focus();
-        } else if (changes.MSNV == '') {
+        if (changes.MSNV == '') {
             T.notify('MSNV đang trống!', 'danger');
             $('#MSNV').focus(); 
         } else if (changes.HO == '') {
