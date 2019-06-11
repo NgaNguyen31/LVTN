@@ -91,9 +91,6 @@ module.exports = app =>{
             }
         }),
 
-        count: (done) => model.find({}, (error, item) => {
-            if(item) done(null, item.length);
-            else done(null, 0);
-        })
+        count: (condition, done) => done ? model.countDocuments(condition, done) : model.countDocuments({}, condition),
     };
 };

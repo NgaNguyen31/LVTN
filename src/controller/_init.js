@@ -18,6 +18,18 @@ module.exports = app => {
                 app.data.numberOfEvent = error ? 0 : numberOfEvent;
                 app.model.job.count((error, numberOfJob) => {
                     app.data.numberOfJob = error ? 0 : numberOfJob;
+                    app.model.cbcnv.count({PHAI: 'Nam'}, (error, numberOfCBCNVNam) => {
+                        app.data.numberOfCBCNVNam = error ? 0 : numberOfCBCNVNam;
+                        app.model.cbcnv.count({PHAI: 'Nữ'}, (error, numberOfCBCNVNu) => {
+                            app.data.numberOfCBCNVNu = error ? 0 : numberOfCBCNVNu;
+                            app.model.cb_nngoai.count((error, numberOfCBNN) => {
+                                app.data.numberOfCBNN = error ? 0 : numberOfCBNN;
+                                app.model.cb_nngoai.count((error, numberOfCBNN) => {
+                                    app.data.numberOfCBNN = error ? 0 : numberOfCBNN;
+                                });
+                            });
+                        });
+                    });
                 });
             });
         });

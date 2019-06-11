@@ -2,15 +2,15 @@ import React from 'react';
 import { connect } from 'react-redux';
 import CountUp from './js/countUp';
 import Highcharts from 'highcharts';
-import {getcountCbcnv} from './redux/cbcnv.jsx';
-import {getcountCb_nngoai} from './redux/cb_nngoai.jsx';
-import {Pie} from 'react-chartjs-2';
+import { getcountCbcnv } from './redux/cbcnv.jsx';
+import { getcountCb_nngoai } from './redux/cb_nngoai.jsx';
+import { Pie } from 'react-chartjs-2';
 
 class DashboardIcon extends React.Component {
     constructor(props) {
         super(props);
         this.valueElement = React.createRef();
-        this.state = {cb_nngoai:0, cbcnv:0};
+        this.state = { cb_nngoai: 0, cbcnv: 0 };
     }
 
     componentDidMount() {
@@ -29,9 +29,9 @@ class DashboardIcon extends React.Component {
                 <div className='info'>
                     <h4>{this.props.title}</h4>
                     <p style={{ fontWeight: 'bold' }} ref={this.valueElement} />
-                </div>                
+                </div>
             </div>
-            
+
         );
     }
 }
@@ -89,29 +89,46 @@ class AdminPage extends React.Component {
 
     render() {
         console.log(this.props);
-        const data = {
+
+        const { numberOfUser, numberOfNews, numberOfEvent, numberOfJob, numberOfCBCNVNam, numberOfCBCNVNu, numberOfCBNN } = this.props.system ?
+            this.props.system : { numberOfUser: 0, numberOfCBNN: 0, numberOfNews: 0, numberOfEvent: 0, numberOfJob: 0, numberOfCBCNVNu: 0, numberOfCBCNVNam: 0 };
+
+        const cnvNamNu = {
             labels: [
-                'ABC',
-                'DEF',
-                'XYZ'
+                'Cán bộ công nhân viên nam',
+                'Cán bộ công nhân viên nữ',
             ],
             datasets: [{
-                data: [300, 50, 100],
+                data: [numberOfCBCNVNam, numberOfCBCNVNu],
                 backgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56'
+                    '#36A2EB',
+                    '#FF6384'
                 ],
                 hoverBackgroundColor: [
-                '#FF6384',
-                '#36A2EB',
-                '#FFCE56'
+                    '#36A2EB',
+                    '#FF6384'
                 ]
             }]
-        };    
-        
-        const { numberOfUser,numberOfCb_nngoai, numberOfNews, numberOfEvent, numberOfJob, todayViews, allViews } = this.props.system ?
-            this.props.system : { numberOfUser: 0,numberOfCb_nngoai: 0, numberOfNews: 0, numberOfEvent: 0, numberOfJob: 0, todayViews: 0, allViews: 0 };
+        };
+
+        const cnvTrongNgoai = {
+            labels: [
+                'Cán bộ công nhân viên nước ngoài',
+                'Cán bộ công nhân viên trong nước',
+            ],
+            datasets: [{
+                data: [numberOfCBNN, numberOfCBCNVNam + numberOfCBCNVNu - numberOfCBNN],
+                backgroundColor: [
+                    '#33ff05',
+                    '#f7df03'
+                ],
+                hoverBackgroundColor: [
+                    '#33ff05',
+                    '#f7df03'
+                ]
+            }]
+        }
+
         return (
             <main className='app-content'>
                 <div className='app-title'>
@@ -131,24 +148,22 @@ class AdminPage extends React.Component {
                         <DashboardIcon type='primary' icon='fa-users' title='Người dùng' value={numberOfUser} />
                     </div>
                     <div className='col-md-6 col-lg-3'>
-                        <DashboardIcon type='info' icon='fa-file' title='CB NNgoài' value={numberOfCb_nngoai} />
+                        <DashboardIcon type='info' icon='fa-file' title='CB NNgoài' value={numberOfCBNN} />
                     </div>
 
-                    <div className='col-12'>
-                        <Pie data={data}/>
+                </div>
+
+                <div className='row'>
+                    <div className='tile col-md-6 col-lg-4 ml-3'>
+                        <div className=''>
+                            <Pie data={cnvNamNu} />
+                        </div>
                     </div>
-                    {/* <div id="atmospheric-composition">
-                
-                    </div> */}
-                    {/* <div className='col-md-6 col-lg-3'>
-                        <DashboardIcon type='info' icon='fa-file' title='News' value={numberOfNews} />
+                    <div className='tile col-md-6 col-lg-4 ml-3'>
+                        <div className=''>
+                            <Pie data={cnvTrongNgoai} />
+                        </div>
                     </div>
-                    <div className='col-md-6 col-lg-3'>
-                        <DashboardIcon type='danger' icon='fa-star' title='Event' value={numberOfEvent} />
-                    </div>
-                    <div className='col-md-6 col-lg-3'>
-                        <DashboardIcon type='warning' icon='fa-pagelines' title='Job' value={numberOfJob} />
-                    </div> */}
                 </div>
             </main>
         );
