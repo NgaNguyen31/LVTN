@@ -3,7 +3,7 @@ import React from 'react';
 export default class BenhvienModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: ''}
+        this.state = {text: {Noi_kham: ''}}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -33,17 +33,17 @@ export default class BenhvienModal extends React.Component {
     }
 
     show(item) {
-        console.log(item);
-        
         const { _id, Noi_kham } = item ?
             item : { _id: null, Noi_kham: null };
         $('#Noi_kham').val(Noi_kham);
-        this.setState({ _id});
+        const state = this.state;
+        state._id = _id;
+        state.text.Noi_kham = Noi_kham; 
+        this.setState(state);
         $(this.modal.current).modal('show');
     }
 
     save(e) {
-        e.preventDefault();
         const changes = {
             Noi_kham: this.state.text.Noi_kham,
         };
@@ -59,6 +59,7 @@ export default class BenhvienModal extends React.Component {
                 $(this.modal.current).modal('hide');
             });
         }
+        e.preventDefault();
     }
 
     render() {

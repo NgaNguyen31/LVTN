@@ -87,7 +87,7 @@ class BenhvienPage extends React.Component {
                     pageNumber={pageNumber} pageSize={pageSize} pageTotal={pageTotal} totalItem={totalItem}
                     getPage={this.props.getBenhvienInPage} />
 
-                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={this.edit}>
+                <button type='button' className='btn btn-primary btn-circle' style={{ position: 'fixed', right: '10px', bottom: '10px' }} onClick={e => this.edit(e)}>
                     <i className='fa fa-lg fa-plus' />
                 </button>
 
