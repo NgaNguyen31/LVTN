@@ -77,5 +77,6 @@ module.exports = app => {
                 item.remove(done);
             }
         }),
+        count: (condition, done) => done ? model.countDocuments(condition, done) : model.countDocuments({}, condition),
     };
 };

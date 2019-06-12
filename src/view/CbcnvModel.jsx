@@ -603,13 +603,13 @@ export default class CbcnvModal extends React.Component {
             GHI_CHU_NOP_BANG: this.state.text.GHI_CHU_NOP_BANG,
             CONG_NHAN_BANG: this.state.text.CONG_NHAN_BANG,
             CHUYEN_NGANH: this.state.text.CHUYEN_NGANH,
-            CD: this.state.text.CD,
-            KS: this.state.text.KS,
-            CH: this.state.text.CH,
-            TS: this.state.text.TS,
-            TSKH: this.state.text.TSKH,
-            TC: this.state.text.TC,
-            KHAC: this.state.text.KHAC,
+            CD: this.state.text.CD ? this.state.text.CD : 0,
+            KS: this.state.text.KS ? this.state.text.KS : 0,
+            CH: this.state.text.CH ?  this.state.text.Ch : 0,
+            TS: this.state.text.TS ?  this.state.text.TS : 0,
+            TSKH: this.state.text.TSKH ? this.state.text.TSKH : 0,
+            TC: this.state.text.TC ? this.state.text.TC : 0,
+            KHAC: this.state.text.KHAC ? this.state.text.KHAC : 0,
             GS: this.state.number.GS,
             PGS: this.state.number.PGS,
             GVC: this.state.number.GVC,
@@ -747,30 +747,6 @@ export default class CbcnvModal extends React.Component {
         } else if (changes.PCCV < 0) {
             T.notify('PCCV không được là số âm', 'danger');
             $('#PCCV').focus();
-        } else if (changes.GS < 0) {
-            T.notify('GS không được là số âm', 'danger');
-            $('#GS').focus();
-        } else if (changes.PGS < 0) {
-            T.notify('PGS không được là số âm', 'danger');
-            $('#PGS').focus();
-        } else if (changes.GVC < 0) {
-            T.notify('GVC không được là số âm', 'danger');
-            $('#GVC').focus();
-        } else if (changes.GV < 0) {
-            T.notify('GV không được là số âm', 'danger');
-            $('#GV').focus();
-        } else if (changes.GVTH < 0) {
-            T.notify('GVTH không được là số âm', 'danger');
-            $('#GVTH').focus();
-        } else if (changes.TG < 0) {
-            T.notify('TG không được là số âm', 'danger');
-            $('#TG').focus();
-        } else if (changes.NVC < 0) {
-            T.notify('NVC không được là số âm', 'danger');
-            $('#NVC').focus();
-        } else if (changes.CVC < 0) {
-            T.notify('CVC không được là số âm', 'danger');
-            $('#CVC').focus();
         } else if (changes.SO_THE < 0) {
             T.notify('Số thẻ không được là số âm', 'danger');
             $('#SO_THE').focus();
@@ -1083,31 +1059,31 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CD'>CD</label>
-                                <input className='form-control' id='CD' type='text' placeholder='CD' onChange={this.handleInput('text', 'CD')} value={this.state.text.CD}/>
+                                <input className='form-control' id='CD' type='text' placeholder='' onChange={this.handleInput('text', 'CD')} value={this.state.text.CD}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='KS'>KS</label>
-                                <input className='form-control' id='KS' type='text' placeholder='KS' onChange={this.handleInput('text', 'KS')} value={this.state.text.KS}/>
+                                <input className='form-control' id='KS' type='text' placeholder='' onChange={this.handleInput('text', 'KS')} value={this.state.text.KS}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CH'>CH</label>
-                                <input className='form-control' id='CH' type='text' placeholder='CH' onChange={this.handleInput('text', 'CH')} value={this.state.text.CH}/>
+                                <input className='form-control' id='CH' type='text' placeholder='' onChange={this.handleInput('text', 'CH')} value={this.state.text.CH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TS'>TS</label>
-                                <input className='form-control' id='TS' type='text' placeholder='TS' onChange={this.handleInput('text', 'TS')} value={this.state.text.TS}/>
+                                <input className='form-control' id='TS' type='text' placeholder='' onChange={this.handleInput('text', 'TS')} value={this.state.text.TS}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TSKH'>TSKH</label>
-                                <input className='form-control' id='TSKH' type='text' placeholder='TSKH' onChange={this.handleInput('text', 'TSKH')} value={this.state.text.TSKH}/>
+                                <input className='form-control' id='TSKH' type='text' placeholder='' onChange={this.handleInput('text', 'TSKH')} value={this.state.text.TSKH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TC'>TC</label>
-                                <input className='form-control' id='TC' type='text' placeholder='TC' onChange={this.handleInput('text', 'TC')} value={this.state.text.TC}/>
+                                <input className='form-control' id='TC' type='text' placeholder='' onChange={this.handleInput('text', 'TC')} value={this.state.text.TC}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='KHAC'>Khác</label>
-                                <input className='form-control' id='KHAC' type='text' placeholder='Khác' onChange={this.handleInput('text', 'KHAC')} value={this.state.text.KHAC}/>
+                                <input className='form-control' id='KHAC' type='text' placeholder='' onChange={this.handleInput('text', 'KHAC')} value={this.state.text.KHAC}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='GS'>GS</label>

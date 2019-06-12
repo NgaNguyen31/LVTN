@@ -90,8 +90,8 @@ class AdminPage extends React.Component {
     render() {
         console.log(this.props);
 
-        const { numberOfUser, numberOfNews, numberOfEvent, numberOfJob, numberOfCBCNVNam, numberOfCBCNVNu, numberOfCBNN } = this.props.system ?
-            this.props.system : { numberOfUser: 0, numberOfCBNN: 0, numberOfNews: 0, numberOfEvent: 0, numberOfJob: 0, numberOfCBCNVNu: 0, numberOfCBCNVNam: 0 };
+        const { numberOfUser, numberOfDKKLGD, numberOfCBNNHĐVTT, numberOfCBCNVHDK, numberOfCBCNVNam, numberOfCBCNVNu, numberOfCBNN, numberOfCH, numberOfTSKH, numberOfCD, numberOfKS, numberOfKHAC, numberOfTC, numberOfTS } = this.props.system ?
+            this.props.system : { numberOfUser: 0, numberOfCBNN: 0, numberOfDKKLGD: 0, numberOfCBNNHĐVTT: 0, numberOfCBCNVHDK: 0, numberOfCBCNVNu: 0, numberOfCBCNVNam: 0, numberOfCH: 0, numberOfTSKH: 0, numberOfCD: 0, numberOfKS: 0, numberOfKHAC: 0, numberOfTC: 0, numberOfTS: 0 };
 
         const cnvNamNu = {
             labels: [
@@ -129,6 +129,57 @@ class AdminPage extends React.Component {
             }]
         }
 
+        const cnvKhoaTutra = {
+            labels: [
+                'Cán bộ công nhân viên hợp đồng đơn vị tự trả',
+                'Cán bộ công nhân viên hợp đồng khoa',
+            ],
+            datasets: [{
+                data: [numberOfCBNNHĐVTT, numberOfCBCNVHDK],
+                backgroundColor: [
+                    '#33ff05',
+                    '#f7df03'
+                ],
+                hoverBackgroundColor: [
+                    '#33ff05',
+                    '#f7df03'
+                ]
+            }]
+        }
+
+        const hocvi = {
+            labels: [
+                'Tiến sĩ khoa học',
+                'Tiến sĩ',
+                'Thạc sĩ',
+                'Kĩ sư',
+                'Cao đẳng',
+                'Trung cấp',
+                'Khác',                
+            ],
+            datasets: [{
+                data: [numberOfCBCNVNam + numberOfCBCNVNu - numberOfTSKH, numberOfCBCNVNam + numberOfCBCNVNu - numberOfCH, numberOfCBCNVNam + numberOfCBCNVNu - numberOfCD, numberOfCBCNVNam + numberOfCBCNVNu - numberOfKS, numberOfCBCNVNam + numberOfCBCNVNu - numberOfKHAC, numberOfCBCNVNam + numberOfCBCNVNu - numberOfTS, numberOfCBCNVNam + numberOfCBCNVNu - numberOfTC],
+                backgroundColor: [
+                    '#33ff05',
+                    '#f7df03',
+                    '#36A2EB',
+                    '#FF6384',
+                    '#99FF33',
+                    '#FF6600',
+                    '#000011'
+                ],
+                hoverBackgroundColor: [
+                    '#33ff05',
+                    '#f7df03',
+                    '#36A2EB',
+                    '#FF6384',
+                    '#99FF33',
+                    '#FF6600',
+                    '#000011'
+                ]
+            }]
+        }
+
         return (
             <main className='app-content'>
                 <div className='app-title'>
@@ -148,7 +199,7 @@ class AdminPage extends React.Component {
                         <DashboardIcon type='primary' icon='fa-users' title='Người dùng' value={numberOfUser} />
                     </div>
                     <div className='col-md-6 col-lg-3'>
-                        <DashboardIcon type='info' icon='fa-file' title='CB NNgoài' value={numberOfCBNN} />
+                        <DashboardIcon type='info' icon='fa-file' title='Đăng kí giảng dạy' value={numberOfDKKLGD} />
                     </div>
 
                 </div>
@@ -162,6 +213,16 @@ class AdminPage extends React.Component {
                     <div className='tile col-md-6 col-lg-4 ml-3'>
                         <div className=''>
                             <Pie data={cnvTrongNgoai} />
+                        </div>
+                    </div>
+                    <div className='tile col-md-6 col-lg-4 ml-3'>
+                        <div className=''>
+                            <Pie data={cnvKhoaTutra} />
+                        </div>
+                    </div>
+                    <div className='tile col-md-6 col-lg-4 ml-3'>
+                        <div className=''>
+                            <Pie data={hocvi} />
                         </div>
                     </div>
                 </div>

@@ -101,7 +101,7 @@ class Cbcnv_hd_khoaPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Cbcnv hợp đồng khoa</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin cbcnv hợp đồng khoa</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>

@@ -74,7 +74,7 @@ class Cv_klgdPage extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin Công việc khối lượng giảng dạy</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin công việc khối lượng giảng dạy</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>

@@ -87,7 +87,7 @@ class Pctn_nghe_2018Page extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có pctn nghe 2018 nào!</p>;
+            table = <p>Chưa có phụ cấp trách nhiệm nghề nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.pctn_nghe_2018 && this.props.pctn_nghe_2018.page ?
@@ -96,13 +96,13 @@ class Pctn_nghe_2018Page extends React.Component {
             <main className='app-content'>
                 <div className='app-title'>
                     <div>
-                        <h1><i className='fa fa fa-send-o' /> Thông tin PCTN Nghe 2018</h1>
+                        <h1><i className='fa fa fa-send-o' /> Thông tin phụ cấp trách nhiệm nghề</h1>
                     </div>
                     <ul className='app-breadcrumb breadcrumb'>
                         <li className='breadcrumb-item'>
                             <Link to='/admin'><i className='fa fa-home fa-lg' /></Link>
                         </li>
-                        <li className='breadcrumb-item'>PCTN Nghe 2018</li>
+                        <li className='breadcrumb-item'>Phụ cấp trách nhiệm nghề</li>
                     </ul>
                 </div>
 

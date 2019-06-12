@@ -149,12 +149,12 @@ class Menu extends React.Component {
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/cbcnv_hd_dv_tu_tra'>
-                                    <i className='icon fa fa-circle-o' />Cán bộ công nhân viên hoạt động dịch vụ tự trả
+                                    <i className='icon fa fa-circle-o' />Cán bộ công nhân viên hợp đồng đơn vị tự trả
                                 </Link>
                             </li>
                             <li>
                                 <Link className='treeview-item' to='/admin/cbcnv_hd_khoa'>
-                                    <i className='icon fa fa-circle-o' />Cán bộ công nhân viên hoạt động khoa
+                                    <i className='icon fa fa-circle-o' />Cán bộ công nhân viên hợp đồng khoa
                                 </Link>
                             </li>
                             <li>
@@ -180,7 +180,7 @@ class Menu extends React.Component {
                             </li>          
                             <li>
                                 <Link className='treeview-item' to='/admin/pctn_nghe_2018'>
-                                    <i className='icon fa fa-circle-o' />PCTN nghe 2018
+                                    <i className='icon fa fa-circle-o' />Phụ cấp trách nhiệm nghề
                                 </Link>
                             </li>
                         </ul>

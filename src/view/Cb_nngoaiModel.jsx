@@ -6,7 +6,7 @@ import Select from 'react-select';
 export default class Cb_nngoaiModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', nuocngoai: [], cbcnv: [], giahan: ["Có", "Không"], selectedcbcnv: [], selectednuoc: [], selectedgiahan: []}
+        this.state = {text: '', nuocngoai: [], cbcnv: [], giahan: [], selectedcbcnv: [], selectednuoc: [], selectedgiahan: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -35,10 +35,7 @@ export default class Cb_nngoaiModal extends React.Component {
                     break;
                 case 'nuocngoai':
                     state.selectednuoc = e;
-                    break;
-                case 'giahan':
-                    state.selectedgiahan = e;
-                    break;                
+                    break;              
             }
             this.setState(state);
         }
@@ -62,12 +59,12 @@ export default class Cb_nngoaiModal extends React.Component {
         $('#Giahan').val(Giahan);
         $('#SoCVan').val(SoCVan);
         $('#NgayCVan').val(T.dateToText(NgayCVan,'yyyy-mm-dd'));
-        //Hovaten ? this.cbcnv.current.setText(Object.assign({}, Hovaten, {text: Hovaten.HO + ' ' + Hovaten.TEN})) : null;
-        //Nuoc ? this.nuocngoai.current.setText(Object.assign({}, Nuoc, {text: Nuoc.TEN_NUOC})) : null;
-        //Giahan ? this.giahan.current.setText(Giahan) : null;
-        Hovaten ? Hovaten.HO + ' ' + Hovaten.TEN : [];
-        Nuoc ? Nuoc.TEN_NUOC : [];
-        Giahan ? Giahan : [];
+        Hovaten ? this.cbcnv.current.setText(Object.assign({}, Hovaten, {text: Hovaten.HO + ' ' + Hovaten.TEN})) : null;
+        Nuoc ? this.nuocngoai.current.setText(Object.assign({}, Nuoc, {text: Nuoc.TEN_NUOC})) : null;
+        Giahan ? this.giahan.current.setText(Giahan) : null;
+        // Hovaten ? Hovaten.HO + ' ' + Hovaten.TEN : [];
+        // Nuoc ? Nuoc.TEN_NUOC : [];
+        // Giahan ? Giahan : [];
         this.setState({ _id, nuocngoai: nuocngoai? nuocngoai: [], cbcnv: cbcnv? cbcnv: []});
         $(this.modal.current).modal('show');
     }
@@ -136,10 +133,9 @@ export default class Cb_nngoaiModal extends React.Component {
     render() {                
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv ? this.state.cbcnv.cbcnv : [];
         const nuocngoai = this.state && this.state.nuocngoai && this.state.nuocngoai.nuocngoai ? this.state.nuocngoai.nuocngoai : [];
-        const giahan = ["Có", "Không"];
-        const selectedcbcnv = this.state.selectedcbcnv;
-        const selectednuoc = this.state.selectednuoc;
-        const selectedgiahan = this.state.selectedgiahan;
+        // const selectedcbcnv = this.state.selectedcbcnv;
+        // const selectednuoc = this.state.selectednuoc;
+        // const selectedgiahan = this.state.selectedgiahan;
         console.log(this.state);
         
         return (
@@ -155,21 +151,21 @@ export default class Cb_nngoaiModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='Hovaten'>Họ và tên</label>
-                                <Select
+                                {/* <Select
                                 value = {selectedcbcnv}
                                 onChange =  {this.handleInput('cbcnv')}
                                 options = {cbcnv.map(e => Object.assign({}, {label: e.HO + ' ' + e.TEN, value: e}))}
-                                />
-                                {/* <Dropdown ref={this.cbcnv} number='' items={cbcnv.map(e => Object.assign({}, e, {text: e.HO + ' ' + e.TEN}))} /> */}
+                                /> */}
+                                <Dropdown ref={this.cbcnv} number='' items={cbcnv.map(e => Object.assign({}, e, {text: e.HO + ' ' + e.TEN}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Nuoc'>Nước</label>
-                                <Select
+                                {/* <Select
                                 value = {selectednuoc}
                                 onChange =  {this.handleInput('nuocngoai')}
                                 options = {nuocngoai.map(e => Object.assign({}, {label: e.TEN_NUOC, value: e}))}
-                                />
-                                {/* <Dropdown ref={this.nuocngoai} number='' items={nuocngoai.map(e => Object.assign({}, e, {text: e.TEN_NUOC}))} /> */}
+                                /> */}
+                                <Dropdown ref={this.nuocngoai} number='' items={nuocngoai.map(e => Object.assign({}, e, {text: e.TEN_NUOC}))} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Ngaydi'>Ngày đi</label>
@@ -189,12 +185,12 @@ export default class Cb_nngoaiModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="Giahan">Gia hạn</label>
-                                <Select
+                                {/* <Select
                                 value = {selectedgiahan}
                                 onChange =  {this.handleInput('giahan')}
                                 options = {giahan}
-                                />
-                                {/* <Dropdown ref={this.giahan} number='' items={T.giahans} /> */}
+                                /> */}
+                                <Dropdown ref={this.giahan} number='' items={T.giahans} />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="SoCVan">Số công văn</label>

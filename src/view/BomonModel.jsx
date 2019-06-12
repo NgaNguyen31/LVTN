@@ -48,14 +48,17 @@ export default class BomonModal extends React.Component {
 
     show(item, khoa) {                      
         const { _id, TEN_BM, TEN_TIENG_ANH, MS_KHOA, NAM_THANH_LAP, GHI_CHU } = item ?
-            item : { _id: null, TEN_BM: null, TEN_TIENG_ANH: null, MS_KHOA: null, NAM_THANH_LAP: null, GHI_CHU: null };
+            item : { _id: null, TEN_BM: null, TEN_TIENG_ANH: null, MS_KHOA: null, NAM_THANH_LAP: null, GHI_CHU: null };     
         $('#TEN_BM').val(TEN_BM);
         $('#TEN_TIENG_ANH').val(TEN_TIENG_ANH);
-        $('#MS_KHOA').val(MS_KHOA);
-        NAM_THANH_LAP ? $('#NAM_THANH_LAP').val(T.dateToText(NAM_THANH_LAP,'yyyy-mm-dd')) : null ;
+        MS_KHOA ? $('#MS_KHOA').val(MS_KHOA).map(ele => ele.TEN_KHOA) : null;
+        $('#NAM_THANH_LAP').val(T.dateToText(NAM_THANH_LAP,'yyyy-mm-dd'));
         $('#GHI_CHU').val(GHI_CHU);
-        this.setState({ _id, khoa: khoa? khoa: []});        
-        MS_KHOA ? MS_KHOA.TEN_KHOA : [];
+               
+        console.log('selected ${MS_KHOA}');
+        
+        
+        this.setState({ _id, khoa: khoa? khoa: []}); 
         $(this.modal.current).modal('show');
     }
 
@@ -67,9 +70,10 @@ export default class BomonModal extends React.Component {
                 TEN_BM: this.state.text.TEN_BM,
                 TEN_TIENG_ANH: this.state.text.TEN_TIENG_ANH,
                 MS_KHOA,
-                NAM_THANH_LAP: this.state.date.NAM_THANH_LAP,
+                NAM_THANH_LAP: this.state.text.NAM_THANH_LAP,
                 GHI_CHU: this.state.text.GHI_CHU,
-            };            
+            };   
+                     
         if (changes.TEN_BM == '') {
             T.notify('Tên bộ môn đang trống!', 'danger');
             $('#TEN_BM').focus();
@@ -95,9 +99,9 @@ export default class BomonModal extends React.Component {
     }
 
     render() {
-        console.log(this.state, this.props);
+        // console.log(this.state, this.props);
         const khoa = this.state && this.state.khoa ? this.state.khoa:[];
-        console.log(khoa);
+        // console.log(khoa);
         
         const selectedOption = this.state.selectedOption;
         return (
@@ -131,7 +135,7 @@ export default class BomonModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Năm thành lập</label>
-                                <input className='form-control' id='NAM_THANH_LAP' type='date' placeholder='Năm thành lập' onChange={this.handleInput('date', 'NAM_THANH_LAP')} value={this.state.date.NAM_THANH_LAP}/>
+                                <input className='form-control' id='NAM_THANH_LAP' type='date' placeholder='Năm thành lập' onChange={this.handleInput('text', 'NAM_THANH_LAP')} value={this.state.text.NAM_THANH_LAP}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Ghi chú</label>
