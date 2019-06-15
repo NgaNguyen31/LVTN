@@ -22,18 +22,23 @@ export default class Qt_dtaoModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;      
                          
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -46,22 +51,24 @@ export default class Qt_dtaoModal extends React.Component {
     show(item, cbcnv) {      
         
         const { _id, MS_NV, STT, TU_NAM, DEN_NAM, cap_dt, CHUYEN_NGANH, NOI_DT, QUOC_GIA, HINH_THUC, LOAI_TN, NAM ,CO_NOP_BANG, GHI_CHU} = item ?
-            item : { _id: null, MS_NV: '', STT: '', TU_THANG: '', TU_NAM: '', DEN_THANG: '', DEN_NAM: '', cap_dt: '', CHUYEN_NGANH: '', NOI_DT: '', QUOC_GIA: '', HINH_THUC: '', LOAI_TN: '', NAM: '', CO_NOP_BANG: '', GHI_CHU: ''};
+            item : { _id: null, MS_NV: null, STT: null, TU_THANG: null, TU_NAM: null, DEN_THANG: null, DEN_NAM: null, cap_dt: null, CHUYEN_NGANH: null, NOI_DT: null, QUOC_GIA: null, HINH_THUC: null, LOAI_TN: null, NAM: null, CO_NOP_BANG: null, GHI_CHU: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         // $('#TU_THANG').val(TU_THANG);
-        $('#TU_NAM').val(TU_NAM);
+        $('#TU_NAM').val(T.dateToText(TU_NAM,'yyyy-mm-dd'));
         // $('#DEN_THANG').val(DEN_THANG);
-        $('#DEN_NAM').val(DEN_NAM);
+        $('#DEN_NAM').val(T.dateToText(DEN_NAM,'yyyy-mm-dd'));
         $('#cap_dt').val(cap_dt);
         $('#CHUYEN_NGANH').val(CHUYEN_NGANH);
         $('#NOI_DT').val(NOI_DT);
         $('#QUOC_GIA').val(QUOC_GIA);
         $('#HINH_THUC').val(HINH_THUC);
         $('#LOAI_TN').val(LOAI_TN);
-        $('#NAM').val(NAM);
+        $('#NAM').val(T.dateToText(NAM,'yyyy-mm-dd'));
         $('#CO_NOP_BANG').val(CO_NOP_BANG);
         $('#GHI_CHU').val(GHI_CHU);
+        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
+
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
         $(this.modal.current).modal('show');
@@ -75,7 +82,7 @@ export default class Qt_dtaoModal extends React.Component {
             CO_NOP_BANG = nopcc? nopcc : [],
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 // TU_THANG: this.state.number.TU_THANG,  
                 TU_NAM: this.state.date.TU_NAM,  
                 // DEN_THANG: this.state.number.DEN_THANG,  
@@ -93,9 +100,6 @@ export default class Qt_dtaoModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
         } else if (changes.CHUYEN_NGANH == '') {
             T.notify('Chuyên ngành đang trống!', 'danger');
             $('#CHUYEN_NGANH').focus();
@@ -140,10 +144,10 @@ export default class Qt_dtaoModal extends React.Component {
                                 <label htmlFor='MS_NV'>MSNV</label>
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
+                            </div>  */}
                             {/* <div className='form-group'>
                                 <label htmlFor='TU_THANG'>Từ tháng</label>
                                 <input className='form-control' id='TU_THANG' type='number' placeholder='' onChange={this.handleInput('number', 'TU_THANG')} value={this.state.number.TU_THANG}/>

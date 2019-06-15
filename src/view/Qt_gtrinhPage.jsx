@@ -44,10 +44,10 @@ class Qt_gtrinhPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: '20%', textAlign: 'center' }}>STT</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
                             <th style={{ width: '50%', textAlign: 'center' }}>Giáo trình</th>
                             <th style={{ width: '10%', textAlign: 'center' }}>Năm XB</th>
-                            <th style={{ width: '30%', textAlign: 'center' }}>Nhà XB</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Nhà XB</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -57,7 +57,7 @@ class Qt_gtrinhPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td> */}
+                                <td>{item.STT}</td>
                                 <td>{item.G_Trinh}</td>
                                 <td>{T.dateToText(item.NamXB,'dd/mm/yyyy')}</td>
                                 <td>{item.NhaXB}</td>

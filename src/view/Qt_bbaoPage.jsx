@@ -31,12 +31,17 @@ class Qt_bbaoPage extends React.Component {
     delete(e, item) {
         T.confirm('Xóa liên hệ', 'Bạn có chắc bạn muốn xóa thông tin này?', true, isConfirm => {
             isConfirm && this.props.deleteQt_bbao(item._id);
+        $(document).ready(() => setTimeout(() => {
+                $(this.qt_bbaoModal.current).on('shown.bs.modal', () => $('#MS_NV').focus());
+            }, 0));
         });
         e.preventDefault();
     }
     
 
-    render() {                   
+    render() {              
+        // console.log(this.props.qt_bbao);
+             
         let table = null;              
         if (this.props.qt_bbao && this.props.qt_bbao.page && this.props.qt_bbao.page.list && this.props.qt_bbao.page.list.length > 0) {
             table = (
@@ -44,10 +49,10 @@ class Qt_bbaoPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: '10%', textAlign: 'center' }}>STT</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
                             <th style={{ width: '40%', textAlign: 'center' }}>Bài báo</th>
-                            <th style={{ width: '35%', textAlign: 'center' }}>Tên tạp chí</th>
-                            <th style={{ width: '15%', textAlign: 'center' }}>Năm</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Tên tạp chí</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
                     </thead>
@@ -57,7 +62,7 @@ class Qt_bbaoPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td> */}
+                                <td>{item.STT}</td>
                                 <td>{item.BAI_BAO}</td>
                                 <td>{item.TEN_TCHI}</td>
                                 <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>

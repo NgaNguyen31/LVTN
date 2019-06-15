@@ -220,11 +220,11 @@ class AdminPage extends React.Component {
                             <Pie data={cnvKhoaTutra} />
                         </div>
                     </div>
-                    <div className='tile col-md-6 col-lg-4 ml-3'>
+                    {/* <div className='tile col-md-6 col-lg-4 ml-3'>
                         <div className=''>
                             <Pie data={hocvi} />
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </main>
         );

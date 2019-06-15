@@ -44,10 +44,10 @@ class Qt_cac_conPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: '20%', textAlign: 'center' }}>STT</th> */}
-                            <th style={{ width: '25%', textAlign: 'center' }}>Tên </th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Tên </th>
                             <th style={{ width: '10%', textAlign: 'center' }}>Năm sinh</th>
-                            <th style={{ width: '25%', textAlign: 'center' }}>Chức vụ</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Chức vụ</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Công tác</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
                         </tr>
@@ -58,7 +58,7 @@ class Qt_cac_conPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td> */}
+                                <td>{item.STT}</td>
                                 <td>{item.TEN}</td>
                                 <td>{T.dateToText(item.NAM_SINH,'dd/mm/yyyy')}</td>
                                 <td>{item.CVU}</td>

@@ -44,15 +44,15 @@ class Qt_boiduongPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Từ tháng</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Từ tháng</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến tháng</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th> */}
-                            <th style={{ width: '35%', textAlign: 'center' }}>Nội dung bồi dưỡng</th>
+                            <th style={{ width: '30%', textAlign: 'center' }}>Nội dung bồi dưỡng</th>
                             <th style={{ width: '25%', textAlign: 'center' }}>Nơi bồi dưỡng</th>
                             <th style={{ width: '10%', textAlign: 'center' }}>Hình thức</th>
-                            <th style={{ width: '15%', textAlign: 'center' }}>Chứng chỉ</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Chứng chỉ</th>
                             <th style={{ width: '5%', textAlign: 'center' }}>Nộp chứng chỉ</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th> */}
                             <th style={{ width: 'auto', textAlign: 'center' }}>Action</th>
@@ -64,8 +64,8 @@ class Qt_boiduongPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td>
-                                <td>{item.TU_THANG}</td>
+                                <td>{item.STT}</td>
+                                {/* <td>{item.TU_THANG}</td>
                                 <td>{item.TU_NAM}</td>
                                 <td>{item.DEN_THANG}</td>
                                 <td>{item.DEN_NAM}</td> */}
@@ -90,7 +90,7 @@ class Qt_boiduongPage extends React.Component {
                 </table>
             );
         } else {
-            table = <p>Chưa có quản trị bồi dưỡng nào!</p>;
+            table = <p>Chưa có thông tin quản trị bồi dưỡng nào!</p>;
         }
 
         const { pageNumber, pageSize, pageTotal, totalItem } = this.props.qt_boiduong && this.props.qt_boiduong.page ?

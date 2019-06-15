@@ -44,8 +44,8 @@ class Qt_dtaiPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: '20%', textAlign: 'center' }}>STT</th> */}
-                            <th style={{ width: '30%', textAlign: 'center' }}>Đề tài</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Đề tài</th>
                             <th style={{ width: '15%', textAlign: 'center' }}>Chủ nhiệm đề tài</th>
                             <th style={{ width: '15%', textAlign: 'center' }}>Cấp</th>
                             <th style={{ width: '15%', textAlign: 'center' }}>Ngày kết thúc</th>
@@ -59,7 +59,7 @@ class Qt_dtaiPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td> */}
+                                <td>{item.STT}</td>
                                 <td>{item.DE_TAI}</td>
                                 <td>{item.CHU_NHIEM_DE_TAI}</td>
                                 <td>{item.CAP}</td>

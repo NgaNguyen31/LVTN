@@ -21,18 +21,22 @@ export default class Qt_gtrinhModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                case 'date':
                     state.date ? (state.date[field] = e.target.value)
                     : (state.date = {}) && (state.date[field] = e.target.value)
-                       
+                    e.preventDefault();
+                    break;               
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -45,12 +49,13 @@ export default class Qt_gtrinhModal extends React.Component {
     show(item, cbcnv) {      
         
         const { _id, MS_NV, STT, G_Trinh, NamXB, NhaXB} = item ?
-            item : { _id: null, MS_NV: '', STT: '', G_Trinh: '', NamXB: '', NhaXB: ''};
+            item : { _id: null, MS_NV: null, STT: null, G_Trinh: null, NamXB: null, NhaXB: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         $('#G_Trinh').val(G_Trinh);
-        $('#NamXB').val(NamXB);
+        $('#NamXB').val(T.dateToText(NamXB,'yyyy-mm-dd'));
         $('#NhaXB').val(NhaXB);
+        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
@@ -63,16 +68,13 @@ export default class Qt_gtrinhModal extends React.Component {
             MS_NV = cbcnv? cbcnv : [],
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 G_Trinh: this.state.text.G_Trinh, 
                 NamXB: this.state.date.NamXB, 
                 NhaXB: this.state.text.NhaXB,                                 };    
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
         } else if (changes.G_Trinh == '') {
             T.notify('Giáo trình đang trống!', 'danger');
             $('#G_Trinh').focus();
@@ -111,10 +113,10 @@ export default class Qt_gtrinhModal extends React.Component {
                                 <label htmlFor='MS_NV'>MSNV</label>
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
+                            </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='G_Trinh'>Giáo trình</label>
                                 <input className='form-control' id='G_Trinh' type='text' placeholder='' onChange={this.handleInput('text', 'G_Trinh')} value={this.state.text.G_Trinh}/>

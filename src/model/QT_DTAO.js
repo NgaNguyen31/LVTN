@@ -24,10 +24,21 @@ module.exports = app => {
                 } else if (item) {
                     if (done) done('Exist', item);
                 } else {
-                    model.create(data,done);
-                }
-            })
-        },
+                    model.find({
+                        $or : [
+                            {
+                                MS_NV: data.MS_NV
+                            }]
+                        }, (error, itemcounts) => {
+                        if (itemcounts.length > 0) {
+                            data.STT = itemcounts.length + 1;                
+                        }
+                        else{
+                            data.STT = 1;
+                        }
+                        model.create(data,done);
+                    })         
+        }})},
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
             if (error) {
                 done(error);
@@ -41,6 +52,13 @@ module.exports = app => {
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
                 model.find(condition).sort({ _id: 1 }).populate(['MS_NV']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                    list.forEach(element => {
+                        if(element.MS_NV == null){
+                            model.findOne({_id: element._id}, function(error,docs){
+                                docs.remove();
+                            })
+                        }                        
+                    });
                     result.list = list;
                     done(error, result);
                 });
@@ -64,7 +82,18 @@ module.exports = app => {
             } else if (item == null) {
                 done('Invalid Id!');
             } else {
-                item.remove(done);
+                model.find({MS_NV: item.MS_NV}, (error,items) => { 
+                    index = 1 ;
+                    items.forEach(element => {
+                        if (element.NOI_DT != item.NOI_DT && element.cap_dt != item.cap_dt) {
+                            item.STT = 0;
+                            item.STT += index;    
+                            index++;              
+                        }  
+                        model.findOneAndUpdate({ _id: element._id }, { $set: {STT:item.STT} }, { new: true }, done)                                                     
+                    });                                          
+                })                                 
+                item.remove(done); 
             }
         }),
     };

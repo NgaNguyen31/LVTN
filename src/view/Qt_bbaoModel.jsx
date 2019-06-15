@@ -22,17 +22,22 @@ export default class Qt_bbaoModal extends React.Component {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
                     : (state.text = {}) && (state.text[field] = e.target.value)
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value)
                     : (state.date = {}) && (state.date[field] = e.target.value)
+                    e.preventDefault();
+                    break;
                     
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -44,14 +49,13 @@ export default class Qt_bbaoModal extends React.Component {
 
     show(item, cbcnv) {      
         
-        const { _id, MS_NV, STT, BAI_BAO, TEN_TCHI, NAM} = item ?
-            item : { _id: null, MS_NV: '', STT: '', BAI_BAO: '', TEN_TCHI: '', NAM: ''};
+        const { _id, MS_NV, BAI_BAO, TEN_TCHI, NAM} = item ?
+            item : { _id: null, MS_NV: null, BAI_BAO: null, TEN_TCHI: null, NAM: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
         $('#BAI_BAO').val(BAI_BAO);
         $('#TEN_TCHI').val(TEN_TCHI);
-        $('#NAM').val(NAM);
-
+        $('#NAM').val(T.dateToText(NAM,'yyyy-mm-dd'));
+        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
         $(this.modal.current).modal('show');
@@ -63,7 +67,6 @@ export default class Qt_bbaoModal extends React.Component {
             MS_NV = cbcnv? cbcnv : [],
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
                 BAI_BAO: this.state.text.BAI_BAO, 
                 TEN_TCHI: this.state.text.TEN_TCHI, 
                 NAM: this.state.date.NAM,                                 
@@ -71,9 +74,6 @@ export default class Qt_bbaoModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
         } else if (changes.BAI_BAO == '') {
             T.notify('Bài báo đang trống!', 'danger');
             $('#BAI_BAO').focus();
@@ -83,9 +83,6 @@ export default class Qt_bbaoModal extends React.Component {
         } else if (changes.NAM == '') {
             T.notify('Năm đang trống!', 'danger');
             $('#NAM').focus();
-        } else if (changes.STT < 0) {
-            T.notify('STT không được là số âm', 'danger');
-            $('#STT').focus();
         } else if (this.state._id) {
             this.props.updateQt_bbao(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -115,10 +112,10 @@ export default class Qt_bbaoModal extends React.Component {
                                 <label htmlFor='MS_NV'>MSNV</label>
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
+                            </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='BAI_BAO'>Bài báo</label>
                                 <input className='form-control' id='BAI_BAO' type='text' placeholder='' onChange={this.handleInput('text', 'BAI_BAO')} value={this.state.text.BAI_BAO}/>

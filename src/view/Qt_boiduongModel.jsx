@@ -22,18 +22,23 @@ export default class Qt_boiduongModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                   
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -45,20 +50,21 @@ export default class Qt_boiduongModal extends React.Component {
 
     show(item, cbcnv) {      
         
-        const { _id, MS_NV, STT, TU_NAM, DEN_NAM, NOI_DUNG_BD, NOI_BOI_DUONG, HINH_THUC, CHUNG_CHI, NOP_CC, GHI_CHU} = item ?
-            item : { _id: null, MS_NV: '', STT: '', TU_NAM: '', DEN_NAM: '', NOI_DUNG_BD: '', NOI_BOI_DUONG: '', HINH_THUC: '', CHUNG_CHI: '', NOP_CC: '', GHI_CHU: ''};
+        const { _id, MS_NV, TU_NAM, DEN_NAM, NOI_DUNG_BD, NOI_BOI_DUONG, HINH_THUC, CHUNG_CHI, NOP_CC, GHI_CHU} = item ?
+            item : { _id: null, MS_NV: null, TU_NAM: null, DEN_NAM: null, NOI_DUNG_BD: null, NOI_BOI_DUONG: null, HINH_THUC: null, CHUNG_CHI: null, NOP_CC: null, GHI_CHU: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         // $('#TU_THANG').val(TU_THANG);
-        $('#TU_NAM').val(TU_NAM);
+        $('#TU_NAM').val(T.dateToText(TU_NAM,'yyyy-mm-dd'));
         // $('#DEN_THANG').val(DEN_THANG);
-        $('#DEN_NAM').val(DEN_NAM);
+        $('#DEN_NAM').val(T.dateToText(DEN_NAM,'yyyy-mm-dd'));
         $('#NOI_DUNG_BD').val(NOI_DUNG_BD);
         $('#NOI_BOI_DUONG').val(NOI_BOI_DUONG);
         $('#HINH_THUC').val(HINH_THUC);
         $('#CHUNG_CHI').val(CHUNG_CHI);
         $('#NOP_CC').val(NOP_CC);
         $('#GHI_CHU').val(GHI_CHU);
+        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
         $(this.modal.current).modal('show');
@@ -72,7 +78,7 @@ export default class Qt_boiduongModal extends React.Component {
             NOP_CC = nopcc ? nopcc : [],
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 // TU_THANG: this.state.number.TU_THANG,  
                 TU_NAM: this.state.date.TU_NAM,  
                 // DEN_THANG: this.state.number.DEN_THANG,  
@@ -87,9 +93,6 @@ export default class Qt_boiduongModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
         } else if (changes.NOI_DUNG_BD == '') {
             T.notify('Nội dung bồi dưỡng đang trống!', 'danger');
             $('#NOI_DUNG_BD').focus();
@@ -131,10 +134,10 @@ export default class Qt_boiduongModal extends React.Component {
                                 <label htmlFor='MS_NV'>MSNV</label>
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
+                            </div>  */}
                             {/* <div className='form-group'>
                                 <label htmlFor='TU_THANG'>Từ tháng</label>
                                 <input className='form-control' id='TU_THANG' type='number' placeholder='' onChange={this.handleInput('number', 'TU_THANG')} value={this.state.number.TU_THANG}/>

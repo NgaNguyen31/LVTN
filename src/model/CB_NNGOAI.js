@@ -63,24 +63,12 @@ module.exports = app =>{
                 ]
             }, (error, items) => {
                 if (items.length > 0) {
-                    const afterFilter = items.filter(e => e._id == _id);
-                    console.log(items);
-                    console.log(_id);
-                    if (afterFilter.length > 0)
-                        done && done('Exist', items);
-                    else 
-                        model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, (error, item) => {
-                            console.log(error, item);
-                            done(error, item);
-                        });
+                    if(done) done('Exist', items);
                 }
                 else{
-                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, (error, item) => {
-                        console.log(error, item);
-                        done(error, item);
-                    })
-                }
-            })},
+                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+                }})         
+            },     
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

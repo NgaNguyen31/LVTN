@@ -5,7 +5,6 @@ module.exports = app => {
         QD_BO_NHIEM: String,
         NGAY_QD_BNHIEM: Date,        
         MA_CV: { type: app.db.Schema.ObjectId, ref: 'chucvu' },
-        CHUC_VU: String,
         HE_SO_PCCV: Number,
         NGAY_BO_NHIEM: Date,
         GHI_CHU_BHXH: String,
@@ -30,7 +29,20 @@ module.exports = app => {
                 if (done) done('Exist', items);
             }
             else{
-                model.create(data,done)
+                model.find({
+                    $or : [
+                        {
+                            MS_NV: data.MS_NV
+                        }]
+                    }, (error, itemcounts) => {
+                    if (itemcounts.length > 0) {
+                        data.STT = itemcounts.length + 1;                
+                    }
+                    else{
+                        data.STT = 1;
+                    }
+                    model.create(data,done);
+                })  
             }})         
 },
         getPage: (pageNumber, pageSize, condition, done) => model.countDocuments(condition, (error, totalItem) => {
@@ -46,6 +58,13 @@ module.exports = app => {
 
                 const skipNumber = (result.pageNumber > 0 ? result.pageNumber - 1 : 0) * result.pageSize;
                 model.find(condition).sort({ _id: 1 }).populate(['MS_NV', 'MA_CV', 'MS_BOMON']).skip(skipNumber).limit(result.pageSize).exec((error, list) => {
+                    list.forEach(element => {
+                        if(element.MS_NV == null){
+                            model.findOne({_id: element._id}, function(error,docs){
+                                docs.remove();
+                            })
+                        }                        
+                    });
                     result.list = list;
                     done(error, result);
                 });
@@ -75,7 +94,18 @@ module.exports = app => {
             } else if (item == null) {
                 done('Invalid Id!');
             } else {
-                item.remove(done);
+                model.find({MS_NV: item.MS_NV}, (error,items) => { 
+                    index = 1 ;
+                    items.forEach(element => {
+                        if (element.MA_CV != item.MA_CV) {
+                            item.STT = 0;
+                            item.STT += index;    
+                            index++;              
+                        }  
+                        model.findOneAndUpdate({ _id: element._id }, { $set: {STT:item.STT} }, { new: true }, done)                                                     
+                    });                                          
+                })                                 
+                item.remove(done); 
             }
         }),
     };

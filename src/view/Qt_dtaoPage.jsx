@@ -44,13 +44,13 @@ class Qt_dtaoPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Từ tháng</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Từ tháng</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Từ năm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến tháng</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Đến năm</th> */}
-                            <th style={{ width: '20%', textAlign: 'center' }}>Cấp đào tạo</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>Chuyên ngành</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Cấp đào tạo</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Chuyên ngành</th>
                             <th style={{ width: '30%', textAlign: 'center' }}>Nơi đào tạo</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Quốc gia</th>                            
                             <th style={{ width: 'auto', textAlign: 'center' }}>Hình thức</th>
@@ -67,8 +67,8 @@ class Qt_dtaoPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td>
-                                <td>{item.TU_THANG}</td>
+                                <td>{item.STT}</td>
+                                {/* <td>{item.TU_THANG}</td>
                                 <td>{item.TU_NAM}</td>
                                 <td>{item.DEN_THANG}</td>
                                 <td>{item.DEN_NAM}</td> */}

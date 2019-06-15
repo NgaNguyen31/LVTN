@@ -23,18 +23,23 @@ export default class Qt_cvuModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);                    
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);                    
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                     
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -46,22 +51,25 @@ export default class Qt_cvuModal extends React.Component {
 
     show(item, cbcnv, chucvu, bomon) {      
         
-        const { _id, MS_NV, STT, QD_BO_NHIEM, NGAY_QD_BNHIEM, MA_CV, CHUC_VU, HE_SO_PCCV, NGAY_BO_NHIEM, GHI_CHU_BHXH, NGAY_THOICV, QD_THOI_CVU, NGAY_QD_THOI_CV, MS_BOMON, GHI_CHU} = item ?
-            item : { _id: null, MS_NV: '', STT: '', QD_BO_NHIEM: '', NGAY_QD_BNHIEM: '', MA_CV: '', CHUC_VU: '', HE_SO_PCCV: '', NGAY_BO_NHIEM: '', GHI_CHU_BHXH: '', NGAY_THOICV: '', QD_THOI_CVU: '', NGAY_QD_THOI_CV: '', MS_BOMON: '', GHI_CHU: ''};
+        const { _id, MS_NV, QD_BO_NHIEM, NGAY_QD_BNHIEM, MA_CV, HE_SO_PCCV, NGAY_BO_NHIEM, GHI_CHU_BHXH, NGAY_THOICV, QD_THOI_CVU, NGAY_QD_THOI_CV, MS_BOMON, GHI_CHU} = item ?
+            item : { _id: null, MS_NV: null, QD_BO_NHIEM: null, NGAY_QD_BNHIEM: null, MA_CV: null, HE_SO_PCCV: null, NGAY_BO_NHIEM: null, GHI_CHU_BHXH: null, NGAY_THOICV: null, QD_THOI_CVU: null, NGAY_QD_THOI_CV: null, MS_BOMON: null, GHI_CHU: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         $('#QD_BO_NHIEM').val(QD_BO_NHIEM);
-        $('#NGAY_QD_BNHIEM').val(NGAY_QD_BNHIEM);
-        $('#MA_CV').val(MA_CV);
-        $('#CHUC_VU').val(CHUC_VU);
+        $('#NGAY_QD_BNHIEM').val(T.dateToText(NGAY_QD_BNHIEM,'yyyy-mm-dd'));
+        MA_CV ? $('#MA_CV').val(MA_CV) : null;
+        // $('#CHUC_VU').val(CHUC_VU);
         $('#HE_SO_PCCV').val(HE_SO_PCCV);
-        $('#NGAY_BO_NHIEM').val(NGAY_BO_NHIEM);
+        $('#NGAY_BO_NHIEM').val(T.dateToText(NGAY_BO_NHIEM,'yyyy-mm-dd'));
         $('#GHI_CHU_BHXH').val(GHI_CHU_BHXH);
-        $('#NGAY_THOICV').val(NGAY_THOICV);
+        $('#NGAY_THOICV').val(T.dateToText(NGAY_THOICV,'yyyy-mm-dd'));
         $('#QD_THOI_CVU').val(QD_THOI_CVU);
-        $('#NGAY_QD_THOI_CV').val(NGAY_QD_THOI_CV);
-        $('#MS_BOMON').val(MS_BOMON);
+        $('#NGAY_QD_THOI_CV').val(T.dateToText(NGAY_QD_THOI_CV,'yyyy-mm-dd'));
+        MS_BOMON ? $('#MS_BOMON').val(MS_BOMON) : null;
         $('#GHI_CHU').val(GHI_CHU);
+        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
+        MA_CV ? this.chucvu.current.setText(Object.assign({}, MA_CV, {text: MA_CV.CHUC_VU})) : null;       
+        MS_BOMON ? this.bomon.current.setText(Object.assign({}, MS_BOMON, {text: MS_BOMON.TEN_BM})) : null;       
         this.setState({ _id, cbcnv: cbcnv? cbcnv: [], chucvu: chucvu? chucvu: [], bomon: bomon? bomon : []});
 
         $(this.modal.current).modal('show');
@@ -75,14 +83,14 @@ export default class Qt_cvuModal extends React.Component {
             MS_NV = cbcnv? cbcnv : [],
             MA_CV = chucvu? chucvu : [],
             MS_BOMON = bomon ? bomon : [],
+            HE_SO_PCCV = this.state.number.HE_SO_PCCV ? this.state.number.HE_SO_PCCV : MA_CV.PC_CVU,   
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 QD_BO_NHIEM: this.state.text.QD_BO_NHIEM,  
                 NGAY_QD_BNHIEM: this.state.date.NGAY_QD_BNHIEM,  
                 MA_CV,
-                CHUC_VU: this.state.text.CHUC_VU,
-                HE_SO_PCCV: this.state.number.HE_SO_PCCV,  
+                HE_SO_PCCV,  
                 NGAY_BO_NHIEM: this.state.date.NGAY_BO_NHIEM, 
                 GHI_CHU_BHXH: this.state.text.GHI_CHU_BHXH, 
                 NGAY_THOICV: this.state.date.NGAY_THOICV,      
@@ -94,21 +102,15 @@ export default class Qt_cvuModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
         } else if (changes.MA_CV == '') {
             T.notify('Mã chức vụ đang trống!', 'danger');
             $('#MA_CV').focus();
-        } else if (changes.STT < 0) {
-            T.notify('STT không được là số âm', 'danger');
-            $('#STT').focus();
         } else if (changes.HE_SO_PCCV < 0) {
             T.notify('Hệ số PCCV không được là số âm', 'danger');
             $('#HE_SO_PCCV').focus();
         } else if (this.state._id) {
             this.props.updateQt_cvu(this.state._id, changes, data => {
-                $(this.modal.current).modal('hide');
+            $(this.modal.current).modal('hide');
             });
         } else {            
             this.props.createQt_cvu(changes, data => {                    
@@ -138,10 +140,6 @@ export default class Qt_cvuModal extends React.Component {
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
                             <div className='form-group'>
-                                <label htmlFor='STT'>STT</label>
-                                <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
-                            <div className='form-group'>
                                 <label htmlFor='QD_BO_NHIEM'>QĐ bổ nhiệm</label>
                                 <input className='form-control' id='QD_BO_NHIEM' type='text' placeholder='' onChange={this.handleInput('text', 'QD_BO_NHIEM')} value={this.state.text.QD_BO_NHIEM}/>
                             </div> 
@@ -150,13 +148,13 @@ export default class Qt_cvuModal extends React.Component {
                                 <input className='form-control' id='NGAY_QD_BNHIEM' type='date' placeholder='' onChange={this.handleInput('date', 'NGAY_QD_BNHIEM')} value={this.state.date.NGAY_QD_BNHIEM}/>
                             </div> 
                             <div className='form-group'>
-                                <label htmlFor='MA_CV'>Mã chức vụ</label>
+                                <label htmlFor='MA_CV'>Chức vụ</label>
                                 <Dropdown ref={this.chucvu} text='' items={chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
                             </div> 
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='CHUC_VU'>Chức vụ</label>
                                 <input className='form-control' id='CHUC_VU' type='text' placeholder='' onChange={this.handleInput('text', 'CHUC_VU')} value={this.state.text.CHUC_VU}/>
-                            </div>      
+                            </div>       */}
                             <div className='form-group'>
                                 <label htmlFor='HE_SO_PCCV'>Hệ số PCCV</label>
                                 <input className='form-control' id='HE_SO_PCCV' type='number' placeholder='' onChange={this.handleInput('number', 'HE_SO_PCCV')} value={this.state.number.HE_SO_PCCV}/>

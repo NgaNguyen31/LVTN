@@ -72,15 +72,15 @@ export default class Cb_nngoaiModal extends React.Component {
     save(e) {
         e.preventDefault();
         const 
-            //nuocngoai = this.nuocngoai.current.getSelectedItem(),
-            //cbcnv = this.cbcnv.current.getSelectedItem(),
-            //giahan = this.giahan.current.getSelectedItem(),
-            nuocngoai = this.state.selectednuoc.map(ele => ele.value._id);
-            cbcnv = this.state.selectedcbcnv.map(ele => ele.value._id);
-            giahan = this.state.selectedgiahan;
-            Nuoc = nuocngoai
-            Hovaten = cbcnv
-            Giahan = giahan
+            nuocngoai = this.nuocngoai.current.getSelectedItem(),
+            cbcnv = this.cbcnv.current.getSelectedItem(),
+            giahan = this.giahan.current.getSelectedItem(),
+            // nuocngoai = this.state.selectednuoc.map(ele => ele.value._id);
+            // cbcnv = this.state.selectedcbcnv.map(ele => ele.value._id);
+            // giahan = this.state.selectedgiahan;
+            Nuoc = nuocngoai,
+            Hovaten = cbcnv,
+            Giahan = giahan,
             changes = {
                 Hovaten,
                 Nuoc,

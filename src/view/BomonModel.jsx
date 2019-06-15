@@ -53,11 +53,7 @@ export default class BomonModal extends React.Component {
         $('#TEN_TIENG_ANH').val(TEN_TIENG_ANH);
         MS_KHOA ? $('#MS_KHOA').val(MS_KHOA).map(ele => ele.TEN_KHOA) : null;
         $('#NAM_THANH_LAP').val(T.dateToText(NAM_THANH_LAP,'yyyy-mm-dd'));
-        $('#GHI_CHU').val(GHI_CHU);
-               
-        console.log('selected ${MS_KHOA}');
-        
-        
+        $('#GHI_CHU').val(GHI_CHU);        
         this.setState({ _id, khoa: khoa? khoa: []}); 
         $(this.modal.current).modal('show');
     }

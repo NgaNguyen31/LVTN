@@ -21,18 +21,22 @@ export default class Qt_cac_conModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
             case 'date':
                     state.date ? (state.date[field] = e.target.value)
                     : (state.date = {}) && (state.date[field] = e.target.value)
-                          
+                    e.preventDefault();
+                    break;
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -45,14 +49,14 @@ export default class Qt_cac_conModal extends React.Component {
     show(item, cbcnv) {      
         
         const { _id, MS_NV, STT, TEN, NAM_SINH, CVU, CTAC} = item ?
-            item : { _id: null, MS_NV: '', STT: '', TEN: '', NAM_SINH: '', CVU: '', CTAC: ''};
+            item : { _id: null, MS_NV: null, STT: null, TEN: null, NAM_SINH: null, CVU: null, CTAC: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         $('#TEN').val(TEN);
-        $('#NAM_SINH').val(NAM_SINH);
+        $('#NAM_SINH').val(T.dateToText(NAM_SINH,'yyyy-mm-dd'));
         $('#CVU').val(CVU);
         $('#CTAC').val(CTAC);
-
+        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
         $(this.modal.current).modal('show');
@@ -64,7 +68,7 @@ export default class Qt_cac_conModal extends React.Component {
             MS_NV = cbcnv? cbcnv : [],
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 TEN: this.state.text.TEN, 
                 NAM_SINH: this.state.date.NAM_SINH, 
                 CVU: this.state.text.CVU,
@@ -72,9 +76,6 @@ export default class Qt_cac_conModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
         } else if (changes.TEN == '') {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();
@@ -116,10 +117,10 @@ export default class Qt_cac_conModal extends React.Component {
                                 <label htmlFor='MS_NV'>MSNV</label>
                                 <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
+                            </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='TEN'>Tên</label>
                                 <input className='form-control' id='TEN' type='text' placeholder='' onChange={this.handleInput('text', 'TEN')} value={this.state.text.TEN}/>

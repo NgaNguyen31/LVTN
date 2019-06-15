@@ -48,13 +48,13 @@ class Qt_cvuPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>QĐ bổ nhiệm</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>QĐ bổ nhiệm</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ bổ nhiệm</th> */}
                             <th style={{ width: '20%%', textAlign: 'center' }}>Mã chức vụ</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Chức vụ</th> */}
                             <th style={{ width: '20%', textAlign: 'center' }}>Hệ số PCCV</th>
-                            <th style={{ width: '30%', textAlign: 'center' }}>Ngày bổ nhiệm</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Ngày bổ nhiệm</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú BHXH</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày thôi chức vụ</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>QĐ thôi chức vụ</th>
@@ -70,8 +70,8 @@ class Qt_cvuPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td>
-                                <td>{item.QD_BO_NHIEM}</td>
+                                <td>{item.STT}</td>
+                                {/* <td>{item.QD_BO_NHIEM}</td>
                                 <td>{item.NGAY_QD_BNHIEM}</td> */}
                                 <td>{item.MA_CV? item.MA_CV.CHUC_VU: ''}</td>
                                 {/* <td>{item.CHUC_VU}</td> */}
