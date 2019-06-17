@@ -2,18 +2,18 @@ module.exports = app =>{
     const schema = app.db.Schema({
         chuc_danh: String,
         ten_day_du: String,
-        ord: [{ type: app.db.Schema.ObjectId, ref: 'trinhdo' }],
+        ord: { type: app.db.Schema.ObjectId, ref: 'trinhdo' },
     });
     const model = app.db.model('chucdanh',schema);
 
     app.model.chucdanh = {
         create: (data, done) => {
             model.find({
-                $or : [
+                $and : [
                     {
-                        chuc_danh: data.chuc_danh                       
+                        chuc_danh: data.chuc_danh,                       
                     }, {
-                        ten_day_du: data.ten_day_du                       
+                        ten_day_du: data.ten_day_du,
                     }              
                 ]
                 }, (error, items) => {

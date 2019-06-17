@@ -15,7 +15,7 @@ class Nghi_ctacPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 11);
+            T.selectMenu(4, 9);
             this.props.getNghi_ctacInPage();
         });
     }
@@ -53,7 +53,7 @@ class Nghi_ctacPage extends React.Component {
                                 <td>{item.Dien_giai}</td>                    
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
-                                        <i className='fa fa-lg fa-envelope-open-o' />
+                                        <i className='fa fa-lg fa-edit' />
                                     </a>
                                     <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />

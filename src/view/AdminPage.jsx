@@ -198,28 +198,29 @@ class AdminPage extends React.Component {
                     <div className='col-md-6 col-lg-3'>
                         <DashboardIcon type='primary' icon='fa-users' title='Người dùng' value={numberOfUser} />
                     </div>
-                    <div className='col-md-6 col-lg-3'>
+                    {/* <div className='col-md-6 col-lg-3'>
                         <DashboardIcon type='info' icon='fa-file' title='Đăng kí giảng dạy' value={numberOfDKKLGD} />
-                    </div>
+                    </div> */}
 
                 </div>
 
                 <div className='row'>
-                    <div className='tile col-md-6 col-lg-4 ml-3'>
+                    <div className='tile col-md-6 col-lg-5 ml-3'>
                         <div className=''>
                             <Pie data={cnvNamNu} />
                         </div>
                     </div>
-                    <div className='tile col-md-6 col-lg-4 ml-3'>
-                        <div className=''>
-                            <Pie data={cnvTrongNgoai} />
-                        </div>
-                    </div>
-                    <div className='tile col-md-6 col-lg-4 ml-3'>
+                    <div className='tile col-md-6 col-lg-5 ml-3'>
                         <div className=''>
                             <Pie data={cnvKhoaTutra} />
                         </div>
                     </div>
+                    <div className='tile col-md-6 col-lg-5 ml-3'>
+                        <div className=''>
+                            <Pie data={cnvTrongNgoai} />
+                        </div>
+                    </div>
+                    
                     {/* <div className='tile col-md-6 col-lg-4 ml-3'>
                         <div className=''>
                             <Pie data={hocvi} />

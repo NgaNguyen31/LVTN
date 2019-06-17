@@ -54,10 +54,10 @@ class ChucdanhPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.chuc_danh ? item.chuc_danh + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.ten_day_du}</td>          
-                                <td>{item.ord.reduce((pre, value) => pre + ' ' + value.ord, ' ')}</td>
+                                <td>{item.ord ? item.ord.ord : ''}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
-                                        <i className='fa fa-lg fa-envelope-open-o' />
+                                        <i className='fa fa-lg fa-edit' />
                                     </a>
                                     <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />

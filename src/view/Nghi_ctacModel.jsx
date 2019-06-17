@@ -34,7 +34,7 @@ export default class Nghi_ctacModal extends React.Component {
 
     show(item) {
         const { _id, NGHI, Dien_giai } = item ?
-            item : { _id: null, NGHI: '', Dien_giai: '' };
+            item : { _id: null, NGHI: null, Dien_giai: null };
         $('#NGHI').val(NGHI);
         $('#Dien_giai').val(Dien_giai);
         this.setState({ _id});
@@ -47,13 +47,10 @@ export default class Nghi_ctacModal extends React.Component {
             NGHI: this.state.text.NGHI,
             Dien_giai: this.state.text.Dien_giai,
         };
-        if (this.state.text =='') {
-            T.notify('Bạn phải điền giá trị!', 'danger');
-            $('#NGHI').focus();
-        }else if (changes.NGHI == '') {
+        if (changes.NGHI == null) {
             T.notify('Loại nghỉ công tác đang trống!', 'danger');
             $('#NGHI').focus();
-        } else if (changes.Dien_giai == '') {
+        } else if (changes.Dien_giai == null) {
             T.notify('Diễn giải đang trống!', 'danger');
             $('#Dien_giai').focus();
         } else if (this.state._id) {
@@ -81,11 +78,11 @@ export default class Nghi_ctacModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='tennghi_ctac'>Loại</label>
-                                <input className='form-control' id='Tennghi_ctac' type='text' placeholder='Nghỉ công tác' onChange={this.handleInput('text', 'NGHI')} value={this.state.text.NGHI}/>
+                                <input className='form-control' id='NGHI' type='text' onChange={this.handleInput('text', 'NGHI')} value={this.state.text.NGHI}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='diengiai'>Diễn giải</label>
-                                <input className='form-control' id='Dien_giai' type='text' placeholder='Diễn giải' onChange={this.handleInput('text', 'Dien_giai')} value={this.state.text.Dien_giai}/>
+                                <input className='form-control' id='Dien_giai' type='text' onChange={this.handleInput('text', 'Dien_giai')} value={this.state.text.Dien_giai}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

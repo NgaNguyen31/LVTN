@@ -162,7 +162,7 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Cán bộ công nhân viên
                                 </Link>
                             </li>                     
-                            
+{/*                             
                             <li>
                                 <Link className='treeview-item' to='/admin/dk_klgd'>
                                     <i className='icon fa fa-circle-o' />Đăng kí khối lượng giảng dạy
@@ -172,7 +172,7 @@ class Menu extends React.Component {
                                 <Link className='treeview-item' to='/admin/khoi_luong_gd_caohoc'>
                                     <i className='icon fa fa-circle-o' />Khối lượng giảng dạy cao học
                                 </Link>
-                            </li>                            
+                            </li>                             */}
                             <li>
                                 <Link className='treeview-item' to='/admin/kiemnhiem'>
                                     <i className='icon fa fa-circle-o' />Kiêm nhiệm
@@ -266,7 +266,7 @@ class Menu extends React.Component {
                     </li>
                     <li className='treeview'>
                         <a className='app-menu__item' href='#' data-toggle='treeview'>
-                            <i className='app-menu__icon fa fa-star' />
+                            <i className='app-menu__icon fa fa-pagelines' />
                             <span className='app-menu__label'>Thông tin chung</span>
                             <i className='treeview-indicator fa fa-angle-right' />
                         </a>
@@ -297,11 +297,11 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Chức vụ
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/cv_klgd'>
                                     <i className='icon fa fa-circle-o' />Công việc khối lượng giảng dạy
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className='treeview-item' to='/admin/dantoc'>
                                     <i className='icon fa fa-circle-o' />Dân tộc
@@ -312,11 +312,11 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Khoa
                                 </Link>
                             </li>
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/khuvuc'>
                                     <i className='icon fa fa-circle-o' />Khu vực
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className='treeview-item' to='/admin/loai'>
                                     <i className='icon fa fa-circle-o' />Loại
@@ -342,21 +342,21 @@ class Menu extends React.Component {
                                     <i className='icon fa fa-circle-o' />Ngoại ngữ
                                 </Link>
                             </li>                                                   
-                            <li>
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/nuocngoai'>
                                     <i className='icon fa fa-circle-o' />Nước ngoài
                                 </Link>
-                            </li>
-                            <li>
+                            </li> */}
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/tinh'>
                                     <i className='icon fa fa-circle-o' />Tỉnh
                                 </Link>
-                            </li>
-                            <li>
+                            </li> */}
+                            {/* <li>
                                 <Link className='treeview-item' to='/admin/tongiao'>
                                     <i className='icon fa fa-circle-o' />Tôn giáo
                                 </Link>
-                            </li>
+                            </li> */}
                             <li>
                                 <Link className='treeview-item' to='/admin/trinhdo'>
                                     <i className='icon fa fa-circle-o' />Trình độ

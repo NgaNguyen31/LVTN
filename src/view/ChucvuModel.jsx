@@ -37,7 +37,7 @@ export default class ChucvuModal extends React.Component {
 
     show(item) {
         const { _id, CHUC_VU, PC_CVU, Ghi_chu } = item ?
-            item : { _id: null, CHUC_VU: '', PC_CVU: '', Ghi_chu: '' };
+            item : { _id: null, CHUC_VU: null, PC_CVU: null, Ghi_chu: null };
         $('#CHUC_VU').val(CHUC_VU);
         $('#PC_CVU').val(PC_CVU);
         $('#Ghi_chu').val(Ghi_chu);
@@ -51,13 +51,10 @@ export default class ChucvuModal extends React.Component {
             PC_CVU: this.state.number.PC_CVU,
             Ghi_chu: this.state.text.Ghi_chu,
         };
-        if (this.state.text == "") {
-            T.notify('Bạn phải điền giá trị!', 'danger');
-            $('#CHUC_VU').focus();
-        } else if (changes.PC_CVU == '') {
+        if (changes.PC_CVU == null) {
             T.notify('Phân cấp chức vụ đang trống!', 'danger');
             $('#PC_CVU').focus();
-        } else if (changes.CHUC_VU == '') {
+        } else if (changes.CHUC_VU == null) {
             T.notify('Chức vụ đang trống!', 'danger');
             $('#CHUC_VU').focus();
         } else if (changes.PC_CVU < 0) {
@@ -89,15 +86,15 @@ export default class ChucvuModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='chucvu'>Chức vụ</label>
-                                <input className='form-control' id='chucvu' type='text' placeholder='Chức vụ' onChange={this.handleInput('text', 'CHUC_VU')} value={this.state.text.CHUC_VU}/>
+                                <input className='form-control' id='CHUC_VU' type='text' onChange={this.handleInput('text', 'CHUC_VU')} value={this.state.text.CHUC_VU}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='PC_CVU'>Phân cấp chức vụ</label>
-                                <input className='form-control' id='PC_CVU' type='number' placeholder='Phân cấp chức vụ' onChange={this.handleInput('number', 'PC_CVU')} value={this.state.number.PC_CVU}/>
+                                <input className='form-control' id='PC_CVU' type='number' onChange={this.handleInput('number', 'PC_CVU')} value={this.state.number.PC_CVU}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Ghi_chu'>Ghi chú</label>
-                                <input className='form-control' id='Ghi_chu' type='text' placeholder='Ghi chú' onChange={this.handleInput('text', 'Ghi_chu')} value={this.state.text.Ghi_chu}/>
+                                <input className='form-control' id='Ghi_chu' type='text' onChange={this.handleInput('text', 'Ghi_chu')} value={this.state.text.Ghi_chu}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

@@ -34,7 +34,7 @@ export default class DantocModal extends React.Component {
 
     show(item) {
         const { _id, Dan_toc } = item ?
-            item : { _id: null, Dan_toc: '' };
+            item : { _id: null, Dan_toc: null };
         $('#Dan_toc').val(Dan_toc);
         this.setState({ _id});
         $(this.modal.current).modal('show');
@@ -45,7 +45,7 @@ export default class DantocModal extends React.Component {
         const changes = {
             Dan_toc: this.state.text.Dan_toc,
         };
-        if (this.state.text == '') {
+        if (changes.Dan_toc == null) {
             T.notify('Tên dân tộc đang trống!', 'danger');
             $('#Dan_toc').focus();
         } else if (this.state._id) {
@@ -74,7 +74,7 @@ export default class DantocModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='Dan_toc'>Tên dân tộc</label>
-                                <input className='form-control' id='Tendantoc' type='text' placeholder='Tên dân tộc' onChange={this.handleInput('text', 'Dan_toc')} value={this.state.text.Dan_toc}/>
+                                <input className='form-control' id='Dan_toc' type='text' onChange={this.handleInput('text', 'Dan_toc')} value={this.state.text.Dan_toc}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

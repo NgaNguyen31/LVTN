@@ -1,8 +1,8 @@
 {
   "name": "web_app",
   "version": "1.0.1",
-  "title": "Web App website",
-  "description": "Web App website",
+  "title": "Phòng tổ chức hành chính",
+  "description": "Phòng tổ chức hành chính",
   "main": "web.js",
   "dbName": "test1",
   "port": 3000,

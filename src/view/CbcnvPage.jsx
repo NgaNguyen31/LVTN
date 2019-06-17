@@ -370,7 +370,7 @@ class CbcnvPage extends React.Component {
 
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
-                                        <i className='fa fa-lg fa-envelope-open-o' />
+                                        <i className='fa fa-lg fa-edit' />
                                     </a>
                                     <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />

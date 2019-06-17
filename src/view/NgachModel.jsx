@@ -37,7 +37,7 @@ export default class NgachModal extends React.Component {
 
     show(item) {
         const { _id, NGACH, TEN_NGACH } = item ?
-            item : { _id: null, NGACH: '', TEN_NGACH: '' };
+            item : { _id: null, NGACH: null, TEN_NGACH: null };
         $('#NGACH').val(NGACH);
         $('#TEN_NGACH').val(TEN_NGACH);
         this.setState({ _id});
@@ -85,13 +85,10 @@ export default class NgachModal extends React.Component {
             NGACH: this.state.number.NGACH,
             TEN_NGACH: this.state.text.TEN_NGACH,
         };
-        if (this.state.text =='') {
-            T.notify('Bạn phải điền giá trị!', 'danger');
-            $('#NGACH').focus();
-        } else if (changes.NGACH == '') {
+        if (changes.NGACH == null) {
             T.notify('Ngạch đang trống!', 'danger');
             $('#NGACH').focus();
-        } else if (changes.TEN_NGACH == '') {
+        } else if (changes.TEN_NGACH == null) {
             T.notify('Tên ngạch đang trống!', 'danger');
             $('#TEN_NGACH').focus();
         } else if (this.state._id) {
@@ -119,11 +116,11 @@ export default class NgachModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='tenngach'>Ngạch</label>
-                                <input className='form-control' id='Tenngach' type='number' placeholder='Ngạch' onChange={this.handleInput('number', 'NGACH')} value={this.state.number.NGACH}/>
+                                <input className='form-control' id='NGACH' type='number' onChange={this.handleInput('number', 'NGACH')} value={this.state.number.NGACH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='diengiai'>Tên ngạch</label>
-                                <input className='form-control' id='TEN_NGACH' type='text' placeholder='Tên ngạch' onChange={this.handleInput('text', 'TEN_NGACH')} value={this.state.text.TEN_NGACH}/>
+                                <input className='form-control' id='TEN_NGACH' type='text' onChange={this.handleInput('text', 'TEN_NGACH')} value={this.state.text.TEN_NGACH}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

@@ -36,7 +36,7 @@ export default class TrinhdoModal extends React.Component {
 
     show(item) {        
         const { _id, trinh_do, Ten_day_du, ord } = item ?
-            item : { _id: null, trinh_do: '', Ten_day_du: '', ord: ''};
+            item : { _id: null, trinh_do: null, Ten_day_du: null, ord: null};
         $('#trinh_do').val(trinh_do);
         $('#Ten_day_du').val(Ten_day_du);
         $('#ord').val(ord);
@@ -51,16 +51,13 @@ export default class TrinhdoModal extends React.Component {
                 Ten_day_du: this.state.text.Ten_day_du,
                 ord: this.state.text.ord,
         };        
-        if (this.state.text == '') {
-            T.notify('Bạn chưa điền thông tin!', 'danger');
-            $('#Hovaten').focus();
-        } else if (changes.trinh_do == '') {
+        if (changes.trinh_do == null) {
             T.notify('Trình độ đang trống!', 'danger');
             $('#trinh_do').focus();            
-        } else if (changes.Ten_day_du == '') {
+        } else if (changes.Ten_day_du == null) {
             T.notify('Tên đầy đủ đang trống!', 'danger');
             $('#Ten_day_du').focus();            
-        } else if (changes.ord == '') {
+        } else if (changes.ord == null) {
             T.notify('Ord đang trống!', 'danger');
             $('#ord').focus();                 
         } else if (this.state._id) {
@@ -88,15 +85,15 @@ export default class TrinhdoModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='trinhdo'>Trình độ</label>
-                                <input className='form-control' id='trinhdo' type='text' onChange={this.handleInput('text', 'trinh_do')} value={this.state.text.trinh_do}/>
+                                <input className='form-control' id='trinh_do' type='text' onChange={this.handleInput('text', 'trinh_do')} value={this.state.text.trinh_do}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='ten_day_du'>Tên đầy đủ</label>
-                                <input className='form-control' id='ten_day_du' type='text' onChange={this.handleInput('text', 'Ten_day_du')} value={this.state.text.Ten_day_du}/>
+                                <input className='form-control' id='Ten_day_du' type='text' onChange={this.handleInput('text', 'Ten_day_du')} value={this.state.text.Ten_day_du}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='Ngaydi'>ORD</label>
-                                <input className='form-control' id='ORD' type='number' onChange={this.handleInput('text', 'ord')} value={this.state.text.ord}/>
+                                <input className='form-control' id='ord' type='number' onChange={this.handleInput('text', 'ord')} value={this.state.text.ord}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

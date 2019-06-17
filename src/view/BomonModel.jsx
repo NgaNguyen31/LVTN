@@ -51,16 +51,18 @@ export default class BomonModal extends React.Component {
             item : { _id: null, TEN_BM: null, TEN_TIENG_ANH: null, MS_KHOA: null, NAM_THANH_LAP: null, GHI_CHU: null };     
         $('#TEN_BM').val(TEN_BM);
         $('#TEN_TIENG_ANH').val(TEN_TIENG_ANH);
-        MS_KHOA ? $('#MS_KHOA').val(MS_KHOA).map(ele => ele.TEN_KHOA) : null;
+        $('#MS_KHOA').val(MS_KHOA);
         $('#NAM_THANH_LAP').val(T.dateToText(NAM_THANH_LAP,'yyyy-mm-dd'));
         $('#GHI_CHU').val(GHI_CHU);        
         this.setState({ _id, khoa: khoa? khoa: []}); 
+        let khoaLabel = MS_KHOA ? MS_KHOA.map((test) => ({value: test._id,label: test.TEN_KHOA})): null;
+        this.setState({selectedOption: khoaLabel});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const khoa = this.state.selectedOption.map(ele => ele.value._id),
+        const khoa = this.state.selectedOption? this.state.selectedOption.map(ele => ele.value._id): null,
         MS_KHOA = khoa,
              changes = {
                 TEN_BM: this.state.text.TEN_BM,
@@ -69,19 +71,17 @@ export default class BomonModal extends React.Component {
                 NAM_THANH_LAP: this.state.text.NAM_THANH_LAP,
                 GHI_CHU: this.state.text.GHI_CHU,
             };   
-                     
-        if (changes.TEN_BM == '') {
+            console.log(changes.TEN_BM);
+                                 
+        if (changes.TEN_BM == null) {
             T.notify('Tên bộ môn đang trống!', 'danger');
             $('#TEN_BM').focus();
-        } else if (changes.TEN_TIENG_ANH == '') {
+        } else if (changes.TEN_TIENG_ANH == null) {
             T.notify('Tên tiếng anh đang trống!', 'danger');
             $('#TEN_TIENG_ANH').focus();
-        } else if (changes.MS_KHOA == '') {
+        } else if (changes.MS_KHOA == null) {
             T.notify('Mã số khoa đang trống!', 'danger');
             $('#MS_KHOA').focus();
-        } else if (changes.NAM_THANH_LAP == '') {
-            T.notify('Năm thành lập đang trống!', 'danger');
-            $('#NAM_THANH_LAP').focus();
         } else if (this.state._id) {
             this.props.updateBomon(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -113,11 +113,11 @@ export default class BomonModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Tên bộ môn</label>
-                                <input className='form-control' id='TEN_BM' type='text' placeholder='Tên bộ môn' onChange={this.handleInput('text', 'TEN_BM')} value={this.state.text.TEN_BM}/>
+                                <input className='form-control' id='TEN_BM' type='text' onChange={this.handleInput('text', 'TEN_BM')} value={this.state.text.TEN_BM}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Tên tiếng anh</label>
-                                <input className='form-control' id='TEN_TIENG_ANH' type='text' placeholder='Tên tiếng anh' onChange={this.handleInput('text', 'TEN_TIENG_ANH')} value={this.state.text.TEN_TIENG_ANH}/>
+                                <input className='form-control' id='TEN_TIENG_ANH' type='text' onChange={this.handleInput('text', 'TEN_TIENG_ANH')} value={this.state.text.TEN_TIENG_ANH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Tên khoa</label>
@@ -131,11 +131,11 @@ export default class BomonModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Năm thành lập</label>
-                                <input className='form-control' id='NAM_THANH_LAP' type='date' placeholder='Năm thành lập' onChange={this.handleInput('text', 'NAM_THANH_LAP')} value={this.state.text.NAM_THANH_LAP}/>
+                                <input className='form-control' id='NAM_THANH_LAP' type='date' onChange={this.handleInput('text', 'NAM_THANH_LAP')} value={this.state.text.NAM_THANH_LAP}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Ghi chú</label>
-                                <input className='form-control' id='GHI_CHU' type='text' placeholder='Ghi chú' onChange={this.handleInput('text', 'GHI_CHU')} value={this.state.text.GHI_CHU}/>
+                                <input className='form-control' id='GHI_CHU' type='text' onChange={this.handleInput('text', 'GHI_CHU')} value={this.state.text.GHI_CHU}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

@@ -34,7 +34,7 @@ export default class MucdichModal extends React.Component {
 
     show(item) {
         const { _id, MUC_DICH } = item ?
-            item : { _id: null, MUC_DICH: '' };
+            item : { _id: null, MUC_DICH: null };
         $('#MUC_DICH').val(MUC_DICH);
         this.setState({ _id});
         $(this.modal.current).modal('show');
@@ -45,7 +45,7 @@ export default class MucdichModal extends React.Component {
         const changes = {
             MUC_DICH: this.state.text.MUC_DICH,
         };
-        if (this.state.text == '') {
+        if (changes.MUC_DICH == null) {
             T.notify('Tên mục đích đang trống!', 'danger');
             $('#MUC_DICH').focus();
         } else if (this.state._id) {
@@ -73,7 +73,7 @@ export default class MucdichModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='MUC_DICH'>Tên mục đích</label>
-                                <input className='form-control' id='Tenmucdich' type='text' placeholder='Tên mục đích' onChange={this.handleInput('text', 'MUC_DICH')} value={this.state.text.MUC_DICH}/>
+                                <input className='form-control' id='MUC_DICH' type='text' onChange={this.handleInput('text', 'MUC_DICH')} value={this.state.text.MUC_DICH}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

@@ -21,7 +21,7 @@ module.exports = app => {
         let data = req.body.changes,
             changes = {};
         data.chuc_danh && data.chuc_danh != '' && (changes.chuc_danh = data.chuc_danh);
-        data.ten_day_du & data.ten_day_du != '' && (changes.ten_day_du = data.ten_day_du);
+        data.ten_day_du && data.ten_day_du != '' && (changes.ten_day_du = data.ten_day_du);
         if (data.ord) changes.ord = data.ord;
         
         app.model.chucdanh.update(req.body._id, changes, (error, chucdanh) => {

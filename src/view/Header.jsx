@@ -52,7 +52,7 @@ class Header extends React.Component {
 
         return (
             <header className='app-header' >
-                <Link className='app-header__logo' to='/admin'>BK App</Link>
+                <Link className='app-header__logo' to='/admin'>PTCHC</Link>
                 <a className='app-sidebar__toggle' href='#' data-toggle='sidebar' aria-label='Hide Sidebar' />
                 <ul className='app-nav'>
                     {/* <li className='dropdown'>

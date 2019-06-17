@@ -52,11 +52,11 @@ export default class Qt_nngoaiModal extends React.Component {
             NGAY_QD_TIEP_NHAN, MUC_DICH, NOI_DUNG, NGANH_HOC, GIA_HAN,
             NUOC_DEN, NOI_DEN, CHI_PHI, GHI_CHU, HOAN_TRA_KP_BHXH,
             NGAY_NHAP, BHXH} = item ?
-            item : { _id: null, MS_NV: '', HO: '', TEN: '', SO_QUYET_DINH: '',
-            NGAY_QDINH: '', DON_VI: '', NGAY_DI: '', NGAY_VE: '', 
-            NGAY_VE_THUC: '', SO_QD_TIEP_NHAN: '', NGAY_QD_TIEP_NHAN: '', 
-            MUC_DICH: '', NOI_DUNG: '', NGANH_HOC: '', GIA_HAN: '', NUOC_DEN: '',
-            NOI_DEN: '', CHI_PHI: '', GHI_CHU: '', HOAN_TRA_KP_BHXH: '', NGAY_NHAP: '', BHXH: ''};
+            item : { _id: null, MS_NV: null, HO: null, TEN: null, SO_QUYET_DINH: null,
+            NGAY_QDINH: null, DON_VI: null, NGAY_DI: null, NGAY_VE: null, 
+            NGAY_VE_THUC: null, SO_QD_TIEP_NHAN: null, NGAY_QD_TIEP_NHAN: null, 
+            MUC_DICH: null, NOI_DUNG: null, NGANH_HOC: null, GIA_HAN: null, NUOC_DEN: null,
+            NOI_DEN: null, CHI_PHI: null, GHI_CHU: null, HOAN_TRA_KP_BHXH: null, NGAY_NHAP: null, BHXH: ''};
         $('#MS_NV').val(MS_NV);
         $('#HO').val(HO);
         $('#TEN').val(TEN);
@@ -96,10 +96,12 @@ export default class Qt_nngoaiModal extends React.Component {
             MUC_DICH = mucdich? mucdich:[],
             NUOC_DEN = nuocngoai? nuocngoai: [],
             GIA_HAN = nopcc? nopcc :[],
+            HO = this.state.text.HO ? this.state.text.HO : MS_NV.HO,
+            TEN = this.state.text.TEN ? this.state.text.TEN : MS_NV.TEN,
              changes = {
                 MS_NV,
-                HO: this.state.text.HO,
-                TEN: this.state.text.TEN,
+                HO,
+                TEN,
                 SO_QUYET_DINH: this.state.text.SO_QUYET_DINH,
                 NGAY_QDINH: this.state.date.NGAY_QDINH,
                 DON_VI: this.state.text.DON_VI, 
@@ -120,37 +122,31 @@ export default class Qt_nngoaiModal extends React.Component {
                 NGAY_NHAP: this.state.date.NGAY_NHAP,
                 BHXH: this.state.text.BHXH, 
             };    
-        if (!changes.MS_NV) {
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.HO == '') {
-            T.notify('Họ đang trống!', 'danger');
-            $('#HO').focus();
-        } else if (changes.TEN == '') {
-            T.notify('Tên đang trống!', 'danger');
-            $('#TEN').focus();
-        } else if (changes.DON_VI == '') {
+        } else if (changes.DON_VI == null) {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#DON_VI').focus();
-        } else if (changes.NGAY_DI == '') {
+        } else if (changes.NGAY_DI == null) {
             T.notify('Ngày đi đang trống!', 'danger');
             $('#NGAY_DI').focus();
-        } else if (changes.NGAY_VE_THUC == '') {
+        } else if (changes.NGAY_VE_THUC == null) {
             T.notify('Ngày về thực đang trống!', 'danger');
             $('#NGAY_VE_THUC').focus();
-        } else if (changes.MUC_DICH == '') {
+        } else if (changes.MUC_DICH == null) {
             T.notify('Mục đích đang trống!', 'danger');
             $('#MUC_DICH').focus();
-        } else if (changes.NGANH_HOC == '') {
+        } else if (changes.NGANH_HOC == null) {
             T.notify('Ngành học đang trống!', 'danger');
             $('#NGANH_HOC').focus();
-        } else if (changes.NUOC_DEN == '') {
+        } else if (changes.NUOC_DEN == null) {
             T.notify('Nước đến đang trống!', 'danger');
             $('#NUOC_DEN').focus();
-        } else if (changes.GIA_HAN == '') {
+        } else if (changes.GIA_HAN == null) {
             T.notify('Gia hạn đang trống!', 'danger');
             $('#GIA_HAN').focus();
-        } else if (changes.NOI_DEN == '') {
+        } else if (changes.NOI_DEN == null) {
             T.notify('Nơi đến đang trống!', 'danger');
             $('#NOI_DEN').focus();
         } else if (changes.CHI_PHI == '') {

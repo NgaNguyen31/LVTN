@@ -34,7 +34,7 @@ export default class KhoaModal extends React.Component {
 
     show(item) {
         const { _id, TEN_KHOA, TEN_TIENG_ANH, TEN_KHOA_TAT } = item ?
-            item : { _id: null, TEN_KHOA: '', TEN_TIENG_ANH: '', TEN_KHOA_TAT: '' };
+            item : { _id: null, TEN_KHOA: null, TEN_TIENG_ANH: null, TEN_KHOA_TAT: null };
         $('#TEN_KHOA').val(TEN_KHOA);
         $('#TEN_TIENG_ANH').val(TEN_TIENG_ANH);
         $('#TEN_KHOA_TAT').val(TEN_KHOA_TAT);
@@ -49,12 +49,15 @@ export default class KhoaModal extends React.Component {
             TEN_TIENG_ANH: this.state.text.TEN_TIENG_ANH,
             TEN_KHOA_TAT: this.state.text.TEN_KHOA_TAT,
         };
-        if (this.state.text == '')  {
-            T.notify('Bạn phải điền dữ liệu!', 'danger');
-            $('#TEN_KHOA').focus();
-        } else if (changes.TEN_KHOA == '') {
+        if (changes.TEN_KHOA == null) {
             T.notify('Tên khoa đang trống!', 'danger');
             $('#TEN_KHOA').focus();
+        } else if (changes.TEN_TIENG_ANH == null) {
+            T.notify('Tên tiếng anh đang trống!', 'danger');
+            $('#TEN_TIENG_ANH').focus();
+        } else if (changes.TEN_KHOA_TAT == null) {
+            T.notify('Tên khoa tắt đang trống!', 'danger');
+            $('#TEN_KHOA_TAT').focus();
         } else if (this.state._id) {
             this.props.updateKhoa(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -80,15 +83,15 @@ export default class KhoaModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='tenkhoa'>Tên khoa</label>
-                                <input className='form-control' id='Tenkhoa' type='text' placeholder='Tên khoa' onChange={this.handleInput('text', 'TEN_KHOA')} value={this.state.text.TEN_KHOA}/>
+                                <input className='form-control' id='TEN_KHOA' type='text' onChange={this.handleInput('text', 'TEN_KHOA')} value={this.state.text.TEN_KHOA}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenkhoa'>Tên tiếng anh</label>
-                                <input className='form-control' id='Tentienganh' type='text' placeholder='Tên tiếng anh' onChange={this.handleInput('text', 'TEN_TIENG_ANH')} value={this.state.text.TEN_TIENG_ANH}/>
+                                <input className='form-control' id='TEN_TIENG_ANH' type='text' onChange={this.handleInput('text', 'TEN_TIENG_ANH')} value={this.state.text.TEN_TIENG_ANH}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenkhoa'>Tên khoa tắt</label>
-                                <input className='form-control' id='Tenkhoatat' type='text' placeholder='Tên khoa tắt' onChange={this.handleInput('text', 'TEN_KHOA_TAT')} value={this.state.text.TEN_KHOA_TAT}/>
+                                <input className='form-control' id='TEN_KHOA_TAT' type='text' onChange={this.handleInput('text', 'TEN_KHOA_TAT')} value={this.state.text.TEN_KHOA_TAT}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

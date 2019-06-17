@@ -15,7 +15,7 @@ class KhoaPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 6);
+            T.selectMenu(4, 5);
             this.props.getKhoaInPage();
         });
     }
@@ -55,7 +55,7 @@ class KhoaPage extends React.Component {
                                 <td>{item.TEN_KHOA_TAT}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
-                                        <i className='fa fa-lg fa-envelope-open-o' />
+                                        <i className='fa fa-lg fa-edit' />
                                     </a>
                                     <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />

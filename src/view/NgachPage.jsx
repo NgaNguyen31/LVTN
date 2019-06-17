@@ -15,7 +15,7 @@ class NgachPage extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(4, 10);
+            T.selectMenu(4, 8);
             this.props.getNgachInPage();
         });
     }
@@ -53,7 +53,7 @@ class NgachPage extends React.Component {
                                 <td>{item.TEN_NGACH}</td>                    
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
-                                        <i className='fa fa-lg fa-envelope-open-o' />
+                                        <i className='fa fa-lg fa-edit' />
                                     </a>
                                     <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />

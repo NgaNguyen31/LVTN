@@ -45,7 +45,7 @@ export default class NgoainguModal extends React.Component {
         const changes = {
             N_NGU: this.state.text.N_NGU,
         };
-        if (this.state.text == '') {
+        if (changes.N_NGU == null) {
             T.notify('Tên ngoại ngữ đang trống!', 'danger');
             $('#N_NGU').focus();
         } else if (this.state._id) {
@@ -73,7 +73,7 @@ export default class NgoainguModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='N_NGU'>Tên ngoại ngữ</label>
-                                <input className='form-control' id='Tenngoaingu' type='text' placeholder='Tên ngoại ngữ' onChange={this.handleInput('text', 'N_NGU')} value={this.state.text.N_NGU}/>
+                                <input className='form-control' id='N_NGU' type='text' onChange={this.handleInput('text', 'N_NGU')} value={this.state.text.N_NGU}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

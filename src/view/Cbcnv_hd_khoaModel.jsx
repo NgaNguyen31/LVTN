@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Cbcnv_hd_khoaPage from './Cbcnv_hd_khoaPage.jsx';
+import Select from 'react-select';
 
 export default class Cbcnv_hd_khoaModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', date: '', trinhdo: [], bomon: []}
+        this.state = {text: '', date: '', bomon: [], selectedbomon: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -14,6 +15,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.bomon = React.createRef();
         this.phai = React.createRef();
+        this.selectedbomon = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -22,31 +24,36 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;                    
                 case 'date':
                     state.date ? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;
+                case 'bomon':
+                    state.selectedbomon = e;
+                    break; 
             }
-
             this.setState(state);
-            e.preventDefault();
         }
     }
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#MSNV').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#MSBM').focus());
         }, 250));
     }
 
     show(item, bomon ) {      
         const { _id, MSBM, HO, TEN, PHAI, NAM_SINH, The_BHYT, Noi_kham, LCB, PC, Xoa } = item ?
-            item : { _id: null, MSBM: '', HO: '', TEN: '', PHAI: '', NAM_SINH:'', The_BHYT: '', Noi_kham: '', LCB: '', PC: '', Xoa: ''};
+            item : { _id: null, MSBM: null, HO: null, TEN: null, PHAI: null, NAM_SINH:null, The_BHYT: null, Noi_kham: null, LCB: null, PC: null, Xoa: null};
         $('#MSBM').val(MSBM);
         $('#HO').val(HO);
         $('#TEN').val(TEN);
         $('#PHAI').val(PHAI);
-        $('#NAM_SINH').val(NAM_SINH);
+        $('#NAM_SINH').val(T.dateToText(NAM_SINH,'yyyy-mm-dd'));
         $('#The_BHYT').val(The_BHYT);
         $('#Noi_kham').val(Noi_kham);
         $('#LCB').val(LCB);
@@ -54,14 +61,17 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
         $('#Xoa').prop('checked', Xoa);
         
         this.setState({ _id, bomon: bomon? bomon: []});
+        let MSBMLabel = MSBM ? ({value:MSBM._id, label:MSBM.TEN_BM}) : null;
+        this.setState({selectedbomon: MSBMLabel});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const bomon = this.bomon.current.getSelectedItem(),
+        const 
+            bomon = this.state.selectedbomon ? this.state.selectedbomon.value : null,
             phai = this.phai.current.getSelectedItem(),
-            MSBM = bomon? bomon._id: [],
+            MSBM = bomon,
             PHAI = phai? phai : [],
             changes = {
                 MSBM,
@@ -75,7 +85,9 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                 PC: this.state.text.PC,
                 Xoa: $('#Xoa').prop('checked'),
         };
-        if (changes.MSBM == '') {
+        console.log(HO);
+        
+        if (changes.MSBM == null) {
             T.notify('MSBM đang trống!', 'danger');
             $('#MSBM').focus(); 
         } else if (changes.HO == '') {
@@ -100,6 +112,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
 
     render() {        
         const bomon = this.state && this.state.bomon && this.state.bomon.bomon ? this.state.bomon.bomon : [];
+        const selectedbomon = this.state.selectedbomon;
 
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
@@ -113,8 +126,12 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                         </div>
                         <div className='modal-body'>
                             <div className='form-group'>
-                                <label htmlFor='MSNV'>MSBM</label>
-                                <Dropdown ref={this.bomon} number='' items={bomon.map(e => Object.assign({}, e, {text: e.TEN_BM}))} />
+                                <label htmlFor='MSBM'>MSBM</label>
+                                <Select
+                                value = {selectedbomon}
+                                onChange =  {this.handleInput('bomon')}
+                                options = {bomon.map(e => Object.assign({}, {label: e.TEN_BM, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='HO'>Họ</label>

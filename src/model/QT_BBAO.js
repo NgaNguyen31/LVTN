@@ -83,19 +83,23 @@ module.exports = app => {
                 done(error);
             } else if (item == null) {
                 done('Invalid Id!');
-            } else {             
+            } else {
                 model.find({MS_NV: item.MS_NV}, (error,items) => { 
                     index = 1 ;
-                    items.forEach(element => {
-                        if (element.BAI_BAO != item.BAI_BAO) {
-                            item.STT = 0;
-                            item.STT += index;    
-                            index++;              
-                        }  
-                        model.findOneAndUpdate({ _id: element._id }, { $set: {STT:item.STT} }, { new: true }, done)                                                     
-                    });                                          
-                })                                 
-                item.remove(done); 
+                    while (index>item.length()) {
+                        item.STT = 0;
+                        item.STT += index;    
+                        index++; 
+                        console.log(item);
+                        
+                    }
+                    // items.forEach(element => {
+                    //     if (element.BAI_BAO != item.BAI_BAO) {
+                                         
+                    //     }  
+                    // });                                          
+                })
+                // item.remove(done);
             }
         }),
     };

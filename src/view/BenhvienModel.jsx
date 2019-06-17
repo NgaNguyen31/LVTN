@@ -76,7 +76,7 @@ export default class BenhvienModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='Noi_kham'>Tên bệnh viện</label>
-                                <input className='form-control' id='Noi_kham' type='text' placeholder='Tên bệnh viện' onChange={this.handleInput('text', 'Noi_kham')} value={this.state.text.Noi_kham}/>
+                                <input className='form-control' id='Noi_kham' type='text' onChange={this.handleInput('text', 'Noi_kham')} value={this.state.text.Noi_kham}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

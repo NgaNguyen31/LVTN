@@ -19,7 +19,7 @@ class Pctn_nghe_2018Page extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => {
-            T.selectMenu(2, 7);
+            T.selectMenu(2, 5);
             this.props.getPctn_nghe_2018InPage();
         });
     }
@@ -75,7 +75,7 @@ class Pctn_nghe_2018Page extends React.Component {
                                 <td>{item.DON_VI}</td>                    
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
-                                        <i className='fa fa-lg fa-envelope-open-o' />
+                                        <i className='fa fa-lg fa-edit' />
                                     </a>
                                     <a className='btn btn-danger' href='#' onClick={e => this.delete(e, item)}>
                                         <i className='fa fa-lg fa-trash' />
