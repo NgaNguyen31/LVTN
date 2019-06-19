@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_nnguPage from './Qt_nnguPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_nnguModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: [], ngoaingu: []};
+        this.state = {text: '', number: '', cbcnv: [], ngoaingu: [], selectedcbcnv: [], selectedngoaingu: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -14,6 +15,8 @@ export default class Qt_nnguModal extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
         this.ngoaingu = React.createRef();
+        this.selectedcbcnv = React.createRef();
+        this.selectedngoaingu = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -22,15 +25,23 @@ export default class Qt_nnguModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
                     : (state.number = {}) && (state.number[field] = e.target.value)
-                    
+                    e.preventDefault();
+                    break;            
+                case 'cbcnv':
+                    state.selectedcbcnv = e;  
+                    break;
+                case 'ngoaingu':
+                    state.selectedngoaingu = e;  
+                    break;
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -43,23 +54,26 @@ export default class Qt_nnguModal extends React.Component {
     show(item, cbcnv, ngoaingu) {      
         
         const { _id, MS_NV, N_NGU, TRINH_DO, GHI_CHU} = item ?
-            item : { _id: null, MS_NV: '', N_NGU: '', TRINH_DO: '', GHI_CHU: ''};
+            item : { _id: null, MS_NV: null, N_NGU: null, TRINH_DO: null, GHI_CHU: null};
         $('#MS_NV').val(MS_NV);
         $('#N_NGU').val(N_NGU);
         $('#TRINH_DO').val(TRINH_DO);
         $('#GHI_CHU').val(GHI_CHU);
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: [], ngoaingu: ngoaingu? ngoaingu: []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});
+        let ngoainguLabel = N_NGU ? ({value: N_NGU._id,label: N_NGU.N_NGU}): null;        
+        this.setState({selectedngoaingu: ngoainguLabel});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),  
-        ngoaingu = this.ngoaingu.current.getSelectedItem(),          
-            MS_NV = cbcnv? cbcnv : [],
-            N_NGU = ngoaingu? ngoaingu : [],
+        const ngoaingu = this.state.selectedngoaingu ? this.state.selectedngoaingu.value : null,
+        cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value._id : null,
+        N_NGU = ngoaingu,
+        MS_NV = cbcnv,
              changes = {
                 MS_NV,
                 N_NGU, 
@@ -68,10 +82,10 @@ export default class Qt_nnguModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.N_NGU == '') {
+        } else if (changes.N_NGU == null) {
             T.notify('Ngoại ngữ đang trống!', 'danger');
             $('#N_NGU').focus();
-        } else if (changes.TRINH_DO == '') {
+        } else if (changes.TRINH_DO == null) {
             T.notify('Trình độ đang trống!', 'danger');
             $('#TRINH_DO').focus();
         } else if (this.state._id) {
@@ -87,8 +101,10 @@ export default class Qt_nnguModal extends React.Component {
     }
 
     render() {
-        const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
-        const ngoaingu =  this.state && this.state.ngoaingu && this.state.ngoaingu.ngoaingu? this.state.ngoaingu.ngoaingu : [];
+        const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv ? this.state.cbcnv.cbcnv : [];
+        const ngoaingu = this.state && this.state.ngoaingu && this.state.ngoaingu.ngoaingu ? this.state.ngoaingu.ngoaingu : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
+        const selectedngoaingu = this.state.selectedngoaingu;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -102,11 +118,19 @@ export default class Qt_nnguModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='N_NGU'>Ngoại ngữ</label>
-                                <Dropdown ref={this.ngoaingu} text='' items={ngoaingu.map(e => Object.assign({}, e, {text: e.N_NGU}))} />
+                                <Select
+                                value = {selectedngoaingu}
+                                onChange =  {this.handleInput('ngoaingu')}
+                                options = {ngoaingu.map(e => Object.assign({}, {label: e.N_NGU, value: e}))}
+                                />
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='TRINH_DO'>Trình độ</label>

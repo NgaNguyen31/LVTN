@@ -106,6 +106,8 @@ export function createCbcnv(cbcnv, done) {
             if (data.error == 'Exist') {
                 T.notify('MSNV đã tồn tại!', 'danger');                
             } else if (data.error) {
+                console.log(data.error);
+                
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('POST: ' + url + '. ' + data.error);
             } else {

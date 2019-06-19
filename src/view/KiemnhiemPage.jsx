@@ -65,8 +65,8 @@ class KiemnhiemPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                <td>{item.MS_BM.TEN_BM}</td>
-                                <td>{item.MS_CVU.CHUC_VU}</td>
+                                <td>{item.MS_BM? item.MS_BM.ten_bm : null}</td>
+                                <td>{item.MS_CVU ? item.MS_CVU.CHUC_VU : null}</td>
                                 <td>{T.dateToText(item.NGAY_CVU,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.GHICHU}</td> */}
                                 <td className='toggle' style={{ textAlign: 'center' }} >

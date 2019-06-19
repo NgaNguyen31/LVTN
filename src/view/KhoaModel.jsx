@@ -28,16 +28,16 @@ export default class KhoaModal extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#TEN_KHOA').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#ten_khoa').focus());
         }, 250));
     }
 
     show(item) {
-        const { _id, TEN_KHOA, TEN_TIENG_ANH, TEN_KHOA_TAT } = item ?
-            item : { _id: null, TEN_KHOA: null, TEN_TIENG_ANH: null, TEN_KHOA_TAT: null };
-        $('#TEN_KHOA').val(TEN_KHOA);
-        $('#TEN_TIENG_ANH').val(TEN_TIENG_ANH);
-        $('#TEN_KHOA_TAT').val(TEN_KHOA_TAT);
+        const { _id, ten_khoa, ten_tieng_anh, ten_khoa_tat } = item ?
+            item : { _id: null, ten_khoa: null, ten_tieng_anh: null, ten_khoa_tat: null };
+        $('#ten_khoa').val(ten_khoa);
+        $('#ten_tieng_anh').val(ten_tieng_anh);
+        $('#ten_khoa_tat').val(ten_khoa_tat);
         this.setState({ _id});
         $(this.modal.current).modal('show');
     }
@@ -45,19 +45,19 @@ export default class KhoaModal extends React.Component {
     save(e) {
         e.preventDefault();
         const changes = {
-            TEN_KHOA: this.state.text.TEN_KHOA,
-            TEN_TIENG_ANH: this.state.text.TEN_TIENG_ANH,
-            TEN_KHOA_TAT: this.state.text.TEN_KHOA_TAT,
+            ten_khoa: this.state.text.ten_khoa,
+            ten_tieng_anh: this.state.text.ten_tieng_anh,
+            ten_khoa_tat: this.state.text.ten_khoa_tat,
         };
-        if (changes.TEN_KHOA == null) {
+        if (changes.ten_khoa == null) {
             T.notify('Tên khoa đang trống!', 'danger');
-            $('#TEN_KHOA').focus();
-        } else if (changes.TEN_TIENG_ANH == null) {
+            $('#ten_khoa').focus();
+        } else if (changes.ten_tieng_anh == null) {
             T.notify('Tên tiếng anh đang trống!', 'danger');
-            $('#TEN_TIENG_ANH').focus();
-        } else if (changes.TEN_KHOA_TAT == null) {
+            $('#ten_tieng_anh').focus();
+        } else if (changes.ten_khoa_tat == null) {
             T.notify('Tên khoa tắt đang trống!', 'danger');
-            $('#TEN_KHOA_TAT').focus();
+            $('#ten_khoa_tat').focus();
         } else if (this.state._id) {
             this.props.updateKhoa(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -83,15 +83,15 @@ export default class KhoaModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='tenkhoa'>Tên khoa</label>
-                                <input className='form-control' id='TEN_KHOA' type='text' onChange={this.handleInput('text', 'TEN_KHOA')} value={this.state.text.TEN_KHOA}/>
+                                <input className='form-control' id='ten_khoa' type='text' onChange={this.handleInput('text', 'ten_khoa')} value={this.state.text.ten_khoa}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenkhoa'>Tên tiếng anh</label>
-                                <input className='form-control' id='TEN_TIENG_ANH' type='text' onChange={this.handleInput('text', 'TEN_TIENG_ANH')} value={this.state.text.TEN_TIENG_ANH}/>
+                                <input className='form-control' id='ten_tieng_anh' type='text' onChange={this.handleInput('text', 'ten_tieng_anh')} value={this.state.text.ten_tieng_anh}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenkhoa'>Tên khoa tắt</label>
-                                <input className='form-control' id='TEN_KHOA_TAT' type='text' onChange={this.handleInput('text', 'TEN_KHOA_TAT')} value={this.state.text.TEN_KHOA_TAT}/>
+                                <input className='form-control' id='ten_khoa_tat' type='text' onChange={this.handleInput('text', 'ten_khoa_tat')} value={this.state.text.ten_khoa_tat}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

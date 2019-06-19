@@ -44,9 +44,9 @@ class Qt_khenPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: '20%', textAlign: 'center' }}>STT</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
                             <th style={{ width: '20%', textAlign: 'center' }}>Năm</th>
-                            <th style={{ width: '25%', textAlign: 'center' }}>Hình thức</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Hình thức</th>
                             <th style={{ width: '25%', textAlign: 'center' }}>Cấp khen</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Lý do</th> */}
                             <th style={{ width: '20%', textAlign: 'center' }}>Danh hiệu</th>
@@ -60,7 +60,7 @@ class Qt_khenPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td> */}
+                                <td>{item.STT}</td>
                                 <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 <td>{item.HINH_THUC}</td>
                                 <td>{item.CAP_KHEN}</td>

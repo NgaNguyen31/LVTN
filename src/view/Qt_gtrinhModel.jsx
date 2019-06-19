@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_gtrinhPage from './Qt_gtrinhPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_gtrinhModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], selectedcbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,6 +14,8 @@ export default class Qt_gtrinhModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
+        this.selectedcbcnv = React.createRef();
+
     }
 
     handleInput(type, field, args) {
@@ -33,7 +36,10 @@ export default class Qt_gtrinhModal extends React.Component {
                     state.date ? (state.date[field] = e.target.value)
                     : (state.date = {}) && (state.date[field] = e.target.value)
                     e.preventDefault();
-                    break;               
+                    break;        
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;        
             }
 
             this.setState(state);
@@ -55,30 +61,31 @@ export default class Qt_gtrinhModal extends React.Component {
         $('#G_Trinh').val(G_Trinh);
         $('#NamXB').val(T.dateToText(NamXB,'yyyy-mm-dd'));
         $('#NhaXB').val(NhaXB);
-        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});        
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),            
-            MS_NV = cbcnv? cbcnv : [],
+        const 
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            MS_NV = cbcnv,
              changes = {
                 MS_NV,
                 // STT: this.state.number.STT, 
                 G_Trinh: this.state.text.G_Trinh, 
                 NamXB: this.state.date.NamXB, 
-                NhaXB: this.state.text.NhaXB,                                 };    
-        if (!changes.MS_NV) {
+                NhaXB: this.state.text.NhaXB };
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.G_Trinh == '') {
+        } else if (changes.G_Trinh == null) {
             T.notify('Giáo trình đang trống!', 'danger');
             $('#G_Trinh').focus();
-        } else if (changes.NamXB == '') {
+        } else if (changes.NamXB == null) {
             T.notify('Năm XB đang trống!', 'danger');
             $('#NamXB').focus();
         } else if (changes.STT < 0) {
@@ -98,6 +105,7 @@ export default class Qt_gtrinhModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -111,7 +119,11 @@ export default class Qt_gtrinhModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
                             {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
@@ -119,15 +131,15 @@ export default class Qt_gtrinhModal extends React.Component {
                             </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='G_Trinh'>Giáo trình</label>
-                                <input className='form-control' id='G_Trinh' type='text' placeholder='' onChange={this.handleInput('text', 'G_Trinh')} value={this.state.text.G_Trinh}/>
+                                <input className='form-control' id='G_Trinh' type='text' onChange={this.handleInput('text', 'G_Trinh')} value={this.state.text.G_Trinh}/>
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NamXB'>Năm XB</label>
-                                <input className='form-control' id='NamXB' type='date' placeholder='' onChange={this.handleInput('date', 'NamXB')} value={this.state.date.NamXB}/>
+                                <input className='form-control' id='NamXB' type='date' onChange={this.handleInput('date', 'NamXB')} value={this.state.date.NamXB}/>
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NhaXB'>Nhà XB</label>
-                                <input className='form-control' id='NhaXB' type='text' placeholder='' onChange={this.handleInput('text', 'NhaXB')} value={this.state.text.NhaXB}/>
+                                <input className='form-control' id='NhaXB' type='text' onChange={this.handleInput('text', 'NhaXB')} value={this.state.text.NhaXB}/>
                             </div> 
                         </div>
                         <div className='modal-footer'>

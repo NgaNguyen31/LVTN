@@ -17,10 +17,10 @@ module.exports = app => {
                         app.data.numberOfCBCNVNam = error ? 0 : numberOfCBCNVNam;
                         app.model.cbcnv.count({PHAI: 'Nữ'}, (error, numberOfCBCNVNu) => {
                             app.data.numberOfCBCNVNu = error ? 0 : numberOfCBCNVNu;
-                            app.model.cb_nngoai.count((error, numberOfCBNN) => {
+                            app.model.cbcnv.count({IS_NNGOAI: 'Đúng'},(error, numberOfCBNN) => {
                                 app.data.numberOfCBNN = error ? 0 : numberOfCBNN;
-                                app.model.cb_nngoai.count((error, numberOfCBNN) => {
-                                    app.data.numberOfCBNN = error ? 0 : numberOfCBNN;
+                                app.model.cb_nngoai.count((error, numberOfCBNN1) => {
+                                    app.data.numberOfCBNN1 = error ? 0 : numberOfCBNN1;
                                     app.model.dk_klgd.count((error, numberOfDKKLGD) => {
                                         app.data.numberOfDKKLGD = error ? 0 : numberOfDKKLGD;
                                         app.model.cbcnv_hd_dv_tu_tra.count((error, numberOfCBNNHĐVTT) => {

@@ -124,6 +124,8 @@ export function updateQt_nngoai(_id, changes, done) {
             if (data.error == 'Exist') {
                 T.notify('MSNV đã tồn tại!', 'danger');                
             } else if (data.error) {
+                console.log(data.error);
+                
                 T.notify('Có lỗi xảy ra!', 'danger');
                 console.error('PUT: ' + url + '. ' + data.error);
             } else {

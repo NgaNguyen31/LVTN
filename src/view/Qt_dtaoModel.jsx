@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_dtaoPage from './Qt_dtaoPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_dtaoModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: [], nopcc: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], nopcc: [], selectedcbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -14,6 +15,7 @@ export default class Qt_dtaoModal extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
         this.nopcc = React.createRef();
+        this.selectedcbcnv = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -35,7 +37,9 @@ export default class Qt_dtaoModal extends React.Component {
                     : (state.date = {}) && (state.date[field] = e.target.value);
                     e.preventDefault();
                     break;      
-                         
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break; 
             }
 
             this.setState(state);
@@ -67,8 +71,8 @@ export default class Qt_dtaoModal extends React.Component {
         $('#NAM').val(T.dateToText(NAM,'yyyy-mm-dd'));
         $('#CO_NOP_BANG').val(CO_NOP_BANG);
         $('#GHI_CHU').val(GHI_CHU);
-        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});        
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
 
         $(this.modal.current).modal('show');
@@ -76,9 +80,10 @@ export default class Qt_dtaoModal extends React.Component {
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(), 
+        const 
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            MS_NV = cbcnv,
             nopcc = this.nopcc.current.getSelectedItem(),
-            MS_NV = cbcnv? cbcnv : [],
             CO_NOP_BANG = nopcc? nopcc : [],
              changes = {
                 MS_NV,
@@ -97,19 +102,19 @@ export default class Qt_dtaoModal extends React.Component {
                 CO_NOP_BANG,    
                 GHI_CHU: this.state.text.GHI_CHU,  
             };    
-        if (!changes.MS_NV) {
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.CHUYEN_NGANH == '') {
+        } else if (changes.CHUYEN_NGANH == null) {
             T.notify('Chuyên ngành đang trống!', 'danger');
             $('#CHUYEN_NGANH').focus();
-        } else if (changes.NOI_DT == '') {
+        } else if (changes.NOI_DT == null) {
             T.notify('Nơi đào tạo đang trống!', 'danger');
             $('#NOI_DT').focus();
-        } else if (changes.QUOC_GIA == '') {
+        } else if (changes.QUOC_GIA == null) {
             T.notify('Quốc gia đang trống!', 'danger');
             $('#QUOC_GIA').focus();
-        } else if (changes.CO_NOP_BANG == '') {
+        } else if (changes.CO_NOP_BANG == null) {
             T.notify('Có nộp bằng đang trống!', 'danger');
             $('#CO_NOP_BANG').focus();
         } else if (changes.STT < 0) {
@@ -129,6 +134,7 @@ export default class Qt_dtaoModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -142,7 +148,11 @@ export default class Qt_dtaoModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
                             {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>

@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_khenPage from './Qt_khenPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_khenModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], selectedcbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,6 +14,7 @@ export default class Qt_khenModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
+        this.selectedcbcnv = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -21,18 +23,25 @@ export default class Qt_khenModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
-                          
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;   
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;                 
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -45,9 +54,9 @@ export default class Qt_khenModal extends React.Component {
     show(item, cbcnv) {      
         
         const { _id, MS_NV, STT, NAM, HINH_THUC, CAP_KHEN, LY_DO, DANH_HIEU, GHI_CHU} = item ?
-            item : { _id: null, MS_NV: '', STT: '', NAM: '', HINH_THUC: '', CAP_KHEN: '', LY_DO: '', DANH_HIEU: '', GHI_CHU: ''};
+            item : { _id: null, MS_NV: null, STT: null, NAM: null, HINH_THUC: null, CAP_KHEN: null, LY_DO: null, DANH_HIEU: null, GHI_CHU: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         $('#NAM').val(NAM);
         $('#HINH_THUC').val(HINH_THUC);
         $('#CAP_KHEN').val(CAP_KHEN);
@@ -56,17 +65,20 @@ export default class Qt_khenModal extends React.Component {
         $('#GHI_CHU').val(GHI_CHU);
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});
+        
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),            
-            MS_NV = cbcnv? cbcnv : [],
+        const 
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            MS_NV = cbcnv,
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 NAM: this.state.date.NAM,
                 HINH_THUC: this.state.text.HINH_THUC, 
                 CAP_KHEN: this.state.text.CAP_KHEN, 
@@ -74,16 +86,16 @@ export default class Qt_khenModal extends React.Component {
                 DANH_HIEU: this.state.text.DANH_HIEU, 
                 GHI_CHU: this.state.text.GHI_CHU,                                 
             };    
-        if (!changes.MS_NV) {
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
-        } else if (changes.NAM == '') {
+        } else if (changes.NAM == null) {
             T.notify('Năm đang trống!', 'danger');
             $('#NAM').focus();
-        } else if (changes.DANH_HIEU == '') {
+        } else if (changes.CAP_KHEN == null) {
+            T.notify('Cấp khen đang trống!', 'danger');
+            $('#CAP_KHEN').focus();
+        } else if (changes.DANH_HIEU == null) {
             T.notify('Danh hiệu đang trống!', 'danger');
             $('#DANH_HIEU').focus();
         } else if (changes.STT < 0) {
@@ -103,6 +115,7 @@ export default class Qt_khenModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -116,12 +129,16 @@ export default class Qt_khenModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
+                            </div>  */}
                             <div className='form-group'>
                                 <label htmlFor='NAM'>Năm</label>
                                 <input className='form-control' id='NAM' type='date' placeholder='' onChange={this.handleInput('date', 'NAM')} value={this.state.date.NAM}/>

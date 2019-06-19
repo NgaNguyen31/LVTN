@@ -47,7 +47,7 @@ class BenhvienPage extends React.Component {
                         {this.props.benhvien.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.Noi_kham ? item.Noi_kham + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.noi_kham ? item.noi_kham + ' ' : '')}</a>
                                 </td>                            
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>

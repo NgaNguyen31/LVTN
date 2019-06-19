@@ -1,21 +1,22 @@
 module.exports = app => {
     const schema = app.db.Schema({
-        TEN_BM: String,   
-        TEN_TIENG_ANH: String,
-        MS_KHOA: [{ type: app.db.Schema.ObjectId, ref: 'khoa' }],
-        NAM_THANH_LAP: Date,
-        GHI_CHU: String
+        ten_bm: String,   
+        ten_tieng_anh: String,
+        ms_khoa: [{ type: app.db.Schema.ObjectId, ref: 'khoa' }],        
+        nam_thanh_lap: String,
+        ghi_chu: String
     });
     const model = app.db.model('bomon',schema);
 
+    
     app.model.bomon = {
         create: (data, done) => {
             model.find({
                 $or : [
                     {
-                        TEN_BM: data.TEN_BM                     
+                        ten_bm: data.ten_bm,                    
                     }, {
-                        TEN_TIENG_ANH: data.TEN_TIENG_ANH
+                        ten_tieng_anh: data.ten_tieng_anh,
                     }
                 ]
             }, (error, items) => {
@@ -50,21 +51,19 @@ module.exports = app => {
             model.find({
                 $or : [
                     {
-                        TEN_KHOA: changes.TEN_KHOA                        
+                        TEN_KHOA: changes.TEN_KHOA,                      
                     }, {
-                        TEN_TIENG_ANH: changes.TEN_TIENG_ANH
+                        ten_tieng_anh: changes.ten_tieng_anh,
                     }
                 ]
             }, (error, items) => {
-                if (items.length > 0) {
-                    if (done) done('Exist', items);
-                }
-                else{
-                    model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, (error, item) => {
-                        done(error, item);
-                    })
-                }
-            })},
+            if (items.length > 0) {
+                if (done) done('Exist', items);
+            }
+            else{
+                model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
+            }})         
+},                   
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

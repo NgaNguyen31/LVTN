@@ -46,7 +46,7 @@ module.exports = app =>{
         PC_DOC_HAI: Number,
         MOI_TRUONG_DOC_HAI: String,
         MS_CVU: { type: app.db.Schema.ObjectId, ref: 'chucvu' },
-        TEN_CV: String, 
+        // TEN_CV: String, 
         PCCV: Number,
         NGAY_PCCV: Date,
         NUOC_NGOAI: String,

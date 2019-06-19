@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Cbcnv_hd_dv_tu_traPage from './Cbcnv_hd_dv_tu_traPage.jsx';
+import Select from 'react-select';
 
 export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', trinhdo: []}
+        this.state = {text: '', trinhdo: [], selectedtrinhdo : []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,6 +14,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.trinhdo = React.createRef();
+        this.selectedtrinhdo = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -22,11 +24,14 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
                     : (state.text = {}) && (state.text[field] = e.target.value)
-                    
+                    e.preventDefault();
+                    break;
+                case 'trinhdo':
+                    state.selectedtrinhdo = e;
+                    break;
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -50,16 +55,19 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
         $('#DON_VI').val(DON_VI);
         $('#DIA_CHI').val(DIA_CHI);
         $('#GHI_CHU').val(GHI_CHU);
-        TRINH_DO ? this.trinhdo.current.setText(Object.assign({}, TRINH_DO, {text: TRINH_DO.Ten_day_du})) : null;
         this.setState({ _id, trinhdo: trinhdo? trinhdo: []});
+        let trinhdoLabel = TRINH_DO ? ({value: TRINH_DO._id,label: TRINH_DO.Ten_day_du}): null;        
+        this.setState({selectedtrinhdo: trinhdoLabel});
+        
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const trinhdo = this.trinhdo.current.getSelectedItem(),
-            TRINH_DO = trinhdo? trinhdo._id : null,
-            changes = {
+        const 
+        trinhdo = this.state.selectedtrinhdo ? this.state.selectedtrinhdo.value : null,
+        TRINH_DO = trinhdo,
+        changes = {
                 MSNV: this.state.text.MSNV,
                 HO: this.state.text.HO,
                 TEN: this.state.text.TEN,
@@ -72,22 +80,22 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                 DIA_CHI: this.state.text.DIA_CHI,
                 GHI_CHU: this.state.text.GHI_CHU,
         };
-        if (changes.MSNV == '') {
+        if (changes.MSNV == '' | changes.MSNV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MSNV').focus(); 
-        } else if (changes.HO == '') {
+        } else if (changes.HO == ''| changes.HO == null) {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();  
-        } else if (changes.TEN == '') {
+        } else if (changes.TEN == ''| changes.TEN == null) {
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();             
-        } else if (changes.NGAY_SINH == '') {
+        } else if (changes.NGAY_SINH == null) {
             T.notify('Ngày sinh đang trống!', 'danger');
             $('#NGAY_SINH').focus();  
-        } else if (changes.DON_VI == '') {
+        } else if (changes.DON_VI == ''| changes.DON_VI == null) {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#DON_VI').focus();            
-        } else if (changes.TRINH_DO == '') {
+        } else if (changes.TRINH_DO == null) {
             T.notify('Trình độ đang trống!', 'danger');
             $('#TRINH_DO').focus();            
         } else if (this.state._id) {
@@ -103,6 +111,7 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
 
     render() {                
         const trinhdo = this.state && this.state.trinhdo && this.state.trinhdo.trinhdo ? this.state.trinhdo.trinhdo : [];
+        const selectedtrinhdo = this.state.selectedtrinhdo;
 
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
@@ -145,7 +154,11 @@ export default class Cbcnv_hd_dv_tu_traModal extends React.Component {
                             </div>                            
                             <div className='form-group'>
                                 <label htmlFor='TRINH_DO'>Trình độ</label>
-                                <Dropdown ref={this.trinhdo} number='' items={trinhdo.map(e => Object.assign({}, e, {text: e.Ten_day_du}))} />
+                                <Select
+                                value = {selectedtrinhdo}
+                                onChange =  {this.handleInput('trinhdo')}
+                                options = {trinhdo.map(e => Object.assign({}, {label: e.Ten_day_du, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor="DON_VI">Đơn vị</label>

@@ -1,11 +1,13 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import CbcnvPage from './CbcnvPage.jsx';
+import Select from 'react-select';
 
 export default class CbcnvModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', boolean :'', is: [] , nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: [], nopcc: [], giahan: [], phai: []}
+        this.state = {text: '', number: '', date: '', boolean :'', is: [] , nghi_ctac: [], loai: [], pctn_nghe_2018: [], chucdanh: [], trinhdo:[], ngach:[], chucvu: [], bomon: [] , dantoc: [], tongiao: [], benhvien: [], nopcc: [], giahan: [], phai: [],
+    selectednghi_ctac: [], selectedloai: [], selectedpctn_nghe_2018: [], selectedchucdanh: [], selectedtrinhdo: [], selectedngach: [], selectedchucvu: [], selectedbomon: [], selecteddantoc: [], selectedtongiao: [], selectedbenhvien: []}
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -27,6 +29,18 @@ export default class CbcnvModal extends React.Component {
         this.nopcc = React.createRef();
         this.giahan = React.createRef();
         this.phai = React.createRef();
+        this.selectednghi_ctac = React.createRef();
+        this.selectedloai = React.createRef();
+        this.selectedpctn_nghe_2018 = React.createRef();
+        this.selectedchucdanh = React.createRef();
+        this.selectedtrinhdo = React.createRef();
+        this.selectedngach = React.createRef();
+        this.selectedchucvu = React.createRef();
+        this.selectedbomon = React.createRef();
+        this.selecteddantoc = React.createRef();
+        this.selectedtongiao = React.createRef();
+        this.selectedbenhvien = React.createRef();
+        
     }
 
     handleInput(type, field, args) {
@@ -35,26 +49,73 @@ export default class CbcnvModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number? (state.number[field] = e.target.value)
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'boolean':
                     state.boolean? (state.boolean[field] = e.target.value)
-                    : (state.boolean ={}) && (state.boolean[field] = e.target.value)
+                    : (state.boolean ={}) && (state.boolean[field] = e.target.value);
+                    e.preventDefault();
+                    break;
+                case 'nghi_ctac':
+                    state.selectednghi_ctac = e;                     
+                    break;  
+                case 'loai':
+                    state.selectedloai = e;
+                    break;  
+                case 'pctn_nghe_2018':
+                    state.selectedpctn_nghe_2018 = e;                    
+                    break;  
+                case 'chucdanh':
+                    state.selectedchucdanh = e;                    
+                    break;  
+                case 'trinhdo':
+                    state.selectedtrinhdo = e;
+                    console.log(state.selectedtrinhdo);
+                    
+                    break;  
+                case 'ngach':
+                    state.selectedngach = e;
+                    console.log(state.selectedngach);
+                    
+                    break;  
+                case 'chucvu':
+                    state.selectedchucvu = e;
+                    break;  
+                case 'bomon':
+                    state.selectedbomon = e;
+                    console.log(state.selectedbomon);
+                    
+                    break;  
+                case 'dantoc':
+                    state.selecteddantoc = e;
+                    break;  
+                case 'tongiao':
+                    state.selectedtongiao = e;
+                    break;  
+                case 'benhvien':
+                    state.selectedbenhvien = e;
+                    break;  
+                
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#SHCC').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#MS_NV').focus());
         }, 250));
     }
 
@@ -201,147 +262,147 @@ export default class CbcnvModal extends React.Component {
         DONG_BHXH,
         HL_DEN_NGAY,
         DIEN_GIAI_HD } = item ?
-            item : { _id: null, NGHI: '',
-            TAM_NGUNG: '',
-            IS_NNGOAI: '',
-            IN_NUOC: '',
-            LOAI: '',
-            SHCC:  '',
-            MS_NV: '',
-            MS_NV_CU: '',
-            HO: '',
-            TEN: '',
-            PHAI: '',
-            NGAY_SINH: '',
-            XA_PHUONG_NOISINH: '',
-            QUAN_HUYEN_NOISINH: '',
-            NOI_SINH_TINH_TP: '',
-            NGAY_BD_CT: '',
-            NGAY_VAO: '',
-            NGAY_BC: '',
-            NGAY_CBGD: '',
-            NGAY_NGHI: '',
-            GIAY_TT_RA_TRUONG: '',
-            So_BHXH_LD: '',
-            THU_BHXH: '',
-            CHUC_DANH: '',
-            TRINH_DO: '',
-            NGACH: '',
-            NGACHMOI: '',
-            BAC_LG: '',
-            HESO_LG: '',//?
-            MOC_NANG_LG: '',
-            NGAY_HUONG_LG: '',
-            HD_KY_DEN: '',
-            VUOT_KHUNG: '',
-            NGAY_HUONG_VK: '',
-            PCTN_CU: '',
-            NGAY_PCTN_NEW: '',
-            PCTN_NEW: '',
-            THOI_DIEM_TANG_1: '',
-            GHI_CHU_LG: '',
-            TYLE_PCUD: '',
-            CHUC_VU_BCH_DANG_BO: '',
-            CHUC_VU_BCH_CONG_DOAN: '',
-            CHUC_VU_BCH_DOAN_TN: '',
-            PC_DOC_HAI: '',
-            MOI_TRUONG_DOC_HAI: '',
-            MS_CVU: '',
-            TEN_CV: '',
-            PCCV: '',
-            NGAY_PCCV: '',
-            NUOC_NGOAI: '',
-            TU_NGAY_NN: '',
-            DEN_NGAY_NN: '',
-            NGAY_VE_THUC_TE_NN: '',
-            TUNGAY_KOLUONG: '',
-            DENNGAY_KOLUONG: '',
-            NGAYTIEPNHAN_KOLUONG: '',
-            PHUC_LOI: '',
-            GHI_CHU_IN: '',
-            MS_BM: '',
-            TDO_LLCT: '',
-            TIN_HOC: '',
-            NGOAI_NGU: '',
-            GHI_CHU_NOP_BANG: '',
-            CONG_NHAN_BANG: '',
-            CHUYEN_NGANH: '',
-            CD: '',
-            KS: '',
-            CH: '',
-            TS: '',
-            TSKH: '',
-            TC: '',
-            KHAC: '',
-            GS: '',
-            PGS: '',
-            GVC: '',
-            GV: '',
-            GVTH: '',
-            TG: '',
-            NVC: '',
-            CVC: '',
-            TG_QUANDOI: '',
-            CAP_BAC: '',
-            HUY_CHUONG_SNGD: '',
-            NGND: '',
-            NGUT: '',
-            SO_THE: '',
-            NGAY_DANG_DB: '',
-            NOI_DANG_DB: '',
-            DANG_VIEN: '',
-            NGAY_DANG_CT: '',
-            NOI_DANG_CT: '',
-            DOAN_VIEN: '',
-            NGAY_DOAN: '',
-            NOI_DOAN: '',
-            NOI_DKHK: '',
-            DC_HIENTAI: '',
-            DIEN_THOAI: '',
-            EMAIL: '',
-            NGUYEN_QUAN: '',
-            SO_CMND: '',
-            NOI_NGAYCAP: '',
-            DANTOC: '',
-            TON_GIAO: '',
-            CHA_TEN: '',
-            CHA_NAM_SINH: '',
-            CHA_NNGHIEP: '',
-            CHA_CONGTAC: '',
-            ME_TEN: '',
-            ME_NAM_SINH: '',
-            ME_NNGHIEP: '',
-            ME_CONGTAC: '',
-            VC_TEN: '',
-            VC_NAMSINH: '',
-            VC_NNGHIEP: '',
-            VC_CONGTAC: '',
-            SO_SO_HK: '',
-            HOTEN_CHU_HO_HK: '',
-            LOAI_GIAY_TO: '',
-            MA_TINH_BV: '',
-            QUOC_TICH: '',
-            TRA_THE_BHYT: '',
-            MA_BV: '',
-            MASO_BHXH: '',
-            GHI_CHU_NOP_SO_BHXH: '',
-            SO_BHXH: '',
-            NO_PC: '',
-            NO_DONG_BHXH: '',
+            item : { _id: null, NGHI: null,
+            TAM_NGUNG: null,
+            IS_NNGOAI: null,
+            IN_NUOC: null,
+            LOAI: null,
+            SHCC:  null,
+            MS_NV: null,
+            MS_NV_CU: null,
+            HO: null,
+            TEN: null,
+            PHAI: null,
+            NGAY_SINH: null,
+            XA_PHUONG_NOISINH: null,
+            QUAN_HUYEN_NOISINH: null,
+            NOI_SINH_TINH_TP: null,
+            NGAY_BD_CT: null,
+            NGAY_VAO: null,
+            NGAY_BC: null,
+            NGAY_CBGD: null,
+            NGAY_NGHI: null,
+            GIAY_TT_RA_TRUONG: null,
+            So_BHXH_LD: null,
+            THU_BHXH: null,
+            CHUC_DANH: null,
+            TRINH_DO: null,
+            NGACH: null,
+            NGACHMOI: null,
+            BAC_LG: null,
+            HESO_LG: null,//?
+            MOC_NANG_LG: null,
+            NGAY_HUONG_LG: null,
+            HD_KY_DEN: null,
+            VUOT_KHUNG: null,
+            NGAY_HUONG_VK: null,
+            PCTN_CU: null,
+            NGAY_PCTN_NEW: null,
+            PCTN_NEW: null,
+            THOI_DIEM_TANG_1: null,
+            GHI_CHU_LG: null,
+            TYLE_PCUD: null,
+            CHUC_VU_BCH_DANG_BO: null,
+            CHUC_VU_BCH_CONG_DOAN: null,
+            CHUC_VU_BCH_DOAN_TN: null,
+            PC_DOC_HAI: null,
+            MOI_TRUONG_DOC_HAI: null,
+            MS_CVU: null,
+            TEN_CV: null,
+            PCCV: null,
+            NGAY_PCCV: null,
+            NUOC_NGOAI: null,
+            TU_NGAY_NN: null,
+            DEN_NGAY_NN: null,
+            NGAY_VE_THUC_TE_NN: null,
+            TUNGAY_KOLUONG: null,
+            DENNGAY_KOLUONG: null,
+            NGAYTIEPNHAN_KOLUONG: null,
+            PHUC_LOI: null,
+            GHI_CHU_IN: null,
+            MS_BM: null,
+            TDO_LLCT: null,
+            TIN_HOC: null,
+            NGOAI_NGU: null,
+            GHI_CHU_NOP_BANG: null,
+            CONG_NHAN_BANG: null,
+            CHUYEN_NGANH: null,
+            CD: null,
+            KS: null,
+            CH: null,
+            TS: null,
+            TSKH: null,
+            TC: null,
+            KHAC: null,
+            GS: null,
+            PGS: null,
+            GVC: null,
+            GV: null,
+            GVTH: null,
+            TG: null,
+            NVC: null,
+            CVC: null,
+            TG_QUANDOI: null,
+            CAP_BAC: null,
+            HUY_CHUONG_SNGD: null,
+            NGND: null,
+            NGUT: null,
+            SO_THE: null,
+            NGAY_DANG_DB: null,
+            NOI_DANG_DB: null,
+            DANG_VIEN: null,
+            NGAY_DANG_CT: null,
+            NOI_DANG_CT: null,
+            DOAN_VIEN: null,
+            NGAY_DOAN: null,
+            NOI_DOAN: null,
+            NOI_DKHK: null,
+            DC_HIENTAI: null,
+            DIEN_THOAI: null,
+            EMAIL: null,
+            NGUYEN_QUAN: null,
+            SO_CMND: null,
+            NOI_NGAYCAP: null,
+            DANTOC: null,
+            TON_GIAO: null,
+            CHA_TEN: null,
+            CHA_NAM_SINH: null,
+            CHA_NNGHIEP: null,
+            CHA_CONGTAC: null,
+            ME_TEN: null,
+            ME_NAM_SINH: null,
+            ME_NNGHIEP: null,
+            ME_CONGTAC: null,
+            VC_TEN: null,
+            VC_NAMSINH: null,
+            VC_NNGHIEP: null,
+            VC_CONGTAC: null,
+            SO_SO_HK: null,
+            HOTEN_CHU_HO_HK: null,
+            LOAI_GIAY_TO: null,
+            MA_TINH_BV: null,
+            QUOC_TICH: null,
+            TRA_THE_BHYT: null,
+            MA_BV: null,
+            MASO_BHXH: null,
+            GHI_CHU_NOP_SO_BHXH: null,
+            SO_BHXH: null,
+            NO_PC: null,
+            NO_DONG_BHXH: null,
             GHICHU_BHXH,
-            NO_BHXH: '',
-            GHICHU_KY_HIEU: '',
-            HIEULUC_GD_HD: '',
-            TANG: '',//?
-            KH_TANG: '',
-            GIAM: '',//?
-            KH_GIAM: '',
-            SO_QH_HD: '',
-            NGAY_KY_QH_HD: '',
-            NGAY_NHAP_HS: '',
-            DONG_BHXH: '',
-            HL_DEN_NGAY: '',
-            DIEN_GIAI_HD: '' };
+            NO_BHXH: null,
+            GHICHU_KY_HIEU: null,
+            HIEULUC_GD_HD: null,
+            TANG: null,//?
+            KH_TANG: null,
+            GIAM: null,//?
+            KH_GIAM: null,
+            SO_QH_HD: null,
+            NGAY_KY_QH_HD: null,
+            NGAY_NHAP_HS: null,
+            DONG_BHXH: null,
+            HL_DEN_NGAY: null,
+            DIEN_GIAI_HD: null };
         $('#NGHI').val(NGHI);
         $('#TAM_NGUNG').val(TAM_NGUNG);
         $('#IS_NNGOAI').val(IS_NNGOAI);
@@ -353,15 +414,15 @@ export default class CbcnvModal extends React.Component {
         $('#HO').val(HO);
         $('#TEN').val(TEN);
         $('#PHAI').val(PHAI);
-        $('#NGAY_SINH').val(NGAY_SINH);
+        $('#NGAY_SINH').val(T.dateToText(NGAY_SINH,'yyyy-mm-dd'));
         $('#XA_PHUONG_NOISINH').val(XA_PHUONG_NOISINH);
         $('#QUAN_HUYEN_NOISINH').val(QUAN_HUYEN_NOISINH);
         $('#NOI_SINH_TINH_TP').val(NOI_SINH_TINH_TP);
-        $('#NGAY_BD_CT').val(NGAY_BD_CT);
-        $('#NGAY_VAO').val(NGAY_VAO);
-        $('#NGAY_BC').val(NGAY_BC);
-        $('#NGAY_CBGD').val(NGAY_CBGD);
-        $('#NGAY_NGHI').val(NGAY_NGHI);
+        $('#NGAY_BD_CT').val(T.dateToText(NGAY_BD_CT,'yyyy-mm-dd'));
+        $('#NGAY_VAO').val(T.dateToText(NGAY_VAO,'yyyy-mm-dd'));
+        $('#NGAY_BC').val(T.dateToText(NGAY_BC,'yyyy-mm-dd'));
+        $('#NGAY_CBGD').val(T.dateToText(NGAY_CBGD,'yyyy-mm-dd'));
+        $('#NGAY_NGHI').val(T.dateToText(NGAY_NGHI,'yyyy-mm-dd'));
         $('#GIAY_TT_RA_TRUONG').val(GIAY_TT_RA_TRUONG);
         $('#So_BHXH_LD').val(So_BHXH_LD);
         $('#THU_BHXH').val(THU_BHXH);
@@ -371,15 +432,15 @@ export default class CbcnvModal extends React.Component {
         $('#NGACHMOI').val(NGACHMOI);
         $('#BAC_LG').val(BAC_LG);
         $('#HESO_LG').val(HESO_LG);
-        $('#MOC_NANG_LG').val(MOC_NANG_LG);
-        $('#NGAY_HUONG_LG').val(NGAY_HUONG_LG);
-        $('#HD_KY_DEN').val(HD_KY_DEN);
+        $('#MOC_NANG_LG').val(T.dateToText(MOC_NANG_LG,'yyyy-mm-dd'));
+        $('#NGAY_HUONG_LG').val(T.dateToText(NGAY_HUONG_LG,'yyyy-mm-dd'));
+        $('#HD_KY_DEN').val(T.dateToText(HD_KY_DEN,'yyyy-mm-dd'));
         $('#VUOT_KHUNG').val(VUOT_KHUNG);
-        $('#NGAY_HUONG_VK').val(NGAY_HUONG_VK);
+        $('#NGAY_HUONG_VK').val(T.dateToText(NGAY_HUONG_VK,'yyyy-mm-dd'));
         $('#PCTN_CU').val(PCTN_CU);
-        $('#NGAY_PCTN_NEW').val(NGAY_PCTN_NEW);
+        $('#NGAY_PCTN_NEW').val(T.dateToText(NGAY_PCTN_NEW,'yyyy-mm-dd'));
         $('#PCTN_NEW').val(PCTN_NEW);
-        $('#THOI_DIEM_TANG_1').val(THOI_DIEM_TANG_1);
+        $('#THOI_DIEM_TANG_1').val(T.dateToText(THOI_DIEM_TANG_1,'yyyy-mm-dd'));
         $('#GHI_CHU_LG').val(GHI_CHU_LG);
         $('#TYLE_PCUD').val(TYLE_PCUD);
         $('#CHUC_VU_BCH_DANG_BO').val(CHUC_VU_BCH_DANG_BO);
@@ -388,16 +449,16 @@ export default class CbcnvModal extends React.Component {
         $('#PC_DOC_HAI').val(PC_DOC_HAI);
         $('#MOI_TRUONG_DOC_HAI').val(MOI_TRUONG_DOC_HAI);
         $('#MS_CVU').val(MS_CVU);
-        $('#TEN_CV').val(TEN_CV);
+        // $('#TEN_CV').val(TEN_CV);
         $('#PCCV').val(PCCV);
-        $('#NGAY_PCCV').val(NGAY_PCCV);
+        $('#NGAY_PCCV').val(T.dateToText(NGAY_PCCV,'yyyy-mm-dd'));
         $('#NUOC_NGOAI').val(NUOC_NGOAI);
-        $('#TU_NGAY_NN').val(TU_NGAY_NN);
-        $('#DEN_NGAY_NN').val(DEN_NGAY_NN);
-        $('#NGAY_VE_THUC_TE_NN').val(NGAY_VE_THUC_TE_NN);
-        $('#TUNGAY_KOLUONG').val(TUNGAY_KOLUONG);
-        $('#DENNGAY_KOLUONG').val(DENNGAY_KOLUONG);
-        $('#NGAYTIEPNHAN_KOLUONG').val(NGAYTIEPNHAN_KOLUONG);
+        $('#TU_NGAY_NN').val(T.dateToText(TU_NGAY_NN,'yyyy-mm-dd'));
+        $('#DEN_NGAY_NN').val(T.dateToText(DEN_NGAY_NN,'yyyy-mm-dd'));
+        $('#NGAY_VE_THUC_TE_NN').val(T.dateToText(NGAY_VE_THUC_TE_NN,'yyyy-mm-dd'));
+        $('#TUNGAY_KOLUONG').val(T.dateToText(TUNGAY_KOLUONG,'yyyy-mm-dd'));
+        $('#DENNGAY_KOLUONG').val(T.dateToText(DENNGAY_KOLUONG,'yyyy-mm-dd'));
+        $('#NGAYTIEPNHAN_KOLUONG').val(T.dateToText(NGAYTIEPNHAN_KOLUONG,'yyyy-mm-dd'));
         $('#PHUC_LOI').val(PHUC_LOI);
         $('#GHI_CHU_IN').val(GHI_CHU_IN);
         $('#MS_BM').val(MS_BM);
@@ -422,19 +483,19 @@ export default class CbcnvModal extends React.Component {
         $('#TG').val(TG);
         $('#NVC').val(NVC);
         $('#CVC').val(CVC);
-        $('#TG_QUANDOI').val(TG_QUANDOI);
+        $('#TG_QUANDOI').val(T.dateToText(TG_QUANDOI,'yyyy-mm-dd'));
         $('#CAP_BAC').val(CAP_BAC);
-        $('#HUY_CHUONG_SNGD').val(HUY_CHUONG_SNGD);
-        $('#NGND').val(NGND);
-        $('#NGUT').val(NGUT);
+        $('#HUY_CHUONG_SNGD').val(T.dateToText(HUY_CHUONG_SNGD,'yyyy-mm-dd'));
+        $('#NGND').val(T.dateToText(NGND,'yyyy-mm-dd'));
+        $('#NGUT').val(T.dateToText(NGUT,'yyyy-mm-dd'));
         $('#SO_THE').val(SO_THE);
-        $('#NGAY_DANG_DB').val(NGAY_DANG_DB);
+        $('#NGAY_DANG_DB').val(T.dateToText(NGAY_DANG_DB,'yyyy-mm-dd'));
         $('#NOI_DANG_DB').val(NOI_DANG_DB);
         $('#DANG_VIEN').val(DANG_VIEN);
-        $('#NGAY_DANG_CT').val(NGAY_DANG_CT);
+        $('#NGAY_DANG_CT').val(T.dateToText(NGAY_DANG_CT,'yyyy-mm-dd'));
         $('#NOI_DANG_CT').val(NOI_DANG_CT);
         $('#DOAN_VIEN').val(DOAN_VIEN);
-        $('#NGAY_DOAN').val(NGAY_DOAN);
+        $('#NGAY_DOAN').val(T.dateToText(NGAY_DOAN,'yyyy-mm-dd'));
         $('#NOI_DOAN').val(NOI_DOAN);
         $('#NOI_DKHK').val(NOI_DKHK);
         $('#DC_HIENTAI').val(DC_HIENTAI);
@@ -446,15 +507,15 @@ export default class CbcnvModal extends React.Component {
         $('#DANTOC').val(DANTOC);
         $('#TON_GIAO').val(TON_GIAO);
         $('#CHA_TEN').val(CHA_TEN);
-        $('#CHA_NAM_SINH').val(CHA_NAM_SINH);
+        $('#CHA_NAM_SINH').val(T.dateToText(CHA_NAM_SINH,'yyyy-mm-dd'));
         $('#CHA_NNGHIEP').val(CHA_NNGHIEP);
         $('#CHA_CONGTAC').val(CHA_CONGTAC);
         $('#ME_TEN').val(ME_TEN);
-        $('#ME_NAM_SINH').val(ME_NAM_SINH);
+        $('#ME_NAM_SINH').val(T.dateToText(ME_NAM_SINH,'yyyy-mm-dd'));
         $('#ME_NNGHIEP').val(ME_NNGHIEP);
         $('#ME_CONGTAC').val(ME_CONGTAC);
         $('#VC_TEN').val(VC_TEN);
-        $('#VC_NAMSINH').val(VC_NAMSINH);
+        $('#VC_NAMSINH').val(T.dateToText(VC_NAMSINH,'yyyy-mm-dd'));
         $('#VC_NNGHIEP').val(VC_NNGHIEP);
         $('#VC_CONGTAC').val(VC_CONGTAC);
         $('#SO_SO_HK').val(SO_SO_HK);
@@ -472,17 +533,27 @@ export default class CbcnvModal extends React.Component {
         $('#GHICHU_BHXH').val(GHICHU_BHXH);
         $('#NO_BHXH').val(NO_BHXH);
         $('#GHICHU_KY_HIEU').val(GHICHU_KY_HIEU);
-        $('#HIEULUC_GD_HD').val(HIEULUC_GD_HD);
+        $('#HIEULUC_GD_HD').val(T.dateToText(HIEULUC_GD_HD,'yyyy-mm-dd'));
         $('#TANG').val(TANG);
         $('#KH_TANG').val(KH_TANG);
         $('#GIAM').val(GIAM);
         $('#KH_GIAM').val(KH_GIAM);
         $('#SO_QH_HD').val(SO_QH_HD);
-        $('#NGAY_KY_QH_HD').val(NGAY_KY_QH_HD);
-        $('#NGAY_NHAP_HS').val(NGAY_NHAP_HS);
+        $('#NGAY_KY_QH_HD').val(T.dateToText(NGAY_KY_QH_HD,'yyyy-mm-dd'));
+        $('#NGAY_NHAP_HS').val(T.dateToText(NGAY_NHAP_HS,'yyyy-mm-dd'));
         $('#DONG_BHXH').val(DONG_BHXH);
-        $('#HL_DEN_NGAY').val(HL_DEN_NGAY);
+        $('#HL_DEN_NGAY').val(T.dateToText(HL_DEN_NGAY,'yyyy-mm-dd'));
         $('#DIEN_GIAI_HD').val(DIEN_GIAI_HD);
+        IN_NUOC ? this.is.current.setText(IN_NUOC) : null;
+        IS_NNGOAI ? this.is.current.setText(IS_NNGOAI) : null;
+        DANG_VIEN ? this.nopcc.current.setText(DANG_VIEN) : null;
+        DOAN_VIEN ? this.nopcc.current.setText(DOAN_VIEN) : null;
+        NO_PC ? this.nopcc.current.setText(NO_PC) : null;
+        NO_DONG_BHXH ? this.nopcc.current.setText(NO_DONG_BHXH) : null;
+        NO_BHXH ? this.nopcc.current.setText(NO_BHXH) : null;
+        TANG ? this.giahan.current.setText(TANG) : null;
+        GIAM ? this.giahan.current.setText(GIAM) : null;
+        PHAI ? this.phai.current.setText(PHAI) : null;
 
         this.setState({ _id, 
             nghi_ctac : nghi_ctac ? nghi_ctac : [], 
@@ -496,38 +567,55 @@ export default class CbcnvModal extends React.Component {
             dantoc : dantoc ? dantoc : [], 
             tongiao : tongiao ? tongiao : [], 
             benhvien : benhvien ? benhvien : []});
+            let nghi_ctacLabel = NGHI ? ({value: NGHI._id,label: NGHI.Dien_giai}): null;        
+            let loaiLabel = LOAI ? ({value: LOAI._id, label:LOAI.LOAI}) : null;
+            let pctn_nghe_2018Label = SHCC ? ({value: SHCC._id,label: SHCC.SHCC}): null;        
+            let chucdanhLabel = CHUC_DANH ? ({value: CHUC_DANH._id, label:CHUC_DANH.chuc_danh}) : null;
+            let trinhdoLabel = TRINH_DO ? ({value: TRINH_DO._id,label: TRINH_DO.trinh_do}): null;        
+            let ngachLabel = NGACH ? ({value: NGACH._id, label:NGACH.NGACH}) : null;
+            let chucvuLabel = MS_CVU ? ({value: MS_CVU._id,label: MS_CVU.CHUC_VU}): null;        
+            let bomonLabel = MS_BM ? ({value: MS_BM._id, label:MS_BM.ten_bm}) : null;
+            let dantocLabel = DANTOC ? ({value: DANTOC._id,label: DANTOC.Dan_toc}): null;        
+            let tongiaoLabel = TON_GIAO ? ({value: TON_GIAO._id, label:TON_GIAO.TON_GIAO}) : null;
+            let benhvienLabel = MA_BV ? ({value: MA_BV._id,label: MA_BV.Noi_kham}): null;        
+            
+            this.setState({selectedbenhvien: benhvienLabel, selectedbomon:bomonLabel, selectedchucdanh:chucdanhLabel,
+            selectedchucvu: chucvuLabel, selecteddantoc: dantocLabel, selectedloai:loaiLabel,selectedngach:ngachLabel,
+            selectednghi_ctac:nghi_ctacLabel,selectedpctn_nghe_2018:pctn_nghe_2018Label,selectedtongiao: tongiaoLabel,selectedtrinhdo:trinhdoLabel});
+               
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const nghi_ctac = this.nghi_ctac.current.getSelectedItem(),
-            loai = this.loai.current.getSelectedItem(),
-            pctn_nghe_2018 = this.pctn_nghe_2018.current.getSelectedItem(),
-            chucdanh = this.chucdanh.current.getSelectedItem(),
-            trinhdo = this.trinhdo.current.getSelectedItem(),
-            ngach = this.ngach.current.getSelectedItem(),
-            chucvu = this.chucvu.current.getSelectedItem(),
-            bomon = this.bomon.current.getSelectedItem(),
-            dantoc = this.dantoc.current.getSelectedItem(),
-            tongiao = this.tongiao.current.getSelectedItem(),
-            benhvien = this.benhvien.current.getSelectedItem(),
+        const 
+            nghi_ctac = this.state.selectednghi_ctac ? this.state.selectednghi_ctac.value : [],
+            loai = this.state.selectedloai ? this.state.selectedloai.value : [],
+            pctn_nghe_2018 = this.state.selectedpctn_nghe_2018 ? this.state.selectedpctn_nghe_2018.value : [],
+            chucdanh = this.state.selectedchucdanh ? this.state.selectedchucdanh.value : [],
+            trinhdo = this.state.selectedtrinhdo ? this.state.selectedtrinhdo.value : [],
+            ngach = this.state.selectedngach ? this.state.selectedngach.value : [],
+            chucvu = this.state.selectedchucvu ? this.state.selectedchucvu.value : [],
+            benhvien = this.state.selectedbenhvien ? this.state.selectedbenhvien.value : [],
+            bomon = this.state.selectedbomon ? this.state.selectedbomon.value : [],
+            dantoc = this.state.selecteddantoc ? this.state.selecteddantoc.value : [],
+            tongiao = this.state.selectedtongiao ? this.state.selectedtongiao.value : [],
+            NGHI = nghi_ctac,
+            LOAI = loai,
+            SHCC = pctn_nghe_2018,
+            CHUC_DANH = chucdanh,
+            TRINH_DO = trinhdo,
+            NGACH = ngach,
+            MS_CVU = chucvu,
+            MS_BM = bomon,
+            DANTOC = dantoc,
+            TON_GIAO = tongiao,
+            MA_BV = benhvien,
             nopcc = this.nopcc.current.getSelectedItem(),
             giahan = this.giahan.current.getSelectedItem(),
             phai = this.phai.current.getSelectedItem(),
             is = this.is.current.getSelectedItem(),
        
-            NGHI = nghi_ctac ? nghi_ctac._id: [],
-            LOAI = loai ? loai._id : [],
-            SHCC = pctn_nghe_2018? pctn_nghe_2018._id : [],
-            CHUC_DANH = chucdanh ? chucdanh._id : [],
-            TRINH_DO = trinhdo ? trinhdo._id : [],
-            NGACH = ngach ? ngach._id : [],
-            MS_CVU = chucvu ? chucvu._id : [],
-            MS_BM = bomon ? bomon._id : [],
-            DANTOC = dantoc ? dantoc._id : [],
-            TON_GIAO = tongiao ? tongiao._id : [],
-            MA_BV = benhvien ? benhvien._id : [],
             IN_NUOC = is? is : [],
             IS_NNGOAI = is? is : [],
             DANG_VIEN = nopcc ? nopcc : [],
@@ -584,8 +672,8 @@ export default class CbcnvModal extends React.Component {
             PC_DOC_HAI: this.state.number.PC_DOC_HAI,
             MOI_TRUONG_DOC_HAI: this.state.text.MOI_TRUONG_DOC_HAI,
             MS_CVU,
-            TEN_CV: this.state.text.TEN_CV,
-            PCCV: this.state.number.PCCV,
+            // TEN_CV: this.state.text.TEN_CV,
+            PCCV: this.state.number.PCCV ? this.state.number.PCCV.PC_CVU : '',
             NGAY_PCCV: this.state.date.NGAY_PCCV,
             NUOC_NGOAI: this.state.text.NUOC_NGOAI,
             TU_NGAY_NN: this.state.date.TU_NGAY_NN,
@@ -603,13 +691,13 @@ export default class CbcnvModal extends React.Component {
             GHI_CHU_NOP_BANG: this.state.text.GHI_CHU_NOP_BANG,
             CONG_NHAN_BANG: this.state.text.CONG_NHAN_BANG,
             CHUYEN_NGANH: this.state.text.CHUYEN_NGANH,
-            CD: this.state.text.CD ? this.state.text.CD : 0,
-            KS: this.state.text.KS ? this.state.text.KS : 0,
-            CH: this.state.text.CH ?  this.state.text.Ch : 0,
-            TS: this.state.text.TS ?  this.state.text.TS : 0,
-            TSKH: this.state.text.TSKH ? this.state.text.TSKH : 0,
-            TC: this.state.text.TC ? this.state.text.TC : 0,
-            KHAC: this.state.text.KHAC ? this.state.text.KHAC : 0,
+            CD: this.state.text.CD,
+            KS: this.state.text.KS,
+            CH: this.state.text.CH,
+            TS: this.state.text.TS,
+            TSKH: this.state.text.TSKH,
+            TC: this.state.text.TC,
+            KHAC: this.state.text.KHAC,
             GS: this.state.number.GS,
             PGS: this.state.number.PGS,
             GVC: this.state.number.GVC,
@@ -680,47 +768,44 @@ export default class CbcnvModal extends React.Component {
             HL_DEN_NGAY: this.state.date.HL_DEN_NGAY,
             DIEN_GIAI_HD: this.state.number.DIEN_GIAI_HD,
 
-        };
+        };        
         if (changes.IN_NUOC == 'Đúng' && changes.IS_NNGOAI == 'Đúng'){
             T.notify('Không thể chọn cả 2 trong nước và đang ở nước ngoài', 'danger');
             $('#IN_NUOC').focus();
-        } else if (!changes.LOAI) {
+        } else if (changes.LOAI == '' ) {
             T.notify('Loại đang trống', 'danger');
             $('#LOAI').focus();
-        } else if (!changes.SHCC) {
-            T.notify('SHCC đang trống', 'danger');
-            $('#SHCC').focus();
-        } else if (changes.MS_NV == '') {
+        } else if (changes.MS_NV == '' | changes.MS_NV == null) {
             T.notify('MSNV đang trống', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.HO == '') {
+        } else if (changes.HO == ''| changes.HO == null) {
             T.notify('Họ đang trống', 'danger');
             $('#HO').focus();
-        } else if (changes.TEN == '') {
+        } else if (changes.TEN == ''| changes.TEN == null) {
             T.notify('Tên đang trống', 'danger');
             $('#TEN').focus();
-        } else if (!changes.PHAI) {
+        } else if (changes.PHAI == '') {
             T.notify('Phái đang trống', 'danger');
             $('#PHAI').focus();
-        } else if (changes.NGAY_SINH == '') {
+        } else if (changes.NGAY_SINH == ''| changes.NGAY_SINH == null) {
             T.notify('Ngày sinh đang trống', 'danger');
             $('#NGAY_SINH').focus();
-        } else if (changes.NOI_DKHK == '') {
+        } else if (changes.NOI_DKHK == ''| changes.NOI_DKHK == null) {
             T.notify('Nơi ĐKHK đang trống', 'danger');
             $('#NOI_DKHK').focus();
-        } else if (changes.DC_HIENTAI == '') {
+        } else if (changes.DC_HIENTAI == ''| changes.DC_HIENTAI == null) {
             T.notify('Địa chỉ hiện tại đang trống', 'danger');
             $('#DC_HIENTAI').focus();
-        } else if (changes.DIEN_THOAI == '') {
+        } else if (changes.DIEN_THOAI == ''| changes.DIEN_THOAI == null) {
             T.notify('Điện thoại đang trống', 'danger');
             $('#DIEN_THOAI').focus();
-        } else if (changes.EMAIL == '') {
+        } else if (changes.EMAIL == ''| changes.EMAIL == null) {
             T.notify('Email đang trống', 'danger');
             $('#EMAIL').focus();
-        } else if (changes.NGUYEN_QUAN == '') {
+        } else if (changes.NGUYEN_QUAN == ''| changes.NGUYEN_QUAN == null) {
             T.notify('Nguyên quán đang trống', 'danger');
             $('#NGUYEN_QUAN').focus();
-        } else if (changes.SO_CMND == '') {
+        } else if (changes.SO_CMND == ''| changes.SO_CMND == null) {
             T.notify('Số CMND đang trống', 'danger');
             $('#SO_CMND').focus();
         } else if (changes.BAC_LG < 0) {
@@ -783,6 +868,17 @@ export default class CbcnvModal extends React.Component {
         const bomon = this.state && this.state.bomon && this.state.bomon.bomon ? this.state.bomon.bomon : [];
         const dantoc = this.state && this.state.dantoc && this.state.dantoc.dantoc ? this.state.dantoc.dantoc : [];
         const tongiao = this.state && this.state.tongiao && this.state.tongiao.tongiao ? this.state.tongiao.tongiao : [];
+        const selectednghi_ctac = this.state.selectednghi_ctac;
+        const selectedloai = this.state.selectedloai;
+        const selectedpctn_nghe_2018 = this.state.selectedpctn_nghe_2018;
+        const selectedchucdanh = this.state.selectedchucdanh;
+        const selectedtrinhdo = this.state.selectedtrinhdo;
+        const selectedngach = this.state.selectedngach;
+        const selectedchucvu = this.state.selectedchucvu;
+        const selectedbenhvien = this.state.selectedbenhvien;
+        const selectedbomon = this.state.selectedbomon;
+        const selecteddantoc = this.state.selecteddantoc;
+        const selectedtongiao = this.state.selectedtongiao;
         
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
@@ -797,7 +893,11 @@ export default class CbcnvModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='NGHI'>Nghỉ công tác</label>
-                                <Dropdown ref={this.nghi_ctac} number='' items={nghi_ctac.map(e => Object.assign({}, e, {text: e.Dien_giai}))} />
+                                <Select
+                                value = {selectednghi_ctac}
+                                onChange = {this.handleInput('nghi_ctac')}
+                                options = {nghi_ctac.map(e => Object.assign({}, {label: e.Dien_giai, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TAM_NGUNG'>Tạm ngưng</label>
@@ -813,11 +913,19 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='LOAI'>Loại</label>
-                                <Dropdown ref={this.loai} number='' items={loai.map(e => Object.assign({}, e, {text: e.LOAI}))} />
+                                <Select
+                                value = {selectedloai}
+                                onChange =  {this.handleInput('loai')}
+                                options = {loai.map(e => Object.assign({}, {label: e.LOAI, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='SHCC'>SHCC</label>
-                                <Dropdown ref={this.pctn_nghe_2018} number='' items={pctn_nghe_2018.map(e => Object.assign({}, e, {text: e.SHCC}))} />
+                                <Select
+                                value = {selectedpctn_nghe_2018}
+                                onChange =  {this.handleInput('pctn_nghe_2018')}
+                                options = {pctn_nghe_2018.map(e => Object.assign({}, {label: e.SHCC, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MS NV</label>
@@ -891,15 +999,27 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CHUC_DANH'>Chức danh</label>
-                                <Dropdown ref={this.chucdanh} number='' items={chucdanh.map(e => Object.assign({}, e, {text: e.chuc_danh}))} />
+                                <Select
+                                value = {selectedchucdanh}
+                                onChange =  {this.handleInput('chucdanh')}
+                                options = {chucdanh.map(e => Object.assign({}, {label: e.ten_day_du, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TRINH_DO'>Trình độ</label>
-                                <Dropdown ref={this.trinhdo} number='' items={trinhdo.map(e => Object.assign({}, e, {text: e.trinh_do}))} />
+                                <Select
+                                value = {selectedtrinhdo}
+                                onChange =  {this.handleInput('trinhdo')}
+                                options = {trinhdo.map(e => Object.assign({}, {label: e.Ten_day_du, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGACH'>Ngạch</label>
-                                <Dropdown ref={this.ngach} number='' items={ngach.map(e => Object.assign({}, e, {text: e.NGACH}))} />
+                                <Select
+                                value = {selectedngach}
+                                onChange =  {this.handleInput('ngach')}
+                                options = {ngach.map(e => Object.assign({}, {label: e.NGACH, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGACHMOI'>Ngạch mới</label>
@@ -979,12 +1099,16 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_CVU'>Chức vụ</label>
-                                <Dropdown ref={this.chucvu} number='' items={chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
+                                <Select
+                                value = {selectedchucvu}
+                                onChange =  {this.handleInput('chucvu')}
+                                options = {chucvu.map(e => Object.assign({}, {label: e.CHUC_VU, value: e}))}
+                                />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='TEN_CV'>Tên CV</label>
                                 <input className='form-control' id='TEN_CV' type='text' placeholder='Tên CV' onChange={this.handleInput('text', 'TEN_CV')} value={this.state.text.TEN_CV}/>
-                            </div>
+                            </div> */}
                             <div className='form-group'>
                                 <label htmlFor='PCCV'>PCCV</label>
                                 <input className='form-control' id='PCCV' type='number' placeholder='PCCV' onChange={this.handleInput('number', 'PCCV')} value={this.state.number.PCCV}/>
@@ -1031,7 +1155,11 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_BM'>MS BM</label>
-                                <Dropdown ref={this.bomon} number='' items={bomon.map(e => Object.assign({}, e, {text: e.TEN_BM}))} />
+                                <Select
+                                value = {selectedbomon}
+                                onChange =  {this.handleInput('bomon')}
+                                options = {bomon.map(e => Object.assign({}, {label: e.ten_bm, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TDO_LLCT'>TDO LLCT</label>
@@ -1203,11 +1331,19 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='DANTOC'>Dân tộc</label>
-                                <Dropdown ref={this.dantoc} number='' items={dantoc.map(e => Object.assign({}, e, {text: e.Dan_toc}))} />
+                                <Select
+                                value = {selecteddantoc}
+                                onChange =  {this.handleInput('dantoc')}
+                                options = {dantoc.map(e => Object.assign({}, {label: e.Dan_toc, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='TON_GIAO'>Tôn giáo</label>
-                                <Dropdown ref={this.tongiao} number='' items={tongiao.map(e => Object.assign({}, e, {text: e.TON_GIAO}))} />
+                                <Select
+                                value = {selectedtongiao}
+                                onChange =  {this.handleInput('tongiao')}
+                                options = {tongiao.map(e => Object.assign({}, {label: e.TON_GIAO, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='CHA_TEN'>Cha tên</label>
@@ -1283,7 +1419,11 @@ export default class CbcnvModal extends React.Component {
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MA_BV'>Mã BV</label>
-                                <Dropdown ref={this.benhvien} number='' items={benhvien.map(e => Object.assign({}, e, {text: e.Noi_kham}))} />
+                                <Select
+                                value = {selectedbenhvien}
+                                onChange =  {this.handleInput('benhvien')}
+                                options = {benhvien.map(e => Object.assign({}, {label: e.Noi_kham, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MASO_BHXH'>Mã số BHXH</label>

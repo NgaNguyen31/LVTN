@@ -44,12 +44,12 @@ class Qt_ky_luatPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tháng</th> */}
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Tháng</th> */}
                             <th style={{ width: '10%', textAlign: 'center' }}>Năm</th>
                             <th style={{ width: '20%', textAlign: 'center' }}>Hình thức</th>
                             <th style={{ width: '20%', textAlign: 'center' }}>Cấp kỷ luật</th>
-                            <th style={{ width: '40%', textAlign: 'center' }}>Lý do</th>                            
+                            <th style={{ width: '30%', textAlign: 'center' }}>Lý do</th>                            
                             {/* <th style={{ width: '20%', textAlign: 'center' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Số QĐ</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th>
@@ -63,8 +63,8 @@ class Qt_ky_luatPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td>
-                                <td>{item.THANG}</td> */}
+                                <td>{item.STT}</td>
+                                {/* <td>{item.THANG}</td> */}
                                 <td>{T.dateToText(item.NAM,'dd/mm/yyyy')}</td>
                                 <td>{item.HINH_THUC}</td>
                                 <td>{item.CAP_KL}</td>

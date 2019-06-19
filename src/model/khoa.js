@@ -1,8 +1,9 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        TEN_KHOA: String,
-        TEN_TIENG_ANH: String,
-        TEN_KHOA_TAT: String
+        ten_khoa: String,
+        ten_tieng_anh: String,
+        ten_khoa_tat: String,
+        xoa: Boolean
     });
     const model = app.db.model('khoa',schema);
 
@@ -11,12 +12,12 @@ module.exports = app =>{
             model.find({
                 $or : [
                     {
-                        TEN_KHOA: data.TEN_KHOA                        
+                        ten_khoa: data.ten_khoa                        
                     }
                     , {      
-                        TEN_TIENG_ANH: data.TEN_TIENG_ANH
+                        ten_tieng_anh: data.ten_tieng_anh
                     }, {
-                        TEN_KHOA_TAT: data.TEN_KHOA_TAT
+                        ten_khoa_tat: data.ten_khoa_tat
                     }
                 ]
             }, (error, items) => {
@@ -52,12 +53,12 @@ module.exports = app =>{
             model.find({
                 $or : [
                     {
-                        TEN_KHOA: changes.TEN_KHOA                        
+                        ten_khoa: changes.ten_khoa                        
                     }
                     , {      
-                        TEN_TIENG_ANH: changes.TEN_TIENG_ANH
+                        ten_tieng_anh: changes.ten_tieng_anh
                     }, {
-                        TEN_KHOA_TAT: changes.TEN_KHOA_TAT
+                        ten_khoa_tat: changes.ten_khoa_tat
                     }
                 ]
             }, (error, items) => {

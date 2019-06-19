@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
+import Select from 'react-select';
 import Qt_luongPage from './Qt_luongPage.jsx';
 
 export default class Qt_luongModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: [], ngach: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], ngach: [], selectedcbcnv: [], selectedngach: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -14,6 +15,8 @@ export default class Qt_luongModal extends React.Component {
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
         this.ngach = React.createRef();
+        this.selectedcbcnv = React.createRef();
+        this.selectedngach = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -22,18 +25,28 @@ export default class Qt_luongModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value) 
                     : (state.date = {}) && (state.date[field] = e.target.value)
-
+                    e.preventDefault();
+                    break;  
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;
+                case 'ngach':
+                    state.selectedngach = e;
+                    break;      
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -46,13 +59,13 @@ export default class Qt_luongModal extends React.Component {
     show(item, cbcnv, ngach) {      
         
         const { _id, MS_NV, STT, QD_luong, Ngay_QD, Ngay_huong, Moc_nang_luong, Ngach, Heso, Bac, PT_Vuot_Khung, LG_Khoan_Chinh, Ty_le, GHI_CHU_LUONG, GHI_CHU_KHAC} = item ?
-            item : { _id: null, MS_NV: '', STT: '', QD_luong: '', Ngay_QD: '', Ngay_huong: '', Moc_nang_luong: '', Ngach: '', Heso: '', Bac: '', PT_Vuot_Khung: '', LG_Khoan_Chinh: '', Ty_le: '', GHI_CHU_LUONG: '', GHI_CHU_KHAC: ''};
+            item : { _id: null, MS_NV: null, STT: null, QD_luong: null, Ngay_QD: null, Ngay_huong: null, Moc_nang_luong: null, Ngach: null, Heso: null, Bac: null, PT_Vuot_Khung: null, LG_Khoan_Chinh: null, Ty_le: null, GHI_CHU_LUONG: null, GHI_CHU_KHAC: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         $('#QD_luong').val(QD_luong);
-        $('#Ngay_QD').val(Ngay_QD);
-        $('#Ngay_huong').val(Ngay_huong);
-        $('#Moc_nang_luong').val(Moc_nang_luong);
+        $('#Ngay_QD').val(T.dateToText(Ngay_QD,'yyyy-mm-dd'));
+        $('#Ngay_huong').val(T.dateToText(Ngay_huong,'yyyy-mm-dd'));
+        $('#Moc_nang_luong').val(T.dateToText(Moc_nang_luong,'yyyy-mm-dd'));
         $('#Ngach').val(Ngach);
         $('#Heso').val(Heso);
         $('#Bac').val(Bac);
@@ -63,19 +76,23 @@ export default class Qt_luongModal extends React.Component {
         $('#GHI_CHU_KHAC').val(GHI_CHU_KHAC);
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: [], ngach: ngach? ngach:[]});
-
+        let MS_NVLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        let ngachLabel = Ngach ? ({value: Ngach._id, label:Ngach.NGACH}): null;
+        this.setState({selectedcbcnv: MS_NVLabel, selectedngach:ngachLabel});
+        
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),  
-        ngach = this.ngach.current.getSelectedItem(),       
-            MS_NV = cbcnv? cbcnv : [],
-            Ngach = ngach? ngach:[],
+        const 
+            ngach = this.state.selectedngach ? this.state.selectedngach.value : null,
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            Ngach = ngach,
+            MS_NV = cbcnv,
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 QD_luong: this.state.text.QD_luong, 
                 Ngay_QD: this.state.date.Ngay_QD,
                 Ngay_huong: this.state.date.Ngay_huong,
@@ -89,22 +106,19 @@ export default class Qt_luongModal extends React.Component {
                 GHI_CHU_LUONG: this.state.text.GHI_CHU_LUONG, 
                 GHI_CHU_KHAC: this.state.text.GHI_CHU_KHAC, 
             };    
-        if (!changes.MS_NV) {
+        if (changes.MS_NV == '') {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
-        } else if (changes.Ngach == '') {
+        } else if (changes.Ngach == null) {
             T.notify('Ngạch đang trống!', 'danger');
             $('#Ngach').focus();
-        } else if (changes.Heso == '') {
+        } else if (changes.Heso == null) {
             T.notify('Hệ số đang trống!', 'danger');
             $('#Heso').focus();
-        } else if (changes.Bac == '') {
+        } else if (changes.Bac == null) {
             T.notify('Bậc đang trống!', 'danger');
             $('#Bac').focus();
-        } else if (changes.LG_Khoan_Chinh == '') {
+        } else if (changes.LG_Khoan_Chinh == null) {
             T.notify('Lương khoản chính đang trống!', 'danger');
             $('#LG_Khoan_Chinh').focus();
         } else if (changes.STT < 0) {
@@ -140,6 +154,9 @@ export default class Qt_luongModal extends React.Component {
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
         const ngach = this. state && this.state.ngach && this.state.ngach.ngach? this.state.ngach.ngach : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
+        const selectedngach = this.state.selectedngach;
+        
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -153,12 +170,12 @@ export default class Qt_luongModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
-                            <div className='form-group'>
-                                <label htmlFor='STT'>STT</label>
-                                <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
                             <div className='form-group'>
                                 <label htmlFor='QD_luong'>QĐ lương</label>
                                 <input className='form-control' id='QD_luong' type='text' placeholder='' onChange={this.handleInput('text', 'QD_luong')} value={this.state.text.QD_luong}/>
@@ -177,7 +194,11 @@ export default class Qt_luongModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='Ngach'>Ngạch</label>
-                                <Dropdown ref={this.ngach} text='' items={ngach.map(e => Object.assign({}, e, {text: e.NGACH}))} />
+                                <Select
+                                value = {selectedngach}
+                                onChange =  {this.handleInput('ngach')}
+                                options = {ngach.map(e => Object.assign({}, {label: e.NGACH, value: e}))}
+                                />
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='Heso'>Hệ số</label>

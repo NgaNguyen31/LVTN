@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_dtaiPage from './Qt_dtaiPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_dtaiModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], selectedcbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,6 +14,8 @@ export default class Qt_dtaiModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
+        this.selectedcbcnv = React.createRef();
+
     }
 
     handleInput(type, field, args) {
@@ -34,6 +37,9 @@ export default class Qt_dtaiModal extends React.Component {
                     : (state.date = {}) && (state.date[field] = e.target.value);
                     e.preventDefault();
                     break;
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break; 
             }
 
             this.setState(state);
@@ -57,17 +63,17 @@ export default class Qt_dtaiModal extends React.Component {
         $('#CAP').val(CAP);
         $('#NGAY_KETTHUC').val(T.dateToText(NGAY_KETTHUC,'yyyy-mm-dd'));
         $('#NAM').val(T.dateToText(NAM,'yyyy-mm-dd'));
-        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});        
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),            
-            MS_NV = cbcnv? cbcnv : [],
+        const cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            MS_NV = cbcnv,
              changes = {
                 MS_NV,
                 // STT: this.state.number.STT, 
@@ -77,16 +83,16 @@ export default class Qt_dtaiModal extends React.Component {
                 NGAY_KETTHUC: this.state.date.NGAY_KETTHUC,
                 NAM: this.state.date.NAM,
             };    
-        if (!changes.MS_NV) {
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.DE_TAI == '') {
+        } else if (changes.DE_TAI == null) {
             T.notify('Đề tài đang trống!', 'danger');
             $('#DE_TAI').focus();
-        } else if (changes.CAP == '') {
+        } else if (changes.CAP == null) {
             T.notify('Cấp đang trống!', 'danger');
             $('#CAP').focus();
-        } else if (changes.CHU_NHIEM_DE_TAI == '') {
+        } else if (changes.CHU_NHIEM_DE_TAI == null) {
             T.notify('Chủ nhiệm đề tài đang trống!', 'danger');
             $('#CHU_NHIEM_DE_TAI').focus();
         } else if (changes.STT < 0) {
@@ -106,6 +112,7 @@ export default class Qt_dtaiModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -119,7 +126,11 @@ export default class Qt_dtaiModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
                             {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>

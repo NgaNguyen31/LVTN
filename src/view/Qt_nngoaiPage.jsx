@@ -47,11 +47,11 @@ class Qt_nngoaiPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Họ</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Tên</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>Số QĐ</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Họ</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>Tên</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>Số QĐ</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th> */}
-                            <th style={{ width: '25%', textAlign: 'center' }}>Đơn vị</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Đơn vị</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ngày đi</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày về</th> */}
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ngày về thực</th>
@@ -62,8 +62,8 @@ class Qt_nngoaiPage extends React.Component {
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngành học</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Gia hạn</th> */}
                             <th style={{ width: '10%', textAlign: 'center' }}>Nước đến</th>
-                            <th style={{ width: '25%', textAlign: 'center' }}>Nơi đến</th>
-                            <th style={{ width: '20%', textAlign: 'center' }}>Chi phí</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Nơi đến</th>
+                            <th style={{ width: '15%', textAlign: 'center' }}>Chi phí</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Ghi chú</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Hoàn trả KP BHXH</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày nhập</th>
@@ -77,9 +77,9 @@ class Qt_nngoaiPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.HO}</td>
-                                <td>{item.TEN}</td>
-                                <td>{item.SO_QUYET_DINH}</td>
+                                <td>{item.MS_NV.HO}</td>
+                                <td>{item.MS_NV.TEN}</td>
+                                {/* <td>{item.SO_QUYET_DINH}</td>
                                 <td>{item.NGAY_QDINH}</td> */}
                                 <td>{item.DON_VI}</td>
                                 {/* <td>{item.NGAY_DI}</td>
@@ -91,7 +91,7 @@ class Qt_nngoaiPage extends React.Component {
                                 {/* <td>{item.NOI_DUNG}</td>
                                 <td>{item.NGANH_HOC}</td>
                                 <td>{item.GIA_HAN}</td> */}
-                                <td>{item.NUOC_DEN.reduce((pre, value) => pre + ' ' +  value.TEN_NUOC, ' ')}</td>
+                                <td>{item.NUOC_DEN.reduce((pre, value) => pre + ' ' +  value.TEN_NUOC + ', ', ' ')}</td>
                                 <td>{item.NOI_DEN}</td>
                                 <td>{item.CHI_PHI}</td>
                                 {/* <td>{item.GHI_CHU}</td>

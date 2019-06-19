@@ -21,7 +21,7 @@ module.exports = app => {
     app.put('/admin/benhvien', app.role.isAdmin, (req, res) => {
         let data = req.body.changes,
             changes = {};
-        if (data.Noi_kham && data.Noi_kham != '') changes.Noi_kham = data.Noi_kham;
+        if (data.noi_kham && data.noi_kham != '') changes.noi_kham = data.noi_kham;
 
         app.model.benhvien.update(req.body._id, changes, (error, benhvien) => {
             if (error) {

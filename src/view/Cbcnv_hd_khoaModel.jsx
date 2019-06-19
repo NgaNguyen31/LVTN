@@ -61,7 +61,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
         $('#Xoa').prop('checked', Xoa);
         
         this.setState({ _id, bomon: bomon? bomon: []});
-        let MSBMLabel = MSBM ? ({value:MSBM._id, label:MSBM.TEN_BM}) : null;
+        let MSBMLabel = MSBM ? ({value:MSBM._id, label:MSBM.ten_bm}) : null;
         this.setState({selectedbomon: MSBMLabel});
         $(this.modal.current).modal('show');
     }
@@ -85,18 +85,17 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                 PC: this.state.text.PC,
                 Xoa: $('#Xoa').prop('checked'),
         };
-        console.log(HO);
         
         if (changes.MSBM == null) {
             T.notify('MSBM đang trống!', 'danger');
             $('#MSBM').focus(); 
-        } else if (changes.HO == '') {
+        } else if (changes.HO == '' | changes.HO == null) {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();  
-        } else if (changes.TEN == '') {  
+        } else if (changes.TEN == '' | changes.TEN == null) {  
             T.notify('Tên đang trống!', 'danger');
             $('#TEN').focus();             
-        } else if (changes.NAM_SINH == '') {
+        } else if (changes.NAM_SINH == '' | changes.NAM_SINH == null) {
             T.notify('Năm sinh đang trống!', 'danger');
             $('#NAM_SINH').focus();            
         } else if (this.state._id) {
@@ -130,7 +129,7 @@ export default class Cbcnv_hd_khoaModal extends React.Component {
                                 <Select
                                 value = {selectedbomon}
                                 onChange =  {this.handleInput('bomon')}
-                                options = {bomon.map(e => Object.assign({}, {label: e.TEN_BM, value: e}))}
+                                options = {bomon.map(e => Object.assign({}, {label: e.ten_bm, value: e}))}
                                 />
                             </div>
                             <div className='form-group'>

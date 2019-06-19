@@ -71,8 +71,7 @@ export default class Cb_nngoaiModal extends React.Component {
         this.setState({ _id, nuocngoai: nuocngoai? nuocngoai: [], cbcnv: cbcnv? cbcnv: []});
         let hovatenLabel = Hovaten ? ({value: Hovaten._id,label: Hovaten.HO + ' ' + Hovaten.TEN}): null;        
         let nuocLabel = Nuoc ? ({value: Nuoc._id, label:Nuoc.TEN_NUOC}): null;
-        let giahanLabel = Giahan ? Giahan : null;
-        this.setState({selectedcbcnv: hovatenLabel, selectednuoc:nuocLabel, selectedgiahan:giahanLabel});
+        this.setState({selectedcbcnv: hovatenLabel, selectednuoc:nuocLabel});
         $(this.modal.current).modal('show');
     }
 
@@ -81,7 +80,7 @@ export default class Cb_nngoaiModal extends React.Component {
         const 
             giahan = this.giahan.current.getSelectedItem(),
             nuocngoai = this.state.selectednuoc ? this.state.selectednuoc.value : null,
-            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value._id : null,
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
             Nuoc = nuocngoai,
             Hovaten = cbcnv,
             Giahan = giahan,

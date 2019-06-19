@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_nngoaiPage from './Qt_nngoaiPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_nngoaiModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: [], mucdich: [], nuocngoai: [], nopcc: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], selectedcbcnv: [], mucdich: [], selectedmucdich: [], nuocngoai: [], selectednuoc: [], nopcc: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -16,6 +17,9 @@ export default class Qt_nngoaiModal extends React.Component {
         this.mucdich = React.createRef();
         this.nuocngoai = React.createRef();
         this.nopcc = React.createRef();
+        this.selectedcbcnv = React.createRef();
+        this.selectedmucdich = React.createRef();
+        this.selectednuoc = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -24,18 +28,31 @@ export default class Qt_nngoaiModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value) 
                     : (state.date = {}) && (state.date[field] = e.target.value)
-
+                    e.preventDefault();
+                    break;
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;
+                case 'nuocngoai':
+                    state.selectednuoc = e;
+                    break; 
+                case 'mucdich':
+                    state.selectedmucdich = e;
+                    break;  
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -61,13 +78,13 @@ export default class Qt_nngoaiModal extends React.Component {
         $('#HO').val(HO);
         $('#TEN').val(TEN);
         $('#SO_QUYET_DINH').val(SO_QUYET_DINH);
-        $('#NGAY_QDINH').val(NGAY_QDINH);
+        $('#NGAY_QDINH').val(T.dateToText(NGAY_QDINH,'yyyy-mm-dd'));
         $('#DON_VI').val(DON_VI);
-        $('#NGAY_DI').val(NGAY_DI);
-        $('#NGAY_VE').val(NGAY_VE);
-        $('#NGAY_VE_THUC').val(NGAY_VE_THUC);
+        $('#NGAY_DI').val(T.dateToText(NGAY_DI,'yyyy-mm-dd'));
+        $('#NGAY_VE').val(T.dateToText(NGAY_VE,'yyyy-mm-dd'));
+        $('#NGAY_VE_THUC').val(T.dateToText(NGAY_VE_THUC,'yyyy-mm-dd'));
         $('#SO_QD_TIEP_NHAN').val(SO_QD_TIEP_NHAN);
-        $('#NGAY_QD_TIEP_NHAN').val(NGAY_QD_TIEP_NHAN);
+        $('#NGAY_QD_TIEP_NHAN').val(T.dateToText(NGAY_QD_TIEP_NHAN,'yyyy-mm-dd'));
         $('#MUC_DICH').val(MUC_DICH);
         $('#NOI_DUNG').val(NOI_DUNG);
         $('#NGANH_HOC').val(NGANH_HOC);
@@ -77,31 +94,32 @@ export default class Qt_nngoaiModal extends React.Component {
         $('#CHI_PHI').val(CHI_PHI);
         $('#GHI_CHU').val(GHI_CHU);
         $('#HOAN_TRA_KP_BHXH').val(HOAN_TRA_KP_BHXH);
-        $('#NGAY_NHAP').val(NGAY_NHAP);
+        $('#NGAY_NHAP').val(T.dateToText(NGAY_NHAP,'yyyy-mm-dd'));
         $('#BHXH').val(BHXH);
-
+        GIA_HAN ? this.nopcc.current.setText(GIA_HAN) : null;
         this.setState({ _id, cbcnv: cbcnv? cbcnv: [], 
             mucdich: mucdich? mucdich:[], nuocngoai: nuocngoai? nuocngoai: []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        let nuocLabel = NUOC_DEN ? NUOC_DEN.map((test) => ({value: test._id,label: test.TEN_NUOC})): null;        
+        let mucdichLabel = MUC_DICH ? ({value: MUC_DICH._id, label:MUC_DICH.MUC_DICH}) : null;
+        this.setState({selectedcbcnv: cbcnvLabel, selectednuoc:nuocLabel, selectedmucdich:mucdichLabel});
+            
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),  
-        mucdich = this.mucdich.current.getSelectedItem(),   
-        nuocngoai = this.nuocngoai.current.getSelectedItem(),    
-        nopcc = this.nopcc.current.getSelectedItem(),
-            MS_NV = cbcnv? cbcnv : [],
-            MUC_DICH = mucdich? mucdich:[],
-            NUOC_DEN = nuocngoai? nuocngoai: [],
+        const 
+            nuocngoai = this.state.selectednuoc ? this.state.selectednuoc.map(ele => ele.value) : null,
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            mucdich = this.state.selectedmucdich ? this.state.selectedmucdich.value : null,
+            NUOC_DEN = nuocngoai,
+            MS_NV = cbcnv,
+            MUC_DICH = mucdich,
+            nopcc = this.nopcc.current.getSelectedItem(),
             GIA_HAN = nopcc? nopcc :[],
-            HO = this.state.text.HO ? this.state.text.HO : MS_NV.HO,
-            TEN = this.state.text.TEN ? this.state.text.TEN : MS_NV.TEN,
              changes = {
                 MS_NV,
-                HO,
-                TEN,
                 SO_QUYET_DINH: this.state.text.SO_QUYET_DINH,
                 NGAY_QDINH: this.state.date.NGAY_QDINH,
                 DON_VI: this.state.text.DON_VI, 
@@ -122,6 +140,7 @@ export default class Qt_nngoaiModal extends React.Component {
                 NGAY_NHAP: this.state.date.NGAY_NHAP,
                 BHXH: this.state.text.BHXH, 
             };    
+            
         if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
@@ -149,7 +168,7 @@ export default class Qt_nngoaiModal extends React.Component {
         } else if (changes.NOI_DEN == null) {
             T.notify('Nơi đến đang trống!', 'danger');
             $('#NOI_DEN').focus();
-        } else if (changes.CHI_PHI == '') {
+        } else if (changes.CHI_PHI == null) {
             T.notify('Chi phí đang trống!', 'danger');
             $('#CHI_PHI').focus();
         } else if (this.state._id) {
@@ -165,9 +184,13 @@ export default class Qt_nngoaiModal extends React.Component {
     }
 
     render() {
-        const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
-        const mucdich = this. state && this.state.mucdich && this.state.mucdich.mucdich? this.state.mucdich.mucdich : [];
-        const nuocngoai = this.state && this.state.nuocngoai && this.state.nuocngoai.nuocngoai? this.state.nuocngoai.nuocngoai : [];
+        const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv ? this.state.cbcnv.cbcnv : [];
+        const nuocngoai = this.state && this.state.nuocngoai && this.state.nuocngoai.nuocngoai ? this.state.nuocngoai.nuocngoai : [];
+        const mucdich = this.state && this.state.mucdich && this.state.mucdich.mucdich ? this.state.mucdich.mucdich : [];
+        const selectedmucdich = this.state.selectedmucdich;
+        const selectedcbcnv = this.state.selectedcbcnv;
+        const selectednuoc = this.state.selectednuoc;
+        
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -181,16 +204,12 @@ export default class Qt_nngoaiModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
-                            <div className='form-group'>
-                                <label htmlFor='HO'>Họ</label>
-                                <input className='form-control' id='HO' type='text' placeholder='' onChange={this.handleInput('text', 'HO')} value={this.state.text.HO}/>
-                            </div> 
-                            <div className='form-group'>
-                                <label htmlFor='TEN'>Tên</label>
-                                <input className='form-control' id='TEN' type='text' placeholder='' onChange={this.handleInput('text', 'TEN')} value={this.state.text.TEN}/>
-                            </div> 
                             <div className='form-group'>
                                 <label htmlFor='SO_QUYET_DINH'>Số QĐ</label>
                                 <input className='form-control' id='SO_QUYET_DINH' type='text' placeholder='' onChange={this.handleInput('text', 'SO_QUYET_DINH')} value={this.state.text.SO_QUYET_DINH}/>
@@ -225,7 +244,11 @@ export default class Qt_nngoaiModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='MUC_DICH'>Mục đích</label>
-                                <Dropdown ref={this.mucdich} text='' items={mucdich.map(e => Object.assign({}, e, {text: e.MUC_DICH}))} />
+                                <Select
+                                value = {selectedmucdich}
+                                onChange =  {this.handleInput('mucdich')}
+                                options = {mucdich.map(e => Object.assign({}, {label: e.MUC_DICH, value: e}))}
+                                />
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NOI_DUNG'>Nội dung</label>
@@ -241,7 +264,12 @@ export default class Qt_nngoaiModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NUOC_DEN'>Nước đến</label>
-                                <Dropdown ref={this.nuocngoai} text='' items={nuocngoai.map(e => Object.assign({}, e, {text: e.TEN_NUOC}))} />
+                                <Select
+                                isMulti
+                                value = {selectednuoc}
+                                onChange =  {this.handleInput('nuocngoai')}
+                                options = {nuocngoai.map(e => Object.assign({}, {label: e.TEN_NUOC, value: e}))}
+                                />
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='NOI_DEN'>Nơi đến</label>

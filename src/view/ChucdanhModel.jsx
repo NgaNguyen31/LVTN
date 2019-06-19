@@ -62,19 +62,18 @@ export default class ChucdanhModal extends React.Component {
     }
 
     save(e) {
+        e.preventDefault();
         const trinhdo = this.state.selectedtrinhdo ? this.state.selectedtrinhdo.value : null,
             ord = trinhdo,
              changes = {
                 chuc_danh: this.state.text.chuc_danh,
                 ten_day_du: this.state.text.ten_day_du,
                 ord,
-            };            
-            console.log(chuc_danh);
-            
-        if (changes.chuc_danh == null) {
+            };    
+        if (chuc_danh.value == null) {
             T.notify('Chức danh đang trống!', 'danger');
             $('#chuc_danh').focus();
-        } else if (changes.ten_day_du == null) {
+        } else if (ten_day_du.value == null) {
             T.notify('Tên đầy đủ đang trống!', 'danger');
             $('#ten_day_du').focus();
         } else if (changes.ord == null) {
@@ -90,7 +89,6 @@ export default class ChucdanhModal extends React.Component {
                 
             });
         }
-        e.preventDefault();
 
     }
 

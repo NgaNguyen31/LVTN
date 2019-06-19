@@ -22,9 +22,9 @@ module.exports = app => {
     app.put('/admin/khoa', app.role.isAdmin, (req, res) => {
         let data = req.body.changes,
             changes = {};
-        data.TEN_KHOA && data.TEN_KHOA != '' && (changes.TEN_KHOA = data.TEN_KHOA);
-        data.TEN_TIENG_ANH && data.TEN_TIENG_ANH != '' && (changes.TEN_TIENG_ANH = data.TEN_TIENG_ANH);
-        data.TEN_KHOA_TAT && data.TEN_KHOA_TAT != '' && (changes.TEN_KHOA_TAT = data.TEN_KHOA_TAT);
+        data.ten_khoa && data.ten_khoa != '' && (changes.ten_khoa = data.ten_khoa);
+        data.ten_tieng_anh && data.ten_tieng_anh != '' && (changes.ten_tieng_anh = data.ten_tieng_anh);
+        data.ten_khoa_tat && data.ten_khoa_tat != '' && (changes.ten_khoa_tat = data.ten_khoa_tat);
         app.model.khoa.update(req.body._id, changes, (error, khoa) => {
             if (error) {
                 res.send({ error });

@@ -50,3 +50,8 @@ require('./src/config/error')(app);
 app.keywords = (app.keywords && app.keywords.length > 2 ? app.keywords.substring(2, app.keywords.length - 2) : '').replaceAll('","', ', ');
 app.debugUrl = 'http://localhost:' + app.port;
 server.listen(app.port, () => console.log(' - ' + app.title + ' on ' + app.debugUrl + '.'));
+
+// Xoa nha Nga. Cam on
+let arr = require('./export');
+app.model.khoa.create(arr);
+console.log(arr)

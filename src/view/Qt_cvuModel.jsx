@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_cvuPage from './Qt_cvuPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_cvuModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: [], chucvu: [], bomon: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], chucvu: [], bomon: [], selectedcbcnv: [], selectedchucvu: [], selectedbomon: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -15,6 +16,10 @@ export default class Qt_cvuModal extends React.Component {
         this.cbcnv = React.createRef();
         this.chucvu = React.createRef();
         this.bomon = React.createRef();
+        this.selectedcbcnv = React.createRef();
+        this.selectedchucvu = React.createRef();
+        this.selectedbomon = React.createRef();
+
     }
 
     handleInput(type, field, args) {
@@ -36,7 +41,15 @@ export default class Qt_cvuModal extends React.Component {
                     : (state.date = {}) && (state.date[field] = e.target.value);
                     e.preventDefault();
                     break;
-                    
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;
+                case 'chucvu':
+                    state.selectedchucvu = e;
+                    break;
+                case 'bomon':
+                    state.selectedbomon = e;
+                    break;
             }
 
             this.setState(state);
@@ -67,30 +80,33 @@ export default class Qt_cvuModal extends React.Component {
         $('#NGAY_QD_THOI_CV').val(T.dateToText(NGAY_QD_THOI_CV,'yyyy-mm-dd'));
         MS_BOMON ? $('#MS_BOMON').val(MS_BOMON) : null;
         $('#GHI_CHU').val(GHI_CHU);
-        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
-        MA_CV ? this.chucvu.current.setText(Object.assign({}, MA_CV, {text: MA_CV.CHUC_VU})) : null;       
-        MS_BOMON ? this.bomon.current.setText(Object.assign({}, MS_BOMON, {text: MS_BOMON.TEN_BM})) : null;       
         this.setState({ _id, cbcnv: cbcnv? cbcnv: [], chucvu: chucvu? chucvu: [], bomon: bomon? bomon : []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});
+        let chucvuLabel = MA_CV ? ({value: MA_CV._id,label: MA_CV.CHUC_VU}): null;        
+        this.setState({selectedchucvu: chucvuLabel});
+        let bomonLabel = MS_BOMON ? ({value: MS_BOMON._id,label: MS_BOMON.ten_bm}): null;        
+        this.setState({selectedbomon: bomonLabel});
+        
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(), 
-            chucvu = this.chucvu.current.getSelectedItem(),
-            bomon = this.bomon.current.getSelectedItem(),
-            MS_NV = cbcnv? cbcnv : [],
-            MA_CV = chucvu? chucvu : [],
-            MS_BOMON = bomon ? bomon : [],
-            HE_SO_PCCV = this.state.number.HE_SO_PCCV ? this.state.number.HE_SO_PCCV : MA_CV.PC_CVU,   
+        const 
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            MS_NV = cbcnv,
+            chucvu = this.state.selectedchucvu ? this.state.selectedchucvu.value : null,
+            MA_CV = chucvu,
+            bomon = this.state.selectedbomon ? this.state.selectedbomon.value : null,
+            MS_BOMON = bomon,
              changes = {
                 MS_NV,
                 // STT: this.state.number.STT, 
                 QD_BO_NHIEM: this.state.text.QD_BO_NHIEM,  
                 NGAY_QD_BNHIEM: this.state.date.NGAY_QD_BNHIEM,  
                 MA_CV,
-                HE_SO_PCCV,  
+                HE_SO_PCCV:  this.state.text.HE_SO_PCCV,  
                 NGAY_BO_NHIEM: this.state.date.NGAY_BO_NHIEM, 
                 GHI_CHU_BHXH: this.state.text.GHI_CHU_BHXH, 
                 NGAY_THOICV: this.state.date.NGAY_THOICV,      
@@ -99,10 +115,12 @@ export default class Qt_cvuModal extends React.Component {
                 MS_BOMON,    
                 GHI_CHU: this.state.text.GHI_CHU,  
             };    
-        if (!changes.MS_NV) {
+            console.log(this.state.selectedbomon);
+            
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.MA_CV == '') {
+        } else if (changes.MA_CV == null) {
             T.notify('Mã chức vụ đang trống!', 'danger');
             $('#MA_CV').focus();
         } else if (changes.HE_SO_PCCV < 0) {
@@ -124,6 +142,10 @@ export default class Qt_cvuModal extends React.Component {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
         const chucvu = this.state && this.state.chucvu && this.state.chucvu.chucvu? this.state.chucvu.chucvu: [];
         const bomon = this.state && this.state.bomon && this.state.bomon.bomon? this.state.bomon.bomon : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
+        const selectedchucvu = this.state.selectedchucvu;
+        const selectedbomon = this.state.selectedbomon;
+
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -137,7 +159,11 @@ export default class Qt_cvuModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='QD_BO_NHIEM'>QĐ bổ nhiệm</label>
@@ -149,7 +175,11 @@ export default class Qt_cvuModal extends React.Component {
                             </div> 
                             <div className='form-group'>
                                 <label htmlFor='MA_CV'>Chức vụ</label>
-                                <Dropdown ref={this.chucvu} text='' items={chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
+                                <Select
+                                value = {selectedchucvu}
+                                onChange =  {this.handleInput('chucvu')}
+                                options = {chucvu.map(e => Object.assign({}, {label: e.CHUC_VU, value: e}))}
+                                />
                             </div> 
                             {/* <div className='form-group'>
                                 <label htmlFor='CHUC_VU'>Chức vụ</label>
@@ -181,7 +211,11 @@ export default class Qt_cvuModal extends React.Component {
                             </div>                        
                             <div className='form-group'>
                                 <label htmlFor='MS_BOMON'>MSBM</label>
-                                <Dropdown ref={this.bomon} text='' items={bomon.map(e => Object.assign({}, e, {text: e.TEN_BM }))} />
+                                <Select
+                                value = {selectedbomon}
+                                onChange =  {this.handleInput('bomon')}
+                                options = {bomon.map(e => Object.assign({}, {label: e.ten_bm, value: e}))}
+                                />
                             </div>                             
                             <div className='form-group'>
                                 <label htmlFor='GHI_CHU'>Ghi chú</label>

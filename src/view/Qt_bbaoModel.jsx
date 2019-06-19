@@ -1,6 +1,7 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_bbaoPage from './Qt_bbaoPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_bbaoModal extends React.Component {
     constructor(props) {
@@ -34,7 +35,9 @@ export default class Qt_bbaoModal extends React.Component {
                     : (state.date = {}) && (state.date[field] = e.target.value)
                     e.preventDefault();
                     break;
-                    
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;  
             }
 
             this.setState(state);
@@ -55,17 +58,17 @@ export default class Qt_bbaoModal extends React.Component {
         $('#BAI_BAO').val(BAI_BAO);
         $('#TEN_TCHI').val(TEN_TCHI);
         $('#NAM').val(T.dateToText(NAM,'yyyy-mm-dd'));
-        MS_NV ? this.cbcnv.current.setText(Object.assign({}, MS_NV, {text: MS_NV.MS_NV})) : null;
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),            
-            MS_NV = cbcnv? cbcnv : [],
-             changes = {
+        const cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            MS_NV = cbcnv,
+            changes = {
                 MS_NV,
                 BAI_BAO: this.state.text.BAI_BAO, 
                 TEN_TCHI: this.state.text.TEN_TCHI, 
@@ -74,13 +77,13 @@ export default class Qt_bbaoModal extends React.Component {
         if (!changes.MS_NV) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.BAI_BAO == '') {
+        } else if (changes.BAI_BAO == '' | changes.BAI_BAO == null) {
             T.notify('Bài báo đang trống!', 'danger');
             $('#BAI_BAO').focus();
-        } else if (changes.TEN_TCHI == '') {
+        } else if (changes.TEN_TCHI == '' | changes.TEN_TCHI == null) {
             T.notify('Tên tạp chí đang trống!', 'danger');
             $('#TEN_TCHI').focus();
-        } else if (changes.NAM == '') {
+        } else if (changes.NAM == '' | changes.NAM == null) {
             T.notify('Năm đang trống!', 'danger');
             $('#NAM').focus();
         } else if (this.state._id) {
@@ -97,6 +100,8 @@ export default class Qt_bbaoModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
+
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -110,7 +115,11 @@ export default class Qt_bbaoModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
                             {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>

@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import Qt_ky_luatPage from './Qt_ky_luatPage.jsx';
+import Select from 'react-select';
 
 export default class Qt_ky_luatModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', date: '', cbcnv: []};
+        this.state = {text: '', number: '', date: '', cbcnv: [], selectedcbcnv: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -13,6 +14,7 @@ export default class Qt_ky_luatModal extends React.Component {
         this.btnSave = React.createRef();
         this.handleInput = this.handleInput.bind(this);
         this.cbcnv = React.createRef();
+        this.selectedcbcnv = React.createRef();
     }
 
     handleInput(type, field, args) {
@@ -21,17 +23,25 @@ export default class Qt_ky_luatModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date':
                     state.date ? (state.date[field] = e.target.value) 
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;    
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -44,31 +54,33 @@ export default class Qt_ky_luatModal extends React.Component {
     show(item, cbcnv) {      
         
         const { _id, MS_NV, STT, NAM, HINH_THUC, CAP_KL, LY_DO, GHI_CHU, SO_QD, NGAY_QD, FIELD1} = item ?
-            item : { _id: null, MS_NV: '', STT: '', NAM: '', HINH_THUC: '', CAP_KL: '', LY_DO: '', GHI_CHU: '', SO_QD: '', NGAY_QD: '', FIELD1: ''};
+            item : { _id: null, MS_NV: null, STT: null, NAM: null, HINH_THUC: null, CAP_KL: null, LY_DO: null, GHI_CHU: null, SO_QD: null, NGAY_QD: null, FIELD1: null};
         $('#MS_NV').val(MS_NV);
-        $('#STT').val(STT);
+        // $('#STT').val(STT);
         // $('#THANG').val(THANG);
-        $('#NAM').val(NAM);
+        $('#NAM').val(T.dateToText(NAM,'yyyy-mm-dd'));
         $('#HINH_THUC').val(HINH_THUC);
         $('#CAP_KL').val(CAP_KL);
         $('#LY_DO').val(LY_DO);
         $('#GHI_CHU').val(GHI_CHU);
         $('#SO_QD').val(SO_QD);
-        $('#NGAY_QD').val(NGAY_QD);
+        $('#NGAY_QD').val(T.dateToText(NGAY_QD,'yyyy-mm-dd'));
         $('#FIELD1').val(FIELD1);
 
         this.setState({ _id, cbcnv: cbcnv? cbcnv: []});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),            
-            MS_NV = cbcnv? cbcnv : [],
+        const 
+            cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+            MS_NV = cbcnv,
              changes = {
                 MS_NV,
-                STT: this.state.number.STT, 
+                // STT: this.state.number.STT, 
                 // THANG: this.state.number.THANG,
                 NAM: this.state.date.NAM,
                 HINH_THUC: this.state.text.HINH_THUC, 
@@ -79,22 +91,19 @@ export default class Qt_ky_luatModal extends React.Component {
                 NGAY_QD: this.state.date.NGAY_QD, 
                 FIELD1: this.state.text.FIELD1,                                  
             };    
-        if (!changes.MS_NV) {
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (changes.STT == '') {
-            T.notify('STT đang trống!', 'danger');
-            $('#STT').focus();
-        } else if (changes.NAM == '') {
+        } else if (changes.NAM == null) {
             T.notify('Năm đang trống!', 'danger');
             $('#NAM').focus();
-        } else if (changes.LY_DO == '') {
+        } else if (changes.LY_DO == null) {
             T.notify('Lý do đang trống!', 'danger');
             $('#LY_DO').focus();
-        } else if (changes.SO_QD == '') {
+        } else if (changes.SO_QD == null) {
             T.notify('SỐ QĐ đang trống!', 'danger');
             $('#SO_QD').focus();
-        } else if (changes.NGAY_QD == '') {
+        } else if (changes.NGAY_QD == null) {
             T.notify('Ngày QĐ đang trống!', 'danger');
             $('#NGAY_QD').focus();
         } else if (changes.STT < 0) {
@@ -114,6 +123,7 @@ export default class Qt_ky_luatModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -127,12 +137,16 @@ export default class Qt_ky_luatModal extends React.Component {
                         <div className='modal-body'>                                                       
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
-                            <div className='form-group'>
+                            {/* <div className='form-group'>
                                 <label htmlFor='STT'>STT</label>
                                 <input className='form-control' id='STT' type='number' placeholder='' onChange={this.handleInput('number', 'STT')} value={this.state.number.STT}/>
-                            </div> 
+                            </div>  */}
                             {/* <div className='form-group'>
                                 <label htmlFor='THANG'>Tháng</label>
                                 <input className='form-control' id='THANG' type='number' placeholder='' onChange={this.handleInput('number', 'THANG')} value={this.state.number.THANG}/>

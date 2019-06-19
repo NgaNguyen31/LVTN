@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { getQt_ctacInPage, createQt_ctac, updateQt_ctac, deleteQt_ctac, getAllQt_ctac } from './redux/qt_ctac.jsx';
 import {getAllCbcnv} from './redux/cbcnv.jsx';
-import {getAllChucvu} from './redux/chucvu.jsx';
+import {getAllBomon} from './redux/bomon.jsx';
 import { Link } from 'react-router-dom';
 import Qt_ctacModal from './Qt_ctacModel.jsx';
 import Pagination from './Pagination.jsx';
@@ -22,10 +22,12 @@ class Qt_ctacPage extends React.Component {
             this.props.getQt_ctacInPage();
         });
         this.props.getAllCbcnv();
+        this.props.getAllBomon();
     }
 
     edit(e, item){
-        this.qt_ctacModal.current.show(item, this.props.cbcnv.data.items);
+        
+        this.qt_ctacModal.current.show(item, this.props.cbcnv.data.items, this.props.bomon.data.items);
         e.preventDefault();
     }
 
@@ -71,7 +73,7 @@ class Qt_ctacPage extends React.Component {
                                 <td>{item.DEN_NAM}</td> */}
                                 <td>{item.CHUC_VU}</td>
                                 <td>{item.NOI_CONG_TAC}</td>
-                                <td>{item.BO_MON_CT}</td>
+                                <td>{item.BO_MON_CT ? item.BO_MON_CT.ten_bm : null}</td>
                                 <td>{item.CONG_VIEC}</td>
                                 {/* <td>{item.GHI_CHU}</td> */}
                                 <td className='btn-group'>
@@ -123,6 +125,6 @@ class Qt_ctacPage extends React.Component {
     }
 }
 
-const mapStateToProps = state => ({ qt_ctac: state.qt_ctac, cbcnv: state.cbcnv});
-const mapActionsToProps = { getQt_ctacInPage, createQt_ctac, updateQt_ctac, deleteQt_ctac, getAllQt_ctac, getAllCbcnv};
+const mapStateToProps = state => ({ qt_ctac: state.qt_ctac, cbcnv: state.cbcnv, bomon: state.bomon});
+const mapActionsToProps = { getQt_ctacInPage, createQt_ctac, updateQt_ctac, deleteQt_ctac, getAllQt_ctac, getAllCbcnv, getAllBomon};
 export default connect(mapStateToProps, mapActionsToProps)(Qt_ctacPage);

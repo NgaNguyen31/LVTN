@@ -49,10 +49,10 @@ class KhoaPage extends React.Component {
                         {this.props.khoa.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_KHOA ? item.TEN_KHOA + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.ten_khoa ? item.ten_khoa + ' ' : '')}</a>
                                 </td>     
-                                <td>{item.TEN_TIENG_ANH}</td>
-                                <td>{item.TEN_KHOA_TAT}</td>
+                                <td>{item.ten_tieng_anh}</td>
+                                <td>{item.ten_khoa_tat}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-edit' />

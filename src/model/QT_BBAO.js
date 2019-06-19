@@ -82,25 +82,17 @@ module.exports = app => {
             if (error) {
                 done(error);
             } else if (item == null) {
-                done('Invalid Id!');
+                done('Không tồn tại Id!');
             } else {
                 model.find({MS_NV: item.MS_NV}, (error,items) => { 
-                    index = 1 ;
-                    while (index>item.length()) {
-                        item.STT = 0;
-                        item.STT += index;    
-                        index++; 
-                        console.log(item);
-                        
-                    }
-                    // items.forEach(element => {
-                    //     if (element.BAI_BAO != item.BAI_BAO) {
-                                         
-                    //     }  
-                    // });                                          
+                    items.filter(i => i._id != _id).map((it, idx) => {
+                        it.STT = idx + 1;
+                        it.save();
+                   });
+                    item.remove(done);     
                 })
-                // item.remove(done);
+                }
             }
-        }),
+        ),
     };
 };

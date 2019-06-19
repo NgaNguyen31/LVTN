@@ -63,7 +63,7 @@ class Cbcnv_hd_khoaPage extends React.Component {
                         {this.props.cbcnv_hd_khoa.page.list.map((item, index) => (
                             <tr key={index}>         
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MSBM ? item.MSBM.TEN_BM + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.MSBM ? item.MSBM.ten_bm + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.HO}</td>      
                                 <td>{item.TEN}</td>

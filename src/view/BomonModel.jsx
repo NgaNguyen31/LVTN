@@ -42,46 +42,43 @@ export default class BomonModal extends React.Component {
 
     componentDidMount() {
         $(document).ready(() => setTimeout(() => {
-            $(this.modal.current).on('shown.bs.modal', () => $('#tenbomon').focus());
+            $(this.modal.current).on('shown.bs.modal', () => $('#ten_bm').focus());
         }, 250));
     }
 
-    show(item, khoa) {                      
-        const { _id, TEN_BM, TEN_TIENG_ANH, MS_KHOA, NAM_THANH_LAP, GHI_CHU } = item ?
-            item : { _id: null, TEN_BM: null, TEN_TIENG_ANH: null, MS_KHOA: null, NAM_THANH_LAP: null, GHI_CHU: null };     
-        $('#TEN_BM').val(TEN_BM);
-        $('#TEN_TIENG_ANH').val(TEN_TIENG_ANH);
-        $('#MS_KHOA').val(MS_KHOA);
-        $('#NAM_THANH_LAP').val(T.dateToText(NAM_THANH_LAP,'yyyy-mm-dd'));
-        $('#GHI_CHU').val(GHI_CHU);        
+    show(item, khoa) {                              
+        const { _id, ten_bm, ten_tieng_anh, ms_khoa, nam_thanh_lap, ghi_chu } = item ?
+            item : { _id: null, ten_bm: null, ten_tieng_anh: null, ms_khoa: null, nam_thanh_lap: null, ghi_chu: null };     
+        $('#ten_bm').val(ten_bm);
+        $('#ten_tieng_anh').val(ten_tieng_anh);
+        $('#ms_khoa').val(ms_khoa);
+        $('#nam_thanh_lap').val(nam_thanh_lap);
+        $('#ghi_chu').val(ghi_chu);   
         this.setState({ _id, khoa: khoa? khoa: []}); 
-        let khoaLabel = MS_KHOA ? MS_KHOA.map((test) => ({value: test._id,label: test.TEN_KHOA})): null;
+        let khoaLabel = ms_khoa ? ms_khoa.map((test) => ({value: test._id,label: test.ten_khoa})): null;
         this.setState({selectedOption: khoaLabel});
         $(this.modal.current).modal('show');
     }
 
     save(e) {
-        e.preventDefault();
-        const khoa = this.state.selectedOption? this.state.selectedOption.map(ele => ele.value._id): null,
-        MS_KHOA = khoa,
+        const khoa = this.state.selectedOption? this.state.selectedOption.map(ele => ele.value): null,
+            ms_khoa = khoa,
              changes = {
-                TEN_BM: this.state.text.TEN_BM,
-                TEN_TIENG_ANH: this.state.text.TEN_TIENG_ANH,
-                MS_KHOA,
-                NAM_THANH_LAP: this.state.text.NAM_THANH_LAP,
-                GHI_CHU: this.state.text.GHI_CHU,
+                ten_bm: this.state.text.ten_bm,
+                ten_tieng_anh: this.state.text.ten_tieng_anh,
+                ms_khoa,
+                nam_thanh_lap: this.state.text.nam_thanh_lap,
+                ghi_chu: this.state.text.ghi_chu,
             };   
-            console.log(changes.TEN_BM);
-                                 
-        if (changes.TEN_BM == null) {
+        if (ten_bm.value == '') {
             T.notify('Tên bộ môn đang trống!', 'danger');
-            $('#TEN_BM').focus();
-        } else if (changes.TEN_TIENG_ANH == null) {
+            $('#ten_bm').focus();
+        } else if (ten_tieng_anh.value == '') {
             T.notify('Tên tiếng anh đang trống!', 'danger');
-            $('#TEN_TIENG_ANH').focus();
-        } else if (changes.MS_KHOA == null) {
+            $('#ten_tieng_anh').focus();
+        } else if (changes.ms_khoa == '') {
             T.notify('Mã số khoa đang trống!', 'danger');
-            $('#MS_KHOA').focus();
+            $('#ms_khoa').focus();
         } else if (this.state._id) {
             this.props.updateBomon(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');
@@ -92,6 +89,8 @@ export default class BomonModal extends React.Component {
                 
             });
         }
+        e.preventDefault();
+
     }
 
     render() {
@@ -113,11 +112,11 @@ export default class BomonModal extends React.Component {
                         <div className='modal-body'>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Tên bộ môn</label>
-                                <input className='form-control' id='TEN_BM' type='text' onChange={this.handleInput('text', 'TEN_BM')} value={this.state.text.TEN_BM}/>
+                                <input className='form-control' id='ten_bm' type='text' onChange={this.handleInput('text', 'ten_bm')} value={this.state.text.ten_bm}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Tên tiếng anh</label>
-                                <input className='form-control' id='TEN_TIENG_ANH' type='text' onChange={this.handleInput('text', 'TEN_TIENG_ANH')} value={this.state.text.TEN_TIENG_ANH}/>
+                                <input className='form-control' id='ten_tieng_anh' type='text' onChange={this.handleInput('text', 'ten_tieng_anh')} value={this.state.text.ten_tieng_anh}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Tên khoa</label>
@@ -125,17 +124,17 @@ export default class BomonModal extends React.Component {
                                 isMulti
                                 value = {selectedOption}
                                 onChange =  {this.handleInput('tenkhoa')}
-                                options = {khoa.map(e => Object.assign({}, {label: e.TEN_KHOA, value: e}))}
+                                options = {khoa.map(e => Object.assign({}, {label: e.ten_khoa, value: e}))}
                                 />
-                                {/* <Dropdown ref={this.khoa} number='' items={khoa.map(e => Object.assign({}, e, {text: e.TEN_KHOA}))} /> */}
+                                {/* <Dropdown ref={this.khoa} number='' items={khoa.map(e => Object.assign({}, e, {text: e.ten_khoa}))} /> */}
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Năm thành lập</label>
-                                <input className='form-control' id='NAM_THANH_LAP' type='date' onChange={this.handleInput('text', 'NAM_THANH_LAP')} value={this.state.text.NAM_THANH_LAP}/>
+                                <input className='form-control' id='nam_thanh_lap' type='text' onChange={this.handleInput('text', 'nam_thanh_lap')} value={this.state.text.nam_thanh_lap}/>
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='tenbomon'>Ghi chú</label>
-                                <input className='form-control' id='GHI_CHU' type='text' onChange={this.handleInput('text', 'GHI_CHU')} value={this.state.text.GHI_CHU}/>
+                                <input className='form-control' id='ghi_chu' type='text' onChange={this.handleInput('text', 'ghi_chu')} value={this.state.text.ghi_chu}/>
                             </div>
                         </div>
                         <div className='modal-footer'>

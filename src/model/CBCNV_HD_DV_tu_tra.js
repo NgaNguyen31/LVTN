@@ -59,7 +59,7 @@ module.exports = app => {
             ]
             }, (error, items) => {
             if (items.length > 0) {
-                if (done) done('Exist', items);
+                if (_id != items._id) done('Exist', items);
             }
             else{
                 model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)

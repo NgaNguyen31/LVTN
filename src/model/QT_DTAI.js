@@ -92,18 +92,14 @@ module.exports = app => {
                 done('Invalid Id!');
             } else {
                 model.find({MS_NV: item.MS_NV}, (error,items) => { 
-                    index = 1 ;
-                    items.forEach(element => {
-                        if (element.DE_TAI != item.DE_TAI) {
-                            item.STT = 0;
-                            item.STT += index;    
-                            index++;              
-                        }  
-                        model.findOneAndUpdate({ _id: element._id }, { $set: {STT:item.STT} }, { new: true }, done)                                                     
-                    });                                          
-                })                                 
-                item.remove(done); 
+                    items.filter(i => i._id != _id).map((it, idx) => {
+                        it.STT = idx + 1;
+                        it.save();
+                   });
+                    item.remove(done);     
+                })
+                }
             }
-        }),
+        ),
     };
 };

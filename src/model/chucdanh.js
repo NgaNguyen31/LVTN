@@ -65,7 +65,7 @@ module.exports = app =>{
             if (error) {
                 done(error);
             } else if (item == null) {
-                done('Invalid Id!');
+                done('Không tồn tại Id!');
             } else {
                 item.remove(done);
             }

@@ -1,6 +1,6 @@
 module.exports = app =>{
     const schema = app.db.Schema({
-        Hovaten: {type: app.db.Schema.ObjectId, ref: 'cbcnv'},
+        hovaten: {type: app.db.Schema.ObjectId, ref: 'cbcnv'},
         Nuoc: {type: app.db.Schema.ObjectId, ref: 'nuocngoai'},
         Ngaydi: Date,
         Ngayve: Date,

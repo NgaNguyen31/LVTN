@@ -1,0 +1,79 @@
+
+[
+    {"ms_khoa":1,"ten_khoa":"Ban Giám hiệu","ten_tieng_anh":"BOARD OF RECTORS","ten_khoa_tat":"BGH","xoa":"false"}
+    ,{"ms_khoa":2,"ten_khoa":"Phòng Tổ chức - Hành chính","ten_tieng_anh":"PERSONNEL & ADMINISTRATIVE AFFAIRS OFFICE","ten_khoa_tat":"P.TC-HC","xoa":"false"}
+    ,{"ms_khoa":3,"ten_khoa":"Phòng Đào tạo","ten_tieng_anh":"ACADEMIC AFFAIRS","ten_khoa_tat":"P.ĐT","xoa":"false"}
+    ,{"ms_khoa":4,"ten_khoa":"Phòng KHCN - QHQT","ten_tieng_anh":"R&D AND INTERNATIONAL RELATIONS","ten_khoa_tat":"P.KHCN-QHQT","xoa":"true"}
+    ,{"ms_khoa":5,"ten_khoa":"Phòng Đào tạo Sau đại học","ten_tieng_anh":"POSTGRADUATE STUDY","ten_khoa_tat":"P.ĐT SĐH","xoa":"false"}
+    ,{"ms_khoa":6,"ten_khoa":"Phòng Công tác Chính trị - Sinh viên","ten_tieng_anh":"STUDENT ACTIVITIES","ten_khoa_tat":"P.CTCT-SV","xoa":"false"}
+    ,{"ms_khoa":7,"ten_khoa":"Phòng Kế hoạch - Tài chinh","ten_tieng_anh":"PLANNING & FINANCIAL AFFAIRS","ten_khoa_tat":"P.KH-TC","xoa":"false"}
+    ,{"ms_khoa":8,"ten_khoa":"Phòng Quản trị - Thiết bị","ten_tieng_anh":"FACILITIES PLANNING & MANAGEMENT","ten_khoa_tat":"P.QT-TB","xoa":"false"}
+    ,{"ms_khoa":9,"ten_khoa":"Ban Thanh tra Giáo dục","ten_tieng_anh":"EDUCATION INSPECTION","ten_khoa_tat":"B.TTGD","xoa":"false"}
+    ,{"ms_khoa":10,"ten_khoa":"Ban Thi đua","ten_tieng_anh":"EMULATION OFFICE","ten_khoa_tat":"B.THI ĐUA","xoa":"false"}
+    ,{"ms_khoa":11,"ten_khoa":"Thư viện","ten_tieng_anh":"LIBRARY","ten_khoa_tat":"THƯ VIỆN","xoa":"false"}
+    ,{"ms_khoa":12,"ten_khoa":"Văn phòng Đoàn TN, Hội SV","ten_tieng_anh":"COMMUNIST YOUTH & STUDENT ASSOCIATION","ten_khoa_tat":"VP.ĐTN, HSV","xoa":"false"}
+    ,{"ms_khoa":13,"ten_khoa":"Văn phòng Công đoàn","ten_tieng_anh":"LABOR UNION","ten_khoa_tat":"VP.CÔNG ĐOÀN","xoa":"false"}
+    ,{"ms_khoa":14,"ten_khoa":"Văn phòng Đảng ủy","ten_tieng_anh":"PARTY COMMITTEE","ten_khoa_tat":"VP. ĐẢNG ỦY","xoa":"false"}
+    ,{"ms_khoa":15,"ten_khoa":"Trung tâm Dịch vụ Ký túc xá Bách khoa","xoa":"false"}
+    ,{"ms_khoa":16,"ten_khoa":"Văn phòng Công đoàn","xoa":"true"}
+    ,{"ms_khoa":18,"ten_khoa":"Khoa Kỹ thuật Hóa học","ten_tieng_anh":"FACULTY OF CHEMICAL ENGINEERING","ten_khoa_tat":"K.KTHH","xoa":"false"}
+    ,{"ms_khoa":19,"ten_khoa":"Khoa Điện - Điện tử","ten_tieng_anh":"FACULTY OF ELECTRICAL & ELECTRONICS ENGINEERING","ten_khoa_tat":"K.Đ-ĐT","xoa":"false"}
+    ,{"ms_khoa":20,"ten_khoa":"Khoa Kỹ thuật Giao thông","ten_tieng_anh":"FACULTY OF TRANSPORTATION ENGINEERING","ten_khoa_tat":"K.KTGT","xoa":"false"}
+    ,{"ms_khoa":21,"ten_khoa":"Khoa Kỹ thuật Xây dựng","ten_tieng_anh":"FACULTY OF CIVIL ENGINEERING","ten_khoa_tat":"K.KTXD","xoa":"false"}
+    ,{"ms_khoa":22,"ten_khoa":"Khoa Cơ khí","ten_tieng_anh":"FACULTY OF MECHANICAL ENGINEERING","ten_khoa_tat":"K.CK","xoa":"false"}
+    ,{"ms_khoa":23,"ten_khoa":"Khoa Kỹ thuật Địa chất và Dầu khí","ten_tieng_anh":"FACULTY OF GEOLOGY AND PETROLEUM ENGINEERING","ten_khoa_tat":"K.KTĐCVÀ DK","xoa":"false"}
+    ,{"ms_khoa":24,"ten_khoa":"Khoa Môi trường và Tài nguyên","ten_tieng_anh":"FACULTY OF ENVIRONMENT AND NATURAL RESOURCES (FENR)","ten_khoa_tat":"K.MT VÀ TN","xoa":"false"}
+    ,{"ms_khoa":25,"ten_khoa":"Khoa Quản lý Công nghiệp","ten_tieng_anh":"SCHOOL OF INDUSTRIAL MANAGEMENT","ten_khoa_tat":"K.QLCN","xoa":"false"}
+    ,{"ms_khoa":26,"ten_khoa":"Khoa Khoa học và Kỹ thuật Máy tính","ten_tieng_anh":"FACULTY OF COMPUTER SCIENCE AND ENGINEERING","ten_khoa_tat":"K.KH&KTMT","xoa":"false"}
+    ,{"ms_khoa":27,"ten_khoa":"Ban Giáo trình","ten_khoa_tat":"B.GIÁO TRÌNH","xoa":"false"}
+    ,{"ms_khoa":29,"ten_khoa":"Trung tâm Kỹ thuật Điện toán","ten_khoa_tat":"TT.KTĐT","xoa":"false"}
+    ,{"ms_khoa":30,"ten_khoa":"Trung tâm ĐT Bảo dưỡng Công nghiệp","ten_tieng_anh":"INDUSTRIAL MAINTENANCE TRAINING CENTER","ten_khoa_tat":"TT.ĐT BDCN","xoa":"false"}
+    ,{"ms_khoa":31,"ten_khoa":"Trung tâm NC Vật liệu Polyme","ten_khoa_tat":"TT.NCVL POLYME","xoa":"false"}
+    ,{"ms_khoa":33,"ten_khoa":"Trung tâm  Đào tạo và Phát triển nguồn nhân lực Đại học Bách khoa","xoa":"false","field1":"Cũ Trung tâm BDKT và VHBK 26\/10\/2016 (QĐ 2853)"}
+    ,{"ms_khoa":34,"ten_khoa":"Trung tâm NCCN Lọc - Hoá dầu","ten_khoa_tat":"TT.NCCN Lọc-HD","xoa":"false"}
+    ,{"ms_khoa":36,"ten_khoa":"Trung tâm NCCN và TBCN","ten_khoa_tat":"TT.NCCN&TBCN","xoa":"false"}
+    ,{"ms_khoa":37,"ten_khoa":"CT \"Các Dự án thuộc cộng đồng nói tiếng Pháp\"","xoa":"true"}
+    ,{"ms_khoa":38,"ten_khoa":"Trung tâm NCƯD Công nghệ Xây dựng","ten_khoa_tat":"TT.NCƯD CNXD","xoa":"false"}
+    ,{"ms_khoa":39,"ten_khoa":"Trung tâm NCTB & CN Cơ khí Bách khoa","ten_tieng_anh":"Bach Khoa Research Center for Manufacturing Engineering (BK - RECME)","ten_khoa_tat":"TT.NCTB & CNCK BK","xoa":"false"}
+    ,{"ms_khoa":40,"ten_khoa":"Trung tâm CN Thông tin Địa lý","ten_khoa_tat":"TT.CNTT Địa lý","xoa":"false"}
+    ,{"ms_khoa":44,"ten_khoa":"Khoa Công nghệ Vật liệu","ten_tieng_anh":"FACULTY OF MATERIALS TECHNOLOGY","ten_khoa_tat":"K.CNVL","xoa":"false"}
+    ,{"ms_khoa":45,"ten_khoa":"CT Hợp tác AIT","ten_khoa_tat":"CT Hợp tác AIT","xoa":"true"}
+    ,{"ms_khoa":46,"ten_khoa":"Trung tâm NC và Hỗ trợ Đào tạo QTDN","ten_khoa_tat":"TT.NC&HTĐT về QTDN","xoa":"false"}
+    ,{"ms_khoa":47,"ten_khoa":"Ban Quản lý mạng","ten_tieng_anh":"IT & NETWORK ADMINISTRATION","ten_khoa_tat":"B.QL Mạng","xoa":"false"}
+    ,{"ms_khoa":48,"ten_khoa":"Khoa Khoa học Ứng dụng","ten_tieng_anh":"FACULTY OF APPLIED SCIENCE","ten_khoa_tat":"K.KHƯD","xoa":"false"}
+    ,{"ms_khoa":50,"ten_khoa":"CT \"Đ\/tạo KS CLC tại VN (PFIEV)\"","ten_khoa_tat":"PFIEV","xoa":"false"}
+    ,{"ms_khoa":51,"ten_khoa":"CT Cao học cơ học XD Bỉ - Việt (EMMC)","ten_khoa_tat":"EMMC","xoa":"true"}
+    ,{"ms_khoa":52,"ten_khoa":"Chương trình MSM","xoa":"false"}
+    ,{"ms_khoa":53,"ten_khoa":"Chương trình \" Hợp tác Đào tạo Thạc sĩ  QTKD ( Maastricht MBA)\"","ten_khoa_tat":"Maastricht MBA","xoa":"false"}
+    ,{"ms_khoa":54,"ten_khoa":"Trung tâm Ngoại ngữ","ten_tieng_anh":"FOREIGN LANGUAGE CENTER","ten_khoa_tat":"TT.Ngọai ngữ","xoa":"false"}
+    ,{"ms_khoa":55,"ten_khoa":"Ban Đảm bảo Chất lượng","ten_tieng_anh":"QUALITY ASSURANCE","ten_khoa_tat":"B.ĐBCL","xoa":"false"}
+    ,{"ms_khoa":56,"ten_khoa":"Trung tâm Hỗ trợ Sinh viên vàViệc làm","ten_khoa_tat":"TT.HTSV&VL","xoa":"false"}
+    ,{"ms_khoa":57,"ten_khoa":"Văn phòng Đào tạo Quốc tế","ten_khoa_tat":"VP -ĐT Quốc tế","xoa":"false"}
+    ,{"ms_khoa":58,"ten_khoa":"Phòng Quan hệ Đối ngoại","ten_khoa_tat":"VP.QHĐN","xoa":"false"}
+    ,{"ms_khoa":59,"ten_khoa":"Phòng Khoa học Công nghệ và Dự án","xoa":"false"}
+    ,{"ms_khoa":60,"ten_khoa":"Phòng TN Trọng điểm  Điều khiển số và Kỹ thuật hệ thống","xoa":"false"}
+    ,{"ms_khoa":61,"ten_khoa":"Cơ sở 2 (Dĩ An - Bình Dương)","xoa":"true"}
+    ,{"ms_khoa":62,"ten_khoa":"Ban QLDA Đầu tư Xây dựng","xoa":"false"}
+    ,{"ms_khoa":63,"ten_khoa":"Phòng TN Trọng điểm Vật liệu Polyme và  Compozit","xoa":"false"}
+    ,{"ms_khoa":64,"ten_khoa":"Ban liên lạc Cựu sinh viên Bách khoa - Phú thọ","xoa":"false"}
+    ,{"ms_khoa":65,"ten_khoa":"Văn phòng đại diện Trường ĐHBK tại Tỉnh Lâm Đồng","xoa":"false"}
+    ,{"ms_khoa":66,"ten_khoa":"Vườn Ươm Doanh nghiệp Khoa học Công nghệ","xoa":"true"}
+    ,{"ms_khoa":67,"ten_khoa":"Dự án JICA  SUPREM-HCMUT","xoa":"false"}
+    ,{"ms_khoa":68,"ten_khoa":"Dự án JICA - JST","xoa":"false"}
+    ,{"ms_khoa":69,"ten_khoa":"Ban Quản lý Dự  án đầu tư Cơ sở trường ĐHBK tại Tỉnh Lâm đồng và Khánh hòa","xoa":"false"}
+    ,{"ms_khoa":70,"ten_khoa":"Phòng TN  Nhiên liệu sinh học và Biomass","xoa":"false"}
+    ,{"ms_khoa":71,"ten_khoa":"Phòng TN  Nghiên cứu Điện tử công suất","xoa":"false"}
+    ,{"ms_khoa":72,"ten_khoa":"Trung tâm Ươm tạo Doanh nghiệp Công nghệ-Trường Đại học Bách khoa","ten_khoa_tat":"HCMUT- TBI","xoa":"false"}
+    ,{"ms_khoa":73,"ten_khoa":"Phòng TN trọng điểm ĐHQG-HCM  Công nghệ Hóa học và Dầu khí","xoa":"false"}
+    ,{"ms_khoa":74,"ten_khoa":"Phòng TN trọng điểm ĐHQG-HCM  Nghiên cứu Cấu trúc Vật liệu (MANAR)","xoa":"false"}
+    ,{"ms_khoa":75,"ten_khoa":"Phòng TN trọng điểm ĐHQG-HCM Công nghệ xử lý chất thải bậc cao","xoa":"false"}
+    ,{"ms_khoa":76,"ten_khoa":"Phòng TN trọng điểm ĐHQG-HCM Động cơ đốt trong","xoa":"false"}
+    ,{"ms_khoa":77,"ten_khoa":"Phòng TN trọng điểm ĐHQG-HCM Công nghệ Vật liệu","xoa":"false"}
+    ,{"ms_khoa":78,"ten_khoa":"Ban QLDÁn đầu tư cơ sở trường ĐHBK tại tỉnh Lâm Đồng & Khánh Hoà","xoa":"false"}
+    ,{"ms_khoa":79,"ten_khoa":"Phòng TN nghiên cứu về nước khu vực Châu Á (CARE)","xoa":"false"}
+    ,{"ms_khoa":80,"ten_khoa":"Phòng TN Công nghệ Thiết kế và Gia công Tiên tiến","xoa":"false"}
+    ,{"ms_khoa":81,"ten_khoa":"Ban Phát triển Dự án","xoa":"false"}
+    ,{"ms_khoa":82,"ten_khoa":"Phòng TN Tính toán nâng cao","ten_khoa_tat":"AC lab","xoa":"false"}
+    ,{"ms_khoa":83,"ten_khoa":"Viện Nghiên cứu Năng lượng bền vững","xoa":"false"}
+    ,{"ms_khoa":84,"ten_khoa":"Xưởng in","xoa":"true"}
+    ]

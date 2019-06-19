@@ -26,11 +26,11 @@ module.exports = app => {
     app.put('/admin/bomon', app.role.isAdmin, (req, res) => {
         let data = req.body.changes,
             changes = {};
-        if (data.TEN_BM && data.TEN_BM != '') changes.TEN_BM = data.TEN_BM;
-        if (data.TEN_TIENG_ANH && data.TEN_TIENG_ANH != '') changes.TEN_TIENG_ANH = data.TEN_TIENG_ANH;
-        if (data.MS_KHOA) changes.MS_KHOA = data.MS_KHOA;
-        if (data.NAM_THANH_LAP && data.NAM_THANH_LAP != '') changes.NAM_THANH_LAP = data.NAM_THANH_LAP;
-        if (data.GHI_CHU && data.GHI_CHU != '') changes.GHI_CHU = data.GHI_CHU;
+        if (data.ten_bm && data.ten_bm != '') changes.ten_bm = data.ten_bm;
+        if (data.ten_tieng_anh && data.ten_tieng_anh != '') changes.ten_tieng_anh = data.ten_tieng_anh;
+        if (data.ms_khoa) changes.ms_khoa = data.ms_khoa;
+        if (data.nam_thanh_lap && data.nam_thanh_lap != '') changes.nam_thanh_lap = data.nam_thanh_lap;
+        if (data.ghi_chu && data.ghi_chu != '') changes.ghi_chu = data.ghi_chu;
     
         app.model.bomon.update(req.body._id, changes, (error, bomon) => {
             if (error) {

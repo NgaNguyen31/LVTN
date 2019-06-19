@@ -1,11 +1,12 @@
 import React from 'react';
 import Dropdown from './Dropdown.jsx';
 import KiemnhiemPage from './KiemnhiemPage.jsx';
+import Select from 'react-select';
 
 export default class KiemnhiemModal extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {text: '', number: '', cbcnv: [], bomon: [], chucvu: []};
+        this.state = {text: '', number: '', cbcnv: [], bomon: [], chucvu: [], selectedcbcnv: [], selectedchucvu: [], selectedbomon: []};
         this.modal = React.createRef();
         this.show = this.show.bind(this);
         this.save = this.save.bind(this);
@@ -15,6 +16,10 @@ export default class KiemnhiemModal extends React.Component {
         this.cbcnv = React.createRef();
         this.bomon = React.createRef();
         this.chucvu = React.createRef();
+        this.selectedcbcnv = React.createRef();
+        this.selectedchucvu = React.createRef();
+        this.selectedbomon = React.createRef();
+
     }
 
     handleInput(type, field, args) {
@@ -23,15 +28,26 @@ export default class KiemnhiemModal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value) 
-                    : (state.number = {}) && (state.number[field] = e.target.value)
-                    
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;                    
+                case 'cbcnv':
+                    state.selectedcbcnv = e;
+                    break;
+                case 'chucvu':
+                    state.selectedchucvu = e;
+                    break;
+                case 'bomon':
+                    state.selectedbomon = e;
+                    break;
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -44,7 +60,7 @@ export default class KiemnhiemModal extends React.Component {
     show(item, cbcnv, bomon, chucvu) {      
         
         const { _id, MS_NV, MS_BM, MS_CVU, NGAY_CVU, GHICHU, Xoa} = item ?
-            item : { _id: null, MS_NV: '', MS_BM: '', MS_CVU: '', NGAY_CVU: '', GHICHU: '', Xoa: ''};
+            item : { _id: null, MS_NV: null, MS_BM: null, MS_CVU: null, NGAY_CVU: null, GHICHU: null, Xoa: null};
         $('#MS_NV').val(MS_NV);
         $('#MS_BM').val(MS_BM);
         $('#MS_CVU').val(MS_CVU);
@@ -53,18 +69,24 @@ export default class KiemnhiemModal extends React.Component {
         $('#Xoa').prop('checked', Xoa);
         
         this.setState({ _id, cbcnv: cbcnv? cbcnv: [], bomon: bomon? bomon: [], chucvu: chucvu? chucvu:[]});
-
+        let cbcnvLabel = MS_NV ? ({value: MS_NV._id,label: MS_NV.MS_NV}): null;        
+        this.setState({selectedcbcnv: cbcnvLabel});
+        let chucvuLabel = MS_CVU ? ({value: MS_CVU._id,label: MS_CVU.CHUC_VU}): null;        
+        this.setState({selectedchucvu: chucvuLabel});
+        let bomonLabel = MS_BM ? ({value: MS_BM._id,label: MS_BM.ten_bm}): null;        
+        this.setState({selectedbomon: bomonLabel});
+        
         $(this.modal.current).modal('show');
     }
 
     save(e) {
         e.preventDefault();
-        const cbcnv = this.cbcnv.current.getSelectedItem(),
-            bomon = this.bomon.current.getSelectedItem(),
-            chucvu = this.chucvu.current.getSelectedItem(),
-            MS_NV = cbcnv? cbcnv : [],
-            MS_BM = bomon? bomon : [],
-            MS_CVU = chucvu? chucvu : [],
+        const cbcnv = this.state.selectedcbcnv ? this.state.selectedcbcnv.value : null,
+        MS_NV = cbcnv,
+        chucvu = this.state.selectedchucvu ? this.state.selectedchucvu.value : null,
+        MS_CVU = chucvu,
+        bomon = this.state.selectedbomon ? this.state.selectedbomon.value : null,
+        MS_BM = bomon,
              changes = {
                 MS_NV,
                 MS_BM,
@@ -73,13 +95,13 @@ export default class KiemnhiemModal extends React.Component {
                 GHICHU : this.state.text.GHICHU, 
                 Xoa: $('#Xoa').prop('checked'),         
             };    
-        if (!changes.MS_NV) {
+        if (changes.MS_NV == null) {
             T.notify('MSNV đang trống!', 'danger');
             $('#MS_NV').focus();
-        } else if (!changes.MS_BM) {
+        } else if (changes.MS_BM == null) {
             T.notify('MSBM đang trống!', 'danger');
             $('#MS_BM').focus();
-        } else if (!changes.MS_CVU) {
+        } else if (changes.MS_CVU == null) {
             T.notify('MS CVụ đang trống!', 'danger');
             $('#MS_CVU').focus();
         } else if (this.state._id) {
@@ -96,8 +118,11 @@ export default class KiemnhiemModal extends React.Component {
 
     render() {
         const cbcnv = this.state && this.state.cbcnv && this.state.cbcnv.cbcnv?this.state.cbcnv.cbcnv : [];
-        const bomon = this.state && this.state.bomon && this.state.bomon.bomon?this.state.bomon.bomon : [];
-        const chucvu = this.state && this.state.chucvu && this.state.chucvu.chucvu?this.state.chucvu.chucvu : [];
+        const chucvu = this.state && this.state.chucvu && this.state.chucvu.chucvu? this.state.chucvu.chucvu: [];
+        const bomon = this.state && this.state.bomon && this.state.bomon.bomon? this.state.bomon.bomon : [];
+        const selectedcbcnv = this.state.selectedcbcnv;
+        const selectedchucvu = this.state.selectedchucvu;
+        const selectedbomon = this.state.selectedbomon;
         return (
             <div className='modal' tabIndex='-1' role='dialog' ref={this.modal}>
                 <div className='modal-dialog modal-lg' role='document'>
@@ -111,15 +136,27 @@ export default class KiemnhiemModal extends React.Component {
                         <div className='modal-body'>                            
                             <div className='form-group'>
                                 <label htmlFor='MS_NV'>MSNV</label>
-                                <Dropdown ref={this.cbcnv} text='' items={cbcnv.map(e => Object.assign({}, e, {text: e.MS_NV}))} />
+                                <Select
+                                value = {selectedcbcnv}
+                                onChange =  {this.handleInput('cbcnv')}
+                                options = {cbcnv.map(e => Object.assign({}, {label: e.MS_NV, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_BM'>Tên BM</label>
-                                <Dropdown ref={this.bomon} text='' items={bomon.map(e => Object.assign({}, e, {text: e.TEN_BM}))} />
+                                <Select
+                                value = {selectedbomon}
+                                onChange =  {this.handleInput('bomon')}
+                                options = {bomon.map(e => Object.assign({}, {label: e.ten_bm, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='MS_CVU'>Tên CVụ</label>
-                                <Dropdown ref={this.chucvu} text='' items={chucvu.map(e => Object.assign({}, e, {text: e.CHUC_VU}))} />
+                                <Select
+                                value = {selectedchucvu}
+                                onChange =  {this.handleInput('chucvu')}
+                                options = {chucvu.map(e => Object.assign({}, {label: e.CHUC_VU, value: e}))}
+                                />
                             </div>
                             <div className='form-group'>
                                 <label htmlFor='NGAY_CVU'>Ngày chức vụ</label>

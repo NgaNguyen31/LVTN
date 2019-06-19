@@ -18,17 +18,22 @@ export default class Pctn_nghe_2018Modal extends React.Component {
             switch (type) {
                 case 'text':
                     state.text ? (state.text[field] = e.target.value)
-                    : (state.text = {}) && (state.text[field] = e.target.value)
+                    : (state.text = {}) && (state.text[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'number':
                     state.number ? (state.number[field] = e.target.value)
-                    : (state.number = {}) && (state.number[field] = e.target.value)
+                    : (state.number = {}) && (state.number[field] = e.target.value);
+                    e.preventDefault();
+                    break;
                 case 'date' :
                     state.date ? (state.date[field] = e.target.value)
-                    : (state.date = {}) && (state.date[field] = e.target.value)
+                    : (state.date = {}) && (state.date[field] = e.target.value);
+                    e.preventDefault();
+                    break;
             }
 
             this.setState(state);
-            e.preventDefault();
         }
     }
 
@@ -40,15 +45,15 @@ export default class Pctn_nghe_2018Modal extends React.Component {
 
     show(item) {
         const { _id, SHCC , HO, TEN, NGAY_SINH, MS_CDNN, NGAY_PCTN_OLD, PT_PCTN_OLD, NGAY_PCTN_NEW, PT_PCTN_NEW, DON_VI } = item ?
-            item : { _id: null, SHCC: '', HO: '', TEN: '', NGAY_SINH: '', MS_CDNN, NGAY_PCTN_OLD: '', PT_PCTN_OLD: '', NGAY_PCTN_NEW: '', PT_PCTN_NEW: '', DON_VI: '' };
+            item : { _id: null, SHCC: null, HO: null, TEN: null, NGAY_SINH: null, MS_CDNN, NGAY_PCTN_OLD: null, PT_PCTN_OLD: null, NGAY_PCTN_NEW: null, PT_PCTN_NEW: null, DON_VI: null };
         $('#SHCC').val(SHCC);
         $('#HO').val(HO);
         $('#TEN').val(TEN);
-        $('#NGAY_SINH').val(NGAY_SINH);
+        $('#NGAY_SINH').val(T.dateToText(NGAY_SINH,'yyyy-mm-dd'));
         $('#MS_CDNN').val(MS_CDNN);
-        $('#NGAY_PCTN_OLD').val(NGAY_PCTN_OLD);
+        $('#NGAY_PCTN_OLD').val(T.dateToText(NGAY_PCTN_OLD,'yyyy-mm-dd'));
         $('#PT_PCTN_OLD').val(PT_PCTN_OLD);
-        $('#NGAY_PCTN_NEW').val(NGAY_PCTN_NEW);
+        $('#NGAY_PCTN_NEW').val(T.dateToText(NGAY_PCTN_NEW,'yyyy-mm-dd'));
         $('#PT_PCTN_NEW').val(PT_PCTN_NEW);
         $('#DON_VI').val(DON_VI);
         this.setState({ _id});
@@ -70,37 +75,34 @@ export default class Pctn_nghe_2018Modal extends React.Component {
             DON_VI: this.state.text.DON_VI,
         };        
         
-        if (this.state.text == '')  {
-            T.notify('Bạn phải điền dữ liệu!', 'danger');
-            $('#TEN_KHOA').focus();
-        } else if (changes.SHCC == '') {
+        if (changes.SHCC == '' | changes.SHCC == null) {
             T.notify('SHCC đang trống!', 'danger');
             $('#SHCC').focus();
-        } else if (changes.HO == '') {
+        } else if (changes.HO == '' | changes.HO == null) {
             T.notify('Họ đang trống!', 'danger');
             $('#HO').focus();
-        } else if (changes.TEN == '' ) {
+        } else if (changes.TEN == '' | changes.TEN == null ) {
             T.notify('TEN đang trống!', 'danger');
             $('#TEN').focus();
-        } else if (changes.NGAY_SINH == '') {
+        } else if (changes.NGAY_SINH == '' | changes.NGAY_SINH == null) {
             T.notify('Ngày sinh đang trống!', 'danger');
             $('#NGAY_SINH').focus();
-        } else if (changes.MS_CDNN == '' ) {
+        } else if (changes.MS_CDNN == '' | changes.MS_CDNN == null) {
             T.notify('MS CDNN đang trống!', 'danger');
             $('#MS_CDNN').focus();
-        } else if (changes.NGAY_PCTN_OLD == '') {
+        } else if (changes.NGAY_PCTN_OLD == ''| changes.NGAY_PCTN_OLD == null) {
             T.notify('Ngày PCTN cũ đang trống!', 'danger');
             $('#NGAY_PCTN_OLD').focus();
-        } else if (changes.PT_PCTN_OLD == '') {
+        } else if (changes.PT_PCTN_OLD == ''| changes.PT_PCTN_OLD == null) {
             T.notify('Phần trăm PCTN cũ đang trống!', 'danger');
             $('#PT_PCTN_OLD').focus();
-        } else if (changes.NGAY_PCTN_NEW == '') {
+        } else if (changes.NGAY_PCTN_NEW == ''| changes.NGAY_PCTN_NEW == null) {
             T.notify('Ngày PCTN mới đang trống!', 'danger');
             $('#NGAY_PCTN_NEW').focus();
-        } else if (changes.PT_PCTN_NEW == '') {
+        } else if (changes.PT_PCTN_NEW == ''| changes.PT_PCTN_NEW == null) {
             T.notify('Phần trăm PCTN mới đang trống!', 'danger');
             $('#PT_PCTN_NEW').focus();
-        } else if (changes.DON_VI == '') {
+        } else if (changes.DON_VI == ''| changes.DON_VI == null) {
             T.notify('Đơn vị đang trống!', 'danger');
             $('#DON_VI').focus();
         } else if (changes.SHCC < 0) {

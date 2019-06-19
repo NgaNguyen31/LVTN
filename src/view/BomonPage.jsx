@@ -20,6 +20,7 @@ class BomonPage extends React.Component {
             this.props.getBomonInPage();
         });
         this.props.getAllKhoa();
+        
     }
 
     edit(e, item){        
@@ -53,11 +54,11 @@ class BomonPage extends React.Component {
                         {this.props.bomon.page.list.map((item, index) => (
                             <tr key={index}>   
                                 <td>
-                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.TEN_BM ? item.TEN_BM + ' ' : '')}</a>
+                                    <a href='#' onClick={e => this.edit(e, item)}>{(item.ten_bm ? item.ten_bm + ' ' : '')}</a>
                                 </td> 
-                                <td>{item.TEN_TIENG_ANH}</td>          
-                                <td>{item.MS_KHOA.reduce((pre, value) => pre + ' ' +  value.TEN_KHOA, ' ')}</td>
-                                <td>{T.dateToText(item.NAM_THANH_LAP,'dd/mm/yyyy')}</td>
+                                <td>{item.ten_tieng_anh}</td>          
+                                <td>{item.ms_khoa ? item.ms_khoa.reduce((pre, value) => pre + ' ' +  value.TEN_KHOA, ' '): ''}</td>                                
+                                <td>{item.nam_thanh_lap}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>
                                         <i className='fa fa-lg fa-edit' />

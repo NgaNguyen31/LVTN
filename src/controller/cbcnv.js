@@ -79,7 +79,7 @@ module.exports = app => {
         if (data.PC_DOC_HAI && data.PC_DOC_HAI != '') changes.PC_DOC_HAI = data.PC_DOC_HAI;
         if (data.MOI_TRUONG_DOC_HAI && data.MOI_TRUONG_DOC_HAI != '') changes.MOI_TRUONG_DOC_HAI = data.MOI_TRUONG_DOC_HAI;
         if (data.MS_CVU && data.MS_CVU != '') changes.MS_CVU = data.MS_CVU;
-        if (data.TEN_CV && data.TEN_CV != '') changes.TEN_CV = data.TEN_CV;
+        // if (data.TEN_CV && data.TEN_CV != '') changes.TEN_CV = data.TEN_CV;
         if (data.NGAY_PCCV && data.NGAY_PCCV != '') changes.NGAY_PCCV = data.NGAY_PCCV;
         if (data.NUOC_NGOAI && data.NUOC_NGOAI != '') changes.NUOC_NGOAI = data.NUOC_NGOAI;
         if (data.TU_NGAY_NN && data.TU_NGAY_NN != '') changes.TU_NGAY_NN = data.TU_NGAY_NN;

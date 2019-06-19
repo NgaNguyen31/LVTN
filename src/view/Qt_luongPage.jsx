@@ -45,10 +45,10 @@ class Qt_luongPage extends React.Component {
                     <thead>
                         <tr>
                             <th style={{ width: '10%', textAlign: 'center' }}>MSNV</th>
-                            {/* <th style={{ width: '30%', textAlign: 'center' }}>STT</th>
-                            <th style={{ width: 'auto', textAlign: 'center' }}>QĐ lương</th>
+                            <th style={{ width: '10%', textAlign: 'center' }}>STT</th>
+                            {/* <th style={{ width: 'auto', textAlign: 'center' }}>QĐ lương</th>
                             <th style={{ width: 'auto', textAlign: 'center' }}>Ngày QĐ</th> */}
-                            <th style={{ width: '30%', textAlign: 'center' }}>Ngày hưởng</th>
+                            <th style={{ width: '20%', textAlign: 'center' }}>Ngày hưởng</th>
                             {/* <th style={{ width: 'auto', textAlign: 'center' }}>Mốc năng lượng</th> */}
                             <th style={{ width: '10%', textAlign: 'center' }}>Ngạch</th>
                             <th style={{ width: '10%', textAlign: 'center' }}>Hệ số</th>
@@ -67,8 +67,8 @@ class Qt_luongPage extends React.Component {
                                 <td>
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.MS_NV ? item.MS_NV.MS_NV + ' ' : '')}</a>
                                 </td>       
-                                {/* <td>{item.STT}</td>
-                                <td>{item.QD_luong}</td>
+                                <td>{item.STT}</td>
+                                {/* <td>{item.QD_luong}</td>
                                 <td>{item.Ngay_QD}</td> */}
                                 <td>{T.dateToText(item.Ngay_huong,'dd/mm/yyyy')}</td>
                                 {/* <td>{item.Moc_nang_luong}</td> */}
