@@ -181,20 +181,21 @@ module.exports = app =>{
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
         update: (_id, changes, done) =>  {
-            model.find({
-            $or : [
-                {
-                    MS_NV: changes.MS_NV                        
-                }                    
-            ]
-            }, (error, items) => {
-            if (items.length > 0) {
-                if (done) done('Exist', items);
-            }
-            else{
+            // model.find({
+            // $or : [
+            //     {
+            //         MS_NV: changes.MS_NV                        
+            //     }                    
+            // ]
+            // }, (error, items) => {
+            // if (items.length > 0) {
+            //     if (done) done('Exist', items);
+            // }
+            // else{
                 model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
-            }
-        })},
+            // }
+        // })
+    },
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {
                 done(error);

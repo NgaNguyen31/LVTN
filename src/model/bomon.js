@@ -48,21 +48,22 @@ module.exports = app => {
         getAll: (done) => model.find({},done),
         get: (_id,done) => model.findById(_id,done),
         update: (_id, changes, done) => {
-            model.find({
-                $or : [
-                    {
-                        TEN_KHOA: changes.TEN_KHOA,                      
-                    }, {
-                        ten_tieng_anh: changes.ten_tieng_anh,
-                    }
-                ]
-            }, (error, items) => {
-            if (items.length > 0) {
-                if (done) done('Exist', items);
-            }
-            else{
+            // model.find({
+            //     $or : [
+            //         {
+            //             TEN_KHOA: changes.TEN_KHOA,                      
+            //         }, {
+            //             ten_tieng_anh: changes.ten_tieng_anh,
+            //         }
+            //     ]
+            // }, (error, items) => {
+            // if (items.length > 0) {
+            //     if (done) done('Exist', items);
+            // }
+            // else{
                 model.findOneAndUpdate({ _id }, { $set: changes }, { new: true }, done)
-            }})         
+            // }}
+            // )         
 },                   
         delete: (_id, done) => model.findById(_id, (error, item) => {
             if (error) {

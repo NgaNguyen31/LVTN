@@ -57,7 +57,7 @@ class BomonPage extends React.Component {
                                     <a href='#' onClick={e => this.edit(e, item)}>{(item.ten_bm ? item.ten_bm + ' ' : '')}</a>
                                 </td> 
                                 <td>{item.ten_tieng_anh}</td>          
-                                <td>{item.ms_khoa ? item.ms_khoa.reduce((pre, value) => pre + ' ' +  value.TEN_KHOA, ' '): ''}</td>                                
+                                <td>{item.ms_khoa ? item.ms_khoa.reduce((pre, value) => pre + ' ' +  value.ten_khoa, ' '): ''}</td>                                
                                 <td>{item.nam_thanh_lap}</td>
                                 <td className='btn-group'>
                                     <a className='btn btn-primary' href='#' onClick={e => this.edit(e, item)}>

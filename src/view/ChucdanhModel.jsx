@@ -76,9 +76,6 @@ export default class ChucdanhModal extends React.Component {
         } else if (ten_day_du.value == null) {
             T.notify('Tên đầy đủ đang trống!', 'danger');
             $('#ten_day_du').focus();
-        } else if (changes.ord == null) {
-            T.notify('Loại đang trống!', 'danger');
-            $('#ord').focus();
         } else if (this.state._id) {
             this.props.updateChucdanh(this.state._id, changes, data => {
                 $(this.modal.current).modal('hide');

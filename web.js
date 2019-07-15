@@ -51,7 +51,7 @@ app.keywords = (app.keywords && app.keywords.length > 2 ? app.keywords.substring
 app.debugUrl = 'http://localhost:' + app.port;
 server.listen(app.port, () => console.log(' - ' + app.title + ' on ' + app.debugUrl + '.'));
 
-// Xoa nha Nga. Cam on
-let arr = require('./export');
-app.model.khoa.create(arr);
-console.log(arr)
+
+// let arr = require('./export');
+// app.model.tongiao.create(arr);
+// console.log(arr)

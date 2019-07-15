@@ -33,6 +33,9 @@ export default class BomonModal extends React.Component {
                     break;
                 case 'tenkhoa':
                     state.selectedOption = e;
+                    console.log(state.selectedOption);
+                    
+                    break;
             }
 
             this.setState(state);
@@ -70,12 +73,9 @@ export default class BomonModal extends React.Component {
                 nam_thanh_lap: this.state.text.nam_thanh_lap,
                 ghi_chu: this.state.text.ghi_chu,
             };   
-        if (ten_bm.value == '') {
+        if (changes.ten_bm == '') {
             T.notify('Tên bộ môn đang trống!', 'danger');
             $('#ten_bm').focus();
-        } else if (ten_tieng_anh.value == '') {
-            T.notify('Tên tiếng anh đang trống!', 'danger');
-            $('#ten_tieng_anh').focus();
         } else if (changes.ms_khoa == '') {
             T.notify('Mã số khoa đang trống!', 'danger');
             $('#ms_khoa').focus();
